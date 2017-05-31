@@ -1,0 +1,39 @@
+body, html {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+}
+.form-header {
+    width: 100%;
+    padding: 30px;
+}
+.back {
+    background-color: #C0392B; 
+    	height: 150px; /*namilekooo  */
+    	margin-top: 80px;
+}
+
+.white {
+    color: white;
+}
+
+.p{
+	padding: 25px;
+	background-color: #ECF0F1;
+
+
+}
+.h3, h3 {
+    font-size: 30px;
+font: bold;    
+    
+}
+.form-top-right{
+	width : 25%;
+	float:left;
+	font-size: 66px;
+}
+.form-top-left{
+	width : 75%;
+	float:left;
+}
