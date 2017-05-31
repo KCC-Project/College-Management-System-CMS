@@ -27,7 +27,18 @@ public class loginController extends HttpServlet {
 		loginModel.setUserEntry(request.getParameter("InputEmail1User"));
 		loginModel.setPassword(request.getParameter("InputPassword1"));
 		LoginServiceInterface loginServiceInterface = new LoginServiceImpl();
-		System.out.println("from controller :"+loginServiceInterface.getUserEntryPassword(loginModel));
+		boolean isAuthenticated=loginServiceInterface.getUserEntryPassword(loginModel);
+		System.out.println("is authenciated: "+isAuthenticated);
+		if (isAuthenticated==true) {
+	
+			//response.sendRedirect("index.jsp");
+			RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
+			reqDisp.forward(request, response);
+		}else{
+			RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
+			reqDisp.forward(request, response);
+			//response.sendRedirect("login.jsp?err=1");
+		}
 	}
 
 }
