@@ -38,6 +38,7 @@ public class loginController extends HttpServlet {
 			RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
 			reqDisp.forward(request, response);
 			//response.sendRedirect("login.jsp?err=1");
+			//mausam
 		}
 	}
 
