@@ -1,6 +1,7 @@
 package CONTROLLER;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,29 +25,45 @@ public class loginController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		LoginModel loginModel = new LoginModel();
-		loginModel.setUserEntry(request.getParameter("InputEmail1User"));
-		loginModel.setPassword(request.getParameter("InputPassword1"));
-		String n= request.getParameter("rememberMe");
-		System.out.println("remember me value :"+n);
-		LoginServiceInterface loginServiceInterface = new LoginServiceImpl();
-		boolean isAuthenticated = loginServiceInterface.getUserEntryPassword(loginModel);
-		System.out.println("is authenciated: " + isAuthenticated);
-		if (isAuthenticated == true ) {
-			HttpSession session = request.getSession();
-			session.setAttribute("userName", loginModel.getUserEntry());
-			if ( n!=null) {
-				session.setAttribute("password", loginModel.getPassword());
-			}
-		
-			
-			RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
-			reqDisp.forward(request, response);
-		
-		} else {
-			RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/login.jsp?err=1");
-			reqDisp.forward(request, response);
+
+		String category = request.getParameter("category");
+		int categoryIndex = 0;
+		if (category.equalsIgnoreCase("Admin")) {
+
+			categoryIndex = 1;
+		} else if (category.equalsIgnoreCase("Teacher")) {
+			categoryIndex = 2;
+		} else if (category.equalsIgnoreCase("Student")) {
+			categoryIndex = 3;
 		}
+		if (categoryIndex != 0) {
+			LoginModel loginModel = new LoginModel();
+			loginModel.setUserEntry(request.getParameter("InputEmail1User"));
+			loginModel.setPassword(request.getParameter("InputPassword1"));
+			String rememberMe = request.getParameter("rememberMe");
+			loginModel.setSelectedIndex(categoryIndex);
+
+			LoginServiceInterface loginServiceInterface = new LoginServiceImpl();
+			boolean isAuthenticated = loginServiceInterface.getUserEntryPassword(loginModel);
+			System.out.println("is authenciated: " + isAuthenticated);
+			if (isAuthenticated == true) {
+				HttpSession session = request.getSession();
+				session.setAttribute("userName", loginModel.getUserEntry());
+				if (rememberMe != null) {
+					session.setAttribute("password", loginModel.getPassword());
+				}
+
+				RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
+				reqDisp.forward(request, response);
+
+			} else {
+				RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/login.jsp?err=1");
+				reqDisp.forward(request, response);
+			}
+		} else {
+			System.out.println("zero");
+		}
+
 	}
 
 }
