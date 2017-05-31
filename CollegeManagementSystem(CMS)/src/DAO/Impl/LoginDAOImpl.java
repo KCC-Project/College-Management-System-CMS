@@ -25,10 +25,10 @@ public class LoginDAOImpl implements LoginDAOInterface {
 				password="admin_password";
 				email="admin_email";
 			}else if(databaseNameIndex==2){
-				tableName="teacher"; //here error
-				username="";
-				password="";
-				email="";
+				tableName="staff"; 
+				username="Staff_UserName";
+				password="Staff_Password";
+				email="Staff_Email";
 			}else{
 				tableName="student";
 				username="Student_UserName";
