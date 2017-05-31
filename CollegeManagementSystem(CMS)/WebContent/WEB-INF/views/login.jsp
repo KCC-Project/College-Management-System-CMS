@@ -65,17 +65,20 @@
 							<label> <input type="checkbox"> Remember Me
 							</label>
 						</div>
-				<Button type="submit"
-							class="btn btn-default btn-success btn-block submit-btn login-btn" >	<span class="glyphicon glyphicon-lock"></span>&nbsp;Login
-						
+						<Button type="submit"
+							class="btn btn-default btn-success btn-block submit-btn login-btn">
+							<span class="glyphicon glyphicon-lock"></span>&nbsp;Login
+
 						</Button>
 
-					</div><!--  ppppppp-->
-				</div><!--formcont  -->
+					</div>
+				
+				</div>
+				
 			</div>
-	
 
-	</form>
+
+		</form>
 	</div>
 </body>
 </html>
