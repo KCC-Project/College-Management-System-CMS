@@ -22,6 +22,7 @@ public class loginController extends HttpServlet {
 		reqDisp.forward(req, resp);
 	}
 
+	///Only Rememb=ber me left
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		LoginModel loginModel = new LoginModel();
