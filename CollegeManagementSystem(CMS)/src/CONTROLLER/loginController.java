@@ -27,7 +27,7 @@ public class loginController extends HttpServlet {
 		loginModel.setUserEntry(request.getParameter("InputEmail1User"));
 		loginModel.setPassword(request.getParameter("InputPassword1"));
 		LoginServiceInterface loginServiceInterface = new LoginServiceImpl();
-		loginServiceInterface.getUserEntryPassword(loginModel);
+		System.out.println("from controller :"+loginServiceInterface.getUserEntryPassword(loginModel));
 	}
 
 }

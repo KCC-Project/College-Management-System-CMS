@@ -8,8 +8,8 @@ import SERVICE.LoginServiceInterface;
 public class LoginServiceImpl implements LoginServiceInterface {
 	LoginDAOInterface loginInterface = new LoginDAOImpl();
 
-	public void getUserEntryPassword(LoginModel loginModel) {
-		loginInterface.getUserEntryPassword(loginModel);
+	public boolean getUserEntryPassword(LoginModel loginModel) {
+		return loginInterface.getUserEntryPassword(loginModel);
 	}
 
 }

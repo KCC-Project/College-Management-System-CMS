@@ -12,7 +12,7 @@ public class LoginDAOImpl implements LoginDAOInterface {
 	private PreparedStatement pst;
 	private ResultSet rs;
 
-	public void getUserEntryPassword(LoginModel loginModel) {
+	public boolean getUserEntryPassword(LoginModel loginModel) {
 		try {
 			Connection conn = DatabaseConnection.connectToDatabase();
 			sql = "select * from admin where ((BINARY admin_username=? or admin_email=?) and BINARY  admin_password=?)";
@@ -23,13 +23,16 @@ public class LoginDAOImpl implements LoginDAOInterface {
 			rs=pst.executeQuery();
 			if (rs.next()) {
 				System.out.println("login");
+				return true;
 			}else{
 				System.out.println("notlogin");
+				return false;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 
 	}
 
