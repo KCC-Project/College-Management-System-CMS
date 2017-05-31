@@ -41,7 +41,7 @@
 								<label for="category"> <span
 									class="glyphicon glyphicon-user"></span> Login as
 								</label> <select class="form-control form-element" name='category'>
-								<option class='drop-down' value='selectOne'>Select One</option>
+									<option class='drop-down' value='selectOne'>Select One</option>
 									<option class='drop-down' value='admin'>Admin</option>
 									<option class='drop-down' value='teacher'>Teacher</option>
 									<option class='drop-down' value='student'>Student</option>
@@ -51,13 +51,13 @@
 						<div class="form-group">
 							<label for="exampleInputEmail1"><span
 								class="glyphicon glyphicon-user"> </span> Username / Email </label> <input
-								type="email" class="form-control" id="exampleInputEmail1"
+								type="text" class="form-control" name="InputEmail1User"
 								placeholder="Username/Email">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1"><span
 								class="glyphicon glyphicon-eye-open"></span> Password</label> <input
-								type="password" class="form-control" id="exampleInputPassword1"
+								type="password" class="form-control" name="InputPassword1"
 								placeholder="Password">
 						</div>
 
@@ -65,18 +65,17 @@
 							<label> <input type="checkbox"> Remember Me
 							</label>
 						</div>
-						<button type="button"
+						<input type="submit"
 							class="btn btn-default btn-success btn-block submit-btn login-btn">
 							<span class="glyphicon glyphicon-lock"></span>&nbsp; Login
-						</button>
+						
 
-					</div>
-				</div>
-				</div>
+					</div><!--  ppppppp-->
+				</div><!--formcont  -->
 			</div>
+	
 
-		</form>
-
+	</form>
 	</div>
 </body>
 </html>
