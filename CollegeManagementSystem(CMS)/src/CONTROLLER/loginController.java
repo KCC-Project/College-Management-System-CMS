@@ -22,18 +22,23 @@ public class loginController extends HttpServlet {
 		reqDisp.forward(req, resp);
 	}
 
-	///Only Rememb=ber me left
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		LoginModel loginModel = new LoginModel();
 		loginModel.setUserEntry(request.getParameter("InputEmail1User"));
 		loginModel.setPassword(request.getParameter("InputPassword1"));
+		String n= request.getParameter("rememberMe");
+		System.out.println("remember me value :"+n);
 		LoginServiceInterface loginServiceInterface = new LoginServiceImpl();
 		boolean isAuthenticated = loginServiceInterface.getUserEntryPassword(loginModel);
 		System.out.println("is authenciated: " + isAuthenticated);
-		if (isAuthenticated == true) {
+		if (isAuthenticated == true ) {
 			HttpSession session = request.getSession();
 			session.setAttribute("userName", loginModel.getUserEntry());
+			if ( n!=null) {
+				session.setAttribute("password", loginModel.getPassword());
+			}
+		
 			
 			RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
 			reqDisp.forward(request, response);
