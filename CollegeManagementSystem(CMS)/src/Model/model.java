@@ -1,7 +1,5 @@
 package Model;
 
 public class model {
-//mausam
-	//nabin
-	kjnknkjn
+//this is mausam rayamajhi
 }
