@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%
+	if (session.getAttribute("password") != null) {
+		RequestDispatcher reqDis = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
+		reqDis.forward(request, response);
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +68,8 @@
 						</div>
 
 						<div class="checkbox">
-							<label> <input type="checkbox"> Remember Me
+							<label> <input type="checkbox" name="rememberMe">
+								Remember Me
 							</label>
 						</div>
 						<Button type="submit"
@@ -72,9 +79,9 @@
 						</Button>
 
 					</div>
-				
+
 				</div>
-				
+
 			</div>
 
 
