@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Model.LoginModel;
 import SERVICE.LoginServiceInterface;
@@ -27,18 +28,18 @@ public class loginController extends HttpServlet {
 		loginModel.setUserEntry(request.getParameter("InputEmail1User"));
 		loginModel.setPassword(request.getParameter("InputPassword1"));
 		LoginServiceInterface loginServiceInterface = new LoginServiceImpl();
-		boolean isAuthenticated=loginServiceInterface.getUserEntryPassword(loginModel);
-		System.out.println("is authenciated: "+isAuthenticated);
-		if (isAuthenticated==true) {
-	
-			//response.sendRedirect("index.jsp");
+		boolean isAuthenticated = loginServiceInterface.getUserEntryPassword(loginModel);
+		System.out.println("is authenciated: " + isAuthenticated);
+		if (isAuthenticated == true) {
+			HttpSession session = request.getSession();
+			session.setAttribute("userName", loginModel.getUserEntry());
+			
 			RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
 			reqDisp.forward(request, response);
-		}else{
-			RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
+		
+		} else {
+			RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/login.jsp?err=1");
 			reqDisp.forward(request, response);
-			//response.sendRedirect("login.jsp?err=1");
-			//mausam
 		}
 	}
 

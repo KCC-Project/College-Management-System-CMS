@@ -1,3 +1,7 @@
+<% if(session.getAttribute("userName")==null){
+	RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
+	reqDisp.forward(request, response);
+}  %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html >
@@ -15,6 +19,6 @@
 <body>
 <form action="indexController"></form>
 
-<h1>Welcome</h1> 
+<h1>Welcome ${userName}</h1> 
 </body>
 </html>
