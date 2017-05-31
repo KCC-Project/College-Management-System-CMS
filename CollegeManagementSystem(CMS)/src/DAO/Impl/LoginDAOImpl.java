@@ -14,8 +14,30 @@ public class LoginDAOImpl implements LoginDAOInterface {
 
 	public boolean getUserEntryPassword(LoginModel loginModel) {
 		try {
+			int databaseNameIndex=loginModel.getSelectedIndex();
+			String tableName;
+			String username;
+			String password;
+			String email;
+			if (databaseNameIndex==1) {
+				tableName="admin";
+				username="admin_username";
+				password="admin_password";
+				email="admin_email";
+			}else if(databaseNameIndex==2){
+				tableName="teacher"; //here error
+				username="";
+				password="";
+				email="";
+			}else{
+				tableName="student";
+				username="Student_UserName";
+				password="Student_Password";
+				email="Student_Email";
+			}
+			
 			Connection conn = DatabaseConnection.connectToDatabase();
-			sql = "select * from admin where ((BINARY admin_username=? or admin_email=?) and BINARY  admin_password=?)";
+			sql = "select * from "+tableName+" where ((BINARY "+username+"=? or "+email+"=?) and BINARY  "+password +"=?)";
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, loginModel.getUserEntry());
 			pst.setString(2, loginModel.getUserEntry());
