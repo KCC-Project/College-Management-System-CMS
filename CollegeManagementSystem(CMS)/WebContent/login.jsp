@@ -2,8 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%
 	if (session.getAttribute("password")!= null) {
-		RequestDispatcher reqDis = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
-		reqDis.forward(request, response);
+		response.sendRedirect("index.jsp");
 	}
 %>
 <!DOCTYPE html>

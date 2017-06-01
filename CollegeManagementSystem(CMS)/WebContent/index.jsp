@@ -1,8 +1,7 @@
 
 <%
 	if (session.getAttribute("userName") == null) {
-		RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/login.jsp");
-		reqDisp.forward(request, response);
+		response.sendRedirect("login.jsp");
 	}
 %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"

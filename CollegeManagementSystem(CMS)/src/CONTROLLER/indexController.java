@@ -20,8 +20,7 @@ public class indexController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
-		reqDisp.forward(request, response);
+		response.sendRedirect("index.jsp");
 	}
 
 

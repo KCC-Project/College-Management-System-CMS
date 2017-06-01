@@ -14,13 +14,13 @@ import javax.servlet.http.HttpSession;
 import Model.LoginModel;
 import SERVICE.LoginServiceInterface;
 import SERVICE.Impl.LoginServiceImpl;
-//mmm
+
+
 @WebServlet("/login")
 public class loginController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher reqDisp = req.getRequestDispatcher("/WEB-INF/views/login.jsp");
-		reqDisp.forward(req, resp);
+		resp.sendRedirect("login.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,13 +52,10 @@ public class loginController extends HttpServlet {
 				if (rememberMe != null) {
 					session.setAttribute("password", loginModel.getPassword());
 				}
-
-				RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/index.jsp");
-				reqDisp.forward(request, response);
+				response.sendRedirect("index.jsp");
 
 			} else {
-				RequestDispatcher reqDisp = request.getRequestDispatcher("/WEB-INF/views/login.jsp?err=1");
-				reqDisp.forward(request, response);
+				response.sendRedirect("login.jsp?err=1");
 			}
 		} else {
 			System.out.println("zero");
