@@ -15,10 +15,8 @@ import Model.LoginModel;
 import SERVICE.LoginServiceInterface;
 import SERVICE.Impl.LoginServiceImpl;
 
-
 @WebServlet("/login")
 public class loginController extends HttpServlet {
-
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.sendRedirect("login.jsp");
 	}
@@ -52,7 +50,8 @@ public class loginController extends HttpServlet {
 				if (rememberMe != null) {
 					session.setAttribute("password", loginModel.getPassword());
 				}
-				response.sendRedirect("index.jsp");
+				System.out.println("Here");
+				response.sendRedirect("admin.jsp");
 
 			} else {
 				response.sendRedirect("login.jsp?err=1");

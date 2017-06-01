@@ -10,17 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/indexController")
-public class indexController extends HttpServlet {
+@WebServlet("/adminController")
+public class adminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
-    public indexController() {
+    public adminController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("admin.jsp");
 	}
 
 

@@ -18,9 +18,9 @@
 </head>
 <body>
 	<div class="container">
-		<form action="indexController"></form>
-		<a href="<%RequestDispatcher dis=request.getRequestDispatcher("/WEB-INF/views/login.jsp"); %> ">logout</a>
-		<h1>Welcome ${userName}</h1>
+		<form action="adminController"></form>
+		<%-- <a href="<% response.sendRedirect("login.jsp"); %> ">logout</a>
+	 --%>	<h1>Welcome ${userName}</h1>
 </div>		
 </body>
 </html>
