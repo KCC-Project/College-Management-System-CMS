@@ -18,9 +18,9 @@
 </head>
 <body>
 	<div class="container">
-		<form action="adminController"></form>
-		<%-- <a href="<% response.sendRedirect("login.jsp"); %> ">logout</a>
-	 --%>	<h1>Welcome ${userName}</h1>
-</div>		
+		
+		<a href="logout" class="btn btn-danger">logout</a>
+	 	<h1>Welcome ${userName}</h1>
+	 </div>		
 </body>
 </html>

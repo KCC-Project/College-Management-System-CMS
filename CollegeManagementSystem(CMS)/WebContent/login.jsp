@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%
-	if (session.getAttribute("password")!= null) {
-		response.sendRedirect("index.jsp");
+	if (session.getAttribute("userName")!= null) {
+		response.sendRedirect("admin.jsp");
 	}
 %>
 <!DOCTYPE html>
