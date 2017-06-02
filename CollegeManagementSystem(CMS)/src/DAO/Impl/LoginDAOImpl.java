@@ -11,6 +11,7 @@ public class LoginDAOImpl implements LoginDAOInterface {
 	private String sql;
 	private PreparedStatement pst;
 	private ResultSet rs;
+	private Connection conn;
 
 	public boolean getUserEntryPassword(LoginModel loginModel) {
 		try {
@@ -36,7 +37,7 @@ public class LoginDAOImpl implements LoginDAOInterface {
 				email="Student_Email";
 			}
 			
-			Connection conn = DatabaseConnection.connectToDatabase();
+			 conn = DatabaseConnection.connectToDatabase();
 			sql = "select * from "+tableName+" where ((BINARY "+username+"=? or "+email+"=?) and BINARY  "+password +"=?)";
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, loginModel.getUserEntry());
