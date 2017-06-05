@@ -36,7 +36,7 @@ public class StudentModelImpl implements StudentModelInterface {
 				pst.setString(col++, studentModel.getEmail());
 				pst.setString(col++, studentModel.getAddress());
 				pst.setInt(col++, studentModel.getMobileNo());
-				pst.setString(col++, studentModel.getUsername()); //// image
+				pst.setBytes(col++, studentModel.getImage()); //// image
 				pst.setString(col++, studentModel.getGender());
 				int count = pst.executeUpdate();
 				if (count > 0) {

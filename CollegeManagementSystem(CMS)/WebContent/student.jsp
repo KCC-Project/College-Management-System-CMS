@@ -16,11 +16,11 @@
 
 <div class="container">
 <div class="col-lg-4">
-	<form method="post" action="addStudent">
+	<form method="post" action="addStudent" enctype="multipart/form-data">
 			
 				<div class="form-group">
 					<label for="FirstName" >First Name </label>
-					<input type="text" name="student_firstname" class="form-control" placeholder="firstname" value="<%= model.getFirstname() %>">
+					<input type="text" name="student_firstname" class="form-control" placeholder="firstname" >
 				</div>
 
 					<div class="form-group">
@@ -67,8 +67,8 @@
 				 <div class = "form-group">
     
          
-            <label><input type = "radio" name="fmale"> Male</label>
-            <label><input type = "radio" name="fmale"> Female</label>
+            <label><input type = "radio"  value ="Male" name="fmale"> Male</label>
+            <label><input type = "radio" value="Female" name="fmale"> Female</label>
          
   		 </div>
 

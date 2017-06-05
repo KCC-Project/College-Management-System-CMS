@@ -1,18 +1,23 @@
 package CONTROLLER;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import Model.StudentModel;
 import SERVICE.StudentServiceInterface;
 import SERVICE.Impl.StudentServiceImpl;
 
 @WebServlet("/addStudent")
+@MultipartConfig(maxFileSize = 16177215)  
 public class Student_ADD_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,8 +40,16 @@ public class Student_ADD_Controller extends HttpServlet {
 		studentModel.setMobileNo(Integer.parseInt(request.getParameter("Mobile")));
 		studentModel.setAddress(request.getParameter("Address"));
 		studentModel.setGender(request.getParameter("fmale"));
-		//studentModel.setImage();//image baki
-
+	
+		  InputStream inputStream = null;
+		   Part filePart = request.getPart("filepath");
+			        if (filePart != null) {
+	       	            inputStream = filePart.getInputStream();
+	        }
+	        
+	    studentModel.setImage(getBytesFromInputStream(inputStream));
+	      
+	        
 		if (interfaccee.save(studentModel) == true) {
 			System.out.println("sucessful in entry");
 			response.sendRedirect("student.jsp");
@@ -44,6 +57,22 @@ public class Student_ADD_Controller extends HttpServlet {
 			System.out.println("not sucessful in entry");
 		}
 
+	}
+	public static byte[] getBytesFromInputStream(InputStream is) throws IOException
+	{
+	    
+		try {
+			 ByteArrayOutputStream os = new ByteArrayOutputStream();
+		        byte[] buffer = new byte[1024];
+
+		        for (int len; (len = is.read(buffer)) != -1;){
+		            os.write(buffer, 0, len);
+		        }
+		        return os.toByteArray();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
 	}
 
 	public void postGetMethod(HttpServletRequest request, HttpServletResponse response) {
