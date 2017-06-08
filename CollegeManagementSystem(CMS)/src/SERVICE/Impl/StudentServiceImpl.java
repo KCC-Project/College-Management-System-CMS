@@ -1,5 +1,7 @@
 package SERVICE.Impl;
 
+import java.util.List;
+
 import DAO.StudentModelInterface;
 import DAO.Impl.StudentModelImpl;
 import Model.StudentModel;
@@ -12,6 +14,12 @@ public class StudentServiceImpl implements StudentServiceInterface {
 	public boolean save(StudentModel studentModel) {
 		return model.save(studentModel);
 
+	}
+
+	@Override
+	public List<StudentModel> getAllRecord() {
+		
+		return model.getAllRecord();
 	}
 
 }

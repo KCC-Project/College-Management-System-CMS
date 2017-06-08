@@ -22,6 +22,7 @@
 		<a href="logout" class="btn btn-danger">logout</a>
 	 	<h1>Welcome ${userName}</h1>
 	 <a href="student.jsp" class="btn btn-danger">AddStudent</a>
+	 <a href="viewStudent.jsp" class="btn btn-danger">View Student</a>
 	 </div>		
 </body>
 </html>

@@ -17,7 +17,7 @@ import SERVICE.StudentServiceInterface;
 import SERVICE.Impl.StudentServiceImpl;
 
 @WebServlet("/addStudent")
-@MultipartConfig(maxFileSize = 16177215)  
+@MultipartConfig(maxFileSize = 16177215)
 public class Student_ADD_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,45 +30,49 @@ public class Student_ADD_Controller extends HttpServlet {
 			throws ServletException, IOException {
 		StudentModel studentModel = new StudentModel();
 		StudentServiceInterface interfaccee = new StudentServiceImpl();
-
-		studentModel.setFirstname(request.getParameter("student_firstname"));
-		studentModel.setMiddlename(request.getParameter("student_middlename"));
-		studentModel.setLastname(request.getParameter("student_Lastname"));
-		studentModel.setUsername(request.getParameter("student_username"));
-		studentModel.setPassword(request.getParameter("confirm_password"));
-		studentModel.setEmail(request.getParameter("email"));
-		studentModel.setMobileNo(Integer.parseInt(request.getParameter("Mobile")));
-		studentModel.setAddress(request.getParameter("Address"));
-		studentModel.setGender(request.getParameter("fmale"));
-	
-		  InputStream inputStream = null;
-		   Part filePart = request.getPart("filepath");
-			        if (filePart != null) {
-	       	            inputStream = filePart.getInputStream();
-	        }
-	        
-	    studentModel.setImage(getBytesFromInputStream(inputStream));
-	      
-	        
-		if (interfaccee.save(studentModel) == true) {
-			System.out.println("sucessful in entry");
-			response.sendRedirect("student.jsp");
+		String password = request.getParameter("password").trim();
+		String confirm_passwrod = request.getParameter("confirm_password").trim();
+		if (!password.equals(confirm_passwrod)) {
+			response.sendRedirect("student.jsp?err=password did not match");
 		} else {
-			System.out.println("not sucessful in entry");
+			studentModel.setFirstname(request.getParameter("student_firstname"));
+			studentModel.setMiddlename(request.getParameter("student_middlename"));
+			studentModel.setLastname(request.getParameter("student_Lastname"));
+			studentModel.setUsername(request.getParameter("student_username"));
+			studentModel.setPassword(request.getParameter("confirm_password"));
+			studentModel.setEmail(request.getParameter("email"));
+			studentModel.setMobileNo(Integer.parseInt(request.getParameter("Mobile")));
+			studentModel.setAddress(request.getParameter("Address"));
+			studentModel.setGender(request.getParameter("fmale"));
+
+			InputStream inputStream = null;
+			Part filePart = request.getPart("filepath");
+			if (filePart != null) {
+				inputStream = filePart.getInputStream();
+			}
+
+			studentModel.setImage(getBytesFromInputStream(inputStream));
+
+			if (interfaccee.save(studentModel) == true) {
+				System.out.println("sucessful in entry");
+				response.sendRedirect("student.jsp");
+			} else {
+				System.out.println("not sucessful in entry");
+			}
+
 		}
-
 	}
-	public static byte[] getBytesFromInputStream(InputStream is) throws IOException
-	{
-	    
-		try {
-			 ByteArrayOutputStream os = new ByteArrayOutputStream();
-		        byte[] buffer = new byte[1024];
 
-		        for (int len; (len = is.read(buffer)) != -1;){
-		            os.write(buffer, 0, len);
-		        }
-		        return os.toByteArray();
+	public static byte[] getBytesFromInputStream(InputStream is) throws IOException {
+
+		try {
+			ByteArrayOutputStream os = new ByteArrayOutputStream();
+			byte[] buffer = new byte[1024];
+
+			for (int len; (len = is.read(buffer)) != -1;) {
+				os.write(buffer, 0, len);
+			}
+			return os.toByteArray();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
