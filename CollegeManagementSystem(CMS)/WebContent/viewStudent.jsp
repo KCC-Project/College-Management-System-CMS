@@ -19,7 +19,8 @@
 <div class="col-md-12">
 
 
-  <h2>All student </h2>       
+  <h2>All student </h2>   
+  <a href="student.jsp" class="btn btn-primary">Add</a>    
   <table class="table table-hover">
     <thead>
       <tr>
@@ -29,7 +30,7 @@
         <th>Lastname</th>
         <th>Email</th>
          <th>Edit || Delete</th>
-         <th>Image</th>
+      
       </tr>
     </thead>
     <tbody>
@@ -47,11 +48,11 @@ for(StudentModel model:mo){
         <td><%= model.getMiddlename()%></td>
         <td><%= model.getLastname()%></td>
         <td><%= model.getEmail()%></td>
-           <td><a href="edit.jsp?id=<%= model.getStudentID()%>"><input type="button" class="btn btn-sucess" value="edit"></a>   
-           <a href="delete.jsp?id=<%= model.getStudentID()%>"><input type="button" class="btn btn-sucess" value="delete"></a>
+           <td><a href="editStudent.jsp?id=<%= model.getStudentID()%>"><input type="button" class="btn btn-sucess" value="edit"></a>   
+           <a href="deleteStudent.jsp?id=<%= model.getStudentID()%>"><input type="button" class="btn btn-sucess" value="delete"></a>
            </td>
         
-          <td><img src="<%= model.getImage()%>" width="50" height="auto"></td> 
+         
       </tr>
   <%} %>
     </tbody>

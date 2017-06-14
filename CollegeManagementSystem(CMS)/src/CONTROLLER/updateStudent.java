@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,25 +15,34 @@ import Model.StudentModel;
 import SERVICE.StudentServiceInterface;
 import SERVICE.Impl.StudentServiceImpl;
 
-@WebServlet("/addStudent")
-@MultipartConfig(maxFileSize = 16177215)
-public class Student_ADD_Controller extends HttpServlet {
+@WebServlet("/updateStudent")
+public class updateStudent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+ 
+    public updateStudent() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect("student.jsp");
+		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+	IOException {
+	
 		StudentModel studentModel = new StudentModel();
 		StudentServiceInterface interfaccee = new StudentServiceImpl();
+		System.out.println(request.getParameter("password"));
+		System.out.println(request.getParameter("student_firstname"));
+		
 		String password = request.getParameter("password").trim();
 		String confirm_passwrod = request.getParameter("confirm_password").trim();
 		if (!password.equals(confirm_passwrod)) {
 			response.sendRedirect("student.jsp?err=password did not match");
 		} else {
+			studentModel.setStudentID(Integer.parseInt(request.getParameter("txtID")));
 			studentModel.setFirstname(request.getParameter("student_firstname"));
 			studentModel.setMiddlename(request.getParameter("student_middlename"));
 			studentModel.setLastname(request.getParameter("student_Lastname"));
@@ -53,34 +61,35 @@ public class Student_ADD_Controller extends HttpServlet {
 
 			studentModel.setImage(getBytesFromInputStream(inputStream));
 
-			if (interfaccee.save(studentModel) == true) {
+			if (interfaccee.update(studentModel) >0) {
 				System.out.println("sucessful in entry");
 				response.sendRedirect("viewStudent.jsp");
 			} else {
 				System.out.println("not sucessful in entry");
 			}
-
-		}
-	}
-
-	public static byte[] getBytesFromInputStream(InputStream is) throws IOException {
-
-		try {
-			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			byte[] buffer = new byte[1024];
-
-			for (int len; (len = is.read(buffer)) != -1;) {
-				os.write(buffer, 0, len);
 			}
-			return os.toByteArray();
-		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
-		return null;
-	}
 
-	public void postGetMethod(HttpServletRequest request, HttpServletResponse response) {
+		public static byte[] getBytesFromInputStream(InputStream is) throws IOException {
 
-	}
+			try {
+				ByteArrayOutputStream os = new ByteArrayOutputStream();
+				byte[] buffer = new byte[1024];
+
+				for (int len; (len = is.read(buffer)) != -1;) {
+					os.write(buffer, 0, len);
+				}
+				return os.toByteArray();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			return null;
+		}
+
+
+	
+		
+		
 
 }
