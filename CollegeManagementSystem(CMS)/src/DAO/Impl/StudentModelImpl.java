@@ -29,13 +29,13 @@ public class StudentModelImpl implements StudentModelInterface {
 				return false;
 			} else {
 				conn = DatabaseConnection.connectToDatabase();
-				sql = "insert into student (Semester_ID,Notice_ID,Student_UserName,Student_Password,"
+				sql = "insert into student (Semester_ID,Student_UserName,Student_Password,"
 						+ "Student_FirstName,Student_MiddleName,Student_LastName,Student_Email,"
 						+ "Student_Address,Student_Phone,Student_Image,Student_Gender) "
-						+ "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+						+ "values(?,?,?,?,?,?,?,?,?,?,?)";
 				pst = conn.prepareStatement(sql);
 				int col = 1;
-				pst.setInt(col++, 1);
+				
 				pst.setInt(col++, 2);
 				pst.setString(col++, studentModel.getUsername());
 				pst.setString(col++, studentModel.getPassword());
@@ -150,12 +150,12 @@ public class StudentModelImpl implements StudentModelInterface {
 
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "update student set Semester_ID=?,Notice_ID=?,Student_UserName=?,Student_Password=?,"
+			sql = "update student set Semester_ID=?,Student_UserName=?,Student_Password=?,"
 					+ "Student_FirstName=?,Student_MiddleName=?,Student_LastName=?,Student_Email=?,"
 					+ "Student_Address=?,Student_Phone=?,Student_Image=?,Student_Gender=? where Student_ID=?";
 			pst = conn.prepareStatement(sql);
 			int col = 1;
-			pst.setInt(col++, 1);
+		
 			pst.setInt(col++, 2);
 			pst.setString(col++, stu.getUsername());
 			pst.setString(col++, stu.getPassword());
