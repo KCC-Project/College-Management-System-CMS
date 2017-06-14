@@ -18,13 +18,10 @@
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		System.out.println(id);
 		StudentModel model= new StudentServiceImpl().readId(id);
-	
-		
 	%>
 	<div class="container">
 		<div class="col-lg-4">
-			<form method="post" action="updateStudent"
-				enctype="multipart/form-data">
+			<form method="Post" action="updateStudent" enctype="multipart/form-data">
 
 				<div class="form-group">
 					<label for="FirstName">First Name </label><input type="hidden" name="txtID" value="<%=id%>"> <input type="text"

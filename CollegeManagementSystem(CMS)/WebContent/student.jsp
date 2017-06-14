@@ -12,7 +12,6 @@
 </head>
 <body>
 
-<% StudentModel model = new StudentModel(); %>
 
 <div class="container">
 <div class="col-lg-4">

@@ -79,8 +79,5 @@ public class Student_ADD_Controller extends HttpServlet {
 		return null;
 	}
 
-	public void postGetMethod(HttpServletRequest request, HttpServletResponse response) {
-
-	}
-
+	
 }

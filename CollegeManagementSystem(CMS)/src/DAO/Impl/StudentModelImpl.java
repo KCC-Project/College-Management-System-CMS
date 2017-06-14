@@ -161,8 +161,8 @@ public class StudentModelImpl implements StudentModelInterface {
 				pst.setString(col++, stu.getEmail());
 				pst.setString(col++, stu.getAddress());
 				pst.setInt(col++, stu.getMobileNo());
-				col++;
-				//pst.setBytes(col++, stu.getImage()); //// image
+			
+				pst.setBytes(col++, stu.getImage()); //// image
 				pst.setString(col++, stu.getGender());
 				pst.setInt(col++, stu.getStudentID());
 				result = pst.executeUpdate();

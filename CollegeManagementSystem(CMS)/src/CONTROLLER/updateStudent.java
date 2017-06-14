@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import SERVICE.StudentServiceInterface;
 import SERVICE.Impl.StudentServiceImpl;
 
 @WebServlet("/updateStudent")
+@MultipartConfig(maxFileSize = 16177215)
 public class updateStudent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -24,10 +26,7 @@ public class updateStudent extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 	IOException {
@@ -61,7 +60,7 @@ public class updateStudent extends HttpServlet {
 
 			studentModel.setImage(getBytesFromInputStream(inputStream));
 
-			if (interfaccee.update(studentModel) >0) {
+			if (interfaccee.update(studentModel)>0) {
 				System.out.println("sucessful in entry");
 				response.sendRedirect("viewStudent.jsp");
 			} else {
