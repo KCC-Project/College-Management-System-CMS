@@ -3,7 +3,7 @@
 <%
 	if (session.getAttribute("userName")!= null) {
 		response.sendRedirect("admin/admin-dashboard.jsp");
-	}
+	}// commment added
 %>
 <!DOCTYPE html>
 <html>
