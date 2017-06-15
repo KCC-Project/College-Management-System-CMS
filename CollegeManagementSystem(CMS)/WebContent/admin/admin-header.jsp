@@ -75,7 +75,7 @@
         <ul class="dropdown-menu pull-left" id="profile-menu">
             <li><a href="profile.jsp">My Profile</a></li>
             <li><a href="#">Notices</a></li>
-            <li><a href="logout.jsp"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout </a></li>
+            <li><a href="/logout.jsp"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout </a></li>
         </ul>
         </div>
         
