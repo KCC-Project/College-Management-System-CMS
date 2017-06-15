@@ -10,12 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
-<link
-	href="${pageContext.request.contextPath}/Resources/css/bootstrap.min.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="${pageContext.request.contextPath}/Resources/css/custom2.css"
-	rel="stylesheet" type="text/css">
+<link href="Resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="Resources/css/custom2.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
