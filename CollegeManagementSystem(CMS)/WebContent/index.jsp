@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%
 	if (session.getAttribute("userName")!= null) {
-		response.sendRedirect("admin.jsp");
+		response.sendRedirect("admin/admin-dashboard.jsp");
 	}
 %>
 <!DOCTYPE html>
