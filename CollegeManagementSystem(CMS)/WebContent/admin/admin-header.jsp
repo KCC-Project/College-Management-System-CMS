@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,13 +47,31 @@
         <input type="text" placeholder="search" class="form-control">
       </div>
 
-      <!-- Dashboard, notificcation and messages -->
-     <div class="" id="notification">
+   
+
+        <!------------ Profile Dropdown-->
+        <div class="dropdown pull-right" id="dash-profile">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <span class="dash-image">
+              <img alt="" src="images/me.jpg">
+          </span>
+            <span class="username hidden-xs">${userName}</span>
+            <span class="caret"></span></a>
+        <ul class="dropdown-menu pull-left" id="profile-menu">
+            <li><a href="profile.jsp">My Profile</a></li>
+            <li><a href="#">Notices</a></li>
+            <li><a><form method="Get" action="../logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> <input type="submit" value="Logout"> </form></a></li>
+        </ul>
+        </div>
+         
+         
+            <!-- Dashboard, notificcation and messages -->
+     <div class="pull-right" id="notification">
        <ul>
         <li class="fixed-width hidden-xs">
           <a href="#" data-toggle="tooltip" title="Notification">
             <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-            <span class="label label-warning">3</span>
+            <span class="label label-warning">30</span>
           </a>
         </li>
         <li class="fixed-width hidden-xs">
@@ -63,22 +82,6 @@
         </li>
         </ul>
         </div>
-
-        <!------------ Profile Dropdown-->
-        <div class="dropdown pull-right" id="dash-profile">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <span class="dash-image">
-              <img alt="" src="me.jpg">
-          </span>
-            <span class="username hidden-xs">{userName}</span>
-            <span class="caret"></span></a>
-        <ul class="dropdown-menu pull-left" id="profile-menu">
-            <li><a href="profile.jsp">My Profile</a></li>
-            <li><a href="#">Notices</a></li>
-            <li><a href="logout.jsp"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout </a></li>
-        </ul>
-        </div>
-         
 
 
   </header>

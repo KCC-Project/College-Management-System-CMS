@@ -43,21 +43,19 @@ public class loginController extends HttpServlet {
 
 			LoginServiceInterface loginServiceInterface = new LoginServiceImpl();
 			boolean isAuthenticated = loginServiceInterface.getUserEntryPassword(loginModel);
-			System.out.println("is authenciated: " + isAuthenticated);
 			if (isAuthenticated == true) {
 				HttpSession session = request.getSession();
 				session.setAttribute("userName", loginModel.getUserEntry());
 				if (rememberMe != null) {
 					session.setAttribute("password", loginModel.getPassword());
 				}
-				System.out.println("Here");
 				response.sendRedirect("admin/admin-dashboard.jsp");
 
 			} else {
-				response.sendRedirect("login.jsp?err=1");
+				response.sendRedirect("index.jsp?err=1");
 			}
 		} else {
-			System.out.println("zero");
+			response.sendRedirect("index.jsp?err=2");
 		}
 
 	}

@@ -3,7 +3,7 @@
 <%
 	if (session.getAttribute("userName")!= null) {
 		response.sendRedirect("admin/admin-dashboard.jsp");
-	}// commment added
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -41,8 +41,8 @@
 
 								<label for="category"> <span
 									class="glyphicon glyphicon-user"></span> Login as
-								</label> <select class="form-control form-element" name='category'>
-									<option class='drop-down' value='selectOne'>Select One</option>
+								</label> <select required class="form-control form-element" name='category'>
+									<option class='drop-down' value="" disabled selected> Select One </option>
 									<option class='drop-down' value='admin'>Admin</option>
 									<option class='drop-down' value='teacher'>Teacher</option>
 									<option class='drop-down' value='student'>Student</option>
@@ -52,13 +52,13 @@
 						<div class="form-group">
 							<label for="exampleInputEmail1"><span
 								class="glyphicon glyphicon-user"> </span> Username / Email </label> <input
-								type="text" class="form-control" name="InputEmail1User"
+								type="text" class="form-control" required name="InputEmail1User"
 								placeholder="Username/Email">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1"><span
 								class="glyphicon glyphicon-eye-open"></span> Password</label> <input
-								type="password" class="form-control" name="InputPassword1"
+								type="password" class="form-control" required name="InputPassword1"
 								placeholder="Password">
 						</div>
 

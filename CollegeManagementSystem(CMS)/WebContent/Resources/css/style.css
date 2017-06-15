@@ -51,10 +51,12 @@ a {
 }
 #dashboard-header .search-field {
   padding: 10px 0px;
+  display:none;
   //width: 145px;
 }
 #notification {
   padding: 3px;
+  margin-right:10px;
 }
 #notification ul li {
   float: left;
