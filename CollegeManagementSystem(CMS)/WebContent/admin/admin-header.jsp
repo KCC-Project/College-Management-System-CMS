@@ -70,7 +70,7 @@
           <span class="dash-image">
               <img alt="" src="me.jpg">
           </span>
-            <span class="username hidden-xs">{username}</span>
+            <span class="username hidden-xs">{userName}</span>
             <span class="caret"></span></a>
         <ul class="dropdown-menu pull-left" id="profile-menu">
             <li><a href="profile.jsp">My Profile</a></li>
