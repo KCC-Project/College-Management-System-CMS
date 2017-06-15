@@ -1,0 +1,27 @@
+/* All Big screen Devices, larger than 980px */
+@media (min-width: 980px) {
+
+	#dashboard-header .search-field {
+		margin-left: 40px; 
+		width: 450px;
+	}
+
+}
+
+/* Devices smaller than 800px */
+@media screen and (max-width:800px) {
+
+	#dashboard-header .search-field {
+		margin-left: 20px; 
+		width: 250px;
+	}
+}
+
+/* Devices smaller than 480px */
+@media screen and (max-width:480px) {
+
+	#dashboard-header .search-field { 
+		margin-left: 0px;
+		width: 140px;
+	}
+}

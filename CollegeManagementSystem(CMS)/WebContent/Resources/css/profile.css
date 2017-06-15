@@ -1,0 +1,38 @@
+.profile-panel {
+	background-color: rgba(209,217,224,0.13);
+	color: rgba(64,45,45,0.96);
+}
+.profile-info {
+	text-align: justify;
+	//border:1px solid white;
+	border-radius: 5px;
+}
+.profile-info tr td {
+	padding: 5px 2px;
+}
+#profile-image img{ 
+	height: 150px;
+	width: auto;
+	border-radius: 50%;
+}
+.event-uploader-image {
+	height: 50px;
+	width: auto;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+.event-info {
+	border: 1px solid white; 
+}
+.event-info > div{
+	float: left;
+}
+.event-info ul li {
+	padding: 3px;
+	list-style: inline;
+	display: block;
+}
+.astriek {
+	float: right;
+	color: red;
+}
