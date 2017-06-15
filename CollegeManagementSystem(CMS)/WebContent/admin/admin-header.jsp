@@ -64,7 +64,7 @@
         </ul>
         </div>
 
-        <!--- Profile Dropdown -->
+        <!------------ Profile Dropdown -->
         <div class="dropdown pull-right" id="dash-profile">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <span class="dash-image">
