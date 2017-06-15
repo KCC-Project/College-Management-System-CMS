@@ -64,7 +64,7 @@
         </ul>
         </div>
 
-        <!-- Profile Dropdown -->
+        <!--- Profile Dropdown -->
         <div class="dropdown pull-right" id="dash-profile">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           <span class="dash-image">
@@ -78,7 +78,7 @@
             <li><a href="logout.jsp"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout </a></li>
         </ul>
         </div>
-        
+         
 
 
   </header>
