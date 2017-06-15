@@ -51,7 +51,7 @@ public class loginController extends HttpServlet {
 					session.setAttribute("password", loginModel.getPassword());
 				}
 				System.out.println("Here");
-				response.sendRedirect("admin.jsp");
+				response.sendRedirect("admin/admin-dashboard.jsp");
 
 			} else {
 				response.sendRedirect("login.jsp?err=1");
