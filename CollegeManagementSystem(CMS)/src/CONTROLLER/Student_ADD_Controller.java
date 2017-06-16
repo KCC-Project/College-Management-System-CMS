@@ -23,7 +23,7 @@ public class Student_ADD_Controller extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect("student.jsp");
+		resp.sendRedirect("admin/addstudents.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,7 +33,7 @@ public class Student_ADD_Controller extends HttpServlet {
 		String password = request.getParameter("password").trim();
 		String confirm_passwrod = request.getParameter("confirm_password").trim();
 		if (!password.equals(confirm_passwrod)) {
-			response.sendRedirect("student.jsp?err=password did not match");
+			response.sendRedirect("admin/addstudents.jsp?err=password did not match");
 		} else {
 			studentModel.setFirstname(request.getParameter("student_firstname"));
 			studentModel.setMiddlename(request.getParameter("student_middlename"));
@@ -43,19 +43,11 @@ public class Student_ADD_Controller extends HttpServlet {
 			studentModel.setEmail(request.getParameter("email"));
 			studentModel.setMobileNo(Integer.parseInt(request.getParameter("Mobile")));
 			studentModel.setAddress(request.getParameter("Address"));
-			studentModel.setGender(request.getParameter("fmale"));
-
-			InputStream inputStream = null;
-			Part filePart = request.getPart("filepath");
-			if (filePart != null) {
-				inputStream = filePart.getInputStream();
-			}
-
-			studentModel.setImage(getBytesFromInputStream(inputStream));
+			studentModel.setGender(request.getParameter("gender"));
 
 			if (interfaccee.save(studentModel) == true) {
 				System.out.println("sucessful in entry");
-				response.sendRedirect("viewStudent.jsp");
+				response.sendRedirect("admin/managestudents.jsp");
 			} else {
 				System.out.println("not sucessful in entry");
 			}
@@ -63,21 +55,6 @@ public class Student_ADD_Controller extends HttpServlet {
 		}
 	}
 
-	public static byte[] getBytesFromInputStream(InputStream is) throws IOException {
-
-		try {
-			ByteArrayOutputStream os = new ByteArrayOutputStream();
-			byte[] buffer = new byte[1024];
-
-			for (int len; (len = is.read(buffer)) != -1;) {
-				os.write(buffer, 0, len);
-			}
-			return os.toByteArray();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return null;
-	}
 
 	
 }

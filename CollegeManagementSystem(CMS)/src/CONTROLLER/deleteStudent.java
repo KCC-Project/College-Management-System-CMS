@@ -25,10 +25,10 @@ public class deleteStudent extends HttpServlet {
 	int id=Integer.parseInt(request.getParameter("txtID"));
 	StudentServiceInterface delete= new StudentServiceImpl();
 	if(delete.delete(id)>0){
-		response.sendRedirect("viewStudent.jsp");
+		response.sendRedirect("admin/managestudents.jsp");
 	}
 	else{
-		response.sendRedirect("deleteStudent.jsp?id="+id);
+		response.sendRedirect("admin/deleteStudent.jsp?id="+id);
 	}
 	}
 
