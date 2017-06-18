@@ -79,7 +79,7 @@
 				<tr>
 					<td>ID:</td>
 					<td><input type="text" placeholder="ID"
-					class="form-control" required name="id"></td>
+					class="form-control" required name="id" id="studentID" onkeyup="autoUserPass();"></td>
 				</tr>
 				<tr>
 					<td>Phone:</td>
@@ -150,17 +150,17 @@
 	<tr>
 		<td>Username:</td>
 		<td><input type="text" placeholder="username"
-		class="form-control" name="student_username"></td>
+		class="form-control" name="student_username" id="student_username1"></td>
 	</tr>
 	<tr>
 		<td>Password:</td>
 		<td><input type="password" class="form-control"
-		name="password" placeholder="Password"></td>
+		name="password" placeholder="Password" id="Password1"></td>
 	</tr>
 	<tr>
 		<td>Confirm Password:</td>
 		<td><input type="password" class="form-control"
-		name="confirm_password" placeholder="Confirm Password"></td>
+		name="confirm_password" placeholder="Confirm Password" id="confirm_password"></td>
 	</tr>
 	<tr>
 		<td>Status: <span class="astriek">*</span>
@@ -226,6 +226,28 @@ aj.onreadystatechange=function(){
 	}
 aj.send(idSend);
 
+}
+
+function autoUserPass(){
+	
+	var id=document.getElementById("studentID").value;
+
+	var url="../ajax_user_password_autofill";
+	var idSend="id="+id;
+	var aj=new XMLHttpRequest();
+	aj.open("POST", url, true);
+	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	aj.onreadystatechange=function(){
+		if (aj.readyState==4&&aj.status==200) {
+			var return_data=aj.responseText;
+			//alert("from ajax:"+return_data);
+			document.getElementById("student_username1").value=return_data;
+			document.getElementById("Password1").value=return_data;
+			document.getElementById("confirm_password").value=return_data;
+		}
+		}
+	aj.send(idSend);
+	
 }
 </script>
 </body>
