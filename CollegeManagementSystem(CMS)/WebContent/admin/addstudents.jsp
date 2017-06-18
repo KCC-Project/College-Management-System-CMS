@@ -3,6 +3,8 @@
 <%@page import="SERVICE.Faculty_Program_Model_Service"%>
 <%@page import="Model.Faculty_ProgramModel"%>
 <jsp:include page="admin-header.jsp" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <div class="container-fluid display-table">
 	<div class="row display-table-row">
 		<jsp:include page="admin-sidemenu.jsp" />
@@ -101,14 +103,14 @@
 				<tr>
 					<td>Faculty: <span class="astriek">*</span>
 				</td>
-				<td><select required class="form-control" id="sel1">
-					<option value="" disabled selected>Select Faculty</option>
+				<td><select required class="form-control" id="sel1" onChange="select_faculty();">
+					<option value="0" disabled selected>Select Faculty</option>
 					<%
 					Faculty_Program_Model_Service service = new Faculty_Program_Model_Service_Impl();
 					List<Faculty_ProgramModel> mo = service.getAllRecord();
 					for (Faculty_ProgramModel model : mo) {
 					%>
-					<option>
+					<option value="<%=model.getID() %>">
 						<%=model.getFaculty_Programe_Name()%>
 					</option>
 					<%
@@ -116,23 +118,14 @@
 					%>
 				</select></td>
 			</tr>
-			<tr>
-				<td>Programme: <span class="astriek">*</span>
-			</td>
-			<td><select required class="form-control" id="sel1">
-				<option value="" disabled selected>Select
-				Programme</option>
-					<%
-					List<Faculty_ProgramModel> mod = service.getAllRecord(1);
-					for (Faculty_ProgramModel modell : mod) {
-					%>
-				<option><%=modell.getFaculty_Programe_Name() %></option>
-				<%
-					}
-					%>
-				
+			
+					<tr>
+		<td>Programme: <span class="astriek">*</span> </td>
+		<td><select required class="form-control" id="sel2" >
+			<option value="" disabled selected>Select Programme</option>	
 			</select></td>
 		</tr>
+		
 		<tr>
 			<td>Batch: <span class="astriek">*</span>
 		</td>
@@ -198,5 +191,24 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../Resources/js/bootstrap.min.js"></script>
 <script src="../Resources/js/default.js"></script>
+<script>
+
+function select_faculty() {
+	var id=document.getElementById("sel1").value;
+	var url="../aja";
+	var idSend="id="+id;
+	var aj=new XMLHttpRequest();
+	aj.open("POST", url, true);
+	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	aj.onreadystatechange=function(){
+		if (aj.readyState==4&&aj.status==200) {
+			var return_data=aj.responseText;
+			document.getElementById("sel2").innerHTML=return_data;
+		}
+		}
+	aj.send(idSend);
+	document.getElementById("sel2").innerHTML="Loading.....";
+}
+</script>
 </body>
 </html>
