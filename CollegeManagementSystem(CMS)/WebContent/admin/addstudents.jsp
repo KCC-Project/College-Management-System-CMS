@@ -96,6 +96,11 @@
 					<td><input type="email" placeholder="email"
 					class="form-control" name="email"></td>
 				</tr>
+				<tr>
+					<td>Enroll Date:</td>
+					<td><input type="date" placeholder="date"
+					class="form-control" name="date"></td>
+				</tr>
 			</table>
 		</div>
 		<div class="col-lg-4 col-sm-4 col-xs-12 profile-info">
