@@ -1,4 +1,4 @@
-package CONTROLLER.AjaxController;
+package CONTROLLER.AJAX_CONTROLLER;
 
 import java.io.IOException;
 import java.io.PrintWriter;
