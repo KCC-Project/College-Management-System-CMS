@@ -134,13 +134,8 @@
 		<tr>
 			<td>Batch: <span class="astriek">*</span>
 		</td>
-		<td><select required class="form-control" id="sel1">
+		<td><select required class="form-control" id="batchID">
 			<option value="" disabled selected>Select Batch</option>
-			<option>2010</option>
-			<option>2012</option>
-			<option>2013</option>
-			<option>2014</option>
-			<option>2015</option>
 		</select></td>
 	</tr>
 	<tr>
@@ -212,12 +207,25 @@ function select_faculty() {
 		}
 		}
 	aj.send(idSend);
-	document.getElementById("sel2").innerHTML="Loading.....";
 }
 
 function autoSelectBatch(){
 var date=document.getElementById("date").value;
-alert(date);
+var program=document.getElementById("sel2").value;
+
+var url="../ajax_Batch";
+var idSend="date="+date+"&program="+program;
+var aj=new XMLHttpRequest();
+aj.open("POST", url, true);
+aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+aj.onreadystatechange=function(){
+	if (aj.readyState==4&&aj.status==200) {
+		var return_data=aj.responseText;
+		document.getElementById("batchID").innerHTML=return_data;
+	}
+	}
+aj.send(idSend);
+
 }
 </script>
 </body>
