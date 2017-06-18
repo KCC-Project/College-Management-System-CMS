@@ -98,7 +98,7 @@
 				</tr>
 				<tr>
 					<td>Enroll Date:</td>
-					<td><input type="date" placeholder="date"
+					<td><input type="date" id="date"
 					class="form-control" name="date"></td>
 				</tr>
 			</table>
@@ -126,7 +126,7 @@
 			
 					<tr>
 		<td>Programme: <span class="astriek">*</span> </td>
-		<td><select required class="form-control" id="sel2" >
+		<td><select required class="form-control" id="sel2" onChange="autoSelectBatch();">
 			<option value="" disabled selected>Select Programme</option>	
 			</select></td>
 		</tr>
@@ -213,6 +213,11 @@ function select_faculty() {
 		}
 	aj.send(idSend);
 	document.getElementById("sel2").innerHTML="Loading.....";
+}
+
+function autoSelectBatch(){
+var date=document.getElementById("date").value;
+alert(date);
 }
 </script>
 </body>
