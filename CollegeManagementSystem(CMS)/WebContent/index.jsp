@@ -73,7 +73,7 @@
 							</label>
 						</div>
 						<Button type="submit"
-							class="btn btn-default btn-info btn-block submit-btn login-btn">
+							class="btn btn-success  btn-block submit-btn login-btn">
 							<span class="glyphicon glyphicon-lock"></span>&nbsp;Login
 						</Button>
 						
@@ -108,7 +108,7 @@
 					placeholder="Email">
 			</div>
 			<Button type="submit"
-				class="btn btn-default btn-success btn-block submit-btn login-btn">
+				class="btn btn-info btn-success btn-block submit-btn login-btn">
 				<span class="glyphicon glyphicon-lock"></span>&nbsp;Send verification link
 			</Button>
         </form>
