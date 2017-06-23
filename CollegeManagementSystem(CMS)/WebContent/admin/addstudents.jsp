@@ -39,7 +39,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td><input type="file" id="inputfile" name="filepath"
+								<td><input type="file" id="inputfile"  name="filepath"
 								class="form-control"></td>
 							</tr>
 							<tr>

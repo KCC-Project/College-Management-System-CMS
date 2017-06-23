@@ -20,7 +20,7 @@
 	<div class="container">
 
 		<form method="post" action="login">
-			<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-sm-offset-4">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-sm-offset-3 col-md-offset-3 col-lg-offset-4">
 				<div class="form-content">
 					<div class="form-header back white">
 						<div class="form-top-left">
@@ -72,12 +72,12 @@
 							<a href="" data-toggle="modal" data-target="#myModal">forgot password ?</a>
 							</label>
 						</div>
+						
 						<Button type="submit"
-							class="btn btn-success  btn-block submit-btn login-btn">
+							class="btn btn-success btn-block submit-btn login-btn ">
 							<span class="glyphicon glyphicon-lock"></span>&nbsp;Login
 						</Button>
-						
-					</div>
+											</div>
 
 				</div>
 
