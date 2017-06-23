@@ -69,12 +69,12 @@
 								Remember Me
 							</label>
 							<label class="pull-right">
-							<a href="" data-toggle="modal" data-target="#myModal">forgot password ?</a>
+							<a href="" data-toggle="modal" data-target="#myModal">forgot password?</a>
 							</label>
 						</div>
 						
 						<Button type="submit"
-							class="btn btn-success btn-block submit-btn login-btn ">
+							class="btn btn-success btn-block login-btn">
 							<span class="glyphicon glyphicon-lock"></span>&nbsp;Login
 						</Button>
 											</div>
