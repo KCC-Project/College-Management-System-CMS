@@ -79,7 +79,7 @@
 				<tr>
 					<td>ID:</td>
 					<td ><input type="text" placeholder="ID"
-					class="form-control" required name="id" id="studentID" onblur="validate();" onkeyup="autoUserPass();" >
+					class="form-control" required name="id" id="studentID"  onblur="validate();" onkeyup="autoUserPass();" >
 						</td>
 						<td><span id="Error_ID" class="glyphicon glyphicon-remove-circle" style="visibility:hidden; "></span>
 				</td>
@@ -268,6 +268,7 @@ function autoUserPass(){
 			document.getElementById("student_username1").value=return_data;
 			document.getElementById("Password1").value=return_data;
 			document.getElementById("confirm_password").value=return_data;
+			document.getElementById("Error_ID").style.visibility = "hidden";
 		}
 		}
 	aj.send(idSend);
