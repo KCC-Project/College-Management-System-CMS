@@ -196,6 +196,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script
 <script src="../Resources/js/default.js"></script>
 <script>
 function validate(){
+//username
 	var userID=document.getElementById("studentID").value;
 var Error="userID="+userID;
 var url ="../ajax_checkUsername";
