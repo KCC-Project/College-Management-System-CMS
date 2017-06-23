@@ -198,7 +198,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script
 function validate(){
 	var userID=document.getElementById("studentID").value;
 var Error="userID="+userID;
-var url ="../ajax_getUserId_Or_Email";
+var url ="../ajax_changeUsername";
 var aj=new XMLHttpRequest();
 aj.open("POST", url, true);
 aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
