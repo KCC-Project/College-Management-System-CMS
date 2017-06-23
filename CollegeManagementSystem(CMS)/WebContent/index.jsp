@@ -20,7 +20,7 @@
 	<div class="container">
 
 		<form method="post" action="login">
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-sm-offset-3 col-md-offset-3 col-lg-offset-4">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-sm-offset-3 col-md-offset-3 col-lg-offset-4 formm">
 				<div class="form-content">
 					<div class="form-header back white">
 						<div class="form-top-left">
