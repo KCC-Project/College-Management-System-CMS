@@ -68,16 +68,19 @@
 							<label class="pull-left"> <input type="checkbox" name="rememberMe">
 								Remember Me
 							</label>
-							<label class="pull-right">
-							<a href="" data-toggle="modal" data-target="#myModal">forgot password?</a>
-							</label>
+							
 						</div>
 						
 						<Button type="submit"
 							class="btn btn-success btn-block login-btn">
 							<span class="glyphicon glyphicon-lock"></span>&nbsp;Login
+							
 						</Button>
-											</div>
+						<hr>
+						<label class="pull-right">
+							<a href="" data-toggle="modal" data-target="#myModal">forgot password?</a>
+							</label>
+					</div>
 
 				</div>
 
