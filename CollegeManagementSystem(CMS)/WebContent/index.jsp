@@ -20,10 +20,11 @@
 	<div class="container">
 
 		<form method="post" action="login">
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-sm-offset-3 col-md-offset-3 col-lg-offset-4 formm">
-				<div class="form-content">
-					<div class="form-header back white">
-						<div class="form-top-left">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-sm-offset-3 col-md-offset-3 col-lg-offset-4  form_margin">
+				<div class="form-content ">
+				<div class="border">
+					<div class="form-header back white ">
+						<div class="form-top-left ">
 							<h3>Login</h3>
 							<p>Be a part of your College Community</p>
 						</div>
@@ -81,7 +82,7 @@
 							<a href="" data-toggle="modal" data-target="#myModal">forgot password?</a>
 							</label>
 					</div>
-
+</div>
 				</div>
 
 			</div>
