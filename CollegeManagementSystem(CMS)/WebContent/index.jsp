@@ -77,7 +77,7 @@
 							
 						</Button>
 						<hr>
-						<label class="pull-right">
+						<label class="pullright">
 							<a href="" data-toggle="modal" data-target="#myModal">forgot password?</a>
 							</label>
 					</div>

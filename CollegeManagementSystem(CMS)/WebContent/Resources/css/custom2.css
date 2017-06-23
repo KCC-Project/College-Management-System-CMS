@@ -46,3 +46,7 @@ hr{
     border: 0;
     border-top: 1px solid #716666;
 }
+.pullright {
+	margin-left: 35%;
+	padding-top: 8px;
+}
