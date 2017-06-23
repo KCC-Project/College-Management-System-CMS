@@ -14,8 +14,8 @@ import Model.StudentModel;
 import SERVICE.StudentServiceInterface;
 import SERVICE.Impl.StudentServiceImpl;
 
-@WebServlet("/ajax_getUserId_Or_Email")
-public class ajax_getUserId_Or_Email extends HttpServlet {
+@WebServlet("/ajax_checkUsername")
+public class ajax_checkUsername extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -29,7 +29,7 @@
 			<div class="col-lg-12">
 				<form class="" action="../addStudent"
 					enctype="multipart/form-data" method="Post">
-					<div class="col-lg-4 col-sm-4 col-xs-12 profile-info ">
+					<div class="col-lg-4 col-sm-2 col-xs-12 profile-info ">
 						<table class="table tabel-responsive">
 							<tr>
 								<td>
@@ -49,7 +49,7 @@
 							</tr>
 						</table>
 					</div>
-					<div class="col-lg-4 col-sm-4 col-xs-12 profile-info">
+					<div class="col-lg-4 col-sm-5 col-xs-12 profile-info">
 						<table class="tabel tabel-responsive">
 							<tr>
 								<td>Firstname: <span class="astriek">*</span>
@@ -106,7 +106,7 @@
 				</tr>
 			</table>
 		</div>
-		<div class="col-lg-4 col-sm-4 col-xs-12 profile-info">
+		<div class="col-lg-4 col-sm-5 col-xs-12 profile-info">
 			<table class="tabel tabel-responsive">
 				<tr>
 					<td>Faculty: <span class="astriek">*</span>
