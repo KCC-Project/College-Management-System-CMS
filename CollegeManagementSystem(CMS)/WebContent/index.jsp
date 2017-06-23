@@ -12,6 +12,8 @@
 <title>Login</title>
 <link href="Resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="Resources/css/custom2.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -63,16 +65,18 @@
 						</div>
 
 						<div class="checkbox">
-							<label> <input type="checkbox" name="rememberMe">
+							<label class="pull-left"> <input type="checkbox" name="rememberMe">
 								Remember Me
+							</label>
+							<label class="pull-right">
+							<a href="" data-toggle="modal" data-target="#myModal">forgot password ?</a>
 							</label>
 						</div>
 						<Button type="submit"
-							class="btn btn-default btn-success btn-block submit-btn login-btn">
+							class="btn btn-default btn-info btn-block submit-btn login-btn">
 							<span class="glyphicon glyphicon-lock"></span>&nbsp;Login
-
 						</Button>
-
+						
 					</div>
 
 				</div>
@@ -82,5 +86,40 @@
 
 		</form>
 	</div>
+	
+
+
+<!-- Modal popup of forgot password -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Forgot Password</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="forgotpassword">
+        	<div class="form-group">
+				<label for="input for forgot email"><span
+					class="glyphicon glyphicon-user"> </span> Email </label> <input
+					type="text" class="form-control" required name="forgotemailname"
+					placeholder="Email">
+			</div>
+			<Button type="submit"
+				class="btn btn-default btn-success btn-block submit-btn login-btn">
+				<span class="glyphicon glyphicon-lock"></span>&nbsp;Send verification link
+			</Button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>	
+
 </body>
 </html>
