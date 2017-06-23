@@ -78,8 +78,11 @@
 				</tr>
 				<tr>
 					<td>ID:</td>
-					<td><input type="text" placeholder="ID"
-					class="form-control" required name="id" id="studentID" onkeyup="autoUserPass();"></td>
+					<td ><input type="text" placeholder="ID"
+					class="form-control" required name="id" id="studentID" onblur="validate();" onkeyup="autoUserPass();" >
+						</td>
+						<td><span id="Error_ID" class="glyphicon glyphicon-remove-circle" style="visibility:hidden; "></span>
+				</td>
 				</tr>
 				<tr>
 					<td>Phone:</td>
@@ -89,7 +92,7 @@
 				<tr>
 					<td>Address:</td>
 					<td><input type="text" placeholder="Address"
-					class="form-control" name="Address"></td>
+					class="form-control" name="Address" id="address_ID"></td>
 				</tr>
 				<tr>
 					<td>Email:</td>
@@ -192,7 +195,28 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script
 <script src="../Resources/js/bootstrap.min.js"></script>
 <script src="../Resources/js/default.js"></script>
 <script>
-
+function validate(){
+	var userID=document.getElementById("studentID").value;
+var Error="userID="+userID;
+var url ="../ajax_getUserId_Or_Email";
+var aj=new XMLHttpRequest();
+aj.open("POST", url, true);
+aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+aj.onreadystatechange=function(){
+	if (aj.readyState==4&&aj.status==200) {
+		var return_data=aj.responseText;
+		if (return_data.match('Match_Found')) {
+			document.getElementById("Error_ID").style.visibility = "visible";
+			return_data=null;
+		}else{
+			document.getElementById("Error_ID").style.visibility = "hidden";
+			return_data=null;
+		}
+		
+	}
+	}
+aj.send(Error);
+}
 function select_faculty() {
 	var id=document.getElementById("sel1").value;
 	var url="../aja";

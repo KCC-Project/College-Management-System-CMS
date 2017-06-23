@@ -16,7 +16,7 @@ public class ajax_user_password_autofill extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id=request.getParameter("id");
 		PrintWriter out = response.getWriter();
-		System.out.println("idddd:"+id);
+	//	System.out.println("idddd:"+id);
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		//out.write("<p>"+id+"</p>");

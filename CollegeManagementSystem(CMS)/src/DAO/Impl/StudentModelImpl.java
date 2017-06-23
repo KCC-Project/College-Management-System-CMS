@@ -90,14 +90,9 @@ public class StudentModelImpl implements StudentModelInterface {
 				model.setMobileNo(rs.getInt("Student_Phone"));
 				model.setAddress(rs.getString("Student_Address"));
 				model.setGender(rs.getString("Student_Gender"));
+				model.setUsername(rs.getString("Student_UserName"));
 
-				try {
-					byte[] imagedata = rs.getBytes("Student_Image");
-
-					model.setImage(imagedata);
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, " has no profile Picture insert One");
-				}
+		
 
 				student.add(model);
 			}
