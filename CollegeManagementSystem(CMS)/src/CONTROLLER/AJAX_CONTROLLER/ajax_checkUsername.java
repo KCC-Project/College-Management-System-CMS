@@ -14,6 +14,7 @@ import Model.StudentModel;
 import SERVICE.StudentServiceInterface;
 import SERVICE.Impl.StudentServiceImpl;
 
+//file name changed
 @WebServlet("/ajax_checkUsername")
 public class ajax_checkUsername extends HttpServlet {
 	private static final long serialVersionUID = 1L;
