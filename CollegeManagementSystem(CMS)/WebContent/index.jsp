@@ -104,7 +104,7 @@
         <h4 class="modal-title">Forgot Password</h4>
       </div>
       <div class="modal-body">
-        <form method="post" action="forgotpassword">
+        <form method="post" action="forgotPassword">
         	<div class="form-group">
 				<label for="input for forgot email"><span
 					class="glyphicon glyphicon-user"> </span> Email </label> <input
