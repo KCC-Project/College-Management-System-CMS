@@ -35,6 +35,14 @@ public class Faculty_Program_Model_Interface_Impl implements Faculty_Program_Mod
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+		}finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return fact_programe;
 	}
@@ -57,6 +65,14 @@ public class Faculty_Program_Model_Interface_Impl implements Faculty_Program_Mod
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+		}finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return fact_programe;
 	}

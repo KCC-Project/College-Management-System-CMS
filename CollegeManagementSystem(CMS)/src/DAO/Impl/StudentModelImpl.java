@@ -98,6 +98,14 @@ public class StudentModelImpl implements StudentModelInterface {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+		}finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return student;
 	}
@@ -127,6 +135,14 @@ public class StudentModelImpl implements StudentModelInterface {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return model;
 	}
@@ -143,6 +159,14 @@ public class StudentModelImpl implements StudentModelInterface {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return result;
 	}
@@ -177,6 +201,14 @@ public class StudentModelImpl implements StudentModelInterface {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 
 		return result;
