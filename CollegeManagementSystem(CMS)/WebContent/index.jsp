@@ -110,8 +110,8 @@
 					type="text" class="form-control" required id="forgotemailname"
 					placeholder="Email">
 			</div>
-			<Button onclick="send();" type="submit" id="btn"
-				class="btn btn-info btn-success btn-block submit-btn login-btn">
+			<Button onkeyup="showSubmit();" onclick="send();" type="submit" id="btnn"
+				class="btn btn-primary active btn-block submit-btn login-btn" >
 				<span class="glyphicon glyphicon-lock"></span>&nbsp;Send verification link
 			</Button>
 			<div id="errmsg"></div>
@@ -127,6 +127,9 @@
 
 <script>
 function send(){
+	document.getElementById("btnn").innerHTML="Loading...";
+	document.getElementById("btnn").disabled = true;
+	
 	var email=document.getElementById("forgotemailname").value;
 	var url="forgotPassword";
 	var sendEmail="email="+email;
@@ -134,13 +137,20 @@ function send(){
 	aj.open("POST", url, true);
 	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	aj.onreadystatechange=function(){
+	
 		if (aj.readyState==4&&aj.status==200) {
 			var return_data=aj.responseText;
-			document.getElementById("btn").innerHTML="Loading...";
 			document.getElementById("errmsg").innerHTML=return_data;
+			document.getElementById("btnn").innerHTML="Sucessfull";
+			document.getElementById("btnn").disabled = false;
+			
 		}
 	}
 	aj.send(sendEmail);
+}
+
+function showSubmit(){
+	document.getElementById("btnn").innerHTML="<span class='glyphicon glyphicon-lock'></span>&nbsp;Send verification link";
 }
 </script>
 
