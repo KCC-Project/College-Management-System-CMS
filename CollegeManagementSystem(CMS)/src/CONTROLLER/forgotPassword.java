@@ -51,18 +51,20 @@ public class forgotPassword extends HttpServlet {
 		            request.setAttribute("Message", resultMessage);
 		            //System.out.println(request.getAttribute("Message"));
 		        }
-				response.setContentType("text/xml");
-				response.setHeader("Cache-Control", "no-cache");
-				out.flush();
-				break;
+				
+				//break;
 			}else{
-				out.write("Invalid Email! please use your valid email address to restore password ");
-				out.flush();
-				break;
+				String mess="Invalid Email! please use your valid email address to restore password";
+				out.write("<p>"+mess+"</p>");
+				
+				//break;
 			}
 			
 		}
 		
+		response.setContentType("text/xml");
+		response.setHeader("Cache-Control", "no-cache");
+		out.flush();
 		
 		
 	}
