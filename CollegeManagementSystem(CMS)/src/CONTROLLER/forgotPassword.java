@@ -1,6 +1,7 @@
 package CONTROLLER;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +20,9 @@ public class forgotPassword extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PrintWriter out = response.getWriter();
+		
 		String email = request.getParameter("forgotemailname");
 		String hash = "1234hello1234"; //system generated hash code will be here
 		
@@ -27,15 +31,20 @@ public class forgotPassword extends HttpServlet {
 		try {
             MailUtil.sendEmailPasswordForgot(email,hash);
             resultMessage = "Success! Please check you email for the verification Link";
-            System.out.println(resultMessage);
+            out.write("<p>"+resultMessage+"</p>");
         } catch (Exception ex) {
             ex.printStackTrace();
             resultMessage = "Oops! something went wrong: " + ex.getMessage();
-            System.out.println(resultMessage);
+            out.write("<p>"+resultMessage+"</p>");
         } finally {
             request.setAttribute("Message", resultMessage);
             System.out.println(request.getAttribute("Message"));
         }
+		
+		response.setContentType("text/xml");
+		response.setHeader("Cache-Control", "no-cache");
+		out.flush();
 	}
-
+	
+	
 }

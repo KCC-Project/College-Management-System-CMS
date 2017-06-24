@@ -59,3 +59,6 @@ hr{
 .form_margin{
 	margin-top: 60px;
 }
+#errmsg {
+	color:red;
+}

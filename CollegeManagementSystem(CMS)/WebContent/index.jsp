@@ -12,8 +12,7 @@
 <title>Login</title>
 <link href="Resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="Resources/css/custom2.css" rel="stylesheet" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
 </head>
 <body>
@@ -104,18 +103,19 @@
         <h4 class="modal-title">Forgot Password</h4>
       </div>
       <div class="modal-body">
-        <form method="post" action="forgotPassword">
+        
         	<div class="form-group">
 				<label for="input for forgot email"><span
 					class="glyphicon glyphicon-user"> </span> Email </label> <input
 					type="text" class="form-control" required name="forgotemailname"
 					placeholder="Email">
 			</div>
-			<Button type="submit"
+			<Button onClick="sendForgotEmail();" type="submit"
 				class="btn btn-info btn-success btn-block submit-btn login-btn">
 				<span class="glyphicon glyphicon-lock"></span>&nbsp;Send verification link
 			</Button>
-        </form>
+			<div id="errmsg"></div>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -124,6 +124,30 @@
 
   </div>
 </div>	
+
+<script>
+function sendForgotEmail(){
+	var email=document.getElementById("forgotemailname").value;
+
+	alert("buda");
+	var url="forgotPassword";
+	var sendEmail="email="+email;
+	var aj=new XMLHttpRequest();
+	aj.open("POST", url, true);
+	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	aj.onreadystatechange=function(){
+		if (aj.readyState==4&&aj.status==200) {
+			var return_data=aj.responseText;
+			document.getElementById("errmsg").innerHTML="hello";
+		}
+	}
+	aj.send(sendEmail);
+
+}
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -18,10 +18,10 @@ public class MailUtil {
 			throws AddressException, MessagingException {
 		
 		Properties props = new Properties();
-		// sets SMTP server properties
-        Properties properties = new Properties();
+		//------ sets SMTP server properties ---------
+//        Properties properties = new Properties();
         
-        // this is not working for now
+        //------- this is not working for now --------
 //        properties.put("mail.smtp.host", "smtp.gmail.com");
 //        properties.put("mail.smtp.port", 465);
 //        properties.put("mail.smtp.auth", "true");
