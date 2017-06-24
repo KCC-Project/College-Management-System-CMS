@@ -56,10 +56,7 @@ public class forgotPassword extends HttpServlet {
 					out.write("<p>" + resultMessage + "</p>");
 				} finally {
 					request.setAttribute("Message", resultMessage);
-					// System.out.println(request.getAttribute("Message"));
 				}
-
-				// break;
 			}
 
 		}
