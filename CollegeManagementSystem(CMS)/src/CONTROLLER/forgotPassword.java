@@ -15,15 +15,12 @@ import com.cms.util.MailUtil;
 
 public class forgotPassword extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		PrintWriter out = response.getWriter();
 		
-		String email = request.getParameter("forgotemailname");
+		String email = request.getParameter("email");
 		String hash = "1234hello1234"; //system generated hash code will be here
 		
 		String resultMessage = ""; // message to reply back to user either send is successful or not 

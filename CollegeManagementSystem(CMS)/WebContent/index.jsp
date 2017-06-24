@@ -107,10 +107,10 @@
         	<div class="form-group">
 				<label for="input for forgot email"><span
 					class="glyphicon glyphicon-user"> </span> Email </label> <input
-					type="text" class="form-control" required name="forgotemailname"
+					type="text" class="form-control" required id="forgotemailname"
 					placeholder="Email">
 			</div>
-			<Button onClick="sendForgotEmail();" type="submit"
+			<Button onclick="send();" type="submit" id="btn"
 				class="btn btn-info btn-success btn-block submit-btn login-btn">
 				<span class="glyphicon glyphicon-lock"></span>&nbsp;Send verification link
 			</Button>
@@ -126,10 +126,8 @@
 </div>	
 
 <script>
-function sendForgotEmail(){
+function send(){
 	var email=document.getElementById("forgotemailname").value;
-
-	alert("buda");
 	var url="forgotPassword";
 	var sendEmail="email="+email;
 	var aj=new XMLHttpRequest();
@@ -138,11 +136,11 @@ function sendForgotEmail(){
 	aj.onreadystatechange=function(){
 		if (aj.readyState==4&&aj.status==200) {
 			var return_data=aj.responseText;
-			document.getElementById("errmsg").innerHTML="hello";
+			document.getElementById("btn").innerHTML="Loading...";
+			document.getElementById("errmsg").innerHTML=return_data;
 		}
 	}
 	aj.send(sendEmail);
-
 }
 </script>
 
