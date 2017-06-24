@@ -145,6 +145,7 @@
 
 				if (aj.readyState == 4 && aj.status == 200) {
 					var return_data = aj.responseText;
+					alert(return_data);
 					var res = return_data.substring(3, 11);
 					if (res.match("Success!")) {
 						document.getElementById("forgotemailname").disabled=true;
