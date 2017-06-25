@@ -33,15 +33,17 @@
 								<label for="password"><span
 									class="glyphicon glyphicon-eye-open"> </span> Password </label> <input
 									type="password" class="form-control" required
-									name="passwordField" placeholder="Enter password">
+									name="passwordField" placeholder="Enter password"
+									id="passwordField"  onkeyup="isPasswordSame();" >
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword1"><span
 									class="glyphicon glyphicon-eye-open"></span> Confirm password</label> <input
 									type="password" class="form-control" required
-									name="confirmPassword" placeholder="Confirm password">
+									id="confirmPassword" name="confirmPassword"
+									placeholder="Confirm password" onkeyup="isPasswordSame();" >
 							</div>
-							<Button type="submit"
+							<Button type="submit" id="resetBtn"
 								class="btn btn-success btn-block login-btn_resetPassword_only">
 								<span class="glyphicon glyphicon-lock"></span>&nbsp;Reset
 							</Button>
@@ -55,31 +57,30 @@
 
 	<script type="text/javascript">
 		window.onload = function() {
-			
+
 			//alert("Automatic loads this script");
 			var fullURL = window.location.search.substring(1);
 			var parameterArray = fullURL.split('&');
 
-			if (parameterArray == "" || parameterArray.length <4) {
+			if (parameterArray == "" || parameterArray.length < 4) {
 				window.location.replace("index.jsp");
 			} else {
 				var currentParameterCode = parameterArray[1].split('=');
 				var currentParameterTablename = parameterArray[2].split('=');
 				var currentParameterID = parameterArray[3].split('=');
-				
-				if (currentParameterCode == "" ||currentParameterTablename=="" ||currentParameterID=="") {
+
+				if (currentParameterCode == ""
+						|| currentParameterTablename == ""
+						|| currentParameterID == "") {
 					window.location.replace("index.jsp");
 				}
 				var vCode = currentParameterCode[1]; //vcode leko
-				var tablename=currentParameterTablename[1];
-				var ID=currentParameterID[1];
-			
-				if (vCode == null || tablename==null || ID==null) {
+				var tablename = currentParameterTablename[1];
+				var ID = currentParameterID[1];
+
+				if (vCode == null || tablename == null || ID == null) {
 					window.location.replace("index.jsp");
-				} 
-				
-				else {
-					
+				} else {
 					var url = "isAuthincatedForResetPassword";
 					var vData = "table=" + tablename + "&vCode=" + vCode
 							+ "&id=" + ID;
@@ -97,10 +98,25 @@
 						}
 					}
 					aj.send(vData);
-
 				}
 			}
 		}
+
+		function isPasswordSame() {
+			var password = document.getElementById("passwordField").value.trim();
+			var confirmPassword = document.getElementById("confirmPassword").value.trim();
+			//alert(password + "=" + confirmPassword);
+			if (password === confirmPassword) {
+				//alert("Password match=" + confirmPassword);
+				document.getElementById("resetBtn").disabled = false;
+				document.getElementById("resetBtn").innerHTML="<span class='glyphicon glyphicon-lock'></span>&nbsp;Reset";
+			} else {
+				document.getElementById("resetBtn").disabled = true;
+				document.getElementById("resetBtn").innerHTML="<span class='glyphicon glyphicon-lock'></span>&nbsp;Password not matched";
+			}
+		}
+		
+		
 	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
