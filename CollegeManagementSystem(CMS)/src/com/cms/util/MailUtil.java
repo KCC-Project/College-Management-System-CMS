@@ -38,7 +38,7 @@ public class MailUtil {
         Session session = Session.getInstance(props,auth);
         
         String message_to_user = "The verification link is given below: "
-        		+ "http://localhost:8080/CollegeManagementSystem/index.jsp?email="+email+"&hash="+hash+"";
+        		+ "http://localhost:8080/CollegeManagementSystem/ResetPassword.jsp?email="+email+"&hash="+hash+"";
         String message_subject_to_user = "Forgot Password verify link from cms";
         
         MimeMessage msg = new MimeMessage(session);
