@@ -40,14 +40,16 @@ public class forgotPassword extends HttpServlet {
 		for (ForgetEmailUserModel studentModel : list) {
 			String emailFromDb = studentModel.getEmail();
 			if (emailFromDb.equalsIgnoreCase(email)) {
-				String hash = "1234hello1234"; // system generated hash code
-												// will be here
+				String verificationCode=studentModel.getAuthienciationCode();
+				int id=studentModel.getId();
+				String tableName=studentModel.getType();
+				
 
 				String resultMessage = ""; // message to reply back to user
 											// either send is successful or not
 
 				try {
-					MailUtil.sendEmailPasswordForgot(email, hash);
+					MailUtil.sendEmailPasswordForgot(email, verificationCode,id,tableName);
 					resultMessage = "Success! Please check you email for the verification Link <a href='https://www.google.com/gmail/' target='_blank'>click here</a>";
 					out.write("<p>" + resultMessage + "</p>");
 				} catch (Exception ex) {

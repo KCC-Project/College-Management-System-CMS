@@ -60,12 +60,12 @@
 			var fullURL = window.location.search.substring(1);
 			var parameterArray = fullURL.split('&');
 
-			if (parameterArray == "" || parameterArray.length < 5) {
+			if (parameterArray == "" || parameterArray.length <4) {
 				window.location.replace("index.jsp");
 			} else {
-				var currentParameterCode = parameterArray[2].split('=');
-				var currentParameterTablename = parameterArray[3].split('=');
-				var currentParameterID = parameterArray[4].split('=');
+				var currentParameterCode = parameterArray[1].split('=');
+				var currentParameterTablename = parameterArray[2].split('=');
+				var currentParameterID = parameterArray[3].split('=');
 				
 				if (currentParameterCode == "" ||currentParameterTablename=="" ||currentParameterID=="") {
 					window.location.replace("index.jsp");

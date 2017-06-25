@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 
 public class MailUtil {
 
-	public static void sendEmailPasswordForgot(String email, String hash) 
+	public static void sendEmailPasswordForgot(String email, String hash, int id, String tableName) 
 			throws AddressException, MessagingException {
 		
 		Properties props = new Properties();
@@ -38,7 +38,7 @@ public class MailUtil {
         Session session = Session.getInstance(props,auth);
         
         String message_to_user = "The verification link is given below: "
-        		+ "http://localhost:8080/CollegeManagementSystem/ResetPassword.jsp?email="+email+"&hash="+hash+"&code=abcd"+"&tablename=student"+"&id=50";
+        		+ "http://localhost:8080/CollegeManagementSystem/ResetPassword.jsp?email="+email+"&code="+hash+"&tablename="+tableName+"&id="+id;
         String message_subject_to_user = "Forgot Password verify link from cms";
         
         MimeMessage msg = new MimeMessage(session);
