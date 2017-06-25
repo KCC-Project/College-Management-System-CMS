@@ -96,4 +96,31 @@ public class ForgetEmailUserModelInterfaceImpl implements ForgetEmailUserModelIn
 		return tablecount;
 	}
 
+	public boolean isAuthenticated(String tableName, int id, String code) {
+		String tblNameID=null;
+		if (tableName.equalsIgnoreCase("student")) {
+			tblNameID="Student_ID";
+		}else if(tableName.equalsIgnoreCase("staff")){
+			tblNameID="Staff_ID";
+		}else if(tableName.equalsIgnoreCase("admin")){
+			tblNameID="admin_ID";
+		}
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "select * from " + tableName + " where " + tblNameID + "=? ";
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			while(rs.next()){
+				String vCode=rs.getString("verificationCode");
+				if (vCode.equals(code)) {
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+	}
+
 }
