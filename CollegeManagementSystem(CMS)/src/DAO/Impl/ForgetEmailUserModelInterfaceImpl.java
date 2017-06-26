@@ -184,4 +184,45 @@ public class ForgetEmailUserModelInterfaceImpl implements ForgetEmailUserModelIn
 		return false;
 	}
 
+
+	public boolean resetPassword(String tableName, int id, String verificationCode, String password) {
+		String idColumnName = null;
+		String setPassword=null;
+		try {
+			if (tableName.equals("admin")) {
+				idColumnName="admin_id";
+				setPassword="admin_password";
+			}
+			else if(tableName.equals("student")){
+				idColumnName="student_id";
+				setPassword="student_password";
+			}
+			else if(tableName.equals("staff")){
+				idColumnName="staff_id";
+				setPassword="staff_password";
+			}
+			conn = DatabaseConnection.connectToDatabase();
+			sql="select * from "+tableName+" where "+idColumnName +"=?" ;
+			pst=conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs=pst.executeQuery();
+			while(rs.next()){
+				String code=rs.getString("verification_code");
+				if (code.equals(verificationCode)) {
+					sql = "UPDATE " + tableName + " SET "+ setPassword+" = '" + password + "' WHERE " + idColumnName
+							+ "=?";
+					pst=conn.prepareStatement(sql);
+					pst.setInt(1, id);
+					int count=pst.executeUpdate();
+					if (count>0) {
+						return true;
+					}
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+	}
+
 }

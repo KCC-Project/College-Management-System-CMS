@@ -18,4 +18,9 @@ public class ForgetEmailUserModelServiceImpl implements ForgetEmailUserModelServ
 		return forget.isAuthenticated(tableName, id, code);
 	}
 
+	@Override
+	public boolean resetPassword(String tableName, int id, String verificationCode, String password) {
+		return forget.resetPassword(tableName, id, verificationCode, password);
+	}
+
 }

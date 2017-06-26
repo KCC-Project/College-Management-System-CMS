@@ -34,17 +34,22 @@
 									class="glyphicon glyphicon-eye-open"> </span> Password </label> <input
 									type="password" class="form-control" required
 									name="passwordField" placeholder="Enter password"
-									id="passwordField"  onkeyup="isPasswordSame();" >
+									id="passwordField" onkeyup="isPasswordSame();">
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword1"><span
 									class="glyphicon glyphicon-eye-open"></span> Confirm password</label> <input
 									type="password" class="form-control" required
 									id="confirmPassword" name="confirmPassword"
-									placeholder="Confirm password" onkeyup="isPasswordSame();" >
+									placeholder="Confirm password" onkeyup="isPasswordSame();">
 							</div>
+							<input type="hidden" name="tableName" id="tableName">
+							<input type="hidden" name="verificationCode" id="verificationCode">
+							<input type="hidden" name="id" id="id">
+							
 							<Button type="submit" id="resetBtn"
-								class="btn btn-success btn-block login-btn_resetPassword_only">
+								class="btn btn-success btn-block login-btn_resetPassword_only"
+								onclick="setDateToHiddenInputField();">
 								<span class="glyphicon glyphicon-lock"></span>&nbsp;Reset
 							</Button>
 
@@ -56,12 +61,16 @@
 	</div>
 
 	<script type="text/javascript">
+		var vCode;
+		var tablename;
+		var ID;
+		
 		window.onload = function() {
 
 			//alert("Automatic loads this script");
 			var fullURL = window.location.search.substring(1);
 			var parameterArray = fullURL.split('&');
-
+			
 			if (parameterArray == "" || parameterArray.length < 4) {
 				window.location.replace("index.jsp");
 			} else {
@@ -74,9 +83,9 @@
 						|| currentParameterID == "") {
 					window.location.replace("index.jsp");
 				}
-				var vCode = currentParameterCode[1]; //vcode leko
-				var tablename = currentParameterTablename[1];
-				var ID = currentParameterID[1];
+				vCode = currentParameterCode[1]; //vcode leko
+				tablename = currentParameterTablename[1];
+				ID = currentParameterID[1];
 
 				if (vCode == null || tablename == null || ID == null) {
 					window.location.replace("index.jsp");
@@ -103,20 +112,25 @@
 		}
 
 		function isPasswordSame() {
-			var password = document.getElementById("passwordField").value.trim();
-			var confirmPassword = document.getElementById("confirmPassword").value.trim();
-			//alert(password + "=" + confirmPassword);
+			var password = document.getElementById("passwordField").value
+					.trim();
+			var confirmPassword = document.getElementById("confirmPassword").value
+					.trim();
 			if (password === confirmPassword) {
 				//alert("Password match=" + confirmPassword);
 				document.getElementById("resetBtn").disabled = false;
-				document.getElementById("resetBtn").innerHTML="<span class='glyphicon glyphicon-lock'></span>&nbsp;Reset";
+				document.getElementById("resetBtn").innerHTML = "<span class='glyphicon glyphicon-lock'></span>&nbsp;Reset";
 			} else {
 				document.getElementById("resetBtn").disabled = true;
-				document.getElementById("resetBtn").innerHTML="<span class='glyphicon glyphicon-lock'></span>&nbsp;Password not matched";
+				document.getElementById("resetBtn").innerHTML = "<span class='glyphicon glyphicon-lock'></span>&nbsp;Password not matched";
 			}
 		}
 		
-		
+		function setDateToHiddenInputField(){
+			document.getElementById("tableName").value = tablename;
+			document.getElementById("verificationCode").value = vCode;
+			document.getElementById("id").value =ID;
+		}
 	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
