@@ -1,7 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@page import="com.model.Faculty_ProgramModel"%>
 <%@page import="java.util.List"%>
-<%@page import="SERVICE.Impl.Faculty_Program_Model_Service_Impl"%>
-<%@page import="SERVICE.Faculty_Program_Model_Service"%>
-<%@page import="Model.Faculty_ProgramModel"%>
+<%@page import="com.serviceimpl.Faculty_Program_Model_Service_Impl"%>
+<%@page import="com.service.Faculty_Program_Model_Service"%>
 <jsp:include page="admin-header.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 

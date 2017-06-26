@@ -1,6 +1,5 @@
-<%@page import="Model.StudentModel"%>
-<%@page import="SERVICE.Impl.StudentServiceImpl"%>
-<%@page import="SERVICE.StudentServiceInterface"%>
+<%@page import="com.serviceimpl.StudentServiceImpl"%>
+<%@page import="com.model.StudentModel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 	

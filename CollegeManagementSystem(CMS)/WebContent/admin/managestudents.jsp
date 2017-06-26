@@ -1,8 +1,8 @@
 
-<%@page import="Model.StudentModel"%>
+<%@page import="com.model.StudentModel"%>
 <%@page import="java.util.List"%>
-<%@page import="SERVICE.Impl.StudentServiceImpl"%>
-<%@page import="SERVICE.StudentServiceInterface"%>
+<%@page import="com.serviceimpl.StudentServiceImpl"%>
+<%@page import="com.service.StudentServiceInterface"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <jsp:include page="admin-header.jsp" />

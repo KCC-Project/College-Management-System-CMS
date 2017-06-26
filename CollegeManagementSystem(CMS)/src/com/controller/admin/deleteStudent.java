@@ -16,12 +16,12 @@ public class deleteStudent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
     public deleteStudent() {
-        super();
-        // TODO Auto-generated constructor stub
+      
     }
     
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 System.out.println("herer");
 	int id=Integer.parseInt(request.getParameter("txtID"));
 	StudentServiceInterface delete= new StudentServiceImpl();
 	if(delete.delete(id)>0){
