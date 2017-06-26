@@ -1,4 +1,4 @@
-package com.daoimpl.admin;
+package com.daoimpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,11 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-
-import com.dao.admin.StudentModelInterface;
-import com.daoimpl.DatabaseConnection;
+import com.dao.StudentModelInterface;
 import com.model.StudentModel;
 
 public class StudentModelImpl implements StudentModelInterface {

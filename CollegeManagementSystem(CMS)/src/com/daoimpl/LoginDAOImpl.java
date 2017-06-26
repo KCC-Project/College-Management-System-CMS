@@ -1,11 +1,10 @@
-package com.daoimpl.login_logout;
+package com.daoimpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.dao.login_logout.LoginDAOInterface;
-import com.daoimpl.DatabaseConnection;
+import com.dao.LoginDAOInterface;
 import com.model.LoginModel;
 
 public class LoginDAOImpl implements LoginDAOInterface {

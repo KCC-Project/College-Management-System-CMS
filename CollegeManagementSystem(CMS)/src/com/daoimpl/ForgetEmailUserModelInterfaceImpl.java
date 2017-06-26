@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.daoimpl.forget_reset_password;
+package com.daoimpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.dao.forget_reset.ForgetEmailUserModelInterface;
-import com.daoimpl.DatabaseConnection;
+import com.dao.ForgetEmailUserModelInterface;
 import com.model.ForgetEmailUserModel;
 
 public class ForgetEmailUserModelInterfaceImpl implements ForgetEmailUserModelInterface {

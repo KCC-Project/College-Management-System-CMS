@@ -1,4 +1,4 @@
-package com.dao.admin;
+package com.dao;
 
 import java.util.List;
 

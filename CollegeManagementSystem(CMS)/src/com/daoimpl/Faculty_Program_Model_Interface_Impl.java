@@ -1,4 +1,4 @@
-package com.daoimpl.admin;
+package com.daoimpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,12 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
-import com.dao.admin.Faculty_Program_Model_Interface;
-import com.daoimpl.DatabaseConnection;
+import com.dao.Faculty_Program_Model_Interface;
 import com.model.Faculty_ProgramModel;
-import com.model.StudentModel;
 
 public class Faculty_Program_Model_Interface_Impl implements Faculty_Program_Model_Interface {
 	private String sql;

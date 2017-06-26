@@ -2,8 +2,8 @@ package com.serviceimpl;
 
 import java.util.List;
 
-import com.dao.admin.Faculty_Program_Model_Interface;
-import com.daoimpl.admin.Faculty_Program_Model_Interface_Impl;
+import com.dao.Faculty_Program_Model_Interface;
+import com.daoimpl.Faculty_Program_Model_Interface_Impl;
 import com.model.Faculty_ProgramModel;
 import com.service.Faculty_Program_Model_Service;
 

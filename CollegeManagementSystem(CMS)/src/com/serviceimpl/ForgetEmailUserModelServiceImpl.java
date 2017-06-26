@@ -2,8 +2,8 @@ package com.serviceimpl;
 
 import java.util.List;
 
-import com.dao.forget_reset.ForgetEmailUserModelInterface;
-import com.daoimpl.forget_reset_password.ForgetEmailUserModelInterfaceImpl;
+import com.dao.ForgetEmailUserModelInterface;
+import com.daoimpl.ForgetEmailUserModelInterfaceImpl;
 import com.model.ForgetEmailUserModel;
 import com.service.ForgetEmailUserModelServiceInterface;
 

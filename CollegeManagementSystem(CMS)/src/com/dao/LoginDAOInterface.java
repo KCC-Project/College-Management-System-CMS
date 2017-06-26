@@ -1,4 +1,4 @@
-package com.dao.login_logout;
+package com.dao;
 
 import com.model.LoginModel;
 

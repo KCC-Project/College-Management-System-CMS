@@ -1,7 +1,7 @@
 package com.serviceimpl;
 
-import com.dao.login_logout.LoginDAOInterface;
-import com.daoimpl.login_logout.LoginDAOImpl;
+import com.dao.LoginDAOInterface;
+import com.daoimpl.LoginDAOImpl;
 import com.model.LoginModel;
 import com.service.LoginServiceInterface;
 

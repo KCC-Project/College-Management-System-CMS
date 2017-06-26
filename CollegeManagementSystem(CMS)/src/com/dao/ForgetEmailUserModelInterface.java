@@ -1,4 +1,4 @@
-package com.dao.forget_reset;
+package com.dao;
 
 import java.util.List;
 
