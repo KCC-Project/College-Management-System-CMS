@@ -29,8 +29,8 @@ public class Faculty_Program_Model_Interface_Impl implements Faculty_Program_Mod
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				Faculty_ProgramModel model = new Faculty_ProgramModel();
-				model.setFaculty_Programe_Name(rs.getString("Faculty_Name"));
-				model.setID(rs.getInt("Faculty_ID"));
+				model.setFaculty_Programe_Name(rs.getString("faculty_name"));
+				model.setID(rs.getInt("faculty_id"));
 				fact_programe.add(model);
 			}
 		} catch (Exception e) {
@@ -53,14 +53,14 @@ public class Faculty_Program_Model_Interface_Impl implements Faculty_Program_Mod
 		List<Faculty_ProgramModel> fact_programe = new ArrayList<>();
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "Select * from program where Faculty_ID=?";
+			sql = "Select * from program where faculty_id=?";
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				Faculty_ProgramModel model = new Faculty_ProgramModel();
-				model.setFaculty_Programe_Name(rs.getString("Program_Name"));
-				model.setID(rs.getInt("Program_ID"));
+				model.setFaculty_Programe_Name(rs.getString("program_name"));
+				model.setID(rs.getInt("program_id"));
 				fact_programe.add(model);
 			}
 		} catch (Exception e) {

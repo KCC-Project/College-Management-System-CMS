@@ -27,14 +27,14 @@ public class LoginDAOImpl implements LoginDAOInterface {
 				email="admin_email";
 			}else if(databaseNameIndex==2){
 				tableName="staff"; 
-				username="Staff_UserName";
-				password="Staff_Password";
-				email="Staff_Email";
+				username="staff_username";
+				password="staff_password";
+				email="staff_email";
 			}else{
 				tableName="student";
-				username="Student_UserName";
-				password="Student_Password";
-				email="Student_Email";
+				username="student_username";
+				password="student_password";
+				email="student_email";
 			}
 			
 			 conn = DatabaseConnection.connectToDatabase();

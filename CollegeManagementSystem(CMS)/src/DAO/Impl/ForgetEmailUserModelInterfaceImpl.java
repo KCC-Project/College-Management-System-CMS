@@ -20,14 +20,14 @@ public class ForgetEmailUserModelInterfaceImpl implements ForgetEmailUserModelIn
 	private ResultSet rs;
 	private Connection conn;
 
-	String tableName = null;
-	String emailField = null;
-	String id = null;
-	String type = null;
+	private String tableName = null;
+	private String emailField = null;
+	private String id = null;
+	private String type = null;
 
-	String finaltableName = null;
-	int finalid;
-	String finalIDNamefield = null;
+	private String finaltableName = null;
+	private int finalid;
+	private String finalIDNamefield = null;
 
 	private int sucessfulUpdated;
 
@@ -39,8 +39,8 @@ public class ForgetEmailUserModelInterfaceImpl implements ForgetEmailUserModelIn
 			do {
 				if (tablecount == 3) {
 					tableName = "student";
-					emailField = "Student_Email";
-					id = "Student_ID";
+					emailField = "student_email";
+					id = "student_id";
 					type = "student";
 					getIDAndTablename(email, list, tablecount);
 					setAuthincatedCode();
@@ -52,8 +52,8 @@ public class ForgetEmailUserModelInterfaceImpl implements ForgetEmailUserModelIn
 
 				else if (tablecount == 2) {
 					tableName = "staff";
-					emailField = "Staff_Email";
-					id = "Staff_ID";
+					emailField = "staff_email";
+					id = "staff_id";
 					type = "Staff";
 					getIDAndTablename(email, list, tablecount);
 					setAuthincatedCode();
@@ -65,8 +65,8 @@ public class ForgetEmailUserModelInterfaceImpl implements ForgetEmailUserModelIn
 				} else if (tablecount == 1) {
 					tableName = "admin";
 					emailField = "admin_email";
-					id = "admin_ID";
-					type = "Admin";
+					id = "admin_id";
+					type = "admin";
 					getIDAndTablename(email, list, tablecount);
 					setAuthincatedCode();
 					if (sucessfulUpdated > 0) {
@@ -108,7 +108,7 @@ public class ForgetEmailUserModelInterfaceImpl implements ForgetEmailUserModelIn
 		try {
 
 			String uuid = UUID.randomUUID().toString();
-			sql = "UPDATE " + finaltableName + " SET verificationCode = '" + uuid + "' WHERE " + finalIDNamefield
+			sql = "UPDATE " + finaltableName + " SET verification_code = '" + uuid + "' WHERE " + finalIDNamefield
 					+ "=?";
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, finalid);
@@ -137,7 +137,7 @@ public class ForgetEmailUserModelInterfaceImpl implements ForgetEmailUserModelIn
 			model.setId(rs.getInt(id));
 			model.setType(type);
 			try {
-				model.setAuthienciationCode(rs.getString("verificationCode"));
+				model.setAuthienciationCode(rs.getString("verification_code"));
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -152,11 +152,11 @@ public class ForgetEmailUserModelInterfaceImpl implements ForgetEmailUserModelIn
 	public boolean isAuthenticated(String tableName, int id, String code) {
 		String tblNameID = null;
 		if (tableName.equalsIgnoreCase("student")) {
-			tblNameID = "Student_ID";
+			tblNameID = "student_id";
 		} else if (tableName.equalsIgnoreCase("staff")) {
-			tblNameID = "Staff_ID";
+			tblNameID = "staff_id";
 		} else if (tableName.equalsIgnoreCase("admin")) {
-			tblNameID = "admin_ID";
+			tblNameID = "admin_id";
 		}
 		try {
 			conn = DatabaseConnection.connectToDatabase();
@@ -165,7 +165,7 @@ public class ForgetEmailUserModelInterfaceImpl implements ForgetEmailUserModelIn
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				String vCode = rs.getString("verificationCode");
+				String vCode = rs.getString("verification_code");
 				if (vCode.equals(code)) {
 					return true;
 				}

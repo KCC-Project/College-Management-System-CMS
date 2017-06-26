@@ -29,14 +29,13 @@ public class StudentModelImpl implements StudentModelInterface {
 				return false;
 			} else {
 				conn = DatabaseConnection.connectToDatabase();
-				sql = "insert into student (Semester_ID,Student_UserName,Student_Password,"
-						+ "Student_FirstName,Student_MiddleName,Student_LastName,Student_Email,"
-						+ "Student_Address,Student_Phone,Student_Image,Student_Gender) "
-						+ "values(?,?,?,?,?,?,?,?,?,?,?)";
+				sql = "insert into student (student_username,student_password,"
+						+ "student_firstname,student_middlename,student_lastname,student_email,"
+						+ "student_address,student_phone,student_image,student_gender,student_identitycard,status"
+						+ "verification_code) " + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				pst = conn.prepareStatement(sql);
 				int col = 1;
-				
-				pst.setInt(col++, 2);
+
 				pst.setString(col++, studentModel.getUsername());
 				pst.setString(col++, studentModel.getPassword());
 				pst.setString(col++, studentModel.getFirstname());
@@ -47,6 +46,9 @@ public class StudentModelImpl implements StudentModelInterface {
 				pst.setInt(col++, studentModel.getMobileNo());
 				pst.setBytes(col++, studentModel.getImage()); //// image
 				pst.setString(col++, studentModel.getGender());
+				pst.setString(col++, studentModel.getIdentityCard());
+				pst.setInt(col++, studentModel.getStatus());
+				pst.setString(col++, studentModel.getVerificationCode());
 				int count = pst.executeUpdate();
 				if (count > 0) {
 					return true;
@@ -56,7 +58,7 @@ public class StudentModelImpl implements StudentModelInterface {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				pst.close();
 				rs.close();
@@ -82,23 +84,23 @@ public class StudentModelImpl implements StudentModelInterface {
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				StudentModel model = new StudentModel();
-				model.setStudentID(rs.getInt("Student_ID"));
-				model.setFirstname(rs.getString("Student_FirstName"));
-				model.setMiddlename(rs.getString("Student_MiddleName"));
-				model.setLastname(rs.getString("Student_LastName"));
-				model.setEmail(rs.getString("Student_Email"));
-				model.setMobileNo(rs.getInt("Student_Phone"));
-				model.setAddress(rs.getString("Student_Address"));
-				model.setGender(rs.getString("Student_Gender"));
-				model.setUsername(rs.getString("Student_UserName"));
-
-		
+				model.setStudentID(rs.getInt("student_id"));
+				model.setFirstname(rs.getString("student_firstname"));
+				model.setMiddlename(rs.getString("student_middlename"));
+				model.setLastname(rs.getString("student_lastname"));
+				model.setEmail(rs.getString("student_email"));
+				model.setMobileNo(rs.getInt("student_phone"));
+				model.setAddress(rs.getString("student_address"));
+				model.setGender(rs.getString("student_gender"));
+				model.setUsername(rs.getString("student_username"));
+				model.setIdentityCard(rs.getString("student_identitycard"));
+				model.setStatus(rs.getInt("status"));
 
 				student.add(model);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-		}finally {
+		} finally {
 			try {
 				pst.close();
 				rs.close();
@@ -110,32 +112,33 @@ public class StudentModelImpl implements StudentModelInterface {
 		return student;
 	}
 
-	// method for reading only one student information from student table of database
+	// method for reading only one student information from student table of
+	// database
 	// and storing retrive values into Student Model
 	public StudentModel readId(int id) {
 		StudentModel model = new StudentModel();
 		try {
 			Connection connection = DatabaseConnection.connectToDatabase();
-			sql = "select * from student where Student_ID=?";
+			sql = "select * from student where student_id=?";
 			pst = connection.prepareStatement(sql);
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-
-				model.setFirstname(rs.getString("Student_FirstName"));
-				model.setMiddlename(rs.getString("Student_MiddleName"));
-				model.setLastname(rs.getString("Student_LastName"));
-				model.setEmail(rs.getString("Student_Email"));
-				model.setMobileNo(rs.getInt("Student_Phone"));
-				model.setAddress(rs.getString("Student_Address"));
-				model.setGender(rs.getString("Student_Gender"));
-				model.setUsername(rs.getString("Student_UserName"));
-				model.setPassword(rs.getString("Student_Password"));
+				model.setFirstname(rs.getString("student_firstname"));
+				model.setMiddlename(rs.getString("student_middlename"));
+				model.setLastname(rs.getString("student_lastname"));
+				model.setEmail(rs.getString("student_email"));
+				model.setMobileNo(rs.getInt("student_phone"));
+				model.setAddress(rs.getString("student_address"));
+				model.setGender(rs.getString("student_gender"));
+				model.setUsername(rs.getString("student_username"));
+				model.setIdentityCard(rs.getString("student_identitycard"));
+				model.setStatus(rs.getInt("status"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				pst.close();
 				rs.close();
@@ -147,19 +150,19 @@ public class StudentModelImpl implements StudentModelInterface {
 		return model;
 	}
 
-	//Metod for Deleting selected id form table
+	// Metod for Deleting selected id form table
 	public int delete(int id) {
 		int result = 0;
 		try {
 			Connection connection = DatabaseConnection.connectToDatabase();
-			sql = "delete from student where Student_ID=?";
+			sql = "delete from student where student_id=?";
 			pst = connection.prepareStatement(sql);
 			pst.setInt(1, id);
 			result = pst.executeUpdate();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				pst.close();
 				rs.close();
@@ -171,19 +174,18 @@ public class StudentModelImpl implements StudentModelInterface {
 		return result;
 	}
 
-	//Method for updating information of Student of particular id
+	// Method for updating information of Student of particular id
 	public int update(StudentModel stu) {
 		int result = 0;
 
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "update student set Semester_ID=?,Student_UserName=?,Student_Password=?,"
-					+ "Student_FirstName=?,Student_MiddleName=?,Student_LastName=?,Student_Email=?,"
-					+ "Student_Address=?,Student_Phone=?,Student_Image=?,Student_Gender=? where Student_ID=?";
+			sql = "update student set student_username=?,student_password=?,"
+					+ "student_firstname=?,student_middlename=?,student_lastname=?,student_email=?,"
+					+ "student_address=?,student_phone=?,student_image=?,student_gender=? ,status=?where student_id=?";
 			pst = conn.prepareStatement(sql);
 			int col = 1;
-		
-			pst.setInt(col++, 2);
+
 			pst.setString(col++, stu.getUsername());
 			pst.setString(col++, stu.getPassword());
 			pst.setString(col++, stu.getFirstname());
@@ -192,16 +194,16 @@ public class StudentModelImpl implements StudentModelInterface {
 			pst.setString(col++, stu.getEmail());
 			pst.setString(col++, stu.getAddress());
 			pst.setInt(col++, stu.getMobileNo());
-
 			pst.setBytes(col++, stu.getImage()); //// image
 			pst.setString(col++, stu.getGender());
+			pst.setInt(col++, stu.getStatus());
 			pst.setInt(col++, stu.getStudentID());
 			result = pst.executeUpdate();
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				pst.close();
 				rs.close();
