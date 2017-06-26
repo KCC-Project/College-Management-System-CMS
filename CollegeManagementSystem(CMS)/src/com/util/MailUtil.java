@@ -1,4 +1,4 @@
-package com.cms.util;
+package com.util;
 
 import java.util.Properties;
 

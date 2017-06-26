@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cms.util.MailUtil;
 import com.model.ForgetEmailUserModel;
 import com.model.StudentModel;
 import com.service.ForgetEmailUserModelServiceInterface;
 import com.service.StudentServiceInterface;
 import com.serviceimpl.ForgetEmailUserModelServiceImpl;
 import com.serviceimpl.StudentServiceImpl;
+import com.util.MailUtil;
 
 @WebServlet("/forgotPassword")
 
