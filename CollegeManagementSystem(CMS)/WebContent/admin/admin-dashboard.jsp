@@ -38,8 +38,8 @@
 			</ol>
 
 			<div class="panel-group" id="first-one">
-			
-<!--NOtice and message loading section  -->			
+
+				<!--NOtice and message loading section  -->
 				<div class="callout callout-info msg-of-day">
 					<h4>
 						<i class="fa fa-bullhorn"></i> Message of day box
@@ -51,9 +51,9 @@
 							Day is a GIFT don't send it BACK unopened. Have a nice Day !</marquee>
 					</p>
 				</div>
-<!--End  of notice and message section  -->
+				<!--End  of notice and message section  -->
 
-<!--4 box start from here  -->
+				<!--4 box start from here  -->
 				<div class="row">
 					<div class="col-lg-3 col-xs-6">
 						<!-- small box -->
@@ -65,10 +65,9 @@
 							<div class="icon">
 								<i class="ion ion-ios-people"></i>
 							</div>
-							<a class="small-box-footer"
-								href="#"
-								target="_blank">More info <i
-								class="fa fa-arrow-circle-right"></i></a>
+							<a class="small-box-footer" href="#" target="_blank">More
+								info <i class="fa fa-arrow-circle-right"></i>
+							</a>
 						</div>
 					</div>
 					<!-- ./col -->
@@ -82,10 +81,9 @@
 							<div class="icon">
 								<i class="ion ion-person"></i>
 							</div>
-							<a class="small-box-footer"
-								href="#"
-								target="_blank">More info <i
-								class="fa fa-arrow-circle-right"></i></a>
+							<a class="small-box-footer" href="#" target="_blank">More
+								info <i class="fa fa-arrow-circle-right"></i>
+							</a>
 						</div>
 					</div>
 					<!-- ./col -->
@@ -99,10 +97,9 @@
 							<div class="icon">
 								<i class="fa fa-graduation-cap"></i>
 							</div>
-							<a class="small-box-footer"
-								href="#"
-								target="_blank">More info <i
-								class="fa fa-arrow-circle-right"></i></a>
+							<a class="small-box-footer" href="#" target="_blank">More
+								info <i class="fa fa-arrow-circle-right"></i>
+							</a>
 						</div>
 					</div>
 					<!-- ./col -->
@@ -116,18 +113,140 @@
 							<div class="icon">
 								<i class="fa fa-sitemap"></i>
 							</div>
-							<a class="small-box-footer"
-								href="#"
-								target="_blank">More info <i
-								class="fa fa-arrow-circle-right"></i></a>
+							<a class="small-box-footer" href="#" target="_blank">More
+								info <i class="fa fa-arrow-circle-right"></i>
+							</a>
 						</div>
 					</div>
 					<!-- ./col -->
 				</div>
 
-<!--4 box end  here  -->
+				<!--4 box end  here  -->
 
 
+				<!-- General notice start from here -->
+				<section class="col-lg-7 connectedSortable  ">
+
+					<div class="nav-tabs-custom">
+						<!-- .nav-tabs-custom -->
+						<!-- Tabs within a box -->
+						<ul class="nav nav-tabs pull-right">
+							<li class=""><a href="#emp-notice" data-toggle="tab"
+								aria-expanded="false">Employee</a></li>
+							<li class=""><a href="#stu-notice" data-toggle="tab"
+								aria-expanded="false">Student</a></li>
+							<li class="active"><a href="#all-notice" data-toggle="tab"
+								aria-expanded="true">General</a></li>
+							<li class="pull-left header" style=""><i class="fa fa-inbox"></i>Notice
+								Board</li>
+						</ul>
+						<div class="slimScrollDiv"
+							style="position: relative; overflow: hidden; width: auto; height: 300px;">
+							<div class="tab-content"
+								style="overflow: hidden; width: auto; height: 300px;">
+								<!-- Notice -->
+								<div class="tab-pane active" id="all-notice">
+
+									<div class="notice-main bg-light-blue">
+										<div class="notice-disp-date">
+											<small class="label label-success"><i
+												class="fa fa-calendar"></i> 30-05-2015</small>
+										</div>
+										<div class="notice-body">
+											<div class="notice-title">
+												<a class="noticeModalLink" href="#" style="color: #FFF"
+													data-value="/EduSec 4.2.6 is released (security fix)/EduSec-EduSec-e90fa70/index.php?r=dashboard%2Fnotice%2Fview-popup&amp;id=3">Summer
+													Vacation</a>&nbsp;
+											</div>
+											<div class="notice-desc">Summer Vacation starts from
+												June to 2nd week of July.</div>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane" id="stu-notice">
+
+									<div class="notice-main bg-aqua">
+										<div class="notice-disp-date">
+											<small class="label label-success"><i
+												class="fa fa-calendar"></i> 01-06-2015</small>
+										</div>
+										<div class="notice-body">
+											<div class="notice-title">
+												<a class="noticeModalLink" href="#" style="color: #FFF"
+													data-value="/EduSec 4.2.6 is released (security fix)/EduSec-EduSec-e90fa70/index.php?r=dashboard%2Fnotice%2Fview-popup&amp;id=1">Next
+													Week Summer Exam </a>&nbsp;
+											</div>
+											<div class="notice-desc">summer Exam will be conducted
+												on Next week. All The Best</div>
+										</div>
+									</div>
+									<div class="notice-main bg-aqua">
+										<div class="notice-disp-date">
+											<small class="label label-success"><i
+												class="fa fa-calendar"></i> 25-05-2015</small>
+										</div>
+										<div class="notice-body">
+											<div class="notice-title">
+												<a class="noticeModalLink" href="#" style="color: #FFF"
+													data-value="/EduSec 4.2.6 is released (security fix)/EduSec-EduSec-e90fa70/index.php?r=dashboard%2Fnotice%2Fview-popup&amp;id=5">Exam
+													From Fill</a>&nbsp;
+											</div>
+											<div class="notice-desc">All Students come and fill
+												their exam forms</div>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane" id="emp-notice">
+
+									<div class="notice-main bg-teal">
+										<div class="notice-disp-date">
+											<small class="label label-success"><i
+												class="fa fa-calendar"></i> 05-06-2015</small>
+										</div>
+										<div class="notice-body">
+											<div class="notice-title">
+												<a class="noticeModalLink" href="#" style="color: #FFF"
+													data-value="/EduSec 4.2.6 is released (security fix)/EduSec-EduSec-e90fa70/index.php?r=dashboard%2Fnotice%2Fview-popup&amp;id=2">Monthly
+													Report</a>&nbsp;
+											</div>
+											<div class="notice-desc">All Employee have to submit
+												their report on month end.</div>
+										</div>
+									</div>
+									<div class="notice-main bg-teal">
+										<div class="notice-disp-date">
+											<small class="label label-success"><i
+												class="fa fa-calendar"></i> 29-05-2015</small>
+										</div>
+										<div class="notice-body">
+											<div class="notice-title">
+												<a class="noticeModalLink" href="#" style="color: #FFF"
+													data-value="/EduSec 4.2.6 is released (security fix)/EduSec-EduSec-e90fa70/index.php?r=dashboard%2Fnotice%2Fview-popup&amp;id=4">Attendance
+													Report</a>&nbsp;
+											</div>
+											<div class="notice-desc">All Employees collect their
+												class wise attendance report</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="slimScrollBar"
+								style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 300px;"></div>
+							<div class="slimScrollRail"
+								style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+						</div>
+						<!--  /.tab-content -->
+					</div>
+
+				</section>
+				<!-- GEnaral notice end here -->
+
+				<!--all running courses start here  -->
+				<section class="col-lg-5 connectedSortable border">
+				
+				
+				</section>
+				<!-- courses Ends herer -->
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="panel panel-default" id="second-one">
