@@ -192,36 +192,32 @@ to {
 	-moz-animation-fill-mode: forwards;
 }
 
-@
-keyframes tansformAnimation {from { font-size:90px;
-	
+@keyframes tansformAnimation {
+  from {
+    font-size: 90px;
+  }
+  to {
+    font-size: 100px;
+  }
 }
-
-to {
-	font-size: 100px;
-}
-
-}
-@
--webkit-keyframes tansformAnimation {from { font-size:90px;
-	
-}
-
-to {
-	font-size: 100px;
-}
-
+@-webkit-keyframes tansformAnimation {
+  from {
+    font-size: 90px;
+  }
+  to {
+    font-size: 100px;
+  }
 }
 @media screen and (max-width: 480px) {
-	.small-box {
-		text-align: center;
-	}
-	.small-box .icon {
-		display: none;
-	}
-	.small-box p {
-		font-size: 12px;
-	}
+  .small-box {
+    text-align: center;
+  }
+  .small-box .icon {
+    display: none;
+  }
+  .small-box p {
+    font-size: 12px;
+  }
 }
 
 .bg-red {

@@ -10,7 +10,7 @@ public class DatabaseConnection {
 	
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/collegemanagementsystem";
+			String url = "jdbc:mysql://localhost:3306/college_management_system";
 			conn = (Connection) DriverManager.getConnection(url, "root", "");
 			return conn;
 		} catch (ClassNotFoundException e) {
