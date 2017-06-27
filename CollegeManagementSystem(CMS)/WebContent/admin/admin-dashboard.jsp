@@ -243,14 +243,14 @@
 
 				<!--all running courses start here  -->
 				<section class="col-lg-5 connectedSortable border">
-					<div id="piechart"></div>
+					
 				</section>
 				<!-- courses Ends herer -->
 				</div>
 				
 				<!-- Graph -->
 				<div class="row">
-				
+				<div id="piechart"></div>
 				</div>
 
 			</div>
