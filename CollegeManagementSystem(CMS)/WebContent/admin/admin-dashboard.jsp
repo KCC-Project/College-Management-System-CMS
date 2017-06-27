@@ -128,9 +128,9 @@
           <section class="panel notice-panel">
             <header class="panel-heading">
               <ul class="nav nav-pills small">
-              	<li class="pull-left lead">
-              		<i class="fa fa-inbox"></i>
-                  	Notice Board
+              	<li class="pull-left notice-board-name">
+              		<a><i class="fa fa-inbox"></i>
+                  	Notice Board</a>
                 <li>
                 <li class="pull-right">
                   <a data-toggle="tab" href="#staff">
@@ -163,7 +163,7 @@
                       <ul>
                         <li>
                           <p class="bg-primary"> 
-                          	<span class="lead"> Summer Vacation </span> 
+                          	<span class="title-message"> Summer Vacation </span> 
                           	<span class="small pull-right"> 2017-06-27 </span> </p>
                         </li>
                         <li><p>Summer Vacation starts from June to 2nd week of July.</p></li>
@@ -181,7 +181,7 @@
                       <ul>
                         <li>
                           <p class="bg-primary"> 
-                          	<span class="lead"> Next Week Summer </span> 
+                          	<span class="title-message"> Next Week Summer </span> 
                           	<span class="small pull-right"> 2017-08-15 </span> </p>
                         </li>
                         <li><p>Summer Exam will be conducted on Next week. All The Best!!!</p></li>
@@ -191,7 +191,7 @@
                       <ul>
                         <li>
                           <p class="bg-primary"> 
-                          	<span class="lead"> Student exam form fillup </span> 
+                          	<span class="title-message"> Student exam form fillup </span> 
                           	<span class="small pull-right"> 2017-07-07 </span> </p>
                         </li>
                         <li><p>All Students come and fill their exam forms</p></li>
@@ -209,7 +209,7 @@
                       <ul>
                         <li>
                           <p class="bg-primary"> 
-                          	<span class="lead"> Monthly Report </span> 
+                          	<span class="title-message"> Monthly Report </span> 
                           	<span class="small pull-right"> 2017-07-02 </span> </p>
                         </li>
                         <li><p>All Staff have to submit their report on month end.</p></li>
@@ -219,7 +219,7 @@
                       <ul>
                         <li>
                           <p class="bg-primary"> 
-                          	<span class="lead"> Attendance Report </span> 
+                          	<span class="title-message"> Attendance Report </span> 
                           	<span class="small pull-right"> 2017-07-28 </span> </p>
                         </li>
                         <li><p>All Staff collect their class wise attendance report.</p></li>

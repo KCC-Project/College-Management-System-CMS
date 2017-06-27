@@ -281,10 +281,20 @@ marquee {
 	text-align: justify;
 }
 .notice-info {
-	background-color:rgb(60, 141, 188);
+	background-color:#d9edf7;
+	border-radius:4px;
 }
 .notice-info p {
 	padding: 5px;
+	letter-spacing:0.4px;
+}
+.notice-info .title-message {
+	font-size:1.1em;
+	letter-spacing:1px;
+	font-weight:bold;
+}
+.notice-board-name {
+	font-size:1.3em;
 }
 
 
