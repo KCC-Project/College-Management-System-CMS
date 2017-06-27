@@ -243,66 +243,11 @@
 
 				<!--all running courses start here  -->
 				<section class="col-lg-5 connectedSortable border">
-				
-				
-<div id="piechart"></div>
+					<div id="piechart"></div>
 				</section>
 				<!-- courses Ends herer -->
-				
-				
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="panel panel-default" id="second-one">
-							<div class="panel-heading main-color-bg">
-								<h3 class="panel-title">Notices</h3>
-							</div>
-							<div class="panel-body">
-								<div class="profile-activity">
-									<div class="event-info">
-										<ul>
-											<li><a href="#"><img
-													class="event-uploader-image pull-left" src="me.jpg" alt=""></a>
-											</li>
-											<li>
-												<p class="small">
-													<a href="#" class="black">{uloader name}</a> at {time,
-													date}
-												</p>
-											</li>
-											<li><p>All the UI design must be completed within, 2
-													weeks</p></li>
-										</ul>
-									</div>
-									<div class="event-info">
-										<ul>
-											<li><a href="#"><img
-													class="event-uploader-image pull-left" src="me.jpg" alt=""></a>
-											</li>
-											<li>
-												<p class="small">
-													<a href="#" class="black">Shrawan Adhikari</a> at {10:05PM
-													2017/08/06}
-												</p>
-											</li>
-											<li><p>This is the next notice</p></li>
-										</ul>
-									</div>
 
 
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="panel panel-default" id="second-one">
-							<div class="panel-heading main-color-bg">
-								<h3 class="panel-title">News</h3>
-							</div>
-							<div class="panel-body"></div>
-						</div>
-					</div>
-
-				</div>
 			</div>
 		</div>
 
@@ -316,31 +261,34 @@
 </div>
 </div>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script type="text/javascript">
-// Load google charts
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+	// Load google charts
+	google.charts.load('current', {
+		'packages' : [ 'corechart' ]
+	});
+	google.charts.setOnLoadCallback(drawChart);
 
-// Draw the chart and set the chart values
-function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-  ['Task', 'Hours per Day'],
-  ['Work', 8],
-  ['Eat', 2],
-  ['TV', 4],
-  ['Gym', 2],
-  ['Sleep', 8]
-]);
+	// Draw the chart and set the chart values
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+				[ 'Task', 'Hours per Day' ], [ 'Work', 8 ], [ 'Eat', 2 ],
+				[ 'TV', 4 ], [ 'Gym', 2 ], [ 'Sleep', 8 ] ]);
 
-  // Optional; add a title and set the width and height of the chart
-  var options = {'title':'My Average Day', 'width':550, 'height':400};
+		// Optional; add a title and set the width and height of the chart
+		var options = {
+			'title' : 'My Average Day',
+			'width' : 550,
+			'height' : 400
+		};
 
-  // Display the chart inside the <div> element with id="piechart"
-  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-  chart.draw(data, options);
-}
+		// Display the chart inside the <div> element with id="piechart"
+		var chart = new google.visualization.PieChart(document
+				.getElementById('piechart'));
+		chart.draw(data, options);
+	}
 </script>
 
 

@@ -1,5 +1,6 @@
 .border{
 	border: 2px solid black;
+	overflow: hidden;
 }
 .four-section {
 	background-color: #eeeeee !important;
