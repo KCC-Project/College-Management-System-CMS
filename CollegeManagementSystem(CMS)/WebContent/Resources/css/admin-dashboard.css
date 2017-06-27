@@ -1,6 +1,6 @@
 .border{
 	border: 2px solid black;
-	overflow: hidden;
+	
 }
 .four-section {
 	background-color: #eeeeee !important;
@@ -71,8 +71,7 @@
 	-moz-animation-fill-mode: forwards;
 }
 
-@
-keyframes tansformAnimation {from { font-size:90px;
+@keyframes tansformAnimation {from { font-size:90px;
 	
 }
 
@@ -81,8 +80,7 @@ to {
 }
 
 }
-@
--webkit-keyframes tansformAnimation {from { font-size:90px;
+@-webkit-keyframes tansformAnimation {from { font-size:90px;
 	
 }
 
@@ -280,9 +278,6 @@ marquee {
 .connectedSortable {
 	min-height: 100px;
 }
-.col-lg-7{
-	padding: 0px;
-}
 .nav-tabs-custom {
 	
 	margin-bottom: 20px;
@@ -460,7 +455,7 @@ marquee {
 
 .notice-body {
 	width: 100%;
-	margin-left: 130px; /*halka wrong here*/
+	margin-left: 130px;
 }
 
 .notice-title {
@@ -482,4 +477,38 @@ marquee {
 	background-color: #39cccc !important;
 }
 /*=======================================================================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
