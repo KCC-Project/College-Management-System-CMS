@@ -71,8 +71,7 @@
 	-moz-animation-fill-mode: forwards;
 }
 
-@
-keyframes tansformAnimation {from { font-size:90px;
+@keyframes tansformAnimation {from { font-size:90px;
 	
 }
 
@@ -81,8 +80,7 @@ to {
 }
 
 }
-@
--webkit-keyframes tansformAnimation {from { font-size:90px;
+@-webkit-keyframes tansformAnimation {from { font-size:90px;
 	
 }
 
@@ -479,4 +477,38 @@ marquee {
 	background-color: #39cccc !important;
 }
 /*=======================================================================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
