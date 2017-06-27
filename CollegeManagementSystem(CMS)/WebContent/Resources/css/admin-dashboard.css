@@ -280,6 +280,9 @@ marquee {
 	background-color: #ffffff;
 	text-align: justify;
 }
+.notice-info {
+	background-color:rgb(60, 141, 188);
+}
 .notice-info p {
 	padding: 5px;
 }
