@@ -21,6 +21,7 @@
 
 </head>
 <body>
+
 	<div class="container">
 
 		<form method="post" action="login">
@@ -186,6 +187,16 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+  			new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+		}
+	</script>
+
+	<script type="text/javascript" 
+		src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+		
 
 </body>
 </html>
