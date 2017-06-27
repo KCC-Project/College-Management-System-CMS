@@ -10,9 +10,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="Resources/css/w3school.css" rel="stylesheet"
+	type="text/css">
+<link rel="stylesheet" href="Resources/font-awesome/css/font-awesome.min.css">
 <link href="Resources/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css">
 <link href="Resources/css/loginAndResetPassword.css" rel="stylesheet"
