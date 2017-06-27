@@ -242,17 +242,15 @@
 				<!-- GEnaral notice end here -->
 
 				<!--all running courses start here  -->
-				<section class="col-lg-5 connectedSortable border">
-					
+				<section class="col-lg-5 connectedSortable ">
+					<div class="border">
+					<div id="piechart"></div>
+					</div>
 				</section>
 				<!-- courses Ends herer -->
 				</div>
 				
-				<!-- Graph -->
-				<div class="row">
-				<div id="piechart"></div>
-				</div>
-
+				
 			</div>
 		</div>
 
@@ -285,8 +283,8 @@
 		// Optional; add a title and set the width and height of the chart
 		var options = {
 			'title' : 'My Average Day',
-			'width' : 550,
-			'height' : 400
+			'width' : 485,
+			'height' : 343
 		};
 
 		// Display the chart inside the <div> element with id="piechart"
