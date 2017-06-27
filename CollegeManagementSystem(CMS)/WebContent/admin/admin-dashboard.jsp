@@ -77,7 +77,7 @@
 						<div class="small-box bg-green">
 							<div class="inner">
 								<h3>17</h3>
-								<p>Employees</p>
+								<p>Staff</p>
 							</div>
 							<div class="icon">
 								<i class="ion ion-person"></i>
