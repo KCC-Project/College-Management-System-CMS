@@ -12,8 +12,17 @@
 %>
 <jsp:include page="admin-header.jsp" />
 
+<link rel="stylesheet" type="text/css"
+	href="../Resources/css/admin-dashboard.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
 
 <div class="container-fluid display-table">
+
 	<div class="row display-table-row">
 
 		<jsp:include page="admin-sidemenu.jsp" />
@@ -37,39 +46,61 @@
 					</div>
 					<div class="panel-body">
 						<div class="col-md-3">
-							<div class="well dash-box">
-								<h2>
-									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-									3000
-								</h2>
-								<h4>Students</h4>
+							<div class="small-box bg-aqua">
+								<div class="inner">
+									<h3>15</h3>
+									<p>Students</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-ios-people"></i>
+								</div>
+								<a class="small-box-footer" href="#" target="_blank">More
+									info <i class="fa fa-arrow-circle-right"></i>
+								</a>
+							</div>
+
+						</div>
+						<div class="col-md-3">
+							<div class="small-box bg-green">
+								<div class="inner">
+									<h3>17</h3>
+									<p>Staff</p>
+								</div>
+								<div class="icon">
+									<i class="ion ion-person"></i>
+								</div>
+								<a class="small-box-footer" href="#" target="_blank">More
+									info <i class="fa fa-arrow-circle-right"></i>
+								</a>
 							</div>
 						</div>
 						<div class="col-md-3">
-							<div class="well dash-box">
-								<h2>
-									<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-									100
-								</h2>
-								<h4>Staffs</h4>
+							<div class="small-box bg-yellow">
+								<div class="inner">
+									<h3>5</h3>
+									<p>Active Courses</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-graduation-cap"></i>
+								</div>
+								<a class="small-box-footer" href="#" target="_blank">More
+									info <i class="fa fa-arrow-circle-right"></i>
+								</a>
 							</div>
 						</div>
 						<div class="col-md-3">
-							<div class="well dash-box">
-								<h2>
-									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-									8
-								</h2>
-								<h4>Courses</h4>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="well dash-box">
-								<h2>
-									<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
-									15,000
-								</h2>
-								<h4>Daily Visitors</h4>
+							<div class="small-box bg-red">
+								<div class="inner">
+									<h3>5</h3>
+									<p>Active Batches</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-sitemap"></i>
+								</div>
+								<a class="small-box-footer"
+									href="#"
+									target="_blank">More info <i
+									class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
