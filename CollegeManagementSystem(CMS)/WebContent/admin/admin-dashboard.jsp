@@ -14,12 +14,10 @@
 
 <link rel="stylesheet" type="text/css"
 	href="../Resources/css/admin-dashboard.css">
-<link href="Resources/css/w3school.css" rel="stylesheet"
+<link href="../Resources/css/w3school.css" rel="stylesheet"
 	type="text/css">
-<link rel="stylesheet" href="Resources/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-
+<link rel="stylesheet" href="../Resources/font-awesome/css/font-awesome.min.css">
+<link href="../Resources/ionicons/css/ionicons.min.css" rel="stylesheet">
 
 <div class="container-fluid display-table">
 
