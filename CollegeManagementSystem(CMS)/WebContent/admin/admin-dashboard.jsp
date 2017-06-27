@@ -122,7 +122,7 @@
 				</div>
 
 				<!--4 box end  here  -->
-
+<div class="row">
 
 				<!-- General notice start from here -->
 				<section class="col-lg-7 connectedSortable  ">
@@ -247,6 +247,7 @@
 					<div id="piechart"></div>
 					</div>
 				</section>
+				</div>
 				<!-- courses Ends herer -->
 				<!--end row here  -->
 				
