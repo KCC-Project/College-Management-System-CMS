@@ -44,7 +44,7 @@
 					<div class="panel-heading main-color-bg">
 						<h3 class="panel-title">Overview</h3>
 					</div>
-					<div class="panel-body">
+					<div class="panel-body four-section">
 						<div class="col-md-3">
 							<div class="small-box bg-aqua">
 								<div class="inner">

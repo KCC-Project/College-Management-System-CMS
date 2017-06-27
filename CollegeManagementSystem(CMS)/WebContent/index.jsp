@@ -10,9 +10,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="Resources/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css">
-<link href="Resources/css/loginAndResetPassword.css" rel="stylesheet" type="text/css">
+<link href="Resources/css/loginAndResetPassword.css" rel="stylesheet"
+	type="text/css">
 
 
 </head>
@@ -113,8 +117,11 @@
 							onkeyup="showSubmit();" type="text" class="form-control" required
 							id="forgotemailname" placeholder="Email">
 					</div>
+					<div class="rotationIcon text-center" hidden id="rotationIcon">
+						<i class='fa fa-refresh w3-spin' style="font-size: 50px; "></i>
+					</div>
 					<Button onclick="send();" type="submit" id="btnn"
-						class="btn btn-primary active btn-block submit-btn login-btn">
+						class="btn btn-primary active btn-block submit-btn login-btnReset">
 						<span class="glyphicon glyphicon-lock"></span>&nbsp;Send
 						verification link
 					</Button>
@@ -131,8 +138,9 @@
 
 	<script>
 		function send() {
-			document.getElementById("btnn").innerHTML = "Loading...";
-			document.getElementById("btnn").disabled = true;
+			document.getElementById("rotationIcon").style.display = "block";
+			document.getElementById("btnn").style.display = "none";
+			//document.getElementById("btnn").disabled = true;
 
 			var email = document.getElementById("forgotemailname").value;
 			var url = "forgotPassword";
@@ -147,9 +155,12 @@
 					var return_data = aj.responseText;
 					var res = return_data.substring(3, 11);
 					if (res.match("Success!")) {
-						document.getElementById("forgotemailname").disabled=true;
+						document.getElementById("forgotemailname").disabled = true;
 						document.getElementById("btnn").innerHTML = "Sucessfull";
+						document.getElementById("rotationIcon").style.display = "none";
 					} else {
+						document.getElementById("rotationIcon").style.display = "none";
+						document.getElementById("btnn").style.display = "block";
 						document.getElementById("btnn").innerHTML = "Failed";
 						var div = document.getElementById('btnn');
 						div.className = 'btn btn-danger btn-block';
@@ -162,7 +173,7 @@
 		}
 
 		function showSubmit() {
-			
+			document.getElementById("rotationIcon").style.display = "none";
 			document.getElementById("btnn").disabled = false;
 			var div = document.getElementById('btnn');
 			div.className = 'btn btn-primary active btn-block';
