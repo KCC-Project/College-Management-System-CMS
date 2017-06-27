@@ -21,7 +21,7 @@
 
 </head>
 <body>
-
+<div id="google_translate_element"></div>
 	<div class="container">
 
 		<form method="post" action="login">
