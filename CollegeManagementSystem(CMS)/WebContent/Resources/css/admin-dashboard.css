@@ -214,3 +214,47 @@
 .bg-green {
   background-color: #00a65a !important;
 }
+
+
+/*css of message or notice*/
+
+
+
+
+.callout.callout-info {
+    background-color: #f0f7fd;
+    border-color: #d0e3f0;
+}
+
+
+.msg-of-day {
+    float: left;
+    width: 100%;
+}
+
+.callout {
+    margin: 0 0 20px 0;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #eee;
+}
+.content {
+    padding: 20px 15px;
+    background: #f9f9f9;
+}
+
+
+.callout.callout-info h4 {
+    color: #3A87AD;
+}
+
+
+.callout h4 {
+    margin-top: 0;
+}
+marquee {
+    display: inline-block;
+    width: -webkit-fill-available;
+}
+.callout p:last-child {
+    margin-bottom: 0;
+}

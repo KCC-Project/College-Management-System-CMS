@@ -16,12 +16,13 @@
 	href="../Resources/css/admin-dashboard.css">
 <link href="../Resources/css/w3school.css" rel="stylesheet"
 	type="text/css">
-<link rel="stylesheet" href="../Resources/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="../Resources/font-awesome/css/font-awesome.min.css">
 <link href="../Resources/ionicons/css/ionicons.min.css" rel="stylesheet">
 
 <div class="container-fluid display-table">
 
-	<div class="row display-table-row">
+	<div class="row display-table-row ">
 
 		<jsp:include page="admin-sidemenu.jsp" />
 
@@ -37,72 +38,95 @@
 			</ol>
 
 			<div class="panel-group" id="first-one">
-
-				<div class="panel panel-default">
-					<div class="panel-heading main-color-bg">
-						<h3 class="panel-title">Overview</h3>
-					</div>
-					<div class="panel-body four-section">
-						<div class="col-md-3">
-							<div class="small-box bg-aqua">
-								<div class="inner">
-									<h3>15</h3>
-									<p>Students</p>
-								</div>
-								<div class="icon">
-									<i class="ion ion-ios-people"></i>
-								</div>
-								<a class="small-box-footer" href="#" target="_blank">More
-									info <i class="fa fa-arrow-circle-right"></i>
-								</a>
-							</div>
-
-						</div>
-						<div class="col-md-3">
-							<div class="small-box bg-green">
-								<div class="inner">
-									<h3>17</h3>
-									<p>Staff</p>
-								</div>
-								<div class="icon">
-									<i class="ion ion-person"></i>
-								</div>
-								<a class="small-box-footer" href="#" target="_blank">More
-									info <i class="fa fa-arrow-circle-right"></i>
-								</a>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="small-box bg-yellow">
-								<div class="inner">
-									<h3>5</h3>
-									<p>Active Courses</p>
-								</div>
-								<div class="icon">
-									<i class="fa fa-graduation-cap"></i>
-								</div>
-								<a class="small-box-footer" href="#" target="_blank">More
-									info <i class="fa fa-arrow-circle-right"></i>
-								</a>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="small-box bg-red">
-								<div class="inner">
-									<h3>5</h3>
-									<p>Active Batches</p>
-								</div>
-								<div class="icon">
-									<i class="fa fa-sitemap"></i>
-								</div>
-								<a class="small-box-footer"
-									href="#"
-									target="_blank">More info <i
-									class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
+			
+<!--NOtice and message loading section  -->			
+				<div class="callout callout-info msg-of-day">
+					<h4>
+						<i class="fa fa-bullhorn"></i> Message of day box
+					</h4>
+					<p>
+						<marquee onmouseout="this.setAttribute('scrollamount', 6, 0);"
+							onmouseover="this.setAttribute('scrollamount', 0, 0);"
+							scrollamount="6" behavior="scroll" direction="left">Each
+							Day is a GIFT don't send it BACK unopened. Have a nice Day !</marquee>
+					</p>
 				</div>
+<!--End  of notice and message section  -->
+
+<!--4 box start from here  -->
+				<div class="row">
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-aqua">
+							<div class="inner">
+								<h3>15</h3>
+								<p>Students</p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-ios-people"></i>
+							</div>
+							<a class="small-box-footer"
+								href="#"
+								target="_blank">More info <i
+								class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- ./col -->
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-green">
+							<div class="inner">
+								<h3>17</h3>
+								<p>Employees</p>
+							</div>
+							<div class="icon">
+								<i class="ion ion-person"></i>
+							</div>
+							<a class="small-box-footer"
+								href="#"
+								target="_blank">More info <i
+								class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- ./col -->
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-yellow">
+							<div class="inner">
+								<h3>5</h3>
+								<p>Active Courses</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-graduation-cap"></i>
+							</div>
+							<a class="small-box-footer"
+								href="#"
+								target="_blank">More info <i
+								class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- ./col -->
+					<div class="col-lg-3 col-xs-6">
+						<!-- small box -->
+						<div class="small-box bg-red">
+							<div class="inner">
+								<h3>5</h3>
+								<p>Active Batches</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-sitemap"></i>
+							</div>
+							<a class="small-box-footer"
+								href="#"
+								target="_blank">More info <i
+								class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- ./col -->
+				</div>
+
+<!--4 box end  here  -->
+
 
 				<div class="row">
 					<div class="col-lg-6">
