@@ -1,6 +1,6 @@
 .border{
 	border: 2px solid black;
-	overflow: hidden;
+	
 }
 .four-section {
 	background-color: #eeeeee !important;
@@ -280,9 +280,6 @@ marquee {
 .connectedSortable {
 	min-height: 100px;
 }
-.col-lg-7{
-	padding: 0px;
-}
 .nav-tabs-custom {
 	
 	margin-bottom: 20px;
@@ -460,7 +457,6 @@ marquee {
 
 .notice-body {
 	width: 100%;
-	margin-left: 130px; /*halka wrong here*/
 }
 
 .notice-title {
