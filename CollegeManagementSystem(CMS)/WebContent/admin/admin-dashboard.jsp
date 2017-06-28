@@ -22,13 +22,13 @@
 
 <div class="container-fluid display-table">
 
-	<div class="row display-table-row ">
+	<div class="row display-table-row col-lg-12 ">
 
 		<jsp:include page="admin-sidemenu.jsp" />
 
 
 		<!-- Content Area -->
-		<div class="col-md-10 col-sm-11 display-table-cell" id="content-area">
+		<div class="col-md-10 col-sm-11 col-lg-10 display-table-cell" id="content-area">
 
 			<ol class="breadcrumb">
 				<li><a href="admin-dashboard.jsp"><span
