@@ -35,6 +35,8 @@
                               <th> Program Name</th>
                               <th> Batch Year </th>
                               <th> Semester no. </th>
+                              <th> Start Date </th>
+                              <th> End Date </th>
                               <th> Status </th>
                             </tr>
                           </thead>
@@ -100,6 +102,7 @@
 						    <label>Semester Start Date: </label>
 						    	<input type="date" id="date" class="form-control" name="date">
 						  </div>
+						  
 						  
 						 
 		</form>
