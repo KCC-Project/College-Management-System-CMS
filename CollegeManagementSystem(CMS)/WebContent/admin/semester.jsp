@@ -99,8 +99,16 @@
 							</select>
 						  </div>
 						  <div class="form-group">
+						    <label>Semester no.: </label>
+						    	<input type="number" id="sem-no" class="form-control" placeholder="Semester number" name="sem_no">
+						  </div>
+						  <div class="form-group">
 						    <label>Semester Start Date: </label>
-						    	<input type="date" id="date" class="form-control" name="date">
+						    	<input type="date" id="date" class="form-control" placeholder="mm/dd/yyyy" name="start_date">
+						  </div>
+						  <div class="form-group">
+						    <label>Semester End Date: </label>
+						    	<input type="date" id="date" class="form-control" placeholder="mm/dd/yyyy" name="end_date">
 						  </div>
 						  
 						 
