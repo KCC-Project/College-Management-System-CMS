@@ -1,4 +1,4 @@
-.border{
+.div{
 	border: 2px solid black;
 	
 }
@@ -287,6 +287,8 @@ marquee {
 .notice-info p {
 	padding: 5px;
 	letter-spacing:0.4px;
+	font-size: 13px;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 .notice-info .title-message {
 	font-size:1.1em;
@@ -297,8 +299,19 @@ marquee {
 	font-size:1.3em;
 }
 
+.notice-info  ul{
+	margin-left: -40px !important;
+	
+}
 
+.tab-content{
+ border-color: 2px solid black;
+ }
 
-
-
-
+.panel-body{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.panel-heading {
+    padding: 10px 15px 0px !important;
+}
