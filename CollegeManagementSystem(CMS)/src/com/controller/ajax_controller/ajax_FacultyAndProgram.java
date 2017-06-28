@@ -33,7 +33,7 @@ public class ajax_FacultyAndProgram extends HttpServlet {
 		for (Faculty_ProgramModel model : mo) {
 			response.setContentType("text/xml");
 			response.setHeader("Cache-Control", "no-cache");
-			out.write("<option >" + model.getFaculty_Programe_Name() + "</option>");
+			out.write("<option value="+model.getID()+">" + model.getFaculty_Programe_Name() + "</option>");
 			out.flush();
 		}
 	}

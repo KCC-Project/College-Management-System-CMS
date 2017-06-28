@@ -10,11 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.model.Faculty_ProgramModel;
 import com.model.YearModel;
-import com.service.Faculty_Program_Model_Service;
 import com.service.YearServiceInterface;
-import com.serviceimpl.Faculty_Program_Model_Service_Impl;
 import com.serviceimpl.YearServiceImpl;
 
 @WebServlet("/ajax_year_load")
