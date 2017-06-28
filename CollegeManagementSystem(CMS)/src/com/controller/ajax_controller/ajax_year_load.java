@@ -23,7 +23,6 @@ public class ajax_year_load extends HttpServlet {
 		
 		int program_id = Integer.parseInt(request.getParameter("id"));
 		
-		System.out.println("program id="+program_id);
 		YearServiceInterface service = new YearServiceImpl();
 		List<YearModel> year = service.getAllRecord();
 		System.out.println("value in year="+year);
