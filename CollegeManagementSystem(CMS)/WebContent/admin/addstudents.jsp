@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="com.model.Faculty_ProgramModel"%>
-<%@page import="java.util.List"%>
-<%@page import="com.serviceimpl.Faculty_Program_Model_Service_Impl"%>
-<%@page import="com.service.Faculty_Program_Model_Service"%>
 <jsp:include page="admin-header.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
@@ -113,25 +109,14 @@
 				<tr>
 					<td>Faculty: <span class="astriek">*</span>
 				</td>
-				<td><select required class="form-control" id="sel1" onChange="select_faculty();">
-					<option value="0" disabled selected>Select Faculty</option>
-					<%
-					Faculty_Program_Model_Service service = new Faculty_Program_Model_Service_Impl();
-					List<Faculty_ProgramModel> mo = service.getAllRecord();
-					for (Faculty_ProgramModel model : mo) {
-					%>
-					<option value="<%=model.getID() %>">
-						<%=model.getFaculty_Programe_Name()%>
-					</option>
-					<%
-					}
-					%>
+				<td><select required class="form-control" id="faculty-box" onChange="load_program();">
+					
 				</select></td>
 			</tr>
 			
 					<tr>
 		<td>Programme: <span class="astriek">*</span> </td>
-		<td><select required class="form-control" id="sel2" onChange="autoSelectBatch();">
+		<td><select required class="form-control" id="program-box" onChange="load_batch();">
 			<option value="" disabled selected>Select Programme</option>	
 			</select></td>
 		</tr>
@@ -139,7 +124,7 @@
 		<tr>
 			<td>Batch: <span class="astriek">*</span>
 		</td>
-		<td><select required class="form-control" id="batchID">
+		<td><select required class="form-control" id="batch-box">
 			<option value="" disabled selected>Select Batch</option>
 		</select></td>
 	</tr>
@@ -219,8 +204,26 @@ aj.onreadystatechange=function(){
 	}
 aj.send(Error);
 }
-function select_faculty() {
-	var id=document.getElementById("sel1").value;
+
+window.addEventListener('load', function() {load_faculty(); }, false)
+
+function load_faculty() {
+	var id=document.getElementById("faculty-box").value;
+	var url="../ajax_faculty_load";
+	var aj=new XMLHttpRequest();
+	aj.open("POST", url, true);
+	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	aj.onreadystatechange=function(){
+		if (aj.readyState==4&&aj.status==200) {
+			var return_data=aj.responseText;
+			document.getElementById("faculty-box").innerHTML=return_data;
+		}
+	}
+	aj.send(id);
+}
+
+function load_program() {
+	var id=document.getElementById("faculty-box").value;
 	var url="../aja";
 	var idSend="id="+id;
 	var aj=new XMLHttpRequest();
@@ -229,15 +232,15 @@ function select_faculty() {
 	aj.onreadystatechange=function(){
 		if (aj.readyState==4&&aj.status==200) {
 			var return_data=aj.responseText;
-			document.getElementById("sel2").innerHTML=return_data;
+			document.getElementById("program-box").innerHTML=return_data;
 		}
-		}
+	}
 	aj.send(idSend);
 }
 
-function autoSelectBatch(){
+function load_batch(){
 var date=document.getElementById("date").value;
-var program=document.getElementById("sel2").value;
+var program=document.getElementById("program-box").value;
 
 var url="../ajax_Batch";
 var idSend="date="+date+"&program="+program;
@@ -247,7 +250,7 @@ aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 aj.onreadystatechange=function(){
 	if (aj.readyState==4&&aj.status==200) {
 		var return_data=aj.responseText;
-		document.getElementById("batchID").innerHTML=return_data;
+		document.getElementById("batch-box").innerHTML=return_data;
 	}
 	}
 aj.send(idSend);

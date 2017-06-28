@@ -86,8 +86,8 @@
 						  </div>
 						  <div class="form-group">
 						    <label>Programme: <span class="astriek">*</span></label>
-						    <select required class="form-control" id="program-box" onChange="autoSelectBatch();">
-									
+						    <select required class="form-control" id="program-box" onChange="load_batch_year();">
+								<option value="" disabled selected>Select Programme</option>
 							</select>
 						  </div>
 						  <div class="form-group">
@@ -139,6 +139,22 @@ function load_program() {
 		if (aj.readyState==4&&aj.status==200) {
 			var return_data=aj.responseText;
 			document.getElementById("program-box").innerHTML=return_data;
+		}
+	}
+	aj.send(idSend);
+}
+
+function load_batch_year() {
+	var id=document.getElementById("program-box").value;
+	var url="../ajax_year_load";
+	var idSend="id="+id;
+	var aj=new XMLHttpRequest();
+	aj.open("POST", url, true);
+	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	aj.onreadystatechange=function(){
+		if (aj.readyState==4&&aj.status==200) {
+			var return_data=aj.responseText;
+			document.getElementById("batch-box").innerHTML=return_data;
 		}
 	}
 	aj.send(idSend);
