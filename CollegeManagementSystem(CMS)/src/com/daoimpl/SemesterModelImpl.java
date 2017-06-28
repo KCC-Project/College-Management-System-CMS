@@ -34,7 +34,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 			else {
 				conn = DatabaseConnection.connectToDatabase();
 				sql = "insert into semester (semester_no,program_id,batch_year,status" 
-				+ "values(?,?,?,?,)";
+				+ "values(?,?,?,?)";
 				pst = conn.prepareStatement(sql);
 				int col = 1;
 
