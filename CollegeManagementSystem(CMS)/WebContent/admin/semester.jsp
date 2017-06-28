@@ -96,6 +96,11 @@
 								<option value="" disabled selected>Select Batch</option>
 							</select>
 						  </div>
+						  <div class="form-group">
+						    <label>Semester Start Date: </label>
+						    	<input type="date" id="date" class="form-control" name="date">
+						  </div>
+						  
 						 
 		</form>
       </div>

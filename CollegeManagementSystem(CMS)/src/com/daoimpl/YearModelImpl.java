@@ -55,7 +55,7 @@ public class YearModelImpl implements YearModelInterface {
 		try {
 			
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "select * from year";
+			sql = "select * from year order by year_id desc";
 			pst = conn.prepareStatement(sql);
 			rs = pst.executeQuery();
 		
