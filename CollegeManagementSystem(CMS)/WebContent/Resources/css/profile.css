@@ -36,3 +36,7 @@
 	float: right;
 	color: red;
 }
+.semester-panel {
+	background-color: grey;
+	//color: rgba(64,45,45,0.96);
+}
