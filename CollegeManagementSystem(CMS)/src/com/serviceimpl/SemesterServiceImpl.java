@@ -9,14 +9,14 @@ import com.service.SemesterServiceInterface;
 
 public class SemesterServiceImpl implements SemesterServiceInterface {
 	
-	SemesterModelInterface model = new SemesterModelImpl(); // Semester Model Object
+	SemesterModelInterface model = new SemesterModelImpl(); // Semester dao Object
 	
-	//Service Impl for inserting the data stored in the Semester Model into Database
-	public boolean createSemester(SemesterModel semesterModel) {
-		return model.createSemester(semesterModel);
+	//Service Implementation, add semester into Database passing semesterModel
+	public boolean addSemester(SemesterModel semesterModel) {
+		return model.addSemester(semesterModel);
 	}
 
-	// Retrieving all the data from Semester Model
+	// Retrieving all the semester data from database
 	public List<SemesterModel> getAllRecord() {
 		return model.getAllRecord();
 	}

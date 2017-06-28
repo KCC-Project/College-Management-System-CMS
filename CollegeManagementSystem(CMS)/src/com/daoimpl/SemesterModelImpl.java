@@ -16,7 +16,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 	private Connection conn;
 	
 	// method for saving semester information
-	public boolean createSemester(SemesterModel semesterModel) {
+	public boolean addSemester(SemesterModel semesterModel) {
 		
 		// getting all the values from the Model
 		int semester_id = semesterModel.getSemester_id();
