@@ -33,12 +33,18 @@
           </ul>
         </li>
 
-        <li class="link">
-          <a href="managecourses.jsp" id="manage-courses">
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <span class="hidden-xs hidden-sm">Manage Course</span>
+         <li class="link">
+          <a href="#collapse-manage" data-toggle="collapse"  aria-controls="collapse-manage">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="hidden-xs hidden-sm">Manage</span>
+            <span class="caret pull-right"></span>
           </a>
+          <ul class="collapse collapseable" id="collapse-manage">
+            <li><a href="semester.jsp" id="Semester">Semester</a></li>
+            <li><a href="managecourses.jsp" id="courses">Courses</a></li>
+          </ul>
         </li>
+        
           <li class="link">
           <a href="#collapse-notice" data-toggle="collapse"  aria-controls="collapse-notice">
             <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
