@@ -103,7 +103,6 @@
 						    	<input type="date" id="date" class="form-control" name="date">
 						  </div>
 						  
-						  
 						 
 		</form>
       </div>
