@@ -18,58 +18,16 @@
 
 
         <div class="panel-group" id="first-one">   
-
+        
           <div class="panel panel-default profile-panel">
-            <div class="panel-heading main-color-bg">Profile</div>
-          </div>
-        </div>
-
-        <!-- page start-->
-        <div class="row">
-         <div class="col-lg-12">
-          <section class="panel semester-panel">
-            <header class="panel-heading">
-              <ul class="nav nav-tabs">
-                <li class="active">
-                  <a data-toggle="tab" href="#add-semester">
-                    <i class="glyphicon glyphicon-home"></i>
-                    Add Semester
-                  </a>
-                </li>
-                <li>
-                  <a data-toggle="tab" href="#view-semester">
-                    <i class="glyphicon glyphicon-user"></i>
-                    View Semester
-                  </a>
-                </li>
-              </ul>
-            </header>
-
+            <div class="panel-heading main-color-bg">
+            	<span class="btn btn-default">Semester</span>
+            	<button type="button" class="btn btn-info pull-right" id="btn-addsem" data-toggle="modal" data-target="#myModal">Add Semester
+				</button>
+            </div>
             <div class="panel-body">
-              <div class="tab-content">
-                <div id="add-semester" class="tab-pane active">
-                  <div class="profile-activity">
-
-                    <div class="event-info">
-                      <ul>
-                        
-                      </ul>
-                    </div>
-                    <div class="event-info">
-                      <ul>
-                        
-                      </ul>
-                    </div>
-
-
-                  </div>
-                </div>
-
-                <!-- profile -->
-                <div id="view-semester" class="tab-pane">
-                  <section class="panel">
-                    <div class="panel-body profile-panel">
-                      <div class="table-responsive">
+				
+				 <div class="table-responsive">
                         <table class="table">
                           <thead>
                             <tr>
@@ -98,23 +56,95 @@
                           </tbody>
                         </table>
                       </div>
-                    </div>
-                  </section>
-                </div>
-
-              </div>
-            </div>
-          </section>
+				
+			</div>
+          </div>
         </div>
-      </div>
 
 
     </div>
   </div>
-</div>
+  </div>
+  
+  <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Semester</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+						  <div class="form-group">
+						    <label>Faculty: <span class="astriek">*</span></label>
+						    <select required class="form-control" id="faculty-box" onChange="load_program();">
+								
+							</select>
+						  </div>
+						  <div class="form-group">
+						    <label>Programme: <span class="astriek">*</span></label>
+						    <select required class="form-control" id="program-box" onChange="autoSelectBatch();">
+									
+							</select>
+						  </div>
+						  <div class="form-group">
+						    <label>Batch: <span class="astriek">*</span></label>
+						    <select required class="form-control" id="batch-box">
+								<option value="" disabled selected>Select Batch</option>
+							</select>
+						  </div>
+						 
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 
+<script>
+
+window.addEventListener('load', function() {load_faculty(); }, false)
+
+function load_faculty() {
+	var id=document.getElementById("faculty-box").value;
+	var url="../ajax_faculty_load";
+	var aj=new XMLHttpRequest();
+	aj.open("POST", url, true);
+	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	aj.onreadystatechange=function(){
+		if (aj.readyState==4&&aj.status==200) {
+			var return_data=aj.responseText;
+			document.getElementById("faculty-box").innerHTML=return_data;
+		}
+	}
+	aj.send(id);
+}
+
+function load_program() {
+	var id=document.getElementById("faculty-box").value;
+	var url="../ajax";
+	var idSend="id="+id;
+	var aj=new XMLHttpRequest();
+	aj.open("POST", url, true);
+	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	aj.onreadystatechange=function(){
+		if (aj.readyState==4&&aj.status==200) {
+			var return_data=aj.responseText;
+			document.getElementById("program-box").innerHTML=return_data;
+		}
+	}
+	aj.send(idSend);
+}
+
+</script>
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
