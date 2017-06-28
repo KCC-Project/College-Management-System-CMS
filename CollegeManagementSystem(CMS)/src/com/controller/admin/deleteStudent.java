@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.service.StudentServiceInterface;
 import com.serviceimpl.StudentServiceImpl;
-//Mausam comment
+//Mausam 
 
 @WebServlet("/deleteStudent")
 public class deleteStudent extends HttpServlet {
