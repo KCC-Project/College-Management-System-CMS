@@ -301,18 +301,10 @@
 									</ul>
 								</header>
 
-								<div class="panel-body">
+								<div class="panel-body border" >
 									<div class="tab-content">
-
-										<div id="general" class="tab-pane active">
-											<div class="notice-div">
-
-												<div class="notice-info">
-													<!--  <div id="piechart"></div>  -->
-													 
-													 												</div>
-
-											</div>
+										<div id="general" class="tab-pane active " >
+											<div id="piechart2" style="width: 900px; height: 500px;"></div>
 										</div>
 									</div>
 								</div>
@@ -335,7 +327,7 @@
 											style="font-size: 15px;" aria-hidden="true"></span>&nbsp;Pass Ratio Graph
 									</div>
 									<div class="panel-body news_pannel_body">
-								 <div id="piechart"></div> 
+								 <div id="piechart1"></div> 
 									</div>
 								</div>
 							</div>
@@ -382,7 +374,7 @@
 
 		// Display the chart inside the <div> element with id="piechart"
 		var chart = new google.visualization.PieChart(document
-				.getElementById('piechart'));
+				.getElementById('piechart1'));
 		chart.draw(data, options);
 	}
 </script>
@@ -416,7 +408,7 @@
           },
         };
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
         chart.draw(data, options);
       }
     </script>
