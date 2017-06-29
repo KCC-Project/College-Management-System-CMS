@@ -286,7 +286,7 @@
 				</div>
 
 				<div class="row">
-					<section class="col-lg-7 connectedSortable hidden-xs">
+					<section class="col-lg-7 connectedSortable ">
 						<div class="border">
 							<div id="piechart"></div>
 						</div>
