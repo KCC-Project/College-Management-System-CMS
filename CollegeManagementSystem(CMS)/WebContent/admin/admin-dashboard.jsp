@@ -228,6 +228,18 @@
 																attendance report.</p></li>
 													</ul>
 												</div>
+												<div class="notice-info">
+													<ul>
+														<li>
+															<p class="bg-primary">
+																<span class="title-message"> Attendance Report </span> <span
+																	class="small pull-right"> 2017-07-28 </span>
+															</p>
+														</li>
+														<li><p>All Staff collect their class wise
+																attendance report.</p></li>
+													</ul>
+												</div>
 
 											</div>
 										</div>
@@ -237,10 +249,36 @@
 							</section>
 						</div>
 					</div>
-					<div class="col-lg-5">
-						<div class="col-lg-12">
-						<div class="row ">
-							
+
+
+					<div class="col-lg-5  ">
+						<div class="row">
+							<div class="col-lg-12">
+
+								<div class="panel panel-default">
+									<div class="panel-heading">News</div>
+									<div class="panel-body news_pannel_body">
+										<div class="danger">
+											<p>
+												<strong>Danger!</strong> Some
+												text...dsfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfg
+											</p>
+										</div>
+
+										<div class="success">
+											<p>
+												<strong>Danger!</strong> Some
+												text...dsfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfg
+											</p>
+										</div>
+										<div class="warning">
+											<p>
+												<strong>Danger!</strong> Some
+												text...dsfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfg
+											</p>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
