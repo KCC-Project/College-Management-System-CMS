@@ -49,6 +49,9 @@
 							<span class="hidden-xs"
 								style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
 								class="fa fa-graduation-cap"></i> Manage Current Active Exam</span>
+								<span class="visible-xs"
+								style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
+								class="fa fa-graduation-cap"></i> Manage Exam</span>
 						</h3>
 					</div>
 				</div>
