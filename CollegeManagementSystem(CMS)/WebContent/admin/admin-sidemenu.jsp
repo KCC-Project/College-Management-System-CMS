@@ -42,6 +42,7 @@
           <ul class="collapse collapseable" id="collapse-manage">
             <li><a href="semester.jsp" id="Semester">Semester</a></li>
             <li><a href="managecourses.jsp" id="courses">Courses</a></li>
+             <li><a href="manageExam.jsp" id="courses">Exam</a></li>
           </ul>
         </li>
         
