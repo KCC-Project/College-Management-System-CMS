@@ -258,8 +258,11 @@ to {
 }
 
 .content {
-	padding: 20px 15px;
+	padding:0px !important;
+	/* padding: 20px 15px; */
 	background: #f9f9f9;
+	position: relative;
+	
 }
 
 .callout.callout-info h4 {
@@ -395,54 +398,5 @@ marquee {
     background-color: #FFFFFF;
     line-height: 30px;
 }
-/*
-.footerPannel {
-    background-color: #FFFFFF;
-    line-height: 20px;
-}
-.card .footerPannel .legend {
-    padding: 5px 0;
-}
 
-.card .footerPannel div {
-    display: inline-block;
-}
 
-.fa {
-    width: 18px;
-    text-align: center;
-}
-
-.text-info, .text-info:hover {
-    color: #1DC7EA !important;
-}
-.text-danger, .text-danger:hover {
-    color: #FF4A55 !important;
-}
-.text-warning, .text-warning:hover {
-    color: #FF9500 !important;
-}
-.card .footerPannel hr {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.footerPannel hr {
-    border-color: #DDDDDD;
-}
-
-.card .footerPannel div {
-    display: inline-block;
-}
-.card .footerPannel hr {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.footerPannel hr {
-    border-color: #DDDDDD;
-}
-
-.card .stats {
-    color: #a9a9a9;
-} 

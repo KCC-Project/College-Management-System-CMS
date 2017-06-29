@@ -122,7 +122,7 @@
 					<!-- ./col -->
 				</div>
 
-				<br>
+				
 				<div class="row ">
 					<div class=" col-lg-7  ">
 						<div class="col-lg-12">
@@ -289,32 +289,41 @@
 
 				</div>
 				<!-- =================================1st graph========================================= -->
+				<br>
 				<div class="row ">
-					<div class="col-lg-12">
+					<div class="col-lg-12 ">
 						<!-- 1st garph -->
-						<div class="col-lg-6 ">
+						<div class="col-lg-7 ">
+						<div class="row">
+						<div class="col-lg-12">
 							<div class="card">
 								<div class="header">
-									<h4 class="title">Email Statistics</h4>
-									<p class="category">Last Campaign Performance</p>
+									<h4 class="title">Graph Of Sotal Student</h4>
+									<p class="category">Per Faculty</p>
 								</div>
-								<div class="content border">
-									<div id="piechart1"></div>
-									<div class="footerPannel">
-									<div class="legend">
-										<i class="fa fa-circle text-info"></i> Open
-										<i class="fa fa-circle text-danger"></i> Bounce
-										<i class="fa fa-circle text-warning"></i> Unsubscribe
-									</div>
-									<hr>
-									<div class="stats">
-										<i class="fa fa-clock-o"></i> Campaign sent 2 days ago
-									</div>
-								</div>
+								<div class="content " >
+									<div id="piechart1" style="background-color: white;"></div>
 								</div>
 							</div>
+							</div>
+							</div>
 						</div>
-						<div class="col-lg-6 border card"></div>
+						
+						<div class="col-lg-5  ">
+						<div class="row">
+						<div class="col-lg-12">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Graph Of Average Pass Ratio</h4>
+									<p class="category">Per Faculty</p>
+								</div>
+								<div class="content  " >
+									<div id="piechart2" style="background-color: white;"></div>
+								</div>
+							</div>
+							</div>
+						</div>
+						</div>
 					</div>
 
 				</div>
@@ -343,68 +352,60 @@
 	// Draw the chart and set the chart values
 	function drawChart() {
 		var data = google.visualization.arrayToDataTable([
-				[ 'Task', 'Hours per Day' ], [ 'Work', 8 ], [ 'Eat', 2 ],
-				[ 'TV', 4 ], [ 'Gym', 2 ], [ 'Sleep', 8 ] ]);
+				[ 'Task', 'Hours per Day' ], [ 'Science and Tech', 100 ], [ 'Management', 80 ],
+				[ 'Arts', 40 ], [ 'Education', 20 ], [ 'Law', 15 ] ]);
 
 		// Optional; add a title and set the width and height of the chart
+		
+		
 		var options = {
-			'title' : 'My Average Day',
-			'max-width' : 450,
-			'max-height' : 300
+			'width' : 618,
+			'height' : 300
+			
 		};
 
 		// Display the chart inside the <div> element with id="piechart"
 		var chart = new google.visualization.PieChart(document
 				.getElementById('piechart1'));
+		
 		chart.draw(data, options);
 	}
 </script>
-
 
 
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
+
 <script type="text/javascript">
-	google.charts.load("current", {
-		packages : [ "corechart" ]
+	// Load google charts
+	google.charts.load('current', {
+		'packages' : [ 'corechart' ]
 	});
 	google.charts.setOnLoadCallback(drawChart);
+
+	// Draw the chart and set the chart values
 	function drawChart() {
 		var data = google.visualization.arrayToDataTable([
-				[ 'Language', 'Speakers (in millions)' ], [ 'Assamese', 13 ],
-				[ 'Bengali', 83 ], [ 'Bodo', 1.4 ], [ 'Dogri', 2.3 ],
-				[ 'Gujarati', 46 ], [ 'Hindi', 300 ], [ 'Kannada', 38 ],
-				[ 'Kashmiri', 5.5 ], [ 'Konkani', 5 ], [ 'Maithili', 20 ],
-				[ 'Malayalam', 33 ], [ 'Manipuri', 1.5 ], [ 'Marathi', 72 ],
-				[ 'Nepali', 2.9 ], [ 'Oriya', 33 ], [ 'Punjabi', 29 ],
-				[ 'Sanskrit', 0.01 ], [ 'Santhali', 6.5 ], [ 'Sindhi', 2.5 ],
-				[ 'Tamil', 61 ], [ 'Telugu', 74 ], [ 'Urdu', 52 ] ]);
+				[ 'Task', 'Hours per Day' ], [ 'Science and Tech', 100 ], [ 'Management', 80 ],
+				[ 'Arts', 40 ], [ 'Education', 20 ], [ 'Law', 15 ] ]);
 
+		// Optional; add a title and set the width and height of the chart
+		
+		
 		var options = {
-			title : 'Indian Language Use',
-			legend : 'none',
-			pieSliceText : 'label',
-			slices : {
-				4 : {
-					offset : 0.2
-				},
-				12 : {
-					offset : 0.3
-				},
-				14 : {
-					offset : 0.4
-				},
-				15 : {
-					offset : 0.5
-				},
-			},
+			'width' : 420,
+			'height' : 300
+			
 		};
 
+		// Display the chart inside the <div> element with id="piechart"
 		var chart = new google.visualization.PieChart(document
 				.getElementById('piechart2'));
+		
 		chart.draw(data, options);
 	}
 </script>
+
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script
