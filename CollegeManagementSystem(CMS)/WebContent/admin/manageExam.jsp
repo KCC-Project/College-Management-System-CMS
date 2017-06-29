@@ -90,7 +90,38 @@
 				</div>
 				<!-- ======================end of exam type============= -->
 
+	<!-- Regular exam -->
+				<div class="box-body " style="margin-bottom: 4px;">
+					<div id="accordion" class="box-group">
 
+						<div class="panel box box-default">
+							<div class="box-header with-border">
+								<h4 class="box-title" style="padding-left: 15px;">
+									2. First Terminal Exam
+
+									<div class="pull-right"
+										style="margin: 0px; padding: 0px; position: relative; margin-top: -6px;">
+										<span class="btn btn-sm btn-info  hidden-xs"> <i
+											class="fa fa-users"></i> Students &nbsp; <span class="badge">
+												5 </span>
+										</span> <span class="btn btn-sm btn-warning  hidden-xs"> <i
+											class="fa fa-sitemap"></i> Faculty &nbsp; <span class="badge">
+												1 </span>
+										</span> <a class="btn-sm btn btn-default" title="View Exam Details"
+											data-toggle="modal" data-target=#View_Exam_Details><i
+											class="fa fa-eye"></i></a> <a class="btn-sm btn btn-default" data-toggle="modal" data-target=#update_exam_modal-body
+											 title="Edit Course Details"><i
+											class="fa fa-pencil-square-o"></i></a> <a
+											class="btn-sm btn btn-default" data-toggle="modal"
+											data-target=#delete_Exam_Details title="Delete"
+											data-method="post"><i class="fa fa-trash-o"></i></a>
+									</div>
+								</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ======================end of exam type============= -->
 			</div>
 
 			<!-- /.box-group -->
