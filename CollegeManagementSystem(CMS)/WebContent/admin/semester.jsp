@@ -78,7 +78,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Semester</h4>
       </div>
-      <form action="../Semester_Add_Controller" enctype="multipart/form-data" method="post">
+      <form action="../Semester_Add_Controller" enctype="multipart/form-data" method="Post">
       <div class="modal-body">
         
 						  <div class="form-group">

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import com.serviceimpl.StudentServiceImpl;
 
 
 @WebServlet("/Semester_Add_Controller")
+@MultipartConfig(maxFileSize = 16177215)
 public class Semester_Add_Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,6 +40,7 @@ public class Semester_Add_Controller extends HttpServlet {
 		//DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); // date formatter
 		
 		// catching all the data obtained from the post method
+		System.out.println("Program form ajax="+request.getParameter("program_id"));
 		Integer program_id = Integer.parseInt(request.getParameter("program_id"));
 		Integer batch_year = Integer.parseInt(request.getParameter("batch_id"));
 		Integer semester_no = Integer.parseInt(request.getParameter("semester_no"));
