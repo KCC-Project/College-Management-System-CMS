@@ -63,13 +63,13 @@
 								<h4 class="box-title" style="padding-left: 15px;">
 									1. Regular
 
-									<div class="pull-right"
+									<div class="pull-right hidden-xs"
 										style="margin: 0px; padding: 0px; position: relative; margin-top: -6px;">
 										<span class="btn btn-sm btn-info disp-count"> <i
 											class="fa fa-users"></i> Students &nbsp; <span class="badge">
 												5 </span>
-										</span> <span class="btn btn-sm btn-warning disp-count"> <i
-											class="fa fa-sitemap"></i> Batches &nbsp; <span class="badge">
+										</span> <span class="btn btn-sm btn-warning disp-count hidden-xs"> <i
+											class="fa fa-sitemap"></i> Faculty &nbsp; <span class="badge">
 												1 </span>
 										</span> <a class="btn-sm btn btn-default" title="View Exam Details"
 											data-toggle="modal" data-target=#View_Exam_Details><i
