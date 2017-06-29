@@ -123,120 +123,129 @@
 
 				<!-- page start-->
 				<div class="row">
-				<div class="row col-lg-7">
-					<div class="col-lg-12">
-						<section class="panel notice-panel">
-							<header class="panel-heading">
-								<ul class="nav nav-pills small">
-									<li class="pull-left notice-board-name"><a><i
-											class="fa fa-inbox"></i> Notice Board</a>
-									<li>
-									<li class="pull-right"><a data-toggle="tab" href="#staff">
-											<i class="icon-envelope"></i> Staff
-									</a></li>
-									<li class="pull-right"><a data-toggle="tab"
-										href="#student"> <i class="glyphicon glyphicon-user"></i>
-											Student
-									</a></li>
-									<li class="active pull-right"><a data-toggle="tab"
-										href="#general"> <i class="glyphicon glyphicon-home"></i>
-											General
-									</a></li>
-								</ul>
-							</header>
+					<div class="row col-lg-7">
+						<div class="col-lg-12">
+							<section class="panel notice-panel">
+								<header class="panel-heading">
+									<ul class="nav nav-pills small ">
+										<li class="pull-left notice-board-name "><a><i
+												class="fa fa-inbox"></i> Notice Board</a>
+										<li>
+										<li class="pull-right"><a data-toggle="tab" href="#staff">
+												<i class="icon-envelope"></i> Staff
+										</a></li>
+										<li class="pull-right"><a data-toggle="tab"
+											href="#student"> <i class="glyphicon glyphicon-user"></i>
+												Student
+										</a></li>
+										<li class="active pull-right"><a data-toggle="tab"
+											href="#general"> <i class="glyphicon glyphicon-home"></i>
+												General
+										</a></li>
+									</ul>
+								</header>
 
-							<div class="panel-body">
-								<div class="tab-content">
+								<div class="panel-body">
+									<div class="tab-content">
 
-									<div id="general" class="tab-pane active">
-										<div class="notice-div">
+										<div id="general" class="tab-pane active">
+											<div class="notice-div">
 
-											<div class="notice-info">
-												<ul>
-													<li>
-														<p class="bg-primary">
-															<span class="title-message"> Summer Vacation </span> <span
-																class="small pull-right"> 2017-06-27 </span>
-														</p>
-													</li>
-													<li><p>Summer Vacation starts from June to 2nd
-															week of July.</p></li>
-												</ul>
+												<div class="notice-info">
+													<ul>
+														<li>
+															<p class="bg-primary">
+																<span class="title-message"> Summer Vacation </span> <span
+																	class="small pull-right"> 2017-06-27 </span>
+															</p>
+														</li>
+														<li><p>Summer Vacation starts from June to 2nd
+																week of July.</p></li>
+													</ul>
+												</div>
+
 											</div>
-
 										</div>
-									</div>
 
 
-									<div id="student" class="tab-pane">
-										<div class="notice-div">
+										<div id="student" class="tab-pane">
+											<div class="notice-div">
 
-											<div class="notice-info">
-												<ul>
-													<li>
-														<p class="bg-primary">
-															<span class="title-message"> Next Week Summer </span> <span
-																class="small pull-right"> 2017-08-15 </span>
-														</p>
-													</li>
-													<li><p>Summer Exam will be conducted on Next week.
-															All The Best!!!</p></li>
-												</ul>
+												<div class="notice-info">
+													<ul>
+														<li>
+															<p class="bg-primary">
+																<span class="title-message"> Next Week Summer </span> <span
+																	class="small pull-right"> 2017-08-15 </span>
+															</p>
+														</li>
+														<li><p>Summer Exam will be conducted on Next
+																week. All The Best!!!</p></li>
+													</ul>
+												</div>
+												<div class="notice-info">
+													<ul>
+														<li>
+															<p class="bg-primary">
+																<span class="title-message"> Student exam form
+																	fillup </span> <span class="small pull-right">
+																	2017-07-07 </span>
+															</p>
+														</li>
+														<li><p>All Students come and fill their exam
+																forms</p></li>
+													</ul>
+												</div>
+
 											</div>
-											<div class="notice-info">
-												<ul>
-													<li>
-														<p class="bg-primary">
-															<span class="title-message"> Student exam form
-																fillup </span> <span class="small pull-right">
-																2017-07-07 </span>
-														</p>
-													</li>
-													<li><p>All Students come and fill their exam forms</p></li>
-												</ul>
-											</div>
-
 										</div>
-									</div>
 
 
-									<div id="staff" class="tab-pane">
-										<div class="notice-div">
+										<div id="staff" class="tab-pane">
+											<div class="notice-div">
 
-											<div class="notice-info">
-												<ul>
-													<li>
-														<p class="bg-primary">
-															<span class="title-message"> Monthly Report </span> <span
-																class="small pull-right"> 2017-07-02 </span>
-														</p>
-													</li>
-													<li><p>All Staff have to submit their report on
-															month end.</p></li>
-												</ul>
+												<div class="notice-info">
+													<ul>
+														<li>
+															<p class="bg-primary">
+																<span class="title-message"> Monthly Report </span> <span
+																	class="small pull-right"> 2017-07-02 </span>
+															</p>
+														</li>
+														<li><p>All Staff have to submit their report on
+																month end.</p></li>
+													</ul>
+												</div>
+												<div class="notice-info">
+													<ul>
+														<li>
+															<p class="bg-primary">
+																<span class="title-message"> Attendance Report </span> <span
+																	class="small pull-right"> 2017-07-28 </span>
+															</p>
+														</li>
+														<li><p>All Staff collect their class wise
+																attendance report.</p></li>
+													</ul>
+												</div>
+
 											</div>
-											<div class="notice-info">
-												<ul>
-													<li>
-														<p class="bg-primary">
-															<span class="title-message"> Attendance Report </span> <span
-																class="small pull-right"> 2017-07-28 </span>
-														</p>
-													</li>
-													<li><p>All Staff collect their class wise
-															attendance report.</p></li>
-												</ul>
-											</div>
-
 										</div>
-									</div>
 
+									</div>
 								</div>
-							</div>
-						</section>
+							</section>
+						</div>
 					</div>
+					<div class="col-lg-5">
+						<div class="col-lg-12">
+						<div class="row ">
+							
+							</div>
+						</div>
+					</div>
+
 				</div>
-</div>
 				<!--all running courses start here  -->
 				<section class="col-lg-5 connectedSortable hidden-xs">
 					<div class="border">
@@ -258,7 +267,7 @@
 
 
 
-</div>
+
 
 
 <script type="text/javascript"
