@@ -105,12 +105,17 @@
 						  </div>
 						  <div class="form-group">
 						    <label>Semester Start Date: </label>
-						    	<input type="date" id="start_date" name="start_date" class="form-control" placeholder="mm/dd/yyyy">
+						    	<input type="date" id="start_date" name="start_date" class="form-control" placeholder="yyyy/mm/dd">
 						  </div>
 						  <div class="form-group">
 						    <label>Semester End Date: </label>
-						    	<input type="date" id="end_date" name="end_date" class="form-control" placeholder="mm/dd/yyyy">
+						    <input type="date" id="end_date" name="end_date" class="form-control" placeholder="yyyy/mm/dd">
 						  </div>
+						  <div class="form-group">
+						  	<label>Semester</label>
+						  	<input type="radio" name="status" required checked value="1">Active
+							<input type="radio" name="status" value="0">Completed</label>
+						</div>
 						  
 						 
 		
