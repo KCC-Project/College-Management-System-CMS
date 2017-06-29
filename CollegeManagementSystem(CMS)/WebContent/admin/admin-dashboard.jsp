@@ -256,7 +256,10 @@
 							<div class="col-lg-12">
 
 								<div class="panel panel-default">
-									<div class="panel-heading"><span class="glyphicon glyphicon-list-alt" style="font-size:15px;" aria-hidden="true"></span>&nbsp;News</div>
+									<div class="panel-heading">
+										<span class="glyphicon glyphicon-list-alt"
+											style="font-size: 15px;" aria-hidden="true"></span>&nbsp;News
+									</div>
 									<div class="panel-body news_pannel_body">
 										<div class="danger">
 											<p>
@@ -284,29 +287,72 @@
 					</div>
 
 				</div>
-
+				<!-- =================================1st graph========================================= -->
+				<br>
 				<div class="row">
-					<section class="col-lg-7 connectedSortable ">
-						<div class="border">
-							<div id="piechart"></div>
+					<div class="row col-lg-7">
+						<div class="col-lg-12">
+							<section class="panel notice-panel">
+								<header class="panel-heading">
+									<ul class="nav nav-pills small ">
+										<li class="pull-left notice-board-name "><a><i
+												class="fa fa-inbox"></i> Total Student Graph</a>
+										<li>
+									</ul>
+								</header>
+
+								<div class="panel-body">
+									<div class="tab-content">
+
+										<div id="general" class="tab-pane active">
+											<div class="notice-div">
+
+												<div class="notice-info">
+													<!--  <div id="piechart"></div>  -->
+													 
+													 												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
 						</div>
-					</section>
+					</div>
+					
+					
+					
+					
+					
+				<!--  =================================2nd graph===========================================-->
+	<div class="col-lg-5 news ">
+						<div class="row">
+							<div class="col-lg-12">
+
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<span class="glyphicon glyphicon-list-alt"
+											style="font-size: 15px;" aria-hidden="true"></span>&nbsp;Pass Ratio Graph
+									</div>
+									<div class="panel-body news_pannel_body">
+								 <div id="piechart"></div> 
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!--=========================================================================  -->
+					
+					
+					
 					
 				</div>
+
 			</div>
-
 			<!--end row here  -->
-
-
 		</div>
 	</div>
-
-
 </div>
-
-<!-- --------------------------------------------------------------- -->
-
-
 
 
 
@@ -330,8 +376,8 @@
 		// Optional; add a title and set the width and height of the chart
 		var options = {
 			'title' : 'My Average Day',
-			'width' : 450,
-			'height' : 300
+			'max-width' : 450,
+			'max-height' : 300
 		};
 
 		// Display the chart inside the <div> element with id="piechart"
@@ -341,6 +387,39 @@
 	}
 </script>
 
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Language', 'Speakers (in millions)'],
+          ['Assamese', 13], ['Bengali', 83], ['Bodo', 1.4],
+          ['Dogri', 2.3], ['Gujarati', 46], ['Hindi', 300],
+          ['Kannada', 38], ['Kashmiri', 5.5], ['Konkani', 5],
+          ['Maithili', 20], ['Malayalam', 33], ['Manipuri', 1.5],
+          ['Marathi', 72], ['Nepali', 2.9], ['Oriya', 33],
+          ['Punjabi', 29], ['Sanskrit', 0.01], ['Santhali', 6.5],
+          ['Sindhi', 2.5], ['Tamil', 61], ['Telugu', 74], ['Urdu', 52]
+        ]);
+
+        var options = {
+          title: 'Indian Language Use',
+          legend: 'none',
+          pieSliceText: 'label',
+          slices: {  4: {offset: 0.2},
+                    12: {offset: 0.3},
+                    14: {offset: 0.4},
+                    15: {offset: 0.5},
+          },
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script
