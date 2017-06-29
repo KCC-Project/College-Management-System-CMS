@@ -251,30 +251,30 @@
 					</div>
 
 
-					<div class="col-lg-5  ">
+					<div class="col-lg-5 news ">
 						<div class="row">
 							<div class="col-lg-12">
 
 								<div class="panel panel-default">
-									<div class="panel-heading">News</div>
+									<div class="panel-heading"><span class="glyphicon glyphicon-list-alt" style="font-size:15px;" aria-hidden="true"></span>&nbsp;News</div>
 									<div class="panel-body news_pannel_body">
 										<div class="danger">
 											<p>
-												<strong>Danger!</strong> Some
-												text...dsfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfg
+												<strong>Danger!</strong> This is a place of news. Lates news
+												will be loaded here.
 											</p>
 										</div>
 
 										<div class="success">
 											<p>
-												<strong>Danger!</strong> Some
-												text...dsfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfg
+												<strong>Danger!</strong> This is a place of news. Lates news
+												will be loaded here.
 											</p>
 										</div>
 										<div class="warning">
 											<p>
-												<strong>Danger!</strong> Some
-												text...dsfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfgsdfg
+												<strong>Danger!</strong> This is a place of news. Lates news
+												will be loaded here.
 											</p>
 										</div>
 									</div>
@@ -284,14 +284,17 @@
 					</div>
 
 				</div>
-				<!--all running courses start here  -->
-				<section class="col-lg-5 connectedSortable hidden-xs">
-					<div class="border">
-						<div id="piechart"></div>
-					</div>
-				</section>
+
+				<div class="row">
+					<section class="col-lg-7 connectedSortable hidden-xs">
+						<div class="border">
+							<div id="piechart"></div>
+						</div>
+					</section>
+					
+				</div>
 			</div>
-			<!-- courses Ends herer -->
+
 			<!--end row here  -->
 
 

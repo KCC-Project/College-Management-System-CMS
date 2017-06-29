@@ -279,6 +279,7 @@ marquee {
 .notice-panel {
 	background-color: #ffffff;
 	text-align: justify;
+	height: 340px;
 }
 .notice-info {
 	background-color:#d9edf7;
@@ -314,11 +315,11 @@ marquee {
 } */
 
 /*=================================news =================================*/
-.news{
+.news_pannel_body{
 	background-color: white;
-	min-height: 300px;
-	height: 335px;
+	min-height: 132px;
 	padding: 10px;
+	height: 295px;
 }
 
 
