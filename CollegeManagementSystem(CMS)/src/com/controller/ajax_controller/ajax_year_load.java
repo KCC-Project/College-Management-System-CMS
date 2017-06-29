@@ -25,7 +25,6 @@ public class ajax_year_load extends HttpServlet {
 		
 		YearServiceInterface service = new YearServiceImpl();
 		List<YearModel> year = service.getAllRecord();
-		System.out.println("value in year="+year);
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		

@@ -62,7 +62,6 @@ public class YearModelImpl implements YearModelInterface {
 			while(rs.next()){
 			
 				YearModel yearModel = new YearModel();
-				System.out.println("year is db="+rs.getInt("year"));
 				yearModel.setYear(rs.getInt("year"));
 				yearModel.setYear_id(rs.getInt("year_id"));
 				

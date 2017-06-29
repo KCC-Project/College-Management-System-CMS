@@ -78,46 +78,48 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Semester</h4>
       </div>
+      <form action="../Semester_Add_Controller" enctype="multipart/form-data" method="post">
       <div class="modal-body">
-        <form>
+        
 						  <div class="form-group">
 						    <label>Faculty: <span class="astriek">*</span></label>
-						    <select required class="form-control" id="faculty-box" onChange="load_program();">
+						    <select required class="form-control" id="faculty-box" name="faculty_id" onChange="load_program();">
 								
 							</select>
 						  </div>
 						  <div class="form-group">
 						    <label>Programme: <span class="astriek">*</span></label>
-						    <select required class="form-control" id="program-box" onChange="load_batch_year();">
+						    <select required class="form-control" id="program-box" name="program_id" onChange="load_batch_year();">
 								<option value="" disabled selected>Select Programme</option>
 							</select>
 						  </div>
 						  <div class="form-group">
 						    <label>Batch: <span class="astriek">*</span></label>
-						    <select required class="form-control" id="batch-box">
+						    <select required class="form-control" name="batch_id" id="batch-box">
 								<option value="" disabled selected>Select Batch</option>
 							</select>
 						  </div>
 						  <div class="form-group">
-						    <label>Semester no.: </label>
-						    	<input type="number" id="sem-no" class="form-control" placeholder="Semester number" name="sem_no">
+						    <label>Semester no.: <span class="astriek">*</span></label>
+						    	<input type="number" id="sem-no" name="semester_no" required class="form-control" placeholder="Semester number">
 						  </div>
 						  <div class="form-group">
 						    <label>Semester Start Date: </label>
-						    	<input type="date" id="date" class="form-control" placeholder="mm/dd/yyyy" name="start_date">
+						    	<input type="date" id="start_date" name="start_date" class="form-control" placeholder="mm/dd/yyyy">
 						  </div>
 						  <div class="form-group">
 						    <label>Semester End Date: </label>
-						    	<input type="date" id="date" class="form-control" placeholder="mm/dd/yyyy" name="end_date">
+						    	<input type="date" id="end_date" name="end_date" class="form-control" placeholder="mm/dd/yyyy">
 						  </div>
 						  
 						 
-		</form>
+		
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
          <button type="submit" class="btn btn-success">Submit</button>
       </div>
+      </form>
     </div>
 
   </div>

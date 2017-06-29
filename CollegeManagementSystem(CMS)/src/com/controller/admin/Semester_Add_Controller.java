@@ -1,6 +1,11 @@
 package com.controller.admin;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,12 +35,25 @@ public class Semester_Add_Controller extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); // date formatter
+		
 		// catching all the data obtained from the post method
-		int semester_no = Integer.parseInt(request.getParameter("semester_no"));
 		int program_id = Integer.parseInt(request.getParameter("program_id"));
-		int batch_year = Integer.parseInt(request.getParameter("batch_year"));
+		int batch_year = Integer.parseInt(request.getParameter("batch_id"));
+		int semester_no = Integer.parseInt(request.getParameter("semester_no"));
+		String start_date_s = request.getParameter("start_date");
+		
+		Date start_date;
+		try {
+			start_date = df.parse(start_date_s);
+			System.out.println(start_date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int status = Integer.parseInt(request.getParameter("status"));
 		
+		System.out.println("program: "+program_id);
 		// checking for empty and invalid values
 		if(semester_no == 0 || program_id == 0 || batch_year == 0){
 			System.out.println("User Entered Invalid Values");
