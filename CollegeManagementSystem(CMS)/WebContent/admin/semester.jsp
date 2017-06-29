@@ -20,7 +20,7 @@
         <div class="panel-group" id="first-one">   
         
           <div class="panel panel-default profile-panel">
-            <div class="panel-heading main-color-bg">
+            <div class="panel-heading main-color-bg_heading">
             	<span class="btn btn-default">Semester</span>
             	<button type="button" class="btn btn-info pull-right" id="btn-addsem" data-toggle="modal" data-target="#myModal">Add Semester
 				</button>

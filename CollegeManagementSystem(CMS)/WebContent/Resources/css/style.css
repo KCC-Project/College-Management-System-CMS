@@ -22,6 +22,13 @@ a {
   color:#ffffff !important;
 }
 
+.main-color-bg_heading{
+	
+	background-color: #87e8d4 !important;
+  border-color: #c0392b !important;
+  color:#ffffff !important;
+}
+
 /* --------------------------------------------------------------------------------------------------------- */
 
 /* ---------- Dashboard container-> (toggler), dash-info, search-field, notification, dash-profile --------- */
