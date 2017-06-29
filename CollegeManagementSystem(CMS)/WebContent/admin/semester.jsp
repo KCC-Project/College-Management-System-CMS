@@ -130,7 +130,7 @@ function load_faculty() {
 
 function load_program() {
 	var id=document.getElementById("faculty-box").value;
-	var url="../ajax";
+	var url="../aja";
 	var idSend="id="+id;
 	var aj=new XMLHttpRequest();
 	aj.open("POST", url, true);
