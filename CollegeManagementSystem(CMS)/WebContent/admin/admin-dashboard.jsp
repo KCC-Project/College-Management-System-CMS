@@ -20,15 +20,15 @@
 	href="../Resources/font-awesome/css/font-awesome.min.css">
 <link href="../Resources/ionicons/css/ionicons.min.css" rel="stylesheet">
 
-<div class="container-fluid display-table">
+<div class="container-fluid display-table ">
 
-	<div class="row display-table-row col-lg-12 ">
+	<div class="row display-table-row col-lg-12  ">
 
 		<jsp:include page="admin-sidemenu.jsp" />
 
 
 		<!-- Content Area -->
-		<div class="col-md-10 col-sm-11 col-lg-10 display-table-cell" id="content-area">
+		<div class="col-md-10 col-sm-11 col-lg-10 display-table-cell " id="content-area">
 
 			<ol class="breadcrumb">
 				<li><a href="admin-dashboard.jsp"><span
@@ -54,8 +54,8 @@
 				<!--End  of notice and message section  -->
 
 				<!--4 box start from here  -->
-				<div class="row">
-					<div class="col-lg-3 col-xs-6">
+				<div class="row ">
+					<div class="col-lg-3 col-xs-6 ">
 						<!-- small box -->
 						<div class="small-box bg-aqua">
 							<div class="inner">
@@ -122,8 +122,8 @@
 				</div>
 
 				<!-- page start-->
-				<div class="row">
-					<div class="row col-lg-7">
+				<div class="row ">
+					<div class=" col-lg-7  ">
 						<div class="col-lg-12">
 							<section class="panel notice-panel">
 								<header class="panel-heading">
@@ -289,7 +289,7 @@
 				</div>
 				<!-- =================================1st graph========================================= -->
 				<br><!-- two -->
-				<div class="row">
+			<!-- 	<div class="row">
 					<div class="row col-lg-7">
 						<div class="col-lg-12">
 							<section class="panel notice-panel">
@@ -316,7 +316,7 @@
 					
 					
 					
-				<!--  =================================2nd graph===========================================-->
+				 =================================2nd graph===========================================
 	<div class="col-lg-5 news ">
 						<div class="row">
 							<div class="col-lg-12">
@@ -333,13 +333,13 @@
 							</div>
 						</div>
 					</div>
-				<!--=========================================================================  -->
+				========================================================================= 
 					
 					
 					
 					
 				</div>
-
+ -->
 			</div>
 			<!--end row here  -->
 		</div>
