@@ -366,3 +366,83 @@ marquee {
     margin-bottom: 5px;
   
 }
+/*=========================================================================================*/
+
+
+.card {
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(63, 63, 68, 0.1);
+    background-color: #FFFFFF;
+    margin-bottom: 30px;
+}
+.card .header {
+    padding: 15px 15px 0;
+}
+
+.card .title {
+    margin: 0;
+    color: #333333;
+    font-weight: 300;
+}
+
+.card .content {
+    padding: 15px 15px 10px 15px;
+    
+}
+
+.card .footerPannel {
+    padding: 0;
+    background-color: #FFFFFF;
+    line-height: 30px;
+}
+/*
+.footerPannel {
+    background-color: #FFFFFF;
+    line-height: 20px;
+}
+.card .footerPannel .legend {
+    padding: 5px 0;
+}
+
+.card .footerPannel div {
+    display: inline-block;
+}
+
+.fa {
+    width: 18px;
+    text-align: center;
+}
+
+.text-info, .text-info:hover {
+    color: #1DC7EA !important;
+}
+.text-danger, .text-danger:hover {
+    color: #FF4A55 !important;
+}
+.text-warning, .text-warning:hover {
+    color: #FF9500 !important;
+}
+.card .footerPannel hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.footerPannel hr {
+    border-color: #DDDDDD;
+}
+
+.card .footerPannel div {
+    display: inline-block;
+}
+.card .footerPannel hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.footerPannel hr {
+    border-color: #DDDDDD;
+}
+
+.card .stats {
+    color: #a9a9a9;
+} 

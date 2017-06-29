@@ -28,7 +28,8 @@
 
 
 		<!-- Content Area -->
-		<div class="col-md-10 col-sm-11 col-lg-10 display-table-cell " id="content-area">
+		<div class="col-md-10 col-sm-11 col-lg-10 display-table-cell "
+			id="content-area">
 
 			<ol class="breadcrumb">
 				<li><a href="admin-dashboard.jsp"><span
@@ -121,7 +122,7 @@
 					<!-- ./col -->
 				</div>
 
-				<!-- page start-->
+				<br>
 				<div class="row ">
 					<div class=" col-lg-7  ">
 						<div class="col-lg-12">
@@ -288,58 +289,38 @@
 
 				</div>
 				<!-- =================================1st graph========================================= -->
-				<br><!-- two -->
-			<!-- 	<div class="row">
-					<div class="row col-lg-7">
-						<div class="col-lg-12">
-							<section class="panel notice-panel">
-								<header class="panel-heading">
-									<ul class="nav nav-pills small ">
-										<li class="pull-left notice-board-name "><a><i
-												class="fa fa-inbox"></i> Total Student Graph</a>
-										<li>
-									</ul>
-								</header>
-
-								<div class="panel-body border" >
-									<div class="tab-content">
-										<div id="general" class="tab-pane active " >
-											<div id="piechart2" style="width: 900px; height: 500px;"></div>
-										</div>
+				<div class="row ">
+					<div class="col-lg-12">
+						<!-- 1st garph -->
+						<div class="col-lg-6 ">
+							<div class="card">
+								<div class="header">
+									<h4 class="title">Email Statistics</h4>
+									<p class="category">Last Campaign Performance</p>
+								</div>
+								<div class="content border">
+									<div id="piechart1"></div>
+									<div class="footerPannel">
+									<div class="legend">
+										<i class="fa fa-circle text-info"></i> Open
+										<i class="fa fa-circle text-danger"></i> Bounce
+										<i class="fa fa-circle text-warning"></i> Unsubscribe
+									</div>
+									<hr>
+									<div class="stats">
+										<i class="fa fa-clock-o"></i> Campaign sent 2 days ago
 									</div>
 								</div>
-							</section>
-						</div>
-					</div>
-					
-					
-					
-					
-					
-				 =================================2nd graph===========================================
-	<div class="col-lg-5 news ">
-						<div class="row">
-							<div class="col-lg-12">
-
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<span class="glyphicon glyphicon-list-alt"
-											style="font-size: 15px;" aria-hidden="true"></span>&nbsp;Pass Ratio Graph
-									</div>
-									<div class="panel-body news_pannel_body">
-								 <div id="piechart1"></div> 
-									</div>
 								</div>
 							</div>
 						</div>
+						<div class="col-lg-6 border card"></div>
 					</div>
-				========================================================================= 
-					
-					
-					
-					
+
 				</div>
- -->
+
+
+				<!-- =================================================================================== -->
 			</div>
 			<!--end row here  -->
 		</div>
@@ -381,37 +362,49 @@
 
 
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Language', 'Speakers (in millions)'],
-          ['Assamese', 13], ['Bengali', 83], ['Bodo', 1.4],
-          ['Dogri', 2.3], ['Gujarati', 46], ['Hindi', 300],
-          ['Kannada', 38], ['Kashmiri', 5.5], ['Konkani', 5],
-          ['Maithili', 20], ['Malayalam', 33], ['Manipuri', 1.5],
-          ['Marathi', 72], ['Nepali', 2.9], ['Oriya', 33],
-          ['Punjabi', 29], ['Sanskrit', 0.01], ['Santhali', 6.5],
-          ['Sindhi', 2.5], ['Tamil', 61], ['Telugu', 74], ['Urdu', 52]
-        ]);
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+	google.charts.load("current", {
+		packages : [ "corechart" ]
+	});
+	google.charts.setOnLoadCallback(drawChart);
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+				[ 'Language', 'Speakers (in millions)' ], [ 'Assamese', 13 ],
+				[ 'Bengali', 83 ], [ 'Bodo', 1.4 ], [ 'Dogri', 2.3 ],
+				[ 'Gujarati', 46 ], [ 'Hindi', 300 ], [ 'Kannada', 38 ],
+				[ 'Kashmiri', 5.5 ], [ 'Konkani', 5 ], [ 'Maithili', 20 ],
+				[ 'Malayalam', 33 ], [ 'Manipuri', 1.5 ], [ 'Marathi', 72 ],
+				[ 'Nepali', 2.9 ], [ 'Oriya', 33 ], [ 'Punjabi', 29 ],
+				[ 'Sanskrit', 0.01 ], [ 'Santhali', 6.5 ], [ 'Sindhi', 2.5 ],
+				[ 'Tamil', 61 ], [ 'Telugu', 74 ], [ 'Urdu', 52 ] ]);
 
-        var options = {
-          title: 'Indian Language Use',
-          legend: 'none',
-          pieSliceText: 'label',
-          slices: {  4: {offset: 0.2},
-                    12: {offset: 0.3},
-                    14: {offset: 0.4},
-                    15: {offset: 0.5},
-          },
-        };
+		var options = {
+			title : 'Indian Language Use',
+			legend : 'none',
+			pieSliceText : 'label',
+			slices : {
+				4 : {
+					offset : 0.2
+				},
+				12 : {
+					offset : 0.3
+				},
+				14 : {
+					offset : 0.4
+				},
+				15 : {
+					offset : 0.5
+				},
+			},
+		};
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
-        chart.draw(data, options);
-      }
-    </script>
+		var chart = new google.visualization.PieChart(document
+				.getElementById('piechart2'));
+		chart.draw(data, options);
+	}
+</script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script
