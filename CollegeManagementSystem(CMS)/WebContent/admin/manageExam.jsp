@@ -113,7 +113,7 @@
 							<div class="form-group">
 								<label>Exam Type : <span class="astriek">&nbsp;*</span></label>
 								<input type="text" required class="form-control"
-									id="add_exam_type" name="add_exam_type">
+									id="add_exam_type" name="add_exam_type" placeholder="Enter Exam Type">
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -145,7 +145,7 @@
 							<div class="form-group">
 								<label>Exam Type : <span class="astriek">&nbsp;*</span></label>
 								<input type="text" required class="form-control"
-									id="add_exam_type" name="add_exam_type">
+									id="add_exam_type" name="add_exam_type" value="Regular">
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -174,7 +174,7 @@
 					<form action="#" enctype="multipart/form-data" method="Post">
 						<div class="modal-body">
 							<h3>
-								<strong>This a Regular exam.</strong> When this exam is held all
+								This a <strong>Regular</strong> exam. When this exam is held all
 								student must participate.Otherwise consequences will should be
 								handle by student him/herslef.
 							</h3>
