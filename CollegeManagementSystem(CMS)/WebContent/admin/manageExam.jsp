@@ -97,7 +97,7 @@
 						<div class="panel box box-default">
 							<div class="box-header with-border">
 								<h4 class="box-title" style="padding-left: 15px;">
-									2. First Terminal Exam
+									2. First Term
 
 									<div class="pull-right"
 										style="margin: 0px; padding: 0px; position: relative; margin-top: -6px;">
