@@ -147,7 +147,7 @@ function load_program() {
 function load_batch_year() {
 	var id=document.getElementById("program-box").value;
 	var url="../ajax_year_load";
-	var idSend="id="+id;
+	var idSend="id=10";
 	var aj=new XMLHttpRequest();
 	aj.open("POST", url, true);
 	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

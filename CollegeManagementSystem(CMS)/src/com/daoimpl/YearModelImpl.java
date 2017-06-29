@@ -51,15 +51,18 @@ public class YearModelImpl implements YearModelInterface {
 
 	// loading year from database
 	public List<YearModel> getAllRecord() {
-		List<YearModel> year = new ArrayList();
+		List<YearModel> year = new ArrayList<>();
 		try {
+			
 			conn = DatabaseConnection.connectToDatabase();
 			sql = "select * from year";
 			pst = conn.prepareStatement(sql);
 			rs = pst.executeQuery();
+		
 			while(rs.next()){
+			
 				YearModel yearModel = new YearModel();
-				
+				System.out.println("year is db="+rs.getInt("year"));
 				yearModel.setYear(rs.getInt("year"));
 				yearModel.setYear_id(rs.getInt("year_id"));
 				

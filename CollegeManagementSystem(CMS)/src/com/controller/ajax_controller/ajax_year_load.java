@@ -20,21 +20,16 @@ import com.serviceimpl.YearServiceImpl;
 @WebServlet("/ajax_year_load")
 public class ajax_year_load extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ajax_year_load() {
-        super();
-    }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
+ 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int program_id = Integer.parseInt(request.getParameter("id"));
 		
+		System.out.println("program id="+program_id);
 		YearServiceInterface service = new YearServiceImpl();
 		List<YearModel> year = service.getAllRecord();
-		
+		System.out.println("value in year="+year);
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		
