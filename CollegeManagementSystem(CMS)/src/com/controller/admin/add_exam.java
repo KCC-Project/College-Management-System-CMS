@@ -17,16 +17,26 @@ public class add_exam extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String examTypeName=request.getParameter("add_exam_type");
-		System.out.println("exam type name is="+examTypeName);
+		if (examTypeName.length()<3) {
+			response.sendRedirect("admin/manageExam.jsp?error=examNameLessThan3");
+		}else{
+		String summary=null;
+		try {
+			 summary=request.getParameter("summary");
+		} catch (Exception e) {
+			System.err.println("No summary");
+		}
+	
 		ExamModelServiceInterface modelInterface= new ExamModelServiceImpl();
 		if (examTypeName.equalsIgnoreCase("")) {
 			
-			response.sendRedirect("admin/manageExam.jsp");
+			response.sendRedirect("admin/manageExam.jsp?error=examNameNull");
 		}else{
-			System.out.println("saved exam="+modelInterface.saveExamType(examTypeName));
+			System.out.println("saved exam="+modelInterface.saveExamType(examTypeName,summary));
 			response.sendRedirect("admin/manageExam.jsp");
 		}
 		
+	}
 	}
 
 }

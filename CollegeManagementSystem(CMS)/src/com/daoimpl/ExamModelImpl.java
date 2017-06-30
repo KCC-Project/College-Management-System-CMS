@@ -16,13 +16,14 @@ public class ExamModelImpl implements ExamModelInterface {
 	private PreparedStatement pst;
 	private ResultSet rs;
 
-	public boolean saveExamType(String examName) {
+	public boolean saveExamType(String examName,String summary) {
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "insert into exam_type(type_name) values(?)";
+			sql = "insert into exam_type(type_name,summary) values(?,?)";
 			pst = conn.prepareStatement(sql);
 			int col = 1;
 			pst.setString(1, examName);
+			pst.setString(2, summary);
 			int count = pst.executeUpdate();
 			if (count > 0) {
 				return true;
@@ -46,6 +47,7 @@ public class ExamModelImpl implements ExamModelInterface {
 				ExamModel exam = new ExamModel();
 				exam.setExamId(rs.getInt("exam_type_id"));
 				exam.setExamTypeName(rs.getString("type_name"));
+				exam.setSummary(rs.getString("summary"));
 				examModel.add(exam);
 			}
 		} catch (Exception e) {

@@ -69,6 +69,11 @@
 					int i = 0;
 					for (ExamModel model : list) {
 						i++;
+						StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
+						StringBuffer viewExamDetail = new StringBuffer(stringBuffer.substring(0, 3));
+						StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
+						viewExamDetail.append("_term");
+						deleteExamType.append("_exam");
 				%>
 				<!-- Regular exam -->
 				<div class="box-body " style="margin-bottom: 4px;">
@@ -77,7 +82,7 @@
 						<div class="panel box box-default">
 							<div class="box-header with-border">
 								<h4 class="box-title" style="padding-left: 15px;">
-									
+
 									<%=i%>.<%=model.getExamTypeName()%>
 
 									<div class="pull-right"
@@ -89,13 +94,13 @@
 											class="fa fa-sitemap"></i> Faculty &nbsp; <span class="badge">
 												1 </span>
 										</span> <a class="btn-sm btn btn-default" title="View Exam Details"
-											data-toggle="modal" data-target=#View_Exam_Details><i
+											data-toggle="modal" data-target=<%="#" + viewExamDetail%>><i
 											class="fa fa-eye"></i></a> <a class="btn-sm btn btn-default"
-											data-toggle="modal" data-target=#update_exam
+											data-toggle="modal" data-target=<%="#" + model.getExamId()%>
 											title="Edit Course Details"><i
 											class="fa fa-pencil-square-o"></i></a> <a
 											class="btn-sm btn btn-default" data-toggle="modal"
-											data-target=#delete_Exam_Details title="Delete"
+											data-target=<%="#" + deleteExamType%> title="Delete"
 											data-method="post"><i class="fa fa-trash-o"></i></a>
 									</div>
 								</h4>
@@ -133,6 +138,15 @@
 									id="add_exam_type" name="add_exam_type"
 									placeholder="Enter Exam Type">
 							</div>
+							<!--=================summary form================  -->
+							<div class="form-group">
+								<label class="sr-only ">Article</label>
+								<textarea class="form-control summernote" placeholder="Summary"
+									name="summary">
+                      
+                      </textarea>
+							</div>
+							<!-- ============================================== -->
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
@@ -147,7 +161,17 @@
 
 		<!--=========================================================================================  -->
 		<!-- Modal -->
-		<div id="update_exam" class="modal fade" role="dialog">
+		<%
+			for (ExamModel model : list) {
+				i++;
+				StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
+				StringBuffer viewExamDetail = new StringBuffer(stringBuffer.substring(0, 3));
+				StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
+				viewExamDetail.append("_term");
+				deleteExamType.append("_exam");
+		%>
+
+		<div id="<%=model.getExamId()%>" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
@@ -162,10 +186,12 @@
 							<div class="form-group">
 								<label>Exam Type : <span class="astriek">&nbsp;*</span></label>
 								<input type="text" required class="form-control"
-									id="update_exam_type" name="update_exam_type" value="Regular">
+									id="update_exam_type" name="update_exam_type"
+									value="<%=model.getExamTypeName()%>">
 							</div>
 						</div>
 						<div class="modal-footer">
+							<input type=hidden name="id" value="<%=model.getExamId()%>">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit" class="btn btn-success">Submit</button>
@@ -179,7 +205,8 @@
 		<!--=========================================================================================  -->
 
 		<!-- Modal -->
-		<div id="View_Exam_Details" class="modal fade" role="dialog">
+
+		<div id="<%=viewExamDetail%>" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
@@ -188,12 +215,11 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Summary</h4>
 					</div>
-					<form action="#" enctype="multipart/form-data" method="Post">
+					<form action="#" method="Post">
 						<div class="modal-body">
+
 							<h3>
-								This a <strong>Regular</strong> exam. When this exam is held all
-								student must participate.Otherwise consequences will should be
-								handle by student him/herslef.
+								<%=model.getSummary()%>
 							</h3>
 						</div>
 						<div class="modal-footer">
@@ -210,27 +236,33 @@
 
 
 		<!-- Modal -->
-		<div id="delete_Exam_Details" class="modal fade" role="dialog">
+
+		<div id="<%=deleteExamType%>" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
 				<div class="modal-content">
-					<form action="#" method="Post">
+					<form action="../deleteExam" method="Post">
 						<div class="modal-body">
-							<h3>Are you sure you want to delete this item?</h3>
+							<h3>
+								Are you sure you want to delete this item?
+								<%=model.getExamTypeName()%></h3>
 						</div>
 						<div class="modal-footer">
+							<input type=hidden  name="deleteId" value="<%=model.getExamId()%>">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-success"
-								data-dismiss="modal">Submit</button>
+							<button type="submit"  class="btn btn-success"
+								>Delete <%=model.getExamId()%></button>
 						</div>
 					</form>
 				</div>
 
 			</div>
 		</div>
-
+		<%
+			}
+		%>
 		<!--=========================================================================================  -->
 
 
@@ -238,79 +270,19 @@
 
 	</div>
 </div>
-
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Add Semester</h4>
-			</div>
-			<form action="../Semester_Add_Controller"
-				enctype="multipart/form-data" method="Post">
-				<div class="modal-body">
-
-					<div class="form-group">
-						<label>Faculty: <span class="astriek">*</span></label> <select
-							required class="form-control" id="faculty-box" name="faculty_id"
-							onChange="load_program();">
-
-						</select>
-					</div>
-					<div class="form-group">
-						<label>Programme: <span class="astriek">*</span></label> <select
-							required class="form-control" id="program-box" name="program_id"
-							onChange="load_batch_year();">
-							<option value="" disabled selected>Select Programme</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label>Batch: <span class="astriek">*</span></label> <select
-							required class="form-control" name="batch_id" id="batch-box">
-							<option value="" disabled selected>Select Batch</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label>Semester no.: <span class="astriek">*</span></label> <input
-							type="number" id="sem-no" name="semester_no" required
-							class="form-control" placeholder="Semester number">
-					</div>
-					<div class="form-group">
-						<label>Semester Start Date: </label> <input type="date"
-							id="start_date" name="start_date" class="form-control"
-							placeholder="mm/dd/yyyy">
-					</div>
-					<div class="form-group">
-						<label>Semester End Date: </label> <input type="date"
-							id="end_date" name="end_date" class="form-control"
-							placeholder="mm/dd/yyyy">
-					</div>
-
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-success">Submit</button>
-				</div>
-			</form>
-		</div>
-
-	</div>
-</div>
-
-
-
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../Resources/js/jquery-3.2.1.min.js"></script> <!-- Muzi Budaa...yo chaii halna pardaina -->
+<script src="../Resources/js/jquery-3.2.1.min.js"></script>
+<!-- Muzi Budaa...yo chaii halna pardaina -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../Resources/js/bootstrap.min.js"></script>
 <script src="../Resources/js/default.js"></script>
+<script src="../Resources/plugins/summernote/dist/summernote.min.js"></script>
+<script type="text/javascript">
+	$('.summernote').summernote({
+		height : 200
+
+	});
+</script>
 </body>
 </html>
 

@@ -10,8 +10,8 @@ import com.service.ExamModelServiceInterface;
 public class ExamModelServiceImpl implements ExamModelServiceInterface {
 	ExamModelInterface examModel = new ExamModelImpl();
 
-	public boolean saveExamType(String examName) {
-		return examModel.saveExamType(examName);
+	public boolean saveExamType(String examName ,String summary) {
+		return examModel.saveExamType(examName,summary);
 	}
 
 	public List<ExamModel> getAllExamType() {
