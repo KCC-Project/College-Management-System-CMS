@@ -18,7 +18,7 @@ public class add_exam extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String examTypeName=request.getParameter("add_exam_type");
 		if (examTypeName.length()<3) {
-			response.sendRedirect("admin/manageExam.jsp?error=examNameLessThan3");
+			response.sendRedirect("admin/manageExamType.jsp?error=examNameLessThan3");
 		}else{
 		String summary=null;
 		try {
@@ -30,10 +30,10 @@ public class add_exam extends HttpServlet {
 		ExamModelServiceInterface modelInterface= new ExamModelServiceImpl();
 		if (examTypeName.equalsIgnoreCase("")) {
 			
-			response.sendRedirect("admin/manageExam.jsp?error=examNameNull");
+			response.sendRedirect("admin/manageExamType.jsp?error=examNameNull");
 		}else{
 			System.out.println("saved exam="+modelInterface.saveExamType(examTypeName,summary));
-			response.sendRedirect("admin/manageExam.jsp");
+			response.sendRedirect("admin/manageExamType.jsp");
 		}
 		
 	}

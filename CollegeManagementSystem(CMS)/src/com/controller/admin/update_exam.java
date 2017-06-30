@@ -18,12 +18,12 @@ public class update_exam extends HttpServlet {
 		String examName=request.getParameter("update_exam_type");
 		String idString = request.getParameter("id");
 		if (examName.equalsIgnoreCase("") || idString.equalsIgnoreCase("id")) {
-			response.sendRedirect("admin/manageExam.jsp");
+			response.sendRedirect("admin/manageExamType.jsp");
 		}else{
 			int id= Integer.parseInt(idString);
 		ExamModelServiceInterface examModel= new ExamModelServiceImpl();
 		System.out.println("exam type update="+examModel.updateExamType(examName, id));
-		response.sendRedirect("admin/manageExam.jsp");
+		response.sendRedirect("admin/manageExamType.jsp");
 		}
 	}
 

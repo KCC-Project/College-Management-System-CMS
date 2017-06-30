@@ -26,11 +26,11 @@ public class deleteExam extends HttpServlet {
 		String deleteExamId = request.getParameter("deleteId");
 		ExamModelServiceInterface interfaceExam = new ExamModelServiceImpl();
 		if (deleteExamId.equalsIgnoreCase("")) {
-			response.sendRedirect("admin/manageExam.jsp?error=deletingexam");
+			response.sendRedirect("admin/manageExamType.jsp?error=deletingexam");
 		} else {
 			int id = Integer.parseInt(deleteExamId);
 			System.out.println("Exam deleted=" + interfaceExam.deleteExamType(id));
-			response.sendRedirect("admin/manageExam.jsp");
+			response.sendRedirect("admin/manageExamType.jsp");
 		}
 	}
 	}

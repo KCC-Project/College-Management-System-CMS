@@ -26,4 +26,9 @@ public class ExamModelServiceImpl implements ExamModelServiceInterface {
 		return examModel.deleteExamType(id);
 	}
 
+	@Override
+	public String getSelectedExam(int id) {
+		return examModel.getSelectedExam(id);
+	}
+
 }

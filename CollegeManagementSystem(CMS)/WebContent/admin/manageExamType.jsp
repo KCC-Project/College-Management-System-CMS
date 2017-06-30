@@ -55,7 +55,7 @@
 						<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
 							<span class="hidden-xs"
 								style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
-								class="fa fa-graduation-cap"></i> Manage Current Active Exam</span> <span
+								class="fa fa-graduation-cap"></i> Manage Current Active Exam Type</span> <span
 								class="visible-xs"
 								style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
 								class="fa fa-graduation-cap"></i> Manage Exam</span>
@@ -254,7 +254,7 @@
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit"  class="btn btn-success"
-								>Delete</button>
+								>Delete<%=model.getExamId() %></button>
 						</div>
 					</form>
 				</div>

@@ -30,6 +30,14 @@ public class ExamModelImpl implements ExamModelInterface {
 			}
 		} catch (Exception e) {
 			System.out.println("Problem in saving exam" + e);
+		}finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return false;
 	}
@@ -52,6 +60,14 @@ public class ExamModelImpl implements ExamModelInterface {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+		}finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return examModel;
 	}
@@ -71,6 +87,14 @@ public class ExamModelImpl implements ExamModelInterface {
 			}
 		} catch (Exception e) {
 			System.out.println("update problem =" + e);
+		}finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
 		}
 		return false;
 	}
@@ -98,6 +122,33 @@ public class ExamModelImpl implements ExamModelInterface {
 		}
 		return result;
 
+	}
+
+	@Override
+	public String getSelectedExam(int id) {
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "select * from exam_type where exam_type_id=?";
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			System.out.println("it is ="+id);
+			while (rs.next()) {
+				return rs.getString("type_name");
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return null;
 	}
 
 }

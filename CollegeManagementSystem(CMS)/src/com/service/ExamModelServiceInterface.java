@@ -9,4 +9,5 @@ public interface ExamModelServiceInterface {
 	List<ExamModel> getAllExamType();
 	boolean updateExamType(String examName,int id);
 	int deleteExamType(int id);
+	String getSelectedExam(int id);
 }
