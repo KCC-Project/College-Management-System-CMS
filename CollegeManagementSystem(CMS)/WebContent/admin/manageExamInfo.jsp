@@ -99,8 +99,8 @@
 										 StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
 											StringBuffer updateExamDetail = new StringBuffer(stringBuffer.substring(0, 3));
 											StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
-											updateExamDetail.append("_term");
-											deleteExamType.append("_exam");
+											updateExamDetail.append("_termExam");
+											deleteExamType.append("_examExam");
 											System.out.println("id form jsp="+model.getExamId());
 									%>
 										<tr>
@@ -234,8 +234,8 @@
 				 StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
 					StringBuffer updateExamDetail = new StringBuffer(stringBuffer.substring(0, 3));
 					StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
-					updateExamDetail.append("_term");
-					deleteExamType.append("_exam");
+					updateExamDetail.append("_termExam");
+					deleteExamType.append("_examExam");
 					System.out.println("id form jsp="+model.getExamId());
 		%>
 

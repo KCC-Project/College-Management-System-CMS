@@ -30,7 +30,8 @@ public class add_exam_info extends HttpServlet {
 		String examStatus=request.getParameter("status");
 		
 		if (subject.equalsIgnoreCase("")||examTypeId.equalsIgnoreCase("")||examStartdate.equalsIgnoreCase("")||examenddate.equalsIgnoreCase("")||examStartTime.equalsIgnoreCase("")||examEndTime.equalsIgnoreCase("")||examStatus.equalsIgnoreCase("")) {
-			response.sendRedirect("manageExamInfo.jsp?error=addExamInfo");
+			response.sendRedirect("admin/manageExamInfo.jsp?error=addExamInfo");
+			
 		}else{
 			int subId=Integer.parseInt(subject);
 			int examId=Integer.parseInt(examTypeId);
@@ -45,7 +46,13 @@ public class add_exam_info extends HttpServlet {
 			model.setPassmarks(Integer.parseInt(examPassmarks));
 			model.setStatus(Integer.parseInt(examStatus));
 			ExamInfoModelServiceInterface intface= new ExamInfoModelServiceImpl();
-			intface.saveExamInfo(model);
+			boolean status= intface.saveExamInfo(model);
+			if (status==true) {
+				response.sendRedirect("admin/manageExamInfo.jsp?error=sucessfullEntryAddExamInfo");
+			}else{
+				response.sendRedirect("admin/manageExamInfo.jsp?error=addExamInfo");
+				
+			}
 		}
 	}
 
