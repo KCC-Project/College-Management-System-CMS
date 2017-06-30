@@ -1,7 +1,7 @@
 package com.daoimpl;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -30,9 +30,9 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 			pst.setInt(col++, model.getExamTypeId());
 			
 
-			Date exam_start_date = (Date) model.getExamStartDate();
+			Date exam_start_date = model.getExamStartDate();
 			java.sql.Date sem_start_date_sql = new java.sql.Date(exam_start_date.getTime()); // converting
-			Date exam_end_date = (Date) model.getExamEndDate();
+			Date exam_end_date =  model.getExamEndDate();
 			java.sql.Date sem_end_date_sql = new java.sql.Date(exam_end_date.getTime());
 			
 			
@@ -114,9 +114,9 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 			pst.setInt(col++, model.getSubjectId());
 			pst.setInt(col++, model.getExamTypeId());
 			
-			Date exam_start_date = (Date) model.getExamStartDate();
+			Date exam_start_date =  model.getExamStartDate();
 			java.sql.Date sem_start_date_sql = new java.sql.Date(exam_start_date.getTime()); // converting
-			Date exam_end_date = (Date) model.getExamEndDate();
+			Date exam_end_date =  model.getExamEndDate();
 			java.sql.Date sem_end_date_sql = new java.sql.Date(exam_end_date.getTime());
 			
 			pst.setDate(col++,sem_start_date_sql);

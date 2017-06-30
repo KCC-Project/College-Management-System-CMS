@@ -37,8 +37,8 @@ public class add_exam_info extends HttpServlet {
 			ExamInfoModel model= new ExamInfoModel();
 			model.setSubjectId(subId);
 			model.setExamTypeId(examId);
-			model.setExamStartDate(new DateUtil().convertToDate(examStartdate));
-			model.setExamEndDate(new DateUtil().convertToDate(examenddate));
+			model.setExamStartDate(DateUtil.convertToDate(examStartdate));
+			model.setExamEndDate(DateUtil.convertToDate(examenddate));
 			model.setExamStartTime(examStartTime);
 			model.setExamEndTime(examEndTime);
 			model.setFullmarks(Integer.parseInt(examFullmarks));
