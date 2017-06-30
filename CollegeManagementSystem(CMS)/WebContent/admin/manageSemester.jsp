@@ -236,7 +236,8 @@
 					</div>
 					<form action="#" method="Post">
 						<div class="modal-body">
-							<% List<SemesterModel> semModel = semesterServiceInterface.loadByProgramId(program_id); 
+							<% 
+							List<SemesterModel> semModel = semesterServiceInterface.loadByProgramId(program_id); 
 							for (SemesterModel semList : semModel) {
 								int id = semList.getSemester_id();
 								int program_id_i = semList.getProgram_id();
