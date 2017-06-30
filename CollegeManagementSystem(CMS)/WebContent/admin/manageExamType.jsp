@@ -93,12 +93,12 @@
 										</span> <span class="btn btn-sm btn-warning  hidden-xs"> <i
 											class="fa fa-sitemap"></i> Faculty &nbsp; <span class="badge">
 												1 </span>
-										</span> <a class="btn-sm btn btn-default" title="View Exam Details"
+										</span> <a class="btn-sm btn btn-default" title="View Exam Details" onclick="setId(<%=model.getExamId()%>);"
 											data-toggle="modal" data-target=<%="#" + viewExamDetail%>><i
-											class="fa fa-eye"></i></a> <a class="btn-sm btn btn-default"
+											class="fa fa-eye" ></i></a> <a class="btn-sm btn btn-default"
 											data-toggle="modal" data-target=<%="#" + model.getExamId()%>
 											title="Edit Course Details"><i
-											class="fa fa-pencil-square-o"></i></a> <a
+											class="fa fa-pencil-square-o"></i></a> <a href="#?id=<%=model.getExamId() %>" onclick="setId(<%=model.getExamId()%>);"
 											class="btn-sm btn btn-default" data-toggle="modal"
 											data-target=<%="#" + deleteExamType%> title="Delete"
 											data-method="post"><i class="fa fa-trash-o"></i></a>
@@ -206,7 +206,7 @@
 
 		<!-- Modal -->
 
-		<div id="<%=viewExamDetail%>" class="modal fade" role="dialog">
+		<div id="<%=viewExamDetail %>" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
@@ -250,7 +250,7 @@
 								<strong"><%=model.getExamTypeName()%></strong></h3>
 						</div>
 						<div class="modal-footer">
-							<input type=hidden  name="deleteId" value="<%=model.getExamId()%>">
+							<input type=hidden  name="deleteId" id="deleteId12">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit"  class="btn btn-success"
@@ -283,6 +283,11 @@
 		height : 200
 
 	});
+	
+	function setId(id) {
+		document.getElementById("deleteId12").value=id;
+
+	}
 </script>
 </body>
 </html>

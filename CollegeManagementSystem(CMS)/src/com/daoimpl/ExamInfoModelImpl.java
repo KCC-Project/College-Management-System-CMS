@@ -175,4 +175,53 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 		return result;
 	}
 
+	@Override
+	public ExamInfoModel getSelectedInfo(int id) {
+
+		ExamInfoModel model= new ExamInfoModel();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "select * from exam  where exam_id=?";
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				
+				model.setSubjectId(rs.getInt("subject_id"));
+				model.setExamTypeId(rs.getInt("exam_type_id"));
+				model.setExamStartDate(rs.getDate("exam_date"));
+				model.setExamEndDate(rs.getDate("exam_end_date"));
+				model.setExamStartTime(rs.getString("exam_starttime"));
+				model.setExamEndTime(rs.getString("exam_endtime"));
+				model.setFullmarks(rs.getInt("full_marks"));
+				model.setPassmarks(rs.getInt("pass_marks"));
+				model.setStatus(rs.getInt("status"));
+				model.setExamId(rs.getInt("exam_id"));
+			
+				ExamModelServiceInterface examModelType = new ExamModelServiceImpl();
+				model.setExamTypeName(examModelType.getSelectedExam(rs.getInt("exam_type_id")));
+				
+				SubjectModelServiceInterface inter= new SubjectModelServiceImpl();
+				model.setSubjectName(inter.getSelectedSubject(rs.getInt("subject_id")).getSubjectName());
+				
+			
+				
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return model;
+	
+	}
+
 }

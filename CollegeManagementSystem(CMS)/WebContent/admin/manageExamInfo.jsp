@@ -42,7 +42,7 @@
 				<div style="position: relative;">
 					<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
 
-						<button type="button" class="btn btn-info pull-right" onclick="load_exam_type();"
+						<button type="button" class="btn btn-info pull-right" id="qqq"
 							data-toggle="modal" data-target=#add_exam_modal-info>Add
 							Exam info</button>
 
@@ -66,7 +66,7 @@
 					</div>
 				</div>
 
-				
+
 				<!-- Regular exam -->
 				<div class="box-body " style="margin-bottom: 4px;">
 					<div id="accordion" class="box-group">
@@ -87,47 +87,55 @@
 											<td>Full Marks</td>
 											<td>Pass Marks</td>
 											<td>Status</td>
-										
+
 										</tr>
 									</thead>
 									<tbody>
-									<% ExamInfoModelServiceInterface interfaceModel= new ExamInfoModelServiceImpl();
-									List<ExamInfoModel> list=interfaceModel.getAllExamInfo();
-									int i=0;
-									for(ExamInfoModel model:list){
-										 i++;
-										 StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
-											StringBuffer updateExamDetail = new StringBuffer(stringBuffer.substring(0, 3));
-											StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
-											updateExamDetail.append("_termExam");
-											deleteExamType.append("_examExam");
-											System.out.println("id form jsp="+model.getExamId());
-									%>
+										<%
+											ExamInfoModelServiceInterface interfaceModel = new ExamInfoModelServiceImpl();
+											List<ExamInfoModel> list = interfaceModel.getAllExamInfo();
+											int i = 0;
+											for (ExamInfoModel model : list) {
+												i++;
+												StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
+												StringBuffer updateExamDetail = new StringBuffer(stringBuffer.substring(0, 3));
+												StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
+												updateExamDetail.append("_termExam");
+												deleteExamType.append("_examExam");
+												System.out.println("id form jsp=" + model.getExamId());
+										%>
 										<tr>
 											<td><%=i%>.</td>
-											<td><%=model.getSubjectName() %></td>
-											<td><%=model.getExamTypeName() %></td>
-											<td><%=model.getExamStartDate() %></td>
-											<td><%=model.getExamEndDate() %></td>
-											<td><%=model.getExamStartTime() %></td>
-											<td><%=model.getExamEndTime() %></td>
-											<td><%=model.getFullmarks() %></td>
-											<td><%=model.getPassmarks() %></td>
-											<td><%=model.getStatus() %></td>
-											<td> 
-											<span class="btn btn-sm btn-info  hidden-xs"> <i
-											class="fa fa-users"></i> BE-computer &nbsp; <span class="badge">
-												5 </span>
-										</span>
-											<a class="btn-sm btn btn-default" href="#?id=<%=model.getExamId() %>"
-											data-toggle="modal" data-target=<%="#" + updateExamDetail%>
-											title="Edit Course Details"><i
-											class="fa fa-pencil-square-o"></i></a> <a href="#?id=<%=model.getExamId() %>"
-											class="btn-sm btn btn-default" data-toggle="modal"
-											data-target=<%="#" + deleteExamType%> title="Delete"
-											data-method="post"><i class="fa fa-trash-o"></i></a></td>
+											<td><%=model.getSubjectName()%></td>
+											<td><%=model.getExamTypeName()%></td>
+											<td><%=model.getExamStartDate()%></td>
+											<td><%=model.getExamEndDate()%></td>
+											<td><%=model.getExamStartTime()%></td>
+											<td><%=model.getExamEndTime()%></td>
+											<td><%=model.getFullmarks()%></td>
+											<td><%=model.getPassmarks()%></td>
+											<td><%=model.getStatus()%></td>
+
+											<td><span class="btn btn-sm btn-info  hidden-xs">
+													<i class="fa fa-users"></i> BE-computer &nbsp; <span
+													class="badge"> 5 </span>
+											</span> <input type="hidden" id="idss"
+												value="<%=model.getExamId()%>"> <a
+												class="btn-sm btn btn-default"
+												href="#?id=<%=model.getExamId()%>" data-toggle="modal"
+												data-target=<%="#" + updateExamDetail%> onclick="loadParticulardata(<%=model.getExamId()%>);"
+												title="Edit Course Details"><i
+													class="fa fa-pencil-square-o" id="qqq"></i></a> <a
+												value="<%=model.getExamId()%>" id="deletedID"
+												href="#?id=<%=model.getExamId()%>"
+												onclick="setId(<%=model.getExamId()%>);"
+												class="btn-sm btn btn-default" data-toggle="modal"
+												data-target=<%="#" + deleteExamType%> title="Delete"
+												data-method="post"><i class="fa fa-trash-o"></i></a></td>
 										</tr>
-										<%} %>
+										<%
+											}
+										%>
 									</tbody>
 								</table>
 							</div>
@@ -135,11 +143,11 @@
 					</div>
 				</div>
 
-				
+
 				<!-- ======================end of exam type============= -->
 
 
-		<!--=========================================================================================  -->
+				<!--=========================================================================================  -->
 
 			</div>
 
@@ -227,20 +235,20 @@
 		</div>
 
 
-<!-- ==================================================================================== -->
-	<%
+		<!-- ==================================================================================== -->
+		<%
 			for (ExamInfoModel model : list) {
 				i++;
-				 StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
-					StringBuffer updateExamDetail = new StringBuffer(stringBuffer.substring(0, 3));
-					StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
-					
-					updateExamDetail.append("_termExam");
-					deleteExamType.append("_examExam");
-					System.out.println("id form jsp="+model.getExamId());
+				StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
+				StringBuffer updateExamDetail = new StringBuffer(stringBuffer.substring(0, 3));
+				StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
+
+				updateExamDetail.append("_termExam");
+				deleteExamType.append("_examExam");
+				System.out.println("id form jsp=" + model.getExamId());
 		%>
 
-<div id="<%=updateExamDetail %>" class="modal fade" role="dialog">
+		<div id="<%=updateExamDetail%>" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
@@ -249,8 +257,8 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Update Exam Information</h4>
 					</div>
-					<form action="../add_exam" method="Post">
-						<div class="modal-body">
+					<form action="../update_exam_info" method="Post">
+						<div class="modal-body" >
 
 							<div class="form-group">
 								<label>Subject: <span class="astriek">*</span></label> <select
@@ -260,7 +268,7 @@
 							<div class="form-group">
 								<label>Exam Type: <span class="astriek">*</span></label> <select
 									required class="form-control" id="examType-box"
-									name="examType_id"">
+									name="examType_id">
 									<option value="" disabled selected>Select Exam Type</option>
 								</select>
 							</div>
@@ -269,36 +277,36 @@
 							<div class="form-group">
 								<label>Exam Date: </label> <input type="date"
 									id="exam_start_date" name="exam_start_date"
-									class="form-control" placeholder="yyyy/mm/dd">
+									class="form-control" value="<%=model.getExamStartDate()%>">
 							</div>
 							<div class="form-group">
 								<label>Exam End Date: </label> <input type="date"
 									id="exam_end_date" name="exam_end_date" class="form-control"
-									placeholder="yyyy/mm/dd">
+									value="<%=model.getExamEndDate()%>">
 							</div>
 
 
 							<div class="form-group">
 								<label>Exam Start Time: </label> <input type="time"
 									id="exam_start_time" name="exam_start_time"
-									class="form-control" placeholder="yyyy/mm/dd">
+									class="form-control" value="<%=model.getExamStartTime()%>">
 							</div>
 							<div class="form-group">
 								<label>Exam End Time: </label> <input type="time"
 									id="exam_end_time" name="exam_end_time" class="form-control"
-									placeholder="yyyy/mm/dd">
+									value="<%=model.getExamEndTime()%>">
 							</div>
 
 
 							<div class="form-group">
 								<label>Full Marks: </label> <input type="number"
 									id="exam_fullMarks" name="exam_fullMarks" class="form-control"
-									placeholder="Fullmarks">
+									value="<%=model.getFullmarks()%>">
 							</div>
 							<div class="form-group">
 								<label>Pass Marks: </label> <input type="number"
 									id="exam_passMarks" name="exam_passMarks" class="form-control"
-									placeholder="Passmarks">
+									value="<%=model.getPassmarks()%>">
 							</div>
 
 							<div class="form-group">
@@ -320,8 +328,8 @@
 		</div>
 
 		<!--=========================================================================================  -->
-	
-	
+
+
 
 		<div id="<%=deleteExamType%>" class="modal fade" role="dialog">
 			<div class="modal-dialog">
@@ -330,17 +338,15 @@
 				<div class="modal-content">
 					<form action="../delete_Exam_info" method="Post">
 						<div class="modal-body">
-							<h3 >
-								Are you sure you want to delete this item?
-								<br>
-								<strong"><%=model.getExamTypeName()%></strong></h3>
+							<h3>
+								Are you sure you want to delete this item? <br> <strong"><%=model.getExamTypeName()%></strong>
+							</h3>
 						</div>
 						<div class="modal-footer">
-							<input type=hidden  name="deleteId" value="<%=model.getExamId()%>">
+							<input type=hidden name="deleteId" id="deleteId12">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit"  class="btn btn-success"
-								>Delete<%=model.getExamId() %></button>
+							<button type="submit" class="btn btn-success">Delete</button>
 						</div>
 					</form>
 				</div>
@@ -364,39 +370,73 @@
 <script src="../Resources/plugins/summernote/dist/summernote.min.js"></script>
 
 <script>
-
-window.addEventListener('load', function() {load_faculty(); }, false)
-
-function load_faculty() {
-	var id=document.getElementById("subject-box").value;
-	var url="../ajax_subject_load";
-	var aj=new XMLHttpRequest();
-	aj.open("POST", url, true);
-	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	aj.onreadystatechange=function(){
-		if (aj.readyState==4&&aj.status==200) {
-			var return_data=aj.responseText;
-			document.getElementById("subject-box").innerHTML=return_data;
+	/* window.addEventListener('load', function() {load_faculty(); load_exam_type();}, false)  */
+	document.getElementById("qqq").addEventListener('click', function() {
+		load_faculty();
+		load_exam_type();
+	}, false)
+	function load_faculty() {
+		
+		var id = document.getElementById("subject-box").value;
+		var url = "../ajax_subject_load";
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+			
+				var return_data = aj.responseText;
+				document.getElementById("subject-box").innerHTML = return_data;
+			}
 		}
+		aj.send(id);
 	}
-	aj.send(id);
-}
 
+	function load_exam_type() {
+		var id = document.getElementById("examType-box").value;
+		var url = "../ajax_examType_load";
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var return_data = aj.responseText;
 
-function load_exam_type(){
-	var id=document.getElementById("examType-box").value;
-	var url="../ajax_examType_load";
-	var aj=new XMLHttpRequest();
-	aj.open("POST", url, true);
-	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	aj.onreadystatechange=function(){
-		if (aj.readyState==4&&aj.status==200) {
-			var return_data=aj.responseText;
-			document.getElementById("examType-box").innerHTML=return_data;
+				document.getElementById("examType-box").innerHTML = return_data;
+			}
 		}
+		aj.send(id);
 	}
-	aj.send(id);
-}
+
+	function setId(id) {
+		alert(" delete id value is=" + id);
+		document.getElementById("deleteId12").value=id;
+	}
+	
+	function loadParticulardata(id) {
+		
+		var url = "../ajax_selected_exam_info";
+		var sendID="id="+id;
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+			
+				var data = aj.responseText;
+				
+				document.getElementById("subject-box").innerHTML = return_data;
+			}
+		}
+		aj.send(sendID);
+	}
+	
 </script>
 
 

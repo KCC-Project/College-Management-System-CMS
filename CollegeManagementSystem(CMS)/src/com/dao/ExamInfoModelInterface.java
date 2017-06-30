@@ -13,4 +13,5 @@ public interface ExamInfoModelInterface {
 	boolean updateExamInfo(ExamInfoModel model);
 
 	int deleteExamInfo(int id);
+	ExamInfoModel getSelectedInfo(int id);
 }
