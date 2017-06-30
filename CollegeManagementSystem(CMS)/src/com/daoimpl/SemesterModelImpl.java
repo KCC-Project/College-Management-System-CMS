@@ -3,6 +3,7 @@ package com.daoimpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.List;
 
 import com.dao.SemesterModelInterface;
@@ -23,6 +24,10 @@ public class SemesterModelImpl implements SemesterModelInterface {
 		int semester_no = semesterModel.getSemester_no();
 		int program_id = semesterModel.getProgram_id();
 		int batch_year = semesterModel.getBatch_year();
+		Date sem_start_date = semesterModel.getStart_date();
+		java.sql.Date sem_start_date_sql = new java.sql.Date(sem_start_date.getTime()); // converting
+		Date sem_end_date = semesterModel.getEnd_date();
+		java.sql.Date sem_end_date_sql = new java.sql.Date(sem_end_date.getTime()); //converting
 		int status = semesterModel.getStatus();
 		
 	
@@ -33,14 +38,16 @@ public class SemesterModelImpl implements SemesterModelInterface {
 			
 			else {
 				conn = DatabaseConnection.connectToDatabase();
-				sql = "insert into semester (semester_no,program_id,batch_year,status" 
-				+ "values(?,?,?,?)";
+				sql = "insert into semester (semester_no,program_id,batch_year_id,sem_start_date,sem_end_date,status) "
+						+ "values(?,?,?,?,?,?)";
 				pst = conn.prepareStatement(sql);
 				int col = 1;
 
 				pst.setInt(col++, semester_no);
 				pst.setInt(col++, program_id);
 				pst.setInt(col++, batch_year);
+				pst.setDate(col++, sem_start_date_sql);
+				pst.setDate(col++, sem_end_date_sql);
 				pst.setInt(col++, status);
 				
 				int count = pst.executeUpdate();
