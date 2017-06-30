@@ -234,6 +234,7 @@
 				 StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
 					StringBuffer updateExamDetail = new StringBuffer(stringBuffer.substring(0, 3));
 					StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
+					
 					updateExamDetail.append("_termExam");
 					deleteExamType.append("_examExam");
 					System.out.println("id form jsp="+model.getExamId());
@@ -327,7 +328,7 @@
 
 				<!-- Modal content-->
 				<div class="modal-content">
-					<form action="../deleteExam" method="Post">
+					<form action="../delete_Exam_info" method="Post">
 						<div class="modal-body">
 							<h3 >
 								Are you sure you want to delete this item?

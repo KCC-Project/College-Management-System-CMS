@@ -31,7 +31,7 @@ public class ajax_subject_load extends HttpServlet {
 		response.setHeader("Cache-Control", "no-cache");
 		
 		PrintWriter out = response.getWriter();
-		out.write("<option disabled selected>Select Faculty </option>");
+		out.write("<option disabled selected>Select Subject </option>");
 		
 		for (SubjectModel model : subject) {		
 			out.write("<option value="+model.getSubject_id()+">" + model.getSubjectName() + "</option>");

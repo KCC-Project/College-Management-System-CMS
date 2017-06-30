@@ -13,5 +13,9 @@ SubjectModelInterface inter= new SubjectModelImpl();
 	public List<SubjectModel> getAllrecord() {
 		return inter.getAllrecord();
 	}
+	@Override
+	public SubjectModel getSelectedSubject(int id) {
+		return inter.getSelectedSubject(id);
+	}
 
 }

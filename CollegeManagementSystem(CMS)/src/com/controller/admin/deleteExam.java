@@ -16,13 +16,14 @@ import com.serviceimpl.ExamModelServiceImpl;
 @WebServlet("/deleteExam")
 public class deleteExam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-  
-    public deleteExam() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	public deleteExam() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String deleteExamId = request.getParameter("deleteId");
 		ExamModelServiceInterface interfaceExam = new ExamModelServiceImpl();
 		if (deleteExamId.equalsIgnoreCase("")) {
@@ -33,6 +34,4 @@ public class deleteExam extends HttpServlet {
 			response.sendRedirect("admin/manageExamType.jsp");
 		}
 	}
-	}
-
-
+}

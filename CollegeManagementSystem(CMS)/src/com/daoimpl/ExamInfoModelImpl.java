@@ -11,7 +11,9 @@ import com.dao.ExamInfoModelInterface;
 import com.model.ExamInfoModel;
 import com.model.ExamModel;
 import com.service.ExamModelServiceInterface;
+import com.service.SubjectModelServiceInterface;
 import com.serviceimpl.ExamModelServiceImpl;
+import com.serviceimpl.SubjectModelServiceImpl;
 
 public class ExamInfoModelImpl implements ExamInfoModelInterface {
 	private Connection conn;
@@ -86,9 +88,13 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 			
 				ExamModelServiceInterface examModelType = new ExamModelServiceImpl();
 				model.setExamTypeName(examModelType.getSelectedExam(rs.getInt("exam_type_id")));
+				
+				SubjectModelServiceInterface inter= new SubjectModelServiceImpl();
+				model.setSubjectName(inter.getSelectedSubject(rs.getInt("subject_id")).getSubjectName());
+				
 				examModel.add(model);
-
-				model.setSubjectName("Db left");
+				
+				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
