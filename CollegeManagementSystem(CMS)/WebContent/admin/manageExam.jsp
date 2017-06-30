@@ -244,16 +244,17 @@
 				<div class="modal-content">
 					<form action="../deleteExam" method="Post">
 						<div class="modal-body">
-							<h3>
+							<h3 >
 								Are you sure you want to delete this item?
-								<%=model.getExamTypeName()%></h3>
+								<br>
+								<strong"><%=model.getExamTypeName()%></strong></h3>
 						</div>
 						<div class="modal-footer">
 							<input type=hidden  name="deleteId" value="<%=model.getExamId()%>">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit"  class="btn btn-success"
-								>Delete <%=model.getExamId()%></button>
+								>Delete</button>
 						</div>
 					</form>
 				</div>
