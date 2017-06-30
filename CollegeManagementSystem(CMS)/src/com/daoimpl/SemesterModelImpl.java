@@ -3,11 +3,14 @@ package com.daoimpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.dao.SemesterModelInterface;
 import com.model.SemesterModel;
+import com.model.YearModel;
 
 public class SemesterModelImpl implements SemesterModelInterface {
 
@@ -77,6 +80,46 @@ public class SemesterModelImpl implements SemesterModelInterface {
 	public List<SemesterModel> getAllRecord() {
 
 		return null;
+	}
+
+	@Override
+	public List<SemesterModel> loadByProgramId(int program_id) {
+		List<SemesterModel> semester = new ArrayList<>();
+		try {
+			
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "select * from semester where program_id=1 order by semester_no asc";
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+		
+			while(rs.next()){
+			
+				SemesterModel semesterModel = new SemesterModel();
+				semesterModel.setSemester_id(rs.getInt("semester_id"));
+				semesterModel.setSemester_no(rs.getInt("semester_no"));
+				semesterModel.setProgram_id(rs.getInt("program_id"));
+				semesterModel.setBatch_year(rs.getInt("batch_year_id"));
+				semesterModel.setStart_date(rs.getDate("sem_start_date"));
+				semesterModel.setEnd_date(rs.getDate("sem_end_date"));
+				semesterModel.setStatus(rs.getInt("status"));
+				
+				semester.add(semesterModel);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return semester;
 	}
 
 }
