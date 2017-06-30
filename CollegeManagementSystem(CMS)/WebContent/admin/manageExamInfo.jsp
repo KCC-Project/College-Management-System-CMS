@@ -74,6 +74,7 @@
 						<div class="panel box box-default">
 							<div class="box-header with-border">
 								<br>
+								<div class="table-responsive">
 								<table class="table table-hover">
 									<thead>
 										<tr>
@@ -81,12 +82,12 @@
 											<td>Subject</td>
 											<td>Exam Type</td>
 											<td>Start Date</td>
-											<td>End Date</td>
-											<td>Start Time</td>
-											<td>End Time</td>
-											<td>Full Marks</td>
-											<td>Pass Marks</td>
-											<td>Status</td>
+											<td class="hidden-xs">End Date</td>
+											<td class="hidden-xs">Start Time</td>
+											<td class="hidden-xs">End Time</td>
+											<td class="hidden-xs">Full Marks</td>
+											<td class="hidden-xs">Pass Marks</td>
+											<td class="hidden-xs">Status</td>
 
 										</tr>
 									</thead>
@@ -107,14 +108,14 @@
 										<tr>
 											<td><%=i%>.</td>
 											<td><%=model.getSubjectName()%></td>
-											<td><%=model.getExamTypeName()%></td>
+											<td class="hidden-xs"><%=model.getExamTypeName()%></td>
 											<td><%=model.getExamStartDate()%></td>
-											<td><%=model.getExamEndDate()%></td>
-											<td><%=model.getExamStartTime()%></td>
-											<td><%=model.getExamEndTime()%></td>
-											<td><%=model.getFullmarks()%></td>
-											<td><%=model.getPassmarks()%></td>
-											<td><%=model.getStatus()%></td>
+											<td class="hidden-xs"><%=model.getExamEndDate()%></td>
+											<td class="hidden-xs"><%=model.getExamStartTime()%></td>
+											<td class="hidden-xs"><%=model.getExamEndTime()%></td>
+											<td class="hidden-xs"><%=model.getFullmarks()%></td>
+											<td class="hidden-xs"><%=model.getPassmarks()%></td>
+											<td class="hidden-xs"><%=model.getStatus()%></td>
 
 											<td><span class="btn btn-sm btn-info  hidden-xs">
 													<i class="fa fa-users"></i> BE-computer &nbsp; <span
@@ -138,6 +139,7 @@
 										%>
 									</tbody>
 								</table>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -150,6 +152,7 @@
 				<!--=========================================================================================  -->
 
 			</div>
+			
 
 			<!-- /.box-group -->
 		</div>

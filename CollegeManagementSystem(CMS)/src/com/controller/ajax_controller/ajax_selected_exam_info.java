@@ -27,8 +27,7 @@ public class ajax_selected_exam_info extends HttpServlet {
 		String id = request.getParameter("id");
 		int iD = Integer.parseInt(id);
 		ExamInfoModelServiceInterface model = new ExamInfoModelServiceImpl();
-		List<ExamInfoModel> list = new ArrayList<>();
-		list.add(model.getSelectedInfo(iD));
+		model.getSelectedInfo(iD);
 	
 
 	}
