@@ -46,7 +46,18 @@
              <li><a href="manageExamInfo.jsp" id="courses">Exam Info</a></li>
           </ul>
         </li>
-        
+        <!--====================================================================================  -->
+              <li class="link">
+          <a href="#collapse-student" data-toggle="collapse"  aria-controls="collapse-student">
+            <span class="ion ion-ios-people" aria-hidden="true"></span>
+            <span class="hidden-xs hidden-sm">Student</span>
+               <span class="caret pull-right"></span>
+          </a>
+           <ul class="collapse collapseable" id="collapse-student">
+            <li><a href="studentResult.jsp" id="result">Result</a></li>
+          </ul>
+        </li>
+        <!--====================================================================================  -->
           <li class="link">
           <a href="#collapse-notice" data-toggle="collapse"  aria-controls="collapse-notice">
             <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>

@@ -3,9 +3,12 @@
 
 <%@page import="com.util.DateUtil"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="com.model.FacultyModel"%>
 <%@page import="com.model.Faculty_ProgramModel"%>
 <%@page import="com.model.SemesterModel"%>
 <%@page import="java.util.List"%>
+<%@page import="com.service.FacultyServiceInterface"%>
+<%@page import="com.serviceimpl.FacultyServiceImpl"%>
 <%@page import="com.service.Faculty_Program_Model_Service"%>
 <%@page import="com.serviceimpl.Faculty_Program_Model_Service_Impl"%>
 <%@page import="com.service.SemesterServiceInterface"%>
@@ -37,22 +40,23 @@
 							Semester</span></a></li>
 
 			</ol>
-
-
+			
 			<!-- ============= Main title content ============= -->
 			<div class="box box-default with-border">
 				<div style="position: relative;">
 					<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
 
 						<button type="button" class="btn btn-info pull-right"
-							data-toggle="modal" data-target=#add_semester_modal-body>Add
-							Semester</button>
+							data-toggle="modal" data-target=#add_semester_modal>Add
+							Semester
+						</button>
 
 					</h3>
 
 				</div>
 			</div>
 			<!-- ============ main title content ends here ============= -->
+
 
 			<!-- ============= Table =============  -->
 			<div class="box box-primary with-border" style="margin-top: 10px;">
@@ -70,23 +74,42 @@
 				</div>
 
 				<%
-				Faculty_Program_Model_Service facultyProgramServiceInterface = new Faculty_Program_Model_Service_Impl();
+				
+				FacultyServiceInterface facultyServiceInterface = new FacultyServiceImpl();	
+				List<FacultyModel> facultyList = facultyServiceInterface.getAllRecord();
+				
+				Faculty_Program_Model_Service facultyProgramServiceInterface = new Faculty_Program_Model_Service_Impl();	
 					List<Faculty_ProgramModel> list = facultyProgramServiceInterface.getAllRecord();
 					int i = 0;
-					for (Faculty_ProgramModel model : list) {
+					// ------- faculty loop --------
+					for (FacultyModel model : facultyList) {
+						int f_id = model.getFaculty_id(); // faculty_id
+						String faculty_name = model.getFaculty_name(); //faculty_name
+						List<Faculty_ProgramModel> listProgram = facultyProgramServiceInterface.getAllRecord(f_id);
 						i++;
-						StringBuffer program_name = new StringBuffer(model.getFaculty_Programe_Name());
-						StringBuffer programNameId = new StringBuffer(program_name.append(model.getID()));
 				%>
+				
+				<h4><%=i%>.<%=faculty_name%></h4></button>
+						
+				<% 
+					int x = 0; // counter for program
+					//-------- program loop --------
+					for (Faculty_ProgramModel programList : listProgram) {
+						x++;
+						StringBuffer program_name = new StringBuffer(programList.getFaculty_Programe_Name());// program_name
+						int programId = programList.getID(); // program_id
+						StringBuffer programNameId = new StringBuffer(program_name.append(programId));
+				%>
+				
 				<!-- Regular exam -->
 				<div class="box-body " style="margin-bottom: 4px;">
 					<div id="accordion" class="box-group">
-
+						
 						<div class="panel box box-default">
 							<div class="box-header with-border">
 								<h4 class="box-title" style="padding-left: 15px;">
 
-									<%=i%>.<%=model.getFaculty_Programe_Name()%>
+									<%=x%>.<%=program_name%>
 
 									<div class="pull-right" style="margin: 0px; padding: 0px; position: relative; margin-top: -6px;">
 										<span class="btn btn-sm btn-info  hidden-xs"> <i
@@ -95,14 +118,15 @@
 										</span> <span class="btn btn-sm btn-warning  hidden-xs"> <i
 											class="fa fa-sitemap"></i> Classes &nbsp; <span class="badge">
 												1 </span>
-										</span> <a class="btn-sm btn btn-default" title="View Exam Details"
+										</span> <a class="btn-sm btn btn-default" title="View Semester Details"
 											data-toggle="modal" data-target=<%="#" + program_name%>><i
 											class="fa fa-eye"></i></a> 
 											
 											<a class="btn-sm btn btn-default"
-											data-toggle="modal" data-target=<%="#" + model.getID()%>
-											title="Edit Course Details"><i
-											class="fa fa-pencil-square-o"></i></a> <a
+											data-toggle="modal" data-target=<%="#" + programId%>
+											title="Edit semester Details"><i
+											class="fa fa-pencil-square-o"></i></a> 
+											<a
 											class="btn-sm btn btn-default" data-toggle="modal"
 											data-target=<%="#" + programNameId%> title="Delete"
 											data-method="post"><i class="fa fa-trash-o"></i></a>
@@ -113,9 +137,7 @@
 					</div>
 				</div>
 
-				<%
-					}
-				%>
+				
 				<!-- ======================end of exam type============= -->
 
 			</div>
@@ -123,8 +145,117 @@
 			<!-- /.box-group -->
 		</div>
 
-		<!-- Semester Modal starts here -->
-		<div id="add_semester_modal-body" class="modal fade" role="dialog">
+	
+		
+		<%
+			SemesterServiceInterface semesterServiceInterface = new SemesterServiceImpl();
+		%>
+
+		<div id="<%=programId%>" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Update Semester <%=program_name %></h4>
+					</div>
+					<form action="../update_semester" method="Post">
+						<div class="modal-body">
+
+							
+						</div>
+						<div class="modal-footer">
+							<input type=hidden name="id" value="<%=programId%>">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-success">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!--=========================================================================================  -->
+
+		<!-- Modal -->
+
+		<div id="<%=program_name%>" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">program_name</h4>
+					</div>
+					<form action="#" method="Post">
+						<div class="modal-body">
+							<% 
+							List<SemesterModel> semModel = semesterServiceInterface.loadByProgramId(programId); 
+							for (SemesterModel semList : semModel) {
+								int id = semList.getSemester_id();
+								int program_id_i = semList.getProgram_id();
+								int batch_year_id = semList.getBatch_year();
+								int sem_no = semList.getSemester_no();
+								String sem_start_date = DateUtil.convertToString(semList.getStart_date());
+								String sem_date_date = DateUtil.convertToString(semList.getEnd_date());
+								int Status = semList.getStatus();
+							%>
+							<p>
+								<%=id %> <%=program_id_i %> <%=batch_year_id %> <%=sem_no %>
+								<%=sem_start_date %> <%=sem_date_date %> <%=Status %> edit
+							</p> <br>
+							
+							<% } %>
+							
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+		<!--=========================================================================================  -->
+
+
+		<!-- Modal -->
+
+		<div id="<%=programNameId%>" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<form action="../deleteProgramSem" method="Post">
+						<div class="modal-body">
+							<h3 >
+								Are you sure you want to delete this Program all Semester?
+								<br>
+								<strong"><%= program_name %></strong></h3>
+						</div>
+						<div class="modal-footer">
+							<input type=hidden  name="deleteId" value="<%= programId %>">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit"  class="btn btn-success"
+								>Delete</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+		
+		<!--=========================================================================================  -->
+		
+		<%} %> <%} %>
+		
+			<!-- Semester Modal starts here -->
+		<div id="add_semester_modal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
@@ -183,122 +314,6 @@
 			</div>
 		</div>
 		<!-- Semester Modal ends here -->
-		
-		<%
-			SemesterServiceInterface semesterServiceInterface = new SemesterServiceImpl();
-		%>
-		
-		<%
-		for (Faculty_ProgramModel model : list) {
-			int x=0;
-			StringBuffer program_name = new StringBuffer(model.getFaculty_Programe_Name());
-			StringBuffer programNameId = new StringBuffer(program_name.append(model.getID()));
-			int program_id = model.getID();
-		%>
-
-		<div id="<%=model.getID()%>" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Update Semester <%=program_name %></h4>
-					</div>
-					<form action="../update_semester" method="Post">
-						<div class="modal-body">
-
-							
-						</div>
-						<div class="modal-footer">
-							<input type=hidden name="id" value="<%=program_id%>">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-success">Submit</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
-		<!--=========================================================================================  -->
-
-		<!-- Modal -->
-
-		<div id="<%=program_name%>" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">program_name</h4>
-					</div>
-					<form action="#" method="Post">
-						<div class="modal-body">
-							<% 
-							List<SemesterModel> semModel = semesterServiceInterface.loadByProgramId(program_id); 
-							for (SemesterModel semList : semModel) {
-								int id = semList.getSemester_id();
-								int program_id_i = semList.getProgram_id();
-								int batch_year_id = semList.getBatch_year();
-								int sem_no = semList.getSemester_no();
-								String sem_start_date = DateUtil.convertToString(semList.getStart_date());
-								String sem_date_date = DateUtil.convertToString(semList.getEnd_date());
-								int Status = semList.getStatus();
-							%>
-							<p>
-								<%=id %> <%=program_id_i %> <%=batch_year_id %> <%=sem_no %>
-								<%=sem_start_date %> <%=sem_date_date %> <%=Status %>
-							</p>
-							
-							<% } %>
-							
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-						</div>
-					</form>
-				</div>
-
-			</div>
-		</div>
-
-		<!--=========================================================================================  -->
-
-
-		<!-- Modal -->
-
-		<div id="<%=programNameId%>" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<form action="../deleteProgramSem" method="Post">
-						<div class="modal-body">
-							<h3 >
-								Are you sure you want to delete this Program all Semester?
-								<br>
-								<strong"><%= program_name %></strong></h3>
-						</div>
-						<div class="modal-footer">
-							<input type=hidden  name="deleteId" value="<%= program_id %>">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-							<button type="submit"  class="btn btn-success"
-								>Delete</button>
-						</div>
-					</form>
-				</div>
-
-			</div>
-		</div>
-		<%
-			}
-		%>
-		<!--=========================================================================================  -->
-
 
 
 

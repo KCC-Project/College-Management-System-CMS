@@ -16,60 +16,64 @@
         <li><a><span class="glyphicon glyphicon-education black"> Semester</span></a></li>
       </ol>
 
+		<!-- ============= Main title content ============= -->
+			<div class="box box-default with-border">
+				<div style="position: relative;">
+					<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
 
-        <div class="panel-group" id="first-one">   
-        
-          <div class="panel panel-default profile-panel">
-            <div class="panel-heading main-color-bg_heading">
-            	<span class="btn btn-default">Semester</span>
-            	<button type="button" class="btn btn-info pull-right" id="btn-addsem" data-toggle="modal" data-target="#myModal">Add Semester
-				</button>
-            </div>
-            <div class="panel-body">
-				
-				 <div class="table-responsive">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th> S.N </th>
-                              <th> Program Name</th>
-                              <th> Batch Year </th>
-                              <th> Semester no. </th>
-                              <th> Start Date </th>
-                              <th> End Date </th>
-                              <th> Status </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td> 1 </td>
-                              <td> BE Computer </td>
-                              <td> 2013 </td>
-                              <td> 7th </td>
-                              <td> 1 </td>
-                            </tr>
-                            <tr>
-                              <td> 2 </td>
-                              <td> BE Computer </td>
-                              <td> 2013 </td>
-                              <td> 7th </td>
-                              <td> 1 </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-				
+						<button type="button" class="btn btn-info pull-right"
+							data-toggle="modal" data-target=#add_sem_modal>Add
+							Semester
+						</button>
+
+					</h3>
+
+				</div>
 			</div>
-          </div>
-        </div>
-
-
+			<!-- ============ main title content ends here ============= -->
+	
+	
+	<% for(int i=0;i<5;i++) { %>
+	<div class="box-body " style="margin-bottom: 4px;">
+		<div id="accordion" class="box-group">
+		
+			<div class="panel box box-default">
+				<div class="box-header with-border">
+					<h4 class="box-title" style="padding-left: 15px;">
+						<span id="program_name">Program_name</span>
+		
+					<div class="pull-right" style="margin: 0px; padding: 0px; position: relative; margin-top: -6px;">
+						<span class="btn btn-sm btn-info  hidden-xs"> 
+							<i class="fa fa-users"></i> Students &nbsp; 
+							<span class="badge" id="student_count">5 </span>
+						</span> 
+						<span class="btn btn-sm btn-warning  hidden-xs"> 
+							<i class="fa fa-sitemap"></i> Classes &nbsp; 
+							<span class="badge" id="class_count">1 </span>
+						</span> 
+						<a class="btn-sm btn btn-default" onClick=load_semester();>
+							<i class="fa fa-eye"></i>
+						</a> 
+						<a class="btn-sm btn btn-default" onClick=edit_semester();>
+							<i class="fa fa-pencil-square-o"></i>
+						</a> 
+						<a class="btn-sm btn btn-default" onClick=delete_semester();>
+							<i class="fa fa-trash-o"></i>
+						</a>
+					</div>
+					</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+<% } %>
+    
     </div>
   </div>
   </div>
   
   <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="add_sem_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -182,6 +186,8 @@ function load_batch_year() {
 	aj.send(idSend);
 }
 
+
+
 </script>
 
 
@@ -190,8 +196,6 @@ function load_batch_year() {
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../Resources/js/bootstrap.min.js"></script>
 <script src="../Resources/js/default.js"></script>
-</body>
-</html>
 
 
 </body>
