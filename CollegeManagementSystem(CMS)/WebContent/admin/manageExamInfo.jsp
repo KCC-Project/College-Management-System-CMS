@@ -80,7 +80,7 @@
 										<tr>
 											<td>S.No</td>
 											<td>Subject</td>
-											<td>Exam Type</td>
+											<td class="hidden-xs">Exam Type</td>
 											<td>Start Date</td>
 											<td class="hidden-xs">End Date</td>
 											<td class="hidden-xs">Start Time</td>
