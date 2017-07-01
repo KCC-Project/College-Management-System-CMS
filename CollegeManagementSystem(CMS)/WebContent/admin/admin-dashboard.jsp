@@ -290,7 +290,7 @@
 				</div>
 				<!-- =================================1st graph========================================= -->
 				<br>
-				<div class="row ">
+				<div class="row hidden-xs">
 					<div class="col-lg-12 ">
 						<!-- 1st garph -->
 						<div class="col-lg-7 ">

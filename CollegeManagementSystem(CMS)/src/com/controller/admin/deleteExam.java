@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.service.ExamModelServiceInterface;
 import com.serviceimpl.ExamModelServiceImpl;
 
-/**
- * Servlet implementation class deleteExam
- */
+
 @WebServlet("/deleteExam")
 public class deleteExam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,11 +25,15 @@ public class deleteExam extends HttpServlet {
 		String deleteExamId = request.getParameter("deleteId");
 		ExamModelServiceInterface interfaceExam = new ExamModelServiceImpl();
 		if (deleteExamId.equalsIgnoreCase("")) {
-			response.sendRedirect("admin/manageExamType.jsp?error=deletingexam");
+			response.sendRedirect("admin/manageExamType.jsp?error=deletingexam_ID_null");
 		} else {
 			int id = Integer.parseInt(deleteExamId);
-			System.out.println("Exam deleted=" + interfaceExam.deleteExamType(id));
-			response.sendRedirect("admin/manageExamType.jsp");
+			int sucessfull=interfaceExam.deleteExamType(id);
+			if (sucessfull>0) {
+				response.sendRedirect("admin/manageExamType.jsp?error=deleteExamType_sucessful");
+			}else{
+			response.sendRedirect("admin/manageExamType.jsp?error=in_use");
+			}
 		}
 	}
 }

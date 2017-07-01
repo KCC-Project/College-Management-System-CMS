@@ -29,4 +29,9 @@ public class ExamInfoModelServiceImpl implements ExamInfoModelServiceInterface {
 		return inter.deleteExamInfo(id);
 	}
 
+	@Override
+	public ExamInfoModel getSelectedInfo(int id) {
+	return inter.getSelectedInfo(id);
+	}
+
 }

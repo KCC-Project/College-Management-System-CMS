@@ -67,6 +67,7 @@
 					ExamModelServiceInterface examModelInterface = new ExamModelServiceImpl();
 					List<ExamModel> list = examModelInterface.getAllExamType();
 					int i = 0;
+				
 					for (ExamModel model : list) {
 						i++;
 						StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
@@ -74,6 +75,8 @@
 						StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
 						viewExamDetail.append("_term");
 						deleteExamType.append("_exam");
+					
+						
 				%>
 				<!-- Regular exam -->
 				<div class="box-body " style="margin-bottom: 4px;">
@@ -93,12 +96,12 @@
 										</span> <span class="btn btn-sm btn-warning  hidden-xs"> <i
 											class="fa fa-sitemap"></i> Faculty &nbsp; <span class="badge">
 												1 </span>
-										</span> <a class="btn-sm btn btn-default" title="View Exam Details"
+										</span> <a class="btn-sm btn btn-default" title="View Exam Details" onclick="setId(<%=model.getExamId()%>);"
 											data-toggle="modal" data-target=<%="#" + viewExamDetail%>><i
-											class="fa fa-eye"></i></a> <a class="btn-sm btn btn-default"
+											class="fa fa-eye" ></i></a> <a class="btn-sm btn btn-default"
 											data-toggle="modal" data-target=<%="#" + model.getExamId()%>
 											title="Edit Course Details"><i
-											class="fa fa-pencil-square-o"></i></a> <a
+											class="fa fa-pencil-square-o"></i></a> <a href="#?id=<%=model.getExamId() %>" onclick="setId(<%=model.getExamId()%>);"
 											class="btn-sm btn btn-default" data-toggle="modal"
 											data-target=<%="#" + deleteExamType%> title="Delete"
 											data-method="post"><i class="fa fa-trash-o"></i></a>
@@ -135,7 +138,7 @@
 							<div class="form-group">
 								<label>Exam Type : <span class="astriek">&nbsp;*</span></label>
 								<input type="text" required class="form-control"
-									id="add_exam_type" name="add_exam_type"
+									id="add_exam_type" name="add_exam_type" onkeyup="checkIfExit();"
 									placeholder="Enter Exam Type">
 							</div>
 							<!--=================summary form================  -->
@@ -151,7 +154,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-success">Submit</button>
+							<button type="submit" id="submitBtn" class="btn btn-success">Submit</button>
 						</div>
 					</form>
 				</div>
@@ -206,7 +209,7 @@
 
 		<!-- Modal -->
 
-		<div id="<%=viewExamDetail%>" class="modal fade" role="dialog">
+		<div id="<%=viewExamDetail %>" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
@@ -250,7 +253,7 @@
 								<strong"><%=model.getExamTypeName()%></strong></h3>
 						</div>
 						<div class="modal-footer">
-							<input type=hidden  name="deleteId" value="<%=model.getExamId()%>">
+							<input type=hidden  name="deleteId" id="deleteId12">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit"  class="btn btn-success"
@@ -283,6 +286,28 @@
 		height : 200
 
 	});
+	
+	function setId(id) {
+		document.getElementById("deleteId12").value=id;
+
+	}
+	
+	function checkIfExit() {
+		var value=document.getElementById("add_exam_type").value;
+		var url="../ajax_checkIf_ExamType_exit";
+		var idSend="value="+value;
+		var aj=new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		aj.onreadystatechange=function(){
+			if (aj.readyState==4&&aj.status==200) {
+				var return_data=aj.responseText;
+				alert(return_date);
+				document.getElementById("submitBtn").disable=true;
+			}
+		}
+		aj.send(idSend);
+	}
 </script>
 </body>
 </html>
