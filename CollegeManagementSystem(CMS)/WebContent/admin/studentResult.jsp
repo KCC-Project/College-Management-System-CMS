@@ -71,7 +71,6 @@
 				<!-- Regular exam -->
 				<div class="box-body " style="margin-bottom: 4px;">
 					<div id="accordion" class="box-group">
-
 						<div class="panel box box-default">
 							<div class="box-header with-border">
 								<br>
@@ -98,20 +97,20 @@
 												<td class="hidden-xs">Unit Test</td>
 												<td class="hidden-xs">100</td>
 												<td class="hidden-xs">50</td>
-												<td ><span class="btn btn-sm btn-warning ">
-														<i class="fa fa-sitemap"></i> Pass &nbsp;
+												<td><span class="btn btn-sm btn-warning "> <i
+														class="fa fa-sitemap"></i> Pass &nbsp;
 												</span></td>
-												<td class="hidden-xs"><span class="btn btn-sm btn-info  hidden-xs">
-														<i class="fa fa-users"></i> BE-Computer &nbsp;
+												<td class="hidden-xs"><span
+													class="btn btn-sm btn-info  hidden-xs"> <i
+														class="fa fa-users"></i> BE-Computer &nbsp;
 												</span></td>
 												<td><a class="btn-sm btn btn-default"
 													title="View Exam Details" data-toggle="modal" data-target=p><i
 														class="fa fa-eye"></i></a> <a class="btn-sm btn btn-default"
-													data-toggle="modal" data-target=title= "EditCourseDetails"><i
+													data-toggle="modal" data-target=# title="EditCourseDetails"><i
 														class="fa fa-pencil-square-o"></i></a> <a href="#?id="
 													class="btn-sm btn btn-default" data-toggle="modal"
-													data-target=title= "Delete"
-											data-method="post"><i
+													data-target=# title="Delete" data-method="post"><i
 														class="fa fa-trash-o"></i></a></td>
 											</tr>
 
@@ -159,12 +158,30 @@
 
 			</div>
 		</div>
-
 		<!--=========================================================================================  -->
-
-
 	</div>
 </div>
+<script type="text/javascript">
+	window.addEventListener('load', function() {
+		loadAllResult();
+	}, true);
+	
+	function loadAllResult() {
+		var url = "../ajax_result_load";
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+			var data=aj.responseText;
+			alert(data);
+			}
+		}
+		aj.send();
+	}
+</script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../Resources/js/jquery-3.2.1.min.js"></script>
 <!-- Muzi Budaa...yo chaii halna pardaina -->
