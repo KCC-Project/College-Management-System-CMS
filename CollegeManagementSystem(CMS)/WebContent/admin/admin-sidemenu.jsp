@@ -40,7 +40,7 @@
             <span class="caret pull-right"></span>
           </a>
           <ul class="collapse collapseable" id="collapse-manage">
-            <li><a href="semester.jsp" id="Semester">Semester</a></li>
+            <li><a href="manageSemesters.jsp" id="Semester">Semesters</a></li>
             <li><a href="managecourses.jsp" id="courses">Courses</a></li>
              <li><a href="manageExamType.jsp" id="courses">Exam Type</a></li>
              <li><a href="manageExamInfo.jsp" id="courses">Exam Info</a></li>
