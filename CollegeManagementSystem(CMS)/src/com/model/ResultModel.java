@@ -1,20 +1,20 @@
 package com.model;
 
-public class StudentExamModel {
+public class ResultModel {
 	private int studentId;
 	private int examId;
-	private int examMarks;
+	private int studentExamMarks;
 	private int isAttended;
 	private int passFailStatus;
-	public StudentExamModel() {
+	public ResultModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public StudentExamModel(int studentId, int examId, int examMarks, int isAttended, int passFailStatus) {
+	public ResultModel(int studentId, int examId, int studentExamMarks, int isAttended, int passFailStatus) {
 		super();
 		this.studentId = studentId;
 		this.examId = examId;
-		this.examMarks = examMarks;
+		this.studentExamMarks = studentExamMarks;
 		this.isAttended = isAttended;
 		this.passFailStatus = passFailStatus;
 	}
@@ -30,11 +30,16 @@ public class StudentExamModel {
 	public void setExamId(int examId) {
 		this.examId = examId;
 	}
-	public int getExamMarks() {
-		return examMarks;
+	@Override
+	public String toString() {
+		return "ResultModel [studentId=" + studentId + ", examId=" + examId + ", studentExamMarks=" + studentExamMarks
+				+ ", isAttended=" + isAttended + ", passFailStatus=" + passFailStatus + "]";
 	}
-	public void setExamMarks(int examMarks) {
-		this.examMarks = examMarks;
+	public int getStudentExamMarks() {
+		return studentExamMarks;
+	}
+	public void setStudentExamMarks(int studentExamMarks) {
+		this.studentExamMarks = studentExamMarks;
 	}
 	public int getIsAttended() {
 		return isAttended;
@@ -47,11 +52,6 @@ public class StudentExamModel {
 	}
 	public void setPassFailStatus(int passFailStatus) {
 		this.passFailStatus = passFailStatus;
-	}
-	@Override
-	public String toString() {
-		return "StudentExamModel [studentId=" + studentId + ", examId=" + examId + ", examMarks=" + examMarks
-				+ ", isAttended=" + isAttended + ", passFailStatus=" + passFailStatus + "]";
 	}
 
 }

@@ -6,19 +6,19 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dao.StudentExamModelInterface;
+import com.dao.StudentExamResultModelInterface;
 import com.model.ExamModel;
-import com.model.StudentExamModel;
+import com.model.StudentExamResultModel;
 import com.model.StudentModel;
 
-public class StudentExamModelImpl implements StudentExamModelInterface {
+public class StudentExamResultModelImpl implements StudentExamResultModelInterface {
 	private Connection conn;
 	private String sql;
 	private PreparedStatement pst;
 	private ResultSet rs;
 
 	@Override
-	public boolean saveInformation(StudentExamModel model) {
+	public boolean saveInformation(StudentExamResultModel model) {
 		try {
 			conn = DatabaseConnection.connectToDatabase();
 			sql = "insert into student_exam(student_id,exam_id,exam_marks,is_attended,pass_fail_status) values(?,?,?,?,?)";
@@ -48,8 +48,8 @@ public class StudentExamModelImpl implements StudentExamModelInterface {
 	}
 
 	@Override
-	public List<StudentExamModel> getAllRecord() {
-		List<StudentExamModel> StudentExamModel = new ArrayList<>();
+	public List<StudentExamResultModel> getAllRecord() {
+		List<StudentExamResultModel> StudentExamModel = new ArrayList<>();
 		try {
 			conn = DatabaseConnection.connectToDatabase();
 			sql = "select * from student_exam order by student_id";
@@ -57,7 +57,7 @@ public class StudentExamModelImpl implements StudentExamModelInterface {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
-				StudentExamModel model = new StudentExamModel();
+				StudentExamResultModel model = new StudentExamResultModel();
 				model.setStudentId(rs.getInt("student_id"));
 				model.setExamId(rs.getInt("exam_id"));
 				model.setExamMarks(rs.getInt("exam_marks"));
@@ -80,8 +80,8 @@ public class StudentExamModelImpl implements StudentExamModelInterface {
 	}
 
 	@Override
-	public StudentExamModel readId(int id) {
-		StudentExamModel model = new StudentExamModel();
+	public StudentExamResultModel readId(int id) {
+		StudentExamResultModel model = new StudentExamResultModel();
 		try {
 			Connection connection = DatabaseConnection.connectToDatabase();
 			sql = "select * from student_exam where student_id=?";
@@ -136,7 +136,7 @@ public class StudentExamModelImpl implements StudentExamModelInterface {
 	}
 
 	@Override
-	public boolean update(StudentExamModel model) {
+	public boolean update(StudentExamResultModel model) {
 		try {
 			conn = DatabaseConnection.connectToDatabase();
 			sql = "update student_exam set exam_id=?,exam_marks=?,is_attended=?,pass_fail_status=? where  student_id=?";
