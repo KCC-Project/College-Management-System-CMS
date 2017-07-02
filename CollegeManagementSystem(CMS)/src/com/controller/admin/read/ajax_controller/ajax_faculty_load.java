@@ -36,7 +36,7 @@ public class ajax_faculty_load extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.write("<option disabled selected>Select Faculty </option>");
 		
-		for (Faculty_ProgramModel model : faculty) {		
+		for (Faculty_ProgramModel model : faculty) {	
 			out.write("<option value="+model.getID()+">" + model.getFaculty_Programe_Name() + "</option>");
 		}
 		out.flush();
