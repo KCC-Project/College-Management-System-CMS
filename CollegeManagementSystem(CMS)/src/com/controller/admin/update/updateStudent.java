@@ -1,4 +1,4 @@
-package com.controller.admin;
+package com.controller.admin.update;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.controller.admin;
+package com.controller.admin.update;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,29 +12,29 @@ import com.service.ExamInfoModelServiceInterface;
 import com.serviceimpl.ExamInfoModelServiceImpl;
 import com.util.DateUtil;
 
-
-@WebServlet("/add_exam_info")
-public class add_exam_info extends HttpServlet {
+@WebServlet("/update_exam_info")
+public class update_exam_info extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String subject=request.getParameter("subject_id");
-		String examTypeId=request.getParameter("examType_id");
-		String examStartdate=request.getParameter("exam_start_date");
-		String examenddate=request.getParameter("exam_end_date");
-		String examStartTime=request.getParameter("exam_start_time");
-		String examEndTime=request.getParameter("exam_end_time");
-		String examFullmarks=request.getParameter("exam_fullMarks");
-		String examPassmarks=request.getParameter("exam_passMarks");
-		String examStatus=request.getParameter("status");
+		String subject=request.getParameter("subject_idd");
+		String examTypeId=request.getParameter("examType_idd");
+		String examStartdate=request.getParameter("exam_start_datee");
+		String examenddate=request.getParameter("exam_end_datee");
+		String examStartTime=request.getParameter("exam_start_timee");
+		String examEndTime=request.getParameter("exam_end_timee");
+		String examFullmarks=request.getParameter("exam_fullMarkss");
+		String examPassmarks=request.getParameter("exam_passMarkss");
+		String examStatus=request.getParameter("statuss");
+		String examID=request.getParameter("hiddenValueToUpdate");//primarykey
 		
-		if (subject.equalsIgnoreCase("")||examTypeId.equalsIgnoreCase("")||examStartdate.equalsIgnoreCase("")||examenddate.equalsIgnoreCase("")||examStartTime.equalsIgnoreCase("")||examEndTime.equalsIgnoreCase("")||examStatus.equalsIgnoreCase("")) {
-			response.sendRedirect("admin/manageExamInfo.jsp?error=addExamInfo");
+		if (examID.equalsIgnoreCase("")||subject.equalsIgnoreCase("")||examTypeId.equalsIgnoreCase("")||examStartdate.equalsIgnoreCase("")||examenddate.equalsIgnoreCase("")||examStartTime.equalsIgnoreCase("")||examEndTime.equalsIgnoreCase("")||examStatus.equalsIgnoreCase("")) {
+			response.sendRedirect("admin/manageExamInfo.jsp?error=updateErrorInExamInfo");
 			
 		}else{
 			int subId=Integer.parseInt(subject);
 			int examId=Integer.parseInt(examTypeId);
+			int primaryKey=Integer.parseInt(examID);
 			ExamInfoModel model= new ExamInfoModel();
 			model.setSubjectId(subId);
 			model.setExamTypeId(examId);
@@ -45,15 +45,18 @@ public class add_exam_info extends HttpServlet {
 			model.setFullmarks(Integer.parseInt(examFullmarks));
 			model.setPassmarks(Integer.parseInt(examPassmarks));
 			model.setStatus(Integer.parseInt(examStatus));
+			model.setExamId(primaryKey);
 			ExamInfoModelServiceInterface intface= new ExamInfoModelServiceImpl();
-			boolean status= intface.saveExamInfo(model);
+			boolean status= intface.updateExamInfo(model);
+			System.out.println(status);
 			if (status==true) {
-				response.sendRedirect("admin/manageExamInfo.jsp?error=sucessfullEntryAddExamInfo");
+				response.sendRedirect("admin/manageExamInfo.jsp?error=sucessfullEntryUpdateExamInfo");
 			}else{
 				response.sendRedirect("admin/manageExamInfo.jsp?error=addExamInfo");
 				
 			}
 		}
+
 	}
 
 }

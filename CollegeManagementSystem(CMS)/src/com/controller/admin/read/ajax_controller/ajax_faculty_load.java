@@ -1,4 +1,4 @@
-package com.controller.ajax_controller;
+package com.controller.admin.read.ajax_controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.model.ProgramModel;
-import com.service.ProgramServiceInterface;
-import com.serviceimpl.ProgramServiceImpl;
+import com.model.Faculty_ProgramModel;
+import com.service.Faculty_Program_Model_Service;
+import com.serviceimpl.Faculty_Program_Model_Service_Impl;
 
-@WebServlet("/ajax_program_load")
-public class ajax_program_load extends HttpServlet {
+@WebServlet("/ajax_faculty_load")
+public class ajax_faculty_load extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ajax_program_load() {
+    public ajax_faculty_load() {
         super();
     }
 
@@ -27,14 +27,18 @@ public class ajax_program_load extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ProgramServiceInterface service = new ProgramServiceImpl();
-		List<ProgramModel> faculty = service.getAllRecord();
+		Faculty_Program_Model_Service service = new Faculty_Program_Model_Service_Impl();
+		List<Faculty_ProgramModel> faculty = service.getAllRecord();
 		
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		
 		PrintWriter out = response.getWriter();
+		out.write("<option disabled selected>Select Faculty </option>");
 		
+		for (Faculty_ProgramModel model : faculty) {		
+			out.write("<option value="+model.getID()+">" + model.getFaculty_Programe_Name() + "</option>");
+		}
 		out.flush();
 	}
 }

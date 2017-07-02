@@ -1,4 +1,4 @@
-package com.controller.admin;
+package com.controller.admin.save;
 
 import java.io.IOException;
 import java.util.Date;
