@@ -67,18 +67,18 @@
 							<div class="box-header with-border">
 								<br>
 								<div class="table-responsive">
-									<table class="table table-bordered table-condensed table-hover table-striped">
+									<table id="mytable" class="table table-bordered table-condensed table-hover table-striped">
 										<thead>
 											<tr>
-												<td>S.No</td>
-												<td>semester_id</td>
-												<td>semester_no</td>
-												<td>program_id</td>
-												<td>batch_year_id</td>
-												<td>sem_start_date</td>
-												<td>sem_end_date</td>
-												<td>status</td>
-												<td>Options</td>
+												<th><input type="checkbox" id="checkall" /></th>
+												<th>semester_id</th>
+												<th>semester_no</th>
+												<th>program_id</th>
+												<th>batch_year_id</th>
+												<th>sem_start_date</th>
+												<th>sem_end_date</th>
+												<th>status</th>
+												<th colspan="2">Options</th>
 
 											</tr>
 										</thead>
@@ -157,6 +157,41 @@
 			</div>
 		</div>
 	<!-- Semester Modal ends here -->
+	
+	
+	
+	<!-- edit semester model start here -->
+	
+	<div class="modal fade" id="edit"  aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        	<h4 class="modal-title custom_align" id="Heading">Edit Semester Detail</h4>
+      	</div>
+          <div class="modal-body">
+          
+          <div class="form-group">
+        <input class="form-control " type="text" placeholder="Mohsin">
+        </div>
+        <div class="form-group">
+        
+        <input class="form-control " type="text" placeholder="Irshad">
+        </div>
+        <div class="form-group">
+        <textarea rows="2" class="form-control" placeholder="CB 106/107 Street # 11 Wah Cantt Islamabad Pakistan"></textarea>
+    
+        
+        </div>
+        
+      </div>
+          <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+      </div>
+        </div>
+  </div>
+</div>
+<!-- ---------------- -->
 
 
 <script src="../Resources/js/jquery-3.2.1.min.js"></script>
@@ -242,12 +277,15 @@ function load_semester(){
 		if (aj.readyState == 4 && aj.status == 200) {
 			
 			var json = eval('(' + aj.responseText + ')');
-
-	            var content = '';
-	          
+	        var content = '';
+	        
+	        if(json.length<1){
+	        	$("#mytable").hide();
+	        }else {
+	        	$("#mytable").show();
 	            for (var i = 0; i < json.length; i++) {
 	            	content += '<tr>';
-	            	content += '<td>' + i + '</td>';
+	            	content += '<td> <input type="\checkbox"\ class="\checkthis"\ /> </td>';
 		            content += '<td>' + json[i].semester_id + '</td>';
 		            content += '<td>' + json[i].semester_no + '</td>';
 		            content += '<td>' + json[i].program_id + '</td>';
@@ -255,18 +293,42 @@ function load_semester(){
 		            content += '<td>' + json[i].start_date + '</td>';
 		            content += '<td>' + json[i].end_date + '</td>';
 		            content += '<td>' + json[i].status + '</td>';
-		            content += '<td><a href="#" class="edit">Edit</a> <a href="#" class="delete">Delete</a></td>';
+		            
+		            content += '<td><a href="?id='+json[i].semester_id+'" class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Edit"> \
+			            <span class="glyphicon glyphicon-pencil"></span></a></td>';
+		            
+		            content += '<td><a href="#" class="btn btn-danger" data-placement="top" data-toggle="tooltip" title="Delete"> \
+		            <span class="glyphicon glyphicon-trash"></span></a></td>';
+		            
 		            content += '</tr>';
 	            }
-	           
+	        }
+	          
 	             $('#table-body').html(content);  
-		
-
-		}
+	     }
 	}
 	aj.send(idSend);
 }
 
+
+// for table
+$(document).ready(function(){
+	$("#mytable").hide();
+	$("#mytable #checkall").click(function () {
+	        if ($("#mytable #checkall").is(':checked')) {
+	            $("#mytable input[type=checkbox]").each(function () {
+	                $(this).prop("checked", true);
+	            });
+
+	        } else {
+	            $("#mytable input[type=checkbox]").each(function () {
+	                $(this).prop("checked", false);
+	            });
+	        }
+	    });
+	    
+	    $("[data-toggle=tooltip]").tooltip();
+	});
 
 
 </script>
