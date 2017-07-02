@@ -22,7 +22,8 @@ public class deleteExam extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String deleteExamId = request.getParameter("deleteId");
+		String deleteExamId = request.getParameter("deleteIdJson");
+		System.out.println("id===="+deleteExamId);
 		ExamModelServiceInterface interfaceExam = new ExamModelServiceImpl();
 		if (deleteExamId.equalsIgnoreCase("")) {
 			response.sendRedirect("admin/manageExamType.jsp?error=deletingexam_ID_null");
@@ -36,4 +37,5 @@ public class deleteExam extends HttpServlet {
 			}
 		}
 	}
+	
 }

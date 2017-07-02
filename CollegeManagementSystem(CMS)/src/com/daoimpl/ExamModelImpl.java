@@ -125,7 +125,8 @@ public class ExamModelImpl implements ExamModelInterface {
 	}
 
 	@Override
-	public String getSelectedExam(int id) {
+	public ExamModel getSelectedExam(int id) {
+		ExamModel model= new ExamModel();
 		try {
 			conn = DatabaseConnection.connectToDatabase();
 			sql = "select * from exam_type where exam_type_id=?";
@@ -134,7 +135,9 @@ public class ExamModelImpl implements ExamModelInterface {
 			rs = pst.executeQuery();
 			System.out.println("it is ="+id);
 			while (rs.next()) {
-				return rs.getString("type_name");
+				model.setExamId(rs.getInt("exam_type_id"));
+				model.setExamTypeName(rs.getString("type_name"));
+				model.setSummary(rs.getString("summary"));
 				
 			}
 		} catch (Exception e) {
@@ -148,7 +151,7 @@ public class ExamModelImpl implements ExamModelInterface {
 				// TODO: handle exception
 			}
 		}
-		return null;
+		return model;
 	}
 
 }

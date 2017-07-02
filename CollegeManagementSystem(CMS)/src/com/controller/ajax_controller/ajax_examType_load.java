@@ -33,7 +33,7 @@ public class ajax_examType_load extends HttpServlet {
 		out.write("<option disabled selected>Select Subject </option>");
 		
 		for (ExamModel model : examType) {		
-			out.write("<option value="+model.getExamId()+">" + model.getExamTypeName() + "</option>");
+			out.write("<option selected='selected' value="+model.getExamId()+">" + model.getExamTypeName() + "</option>");
 		}
 		out.flush();
 	}

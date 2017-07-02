@@ -18,14 +18,19 @@ public class delete_Exam_info extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String deleteExamId = request.getParameter("deleteId");
+		String deleteExamId = request.getParameter("deleteIdJson");
 	ExamInfoModelServiceInterface interfaceExamInfo= new ExamInfoModelServiceImpl();
 		if (deleteExamId.equalsIgnoreCase("")) {
 			response.sendRedirect("admin/manageExamInfo.jsp?error=deletingexamInfo");
 		} else {
 			int id = Integer.parseInt(deleteExamId);
-			System.out.println("Exam deleted=" + interfaceExamInfo.deleteExamInfo(id));
-			response.sendRedirect("admin/manageExamInfo.jsp?error=sucessfuldelete");
+			int delete=interfaceExamInfo.deleteExamInfo(id);
+			if (delete==1) {
+				response.sendRedirect("admin/manageExamInfo.jsp?error=sucessfuldelete");	
+			}else{
+				response.sendRedirect("admin/manageExamInfo.jsp?error=notDeleted_inuse");		
+			}
+			
 		}
 	}
 

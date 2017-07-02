@@ -85,9 +85,9 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 				model.setPassmarks(rs.getInt("pass_marks"));
 				model.setStatus(rs.getInt("status"));
 				model.setExamId(rs.getInt("exam_id"));
-			
+			int id1=rs.getInt("exam_type_id");
 				ExamModelServiceInterface examModelType = new ExamModelServiceImpl();
-				model.setExamTypeName(examModelType.getSelectedExam(rs.getInt("exam_type_id")));
+				model.setExamTypeName(examModelType.getSelectedExam(id1).getExamTypeName());
 				
 				SubjectModelServiceInterface inter= new SubjectModelServiceImpl();
 				model.setSubjectName(inter.getSelectedSubject(rs.getInt("subject_id")).getSubjectName());
@@ -198,9 +198,9 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 				model.setPassmarks(rs.getInt("pass_marks"));
 				model.setStatus(rs.getInt("status"));
 				model.setExamId(rs.getInt("exam_id"));
-			
+				int id1=rs.getInt("exam_type_id");
 				ExamModelServiceInterface examModelType = new ExamModelServiceImpl();
-				model.setExamTypeName(examModelType.getSelectedExam(rs.getInt("exam_type_id")));
+				model.setExamTypeName(examModelType.getSelectedExam(id1).getExamTypeName());
 				
 				SubjectModelServiceInterface inter= new SubjectModelServiceImpl();
 				model.setSubjectName(inter.getSelectedSubject(rs.getInt("subject_id")).getSubjectName());

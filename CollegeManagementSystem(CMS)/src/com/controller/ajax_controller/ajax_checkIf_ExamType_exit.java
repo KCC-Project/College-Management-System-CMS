@@ -21,18 +21,22 @@ public class ajax_checkIf_ExamType_exit extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String examTypeName=request.getParameter("value");
+		
 		ExamModelServiceInterface model= new ExamModelServiceImpl();
 		List<ExamModel> list=model.getAllExamType();
 		PrintWriter out= response.getWriter();
+		
+		int sucess=0;
 		for (ExamModel examModel : list) {
 			if (examTypeName.equalsIgnoreCase(examModel.getExamTypeName())) {
-				out.write(1);
-				out.flush();
+			sucess=0;
+			break;
 			}else{
-				out.write(0);
-				out.flush();
+				sucess=1;
 			}
 		}
+		out.write(""+sucess);
+		out.flush();
 	}
 
 }

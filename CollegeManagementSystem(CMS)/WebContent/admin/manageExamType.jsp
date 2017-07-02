@@ -70,11 +70,7 @@
 				
 					for (ExamModel model : list) {
 						i++;
-						StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
-						StringBuffer viewExamDetail = new StringBuffer(stringBuffer.substring(0, 3));
-						StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
-						viewExamDetail.append("_term");
-						deleteExamType.append("_exam");
+						
 					
 						
 				%>
@@ -96,14 +92,14 @@
 										</span> <span class="btn btn-sm btn-warning  hidden-xs"> <i
 											class="fa fa-sitemap"></i> Faculty &nbsp; <span class="badge">
 												1 </span>
-										</span> <a class="btn-sm btn btn-default" title="View Exam Details" onclick="setId(<%=model.getExamId()%>);"
-											data-toggle="modal" data-target=<%="#" + viewExamDetail%>><i
-											class="fa fa-eye" ></i></a> <a class="btn-sm btn btn-default"
-											data-toggle="modal" data-target=<%="#" + model.getExamId()%>
+										</span> <a href="#?id=<%=model.getExamId() %>" class="btn-sm btn btn-default" title="View Exam Details" "
+											data-toggle="modal" data-target=#viewExamDetail onclick="viewExamDetails('<%=model.getExamId() %>');" id="viewExamDetails"><i
+											class="fa fa-eye" ></i></a> <a onclick="viewExamDetails('<%=model.getExamId() %>');" class="btn-sm btn btn-default" href="#?id=<%=model.getExamId() %>"
+											data-toggle="modal" data-target=#update
 											title="Edit Course Details"><i
-											class="fa fa-pencil-square-o"></i></a> <a href="#?id=<%=model.getExamId() %>" onclick="setId(<%=model.getExamId()%>);"
+											class="fa fa-pencil-square-o"></i></a> <a onclick="viewExamDetails('<%=model.getExamId() %>');" href="#?id=<%=model.getExamId() %>" 
 											class="btn-sm btn btn-default" data-toggle="modal"
-											data-target=<%="#" + deleteExamType%> title="Delete"
+											data-target=#deleteExamType title="Delete"
 											data-method="post"><i class="fa fa-trash-o"></i></a>
 									</div>
 								</h4>
@@ -138,7 +134,7 @@
 							<div class="form-group">
 								<label>Exam Type : <span class="astriek">&nbsp;*</span></label>
 								<input type="text" required class="form-control"
-									id="add_exam_type" name="add_exam_type" onkeyup="checkIfExit();"
+									id="add_exam_type" name="add_exam_type" onfocus="resetBtn();" onblur="checkIfExit();"
 									placeholder="Enter Exam Type">
 							</div>
 							<!--=================summary form================  -->
@@ -164,17 +160,8 @@
 
 		<!--=========================================================================================  -->
 		<!-- Modal -->
-		<%
-			for (ExamModel model : list) {
-				i++;
-				StringBuffer stringBuffer = new StringBuffer(model.getExamTypeName());
-				StringBuffer viewExamDetail = new StringBuffer(stringBuffer.substring(0, 3));
-				StringBuffer deleteExamType = new StringBuffer(stringBuffer.substring(0, 2));
-				viewExamDetail.append("_term");
-				deleteExamType.append("_exam");
-		%>
-
-		<div id="<%=model.getExamId()%>" class="modal fade" role="dialog">
+		
+		<div id="update" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
@@ -190,11 +177,11 @@
 								<label>Exam Type : <span class="astriek">&nbsp;*</span></label>
 								<input type="text" required class="form-control"
 									id="update_exam_type" name="update_exam_type"
-									value="<%=model.getExamTypeName()%>">
+									>
 							</div>
 						</div>
 						<div class="modal-footer">
-							<input type=hidden name="id" value="<%=model.getExamId()%>">
+							<input type=hidden name="id" id="updateidJson">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit" class="btn btn-success">Submit</button>
@@ -209,7 +196,7 @@
 
 		<!-- Modal -->
 
-		<div id="<%=viewExamDetail %>" class="modal fade" role="dialog">
+		<div id="viewExamDetail" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
@@ -221,8 +208,7 @@
 					<form action="#" method="Post">
 						<div class="modal-body">
 
-							<h3>
-								<%=model.getSummary()%>
+							<h3 id="summaryHeadingJson">
 							</h3>
 						</div>
 						<div class="modal-footer">
@@ -240,7 +226,7 @@
 
 		<!-- Modal -->
 
-		<div id="<%=deleteExamType%>" class="modal fade" role="dialog">
+		<div id="deleteExamType" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
@@ -250,10 +236,10 @@
 							<h3 >
 								Are you sure you want to delete this item?
 								<br>
-								<strong"><%=model.getExamTypeName()%></strong></h3>
+								<strong id="deleteIteamJson"></strong></h3>
 						</div>
 						<div class="modal-footer">
-							<input type=hidden  name="deleteId" id="deleteId12">
+							<input type=hidden  name="deleteIdJson" id="deleteIdJson" >
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit"  class="btn btn-success"
@@ -264,9 +250,8 @@
 
 			</div>
 		</div>
-		<%
-			}
-		%>
+		
+		
 		<!--=========================================================================================  -->
 
 
@@ -286,12 +271,7 @@
 		height : 200
 
 	});
-	
-	function setId(id) {
-		document.getElementById("deleteId12").value=id;
 
-	}
-	
 	function checkIfExit() {
 		var value=document.getElementById("add_exam_type").value;
 		var url="../ajax_checkIf_ExamType_exit";
@@ -302,8 +282,40 @@
 		aj.onreadystatechange=function(){
 			if (aj.readyState==4&&aj.status==200) {
 				var return_data=aj.responseText;
-				alert(return_date);
-				document.getElementById("submitBtn").disable=true;
+				
+				if (return_data==0) {
+					alert("Data already Exit");
+					document.getElementById("submitBtn").disabled = true;
+					
+				}
+			
+				}
+		}
+		aj.send(idSend);
+	}
+	
+	function resetBtn() {
+		document.getElementById("submitBtn").disabled = false;
+		
+	}
+	
+	
+	/* Json and Ajax used for all  */
+	function viewExamDetails(id) {
+		var value=document.getElementById("viewExamDetails").value;
+		var url="../ajax_ViewExamTypeSummary";
+		var idSend="value="+id;
+		var aj=new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		aj.onreadystatechange=function(){
+			if (aj.readyState==4&&aj.status==200) {
+			var jSonObject=eval('(' +aj.responseText+')');	
+			document.getElementById("summaryHeadingJson").innerHTML=jSonObject.summary;
+			document.getElementById("update_exam_type").value=jSonObject.examTypeName;
+			document.getElementById("deleteIteamJson").innerHTML=jSonObject.examTypeName;
+			document.getElementById("deleteIdJson").value=jSonObject.examId;
+			document.getElementById("updateidJson").value=jSonObject.examId;
 			}
 		}
 		aj.send(idSend);

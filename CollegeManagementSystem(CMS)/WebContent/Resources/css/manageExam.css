@@ -66,3 +66,18 @@ a{
     background-color: #ddffdd;
     border-left: 6px solid #4CAF50;
 }
+
+
+
+.tblThTd th, td {
+    border: none;
+    text-align: left;
+    padding: 8px;
+}
+
+.tblThTd {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}

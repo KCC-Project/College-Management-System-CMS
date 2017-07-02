@@ -27,7 +27,7 @@ public class ExamModelServiceImpl implements ExamModelServiceInterface {
 	}
 
 	@Override
-	public String getSelectedExam(int id) {
+	public ExamModel getSelectedExam(int id) {
 		return examModel.getSelectedExam(id);
 	}
 
