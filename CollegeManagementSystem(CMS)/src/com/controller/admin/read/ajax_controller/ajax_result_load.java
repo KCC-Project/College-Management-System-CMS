@@ -20,7 +20,7 @@ import com.util.JsonUtil;
 @WebServlet("/ajax_result_load")
 public class ajax_result_load extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+//buda
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
