@@ -247,7 +247,7 @@ function load_semester(){
 	          
 	            for (var i = 0; i < json.length; i++) {
 	            	content += '<tr>';
-	            	content += '<td>' + i+1 + '</td>';
+	            	content += '<td>' + i + '</td>';
 		            content += '<td>' + json[i].semester_id + '</td>';
 		            content += '<td>' + json[i].semester_no + '</td>';
 		            content += '<td>' + json[i].program_id + '</td>';

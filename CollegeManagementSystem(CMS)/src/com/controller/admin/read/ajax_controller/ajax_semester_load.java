@@ -23,6 +23,7 @@ public class ajax_semester_load extends HttpServlet {
 			System.out.println("no data recevied");
 		}else{
 			int id=Integer.parseInt(program_id);
+			System.out.println(program_id);
 			SemesterServiceInterface semester= new SemesterServiceImpl();
 			String semesterJson=JsonUtil.convertJavaToJson(semester.loadByProgramId(id));
 			

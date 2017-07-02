@@ -88,8 +88,9 @@ public class SemesterModelImpl implements SemesterModelInterface {
 		try {
 			
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "select * from semester where program_id=program_id order by semester_no asc";
+			sql = "select * from semester where program_id=? order by semester_no asc";
 			pst = conn.prepareStatement(sql);
+			pst.setInt(1, program_id);
 			rs = pst.executeQuery();
 		
 			while(rs.next()){
