@@ -179,13 +179,13 @@
 					cell6.innerHTML = item.examMarksByStudent;
 					var passFailStatus=item.passFailStatus;
 					if(passFailStatus===0){
-						cell7.innerHTML = '<span class="btn btn-sm btn-danger "> <i class="fa fa-sitemap"></i> Pass &nbsp;</span>';	
+						cell7.innerHTML = '<span class="btn btn-sm btn-danger "> <i class="fa fa-sitemap"></i> &nbsp;&nbsp;Fail &nbsp;</span>';	
 					}else{
 					cell7.innerHTML = '<span class="btn btn-sm btn-warning "> <i class="fa fa-sitemap"></i> Pass &nbsp;</span>';
 					}
 					cell8.innerHTML = '<span class="btn btn-sm btn-info  hidden-xs"> <i class="fa fa-users"></i> BE-Computer &nbsp; </span>';
 					cell9.innerHTML = '<a href='+item.resultId+' value='+item.resultId+' class="btn-sm btn btn-default" title="View Exam Details" data-toggle="modal" data-target=p><i class="fa fa-eye"></i></a><a href='+item.resultId+' value='+item.resultId+'  class="btn-sm btn btn-default" data-toggle="modal" data-target=# title="EditCourseDetails"><i class="fa fa-pencil-square-o"></i></a>	<a href='+item.resultId+' value='+item.resultId+' class="btn-sm btn btn-default" data-toggle="modal" data-target=# title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a>';
-							
+			
 					i--;
 				}
 

@@ -49,12 +49,7 @@ public class ajax_result_load extends HttpServlet {
 			int studentId = studentExamResultModel.getStudentId();
 			StudentModel studentName = new StudentServiceImpl().readId(studentId);
 			String fname = studentName.getFirstname();
-			String mName = null;
-			try {
-				mName = studentName.getMiddlename();
-			} catch (Exception e) {
-				mName = "";
-			}
+			String mName = studentName.getMiddlename();
 			String lName = studentName.getLastname();
 
 			ExamInfoModel examInfo = new ExamInfoModelServiceImpl().getSelectedInfo(resultId);
