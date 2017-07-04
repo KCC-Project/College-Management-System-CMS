@@ -27,7 +27,7 @@ public class ajax_loadRequiredInfoFormJson_mangeExamInfo extends HttpServlet {
 			String examInfoJson=JsonUtil.convertJavaToJson(inter.getSelectedInfo(iD));
 			response.setContentType("text/xml");
 			response.setHeader("Cache-Control", "no-cache");
-			System.out.println("mausamJson="+examInfoJson);
+		//	System.out.println("mausamJson="+examInfoJson);
 			response.getWriter().write(examInfoJson);
 		}
 	}

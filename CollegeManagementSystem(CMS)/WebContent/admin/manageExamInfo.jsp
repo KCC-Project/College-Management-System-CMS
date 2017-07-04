@@ -491,7 +491,7 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var jSonObject = eval('(' + aj.responseText + ')');
-				
+				alert("form mausam="+jSonObject.subjectName);
 				document.getElementById("subjectJsonXXX").innerHTML = jSonObject.subjectName;
 				document.getElementById("examTypeJsonXXX").innerHTML = jSonObject.examTypeName;
 

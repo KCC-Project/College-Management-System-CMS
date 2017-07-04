@@ -75,7 +75,7 @@
 							<div class="box-header with-border">
 								<br>
 								<div class="table-responsive">
-									<table class="table table-hover">
+									<table class="table table-hover" id="tblname">
 										<thead>
 											<tr>
 												<td>S.No</td>
@@ -92,7 +92,7 @@
 
 											<tr>
 												<td>1.</td>
-												<td>Mausam Rayamjhi</td>
+												<td id="studentName"></td>
 												<td>Java</td>
 												<td class="hidden-xs">Unit Test</td>
 												<td class="hidden-xs">100</td>
@@ -165,7 +165,7 @@
 	window.addEventListener('load', function() {
 		loadAllResult();
 	}, true);
-	
+
 	function loadAllResult() {
 		var url = "../ajax_result_load";
 		var aj = new XMLHttpRequest();
@@ -175,8 +175,14 @@
 						"application/x-www-form-urlencoded");
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
-			var data=aj.responseText;
-			alert(data);
+
+				var jSonObject = eval('(' + aj.responseText + ')');
+				//alert("mausam="+jSonObject.StudentName);
+				for ( var prop in jSonObject) {
+					var item = jSonObject[prop];
+					alert(item.StudentName);
+				}
+				//document.getElementById("studentName").innerHTML = jSonObject.fullMarks;
 			}
 		}
 		aj.send();

@@ -133,7 +133,7 @@ public class ExamModelImpl implements ExamModelInterface {
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
-			System.out.println("it is ="+id);
+			
 			while (rs.next()) {
 				model.setExamId(rs.getInt("exam_type_id"));
 				model.setExamTypeName(rs.getString("type_name"));
