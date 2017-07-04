@@ -75,7 +75,7 @@
 							<div class="box-header with-border">
 								<br>
 								<div class="table-responsive">
-									<table class="table table-hover" id="tblname">
+									<table class="table table-hover" id="tblResult">
 										<thead>
 											<tr>
 												<td>S.No</td>
@@ -88,33 +88,7 @@
 												<td class="hidden-xs">Faculty</td>
 											</tr>
 										</thead>
-										<tbody>
-
-											<tr>
-												<td>1.</td>
-												<td id="studentName"></td>
-												<td>Java</td>
-												<td class="hidden-xs">Unit Test</td>
-												<td class="hidden-xs">100</td>
-												<td class="hidden-xs">50</td>
-												<td><span class="btn btn-sm btn-warning "> <i
-														class="fa fa-sitemap"></i> Pass &nbsp;
-												</span></td>
-												<td class="hidden-xs"><span
-													class="btn btn-sm btn-info  hidden-xs"> <i
-														class="fa fa-users"></i> BE-Computer &nbsp;
-												</span></td>
-												<td><a class="btn-sm btn btn-default"
-													title="View Exam Details" data-toggle="modal" data-target=p><i
-														class="fa fa-eye"></i></a> <a class="btn-sm btn btn-default"
-													data-toggle="modal" data-target=# title="EditCourseDetails"><i
-														class="fa fa-pencil-square-o"></i></a> <a href="#?id="
-													class="btn-sm btn btn-default" data-toggle="modal"
-													data-target=# title="Delete" data-method="post"><i
-														class="fa fa-trash-o"></i></a></td>
-											</tr>
-
-										</tbody>
+										
 									</table>
 								</div>
 							</div>
@@ -178,11 +152,43 @@
 
 				var jSonObject = eval('(' + aj.responseText + ')');
 				//alert("mausam="+jSonObject.StudentName);
+				var i = jSonObject.length;
+
 				for ( var prop in jSonObject) {
+
 					var item = jSonObject[prop];
-					alert(item.StudentName);
+
+					var table = document.getElementById("tblResult");
+					var row = table.insertRow(1);
+
+					var cell1 = row.insertCell(0);
+					var cell2 = row.insertCell(1);
+					var cell3 = row.insertCell(2);
+					var cell4 = row.insertCell(3);
+					var cell5 = row.insertCell(4);
+					var cell6 = row.insertCell(5);
+					var cell7 = row.insertCell(6);
+					var cell8 = row.insertCell(7);
+					var cell9 = row.insertCell(8);
+
+					cell1.innerHTML = i;
+					cell2.innerHTML = item.StudentName;
+					cell3.innerHTML = item.subjectName;
+					cell4.innerHTML = item.examTypeName;
+					cell5.innerHTML = item.fullMarks;
+					cell6.innerHTML = item.examMarksByStudent;
+					var passFailStatus=item.passFailStatus;
+					if(passFailStatus===0){
+						cell7.innerHTML = '<span class="btn btn-sm btn-danger "> <i class="fa fa-sitemap"></i> Pass &nbsp;</span>';	
+					}else{
+					cell7.innerHTML = '<span class="btn btn-sm btn-warning "> <i class="fa fa-sitemap"></i> Pass &nbsp;</span>';
+					}
+					cell8.innerHTML = '<span class="btn btn-sm btn-info  hidden-xs"> <i class="fa fa-users"></i> BE-Computer &nbsp; </span>';
+					cell9.innerHTML = '<a href='+item.resultId+' value='+item.resultId+' class="btn-sm btn btn-default" title="View Exam Details" data-toggle="modal" data-target=p><i class="fa fa-eye"></i></a><a href='+item.resultId+' value='+item.resultId+'  class="btn-sm btn btn-default" data-toggle="modal" data-target=# title="EditCourseDetails"><i class="fa fa-pencil-square-o"></i></a>	<a href='+item.resultId+' value='+item.resultId+' class="btn-sm btn btn-default" data-toggle="modal" data-target=# title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a>';
+							
+					i--;
 				}
-				//document.getElementById("studentName").innerHTML = jSonObject.fullMarks;
+
 			}
 		}
 		aj.send();

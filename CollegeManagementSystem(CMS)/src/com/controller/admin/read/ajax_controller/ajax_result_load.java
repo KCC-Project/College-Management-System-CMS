@@ -36,12 +36,14 @@ public class ajax_result_load extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		List   JsonObject= new ArrayList<>();
 		
-		ArrayList  ma= new ArrayList<>();
-		Map<String, Object> studentDataMap = new HashMap<String, Object>();
 		StudentExamResultModelServiceInterface result = new StudentExamResultModelServiceImpl();
 		List<StudentExamResultModel> list = result.getAllRecord();
+		
 		for (StudentExamResultModel studentExamResultModel : list) {
+			Map<String, Object> studentDataMap = new HashMap<String, Object>();
+
 			int resultId = studentExamResultModel.getExamId();
 			System.out.println("id="+resultId);
 			int studentId = studentExamResultModel.getStudentId();
@@ -70,7 +72,8 @@ public class ajax_result_load extends HttpServlet {
 			SubjectModel subjectModel = new SubjectModelServiceImpl().getSelectedSubject(subjectId);
 			String subjectName = subjectModel.getSubjectName();
 			int subjectCredit = subjectModel.getSubjectCredit();
-
+			
+			studentDataMap.put("resultId",resultId);
 			studentDataMap.put("StudentName", fname + " " + mName + " " + lName);
 			studentDataMap.put("image", studentName.getImage());
 			studentDataMap.put("phone", studentName.getMobileNo());
@@ -84,14 +87,11 @@ public class ajax_result_load extends HttpServlet {
 			studentDataMap.put("fullMarks", fullMarks);
 			studentDataMap.put("passMarks", passMarks);
 			
-			ma.add(studentDataMap);
+			JsonObject.add(studentDataMap);
 			
 		}
-		
-	
-		System.out.println("ma="+ma);
-		System.out.println("student="+studentDataMap);
-	response.getWriter().write(JsonUtil.convertJavaToJson(ma));
+		System.out.println(JsonObject);
+		response.getWriter().write(JsonUtil.convertJavaToJson(JsonObject));
 
 	}
 
