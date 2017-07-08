@@ -199,7 +199,7 @@
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 								<button type="submit" class="btn btn-success"
-									onclick="loadAllResult();">Search</button>
+									onclick="loadAllResult();" data-dismiss="modal">Search</button>
 							</div>
 						</div>
 
