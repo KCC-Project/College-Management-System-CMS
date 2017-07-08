@@ -9,5 +9,6 @@ public interface SemesterServiceInterface {
 	// requesting the services to semesterServiceImpl
 	public boolean addSemester (SemesterModel semesterModel);
 	public List<SemesterModel> getAllRecord();  
-	public SemesterModel loadByProgramId(int program_id);
+	public List<SemesterModel> loadByProgramId(int program_id);
+	public List<SemesterModel> searchByFields(Object[] obj);
 }

@@ -105,7 +105,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Add Semester</h4>
+						<h4 class="modal-title" id="modal-title">Add Semester</h4>
 					</div>
 					<form action="../Semester_Add_Controller" enctype="multipart/form-data" method="Post">
       <div class="modal-body">
@@ -160,67 +160,7 @@
 	
 	
 	
-	<!-- edit semester model start here -->
 	
-	<div class="modal fade" id="edit_semester_modal" role="dialog">
-			<div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Update Semester</h4>
-					</div>
-					<form action="../Semester_Add_Controller" enctype="multipart/form-data" method="Post">
-      <div class="modal-body">
-        
-						  <div class="form-group">
-						    <label>Faculty: <span class="astriek">*</span></label>
-						    <select required class="form-control" id="faculty-box" name="faculty_id" onChange="load_program();">
-								
-							</select>
-						  </div>
-						  <div class="form-group">
-						    <label>Programme: <span class="astriek">*</span></label>
-						    <select required class="form-control" id="program-box" name="program_id" onChange="load_batch_year();">
-								<option value="" disabled selected>Select Programme</option>
-							</select>
-						  </div>
-						  <div class="form-group">
-						    <label>Batch: <span class="astriek">*</span></label>
-						    <select required class="form-control" name="batch_id" id="batch-box">
-								<option value="" disabled selected>Select Batch</option>
-							</select>
-						  </div>
-						  <div class="form-group">
-						    <label>Semester no.: <span class="astriek">*</span></label>
-						    	<input type="number" id="sem-no" name="semester_no" required class="form-control" placeholder="Semester number">
-						  </div>
-						  <div class="form-group">
-						    <label>Semester Start Date: </label>
-						    	<input type="date" id="start_date" name="start_date" class="form-control" placeholder="yyyy/mm/dd">
-						  </div>
-						  <div class="form-group">
-						    <label>Semester End Date: </label>
-						    <input type="date" id="end_date" name="end_date" class="form-control" placeholder="yyyy/mm/dd">
-						  </div>
-						  <div class="form-group">
-						  	<label>Semester</label>
-						  	<input type="radio" name="status" required checked value="1">Active
-							<input type="radio" name="status" value="0">Completed
-						</div>
-						  
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				         <button type="submit" class="btn btn-success">Submit</button>
-				      </div>
-				      </form>
-				</div>
-
-			</div>
-		</div>
-<!-- ------- edit semester model ends here --------- -->
 
 
 <script src="../Resources/js/jquery-3.2.1.min.js"></script>
@@ -274,6 +214,14 @@ if (gobtn.addEventListener) {                    // For all major browsers, exce
 	gobtn.attachEvent("onclick", load_semester());
 }
 
+var editbtn = document.getElementById("edit");
+if (editbtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
+	//editbtn.addEventListener("click", load_program(event));
+	editbtn.addEventListener("click", function(){load_faculty(event)}, false);
+} else if (editbtn.attachEvent) {                  // For IE 8 and earlier versions
+	editbtn.attachEvent("onclick", load_faculty(event));
+}
+	
 function load_faculty(e) {
 	var id=document.getElementById("faculty-box").value;
 	alert("s"+e.target.id);
@@ -285,7 +233,7 @@ function load_faculty(e) {
 	aj.onreadystatechange=function(){
 		if (aj.readyState==4&&aj.status==200) {
 			var return_data=aj.responseText;
-			if(getid=="modal-box" || getid=="faculty-box"){
+			if(getid=="modal-box" || getid=="faculty-box" || getid=="edit"){
 				document.getElementById("faculty-box").innerHTML=return_data;	
 			}else {
 				document.getElementById("p-faculty-box").innerHTML=return_data;
@@ -368,8 +316,9 @@ function load_semester(){
 		            content += '<td>' + json[i].end_date + '</td>';
 		            content += '<td>' + json[i].status + '</td>';
 		            
-		            content += '<td><a href="?id='+json[i].semester_id+'" class="btn btn-primary" data-placement="top" data-toggle="tooltip" title="Edit"> \
-			            <span class="glyphicon glyphicon-pencil"></span></a></td>';
+		            content += '<td><button type="button" class="btn btn-info pull-right" \
+								data-toggle="modal" data-target=#add_semester_modal id="edit" onClick="load_edit();">Edit\
+			            <span class="glyphicon glyphicon-pencil"></span></button></td>';
 		            
 		            content += '<td><a href="#" class="btn btn-danger" data-placement="top" data-toggle="tooltip" title="Delete"> \
 		            <span class="glyphicon glyphicon-trash"></span></a></td>';
@@ -382,6 +331,10 @@ function load_semester(){
 	     }
 	}
 	aj.send(idSend);
+}
+function load_edit(){
+	load_faculty(event);
+	alert("this is running");
 }
 
 

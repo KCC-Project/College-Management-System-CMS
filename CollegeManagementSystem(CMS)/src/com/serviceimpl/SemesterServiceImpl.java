@@ -22,8 +22,11 @@ public class SemesterServiceImpl implements SemesterServiceInterface {
 	}
 
 	@Override
-	public SemesterModel loadByProgramId(int program_id) {
+	public List<SemesterModel> loadByProgramId(int program_id) {
 		return model.loadByProgramId(program_id);
 	}
-
+	
+	public List<SemesterModel> searchByFields(Object[] obj){
+		return model.searchByFields(obj);
+	}
 }

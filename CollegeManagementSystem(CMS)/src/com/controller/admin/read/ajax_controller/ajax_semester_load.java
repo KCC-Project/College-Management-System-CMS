@@ -1,6 +1,8 @@
 package com.controller.admin.read.ajax_controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,9 +24,18 @@ public class ajax_semester_load extends HttpServlet {
 		if (program_id.equalsIgnoreCase("")) {
 			System.out.println("no data recevied");
 		}else{
+			
 			int id=Integer.parseInt(program_id);
 			System.out.println(program_id);
 			SemesterServiceInterface semester= new SemesterServiceImpl();
+			
+			Object[] obj = new Object[7];
+			obj[1]=5;
+			
+			System.out.println(obj[1]);
+			String jsonSearch=JsonUtil.convertJavaToJson(semester.searchByFields(obj));
+			System.out.println("json checking="+jsonSearch);
+			
 			String semesterJson=JsonUtil.convertJavaToJson(semester.loadByProgramId(id));
 			
 			response.setContentType("text/xml");

@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.dao.SemesterModelInterface;
 import com.model.SemesterModel;
-import com.model.YearModel;
+import com.util.DateUtil;
 
 public class SemesterModelImpl implements SemesterModelInterface {
 
@@ -83,9 +83,9 @@ public class SemesterModelImpl implements SemesterModelInterface {
 	}
 
 	@Override
-	public SemesterModel loadByProgramId(int program_id) {
-		//List<SemesterModel> semester = new ArrayList<>();
-		SemesterModel semesterModel = new SemesterModel();
+	public List<SemesterModel> loadByProgramId(int program_id) {
+		List<SemesterModel> semester = new ArrayList<>();
+		
 		try {
 			
 			conn = DatabaseConnection.connectToDatabase();
@@ -95,7 +95,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 			rs = pst.executeQuery();
 		
 			while(rs.next()){
-			
+				SemesterModel semesterModel = new SemesterModel();
 				semesterModel.setSemester_id(rs.getInt("semester_id"));
 				semesterModel.setSemester_no(rs.getInt("semester_no"));
 				semesterModel.setProgram_id(rs.getInt("program_id"));
@@ -104,7 +104,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 				semesterModel.setEnd_date(rs.getDate("sem_end_date"));
 				semesterModel.setStatus(rs.getInt("status"));
 				
-				//semester.add(semesterModel);
+				semester.add(semesterModel);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -120,7 +120,106 @@ public class SemesterModelImpl implements SemesterModelInterface {
 			
 		}
 		
-		return semesterModel;
+		return semester;
 	}
 
+	@Override
+	public List<SemesterModel> searchByFields(Object[] obj) {
+		List<Object> parameters = new ArrayList<Object>();
+		List<SemesterModel> semester = new ArrayList<>();
+		int semester_id = 0;
+		int semester_no = 0;
+		int program_id = 0;
+		int batch_year = 0;
+		java.sql.Date sem_start_date_sql = null;
+		java.sql.Date sem_end_date_sql = null;
+		int status = 0;
+		
+		if (obj[0] != null) {  semester_id = Integer.parseInt(obj[0].toString()); }
+		if (obj[1] != null) {  semester_no = Integer.parseInt(obj[1].toString()); }
+		if (obj[2] != null) {  program_id = Integer.parseInt(obj[2].toString()); }
+		if (obj[3] != null) {  batch_year = Integer.parseInt(obj[3].toString()); }
+		if (obj[4] != null) { Date sem_start_date = DateUtil.convertToDate(obj[4].toString()); 
+			sem_start_date_sql = new java.sql.Date(sem_start_date.getTime()); }// converting
+		if (obj[5] != null) { Date sem_end_date = DateUtil.convertToDate(obj[5].toString());
+			sem_end_date_sql = new java.sql.Date(sem_end_date.getTime()); }//converting
+		if (obj[6] != null) {  status = Integer.parseInt(obj[6].toString()); }
+		
+		try {
+	        StringBuilder query = new StringBuilder("SELECT * FROM semester WHERE 1=1");
+	        
+			if (semester_id != 0) {
+	            query.append(" AND semester_id = ?");
+	            parameters.add(semester_id);
+	        }
+	        if (semester_no != 0) {
+	            query.append(" AND semester_no = ?");
+	            parameters.add(semester_no);
+	        }
+	        if (program_id != 0) {
+	            query.append(" AND program_id = ?");
+	            parameters.add(program_id);
+	        }
+	        if (batch_year != 0) {
+	            query.append(" AND batch_year = ?");
+	            parameters.add(batch_year);
+	        }
+			if (sem_start_date_sql != null) {
+	            query.append(" AND sem_start_date_sql = ?");
+	            parameters.add(sem_start_date_sql);
+	        }
+	        if (sem_end_date_sql != null) {
+	            query.append(" AND sem_end_date_sql = ?");
+	            parameters.add(sem_end_date_sql);
+	        }
+	        if (status != 0) {
+	            query.append(" AND status = ?");
+	            parameters.add(status);
+	        }
+	        
+	        String Query = query.toString();
+	        System.out.println(Query);
+	        
+	        conn = DatabaseConnection.connectToDatabase();
+	        pst = conn.prepareStatement(Query);
+
+	        int i = 1;
+	        for (Object parameter : parameters) {
+	            pst.setObject(i++, parameter);
+	        }
+
+	        rs = pst.executeQuery();
+	        if (rs != null) {
+	            
+	        	while(rs.next()){
+					SemesterModel semesterModel = new SemesterModel();
+					semesterModel.setSemester_id(rs.getInt("semester_id"));
+					semesterModel.setSemester_no(rs.getInt("semester_no"));
+					semesterModel.setProgram_id(rs.getInt("program_id"));
+					semesterModel.setBatch_year(rs.getInt("batch_year_id"));
+					semesterModel.setStart_date(rs.getDate("sem_start_date"));
+					semesterModel.setEnd_date(rs.getDate("sem_end_date"));
+					semesterModel.setStatus(rs.getInt("status"));
+					
+					semester.add(semesterModel);
+				}
+
+	        }
+
+	    }  catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return semester;
+	}
 }
