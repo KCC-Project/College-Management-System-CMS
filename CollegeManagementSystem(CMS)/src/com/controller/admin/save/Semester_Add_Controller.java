@@ -43,7 +43,7 @@ public class Semester_Add_Controller extends HttpServlet {
 		// checking for empty and invalid values
 		if(semester_no == 0 || program_id == 0 || batch_year == 0 ){
 			System.out.println("User Entered Invalid Values");
-			response.sendRedirect("admin/semester.jsp?err=user input data error");
+			response.sendRedirect("admin/manageSemesters.jsp?err=user input data error");
 		}
 		else {
 			// Semester Model object
@@ -64,10 +64,10 @@ public class Semester_Add_Controller extends HttpServlet {
 			SemesterServiceInterface semesterService = new SemesterServiceImpl();
 			if (semesterService.addSemester(semesterModel) == true) {
 				System.out.println("Semester Added Sucessfully");
-				response.sendRedirect("admin/semester.jsp?status=sucess");
+				response.sendRedirect("admin/manageSemesters.jsp?status=sucess");
 			} else {
 				System.out.println("Oops! Something went Wrong");
-				response.sendRedirect("admin/semester.jsp?err=couldnt add");
+				response.sendRedirect("admin/manageSemesters.jsp?err=couldnt add");
 			}
 
 		}
