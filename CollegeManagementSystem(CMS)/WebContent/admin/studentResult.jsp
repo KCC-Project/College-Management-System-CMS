@@ -45,7 +45,7 @@
 
 						<button type="button" class="btn btn-info pull-right" id="qqq"
 							data-toggle="modal" data-target=#add_exam_modal-info>
-							Result</button>
+							Add Result</button>
 						<button id="seacrchBtnClicked" type="button" class="btn btn-info"
 							style="float: left; margin-left: -20px;" data-toggle="modal"
 							data-target=#searchModal onclick="searchBtn();">
