@@ -117,15 +117,15 @@
 									</select> <select required class="form-control" id="Semester_box"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
-										<option value="1" >1</option>
-										<option value="2" >2</option>
-										<option value="3" >3</option>
-										<option value="4" >4</option>
-										<option value="5" >5</option>
-										<option value="6" >6</option>
-										<option value="7" >7</option>
-										<option value="8" >8</option>
-										
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+
 									</select> <select required class="form-control" id="pass_fail_box"
 										name="pass_fail_box">
 										<option value="" disabled selected>Select Pass/Fail</option>
@@ -139,14 +139,14 @@
 									</select> <select required class="form-control" id="Semester_box"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
-										<option value="1" >1</option>
-										<option value="2" >2</option>
-										<option value="3" >3</option>
-										<option value="4" >4</option>
-										<option value="5" >5</option>
-										<option value="6" >6</option>
-										<option value="7" >7</option>
-										<option value="8" >8</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
 									</select> <select required class="form-control"
 										id="exam_type_semester_box" name="exam_type_semester_box">
 										<option value="" disabled selected>Select Exam Type</option>
@@ -160,14 +160,14 @@
 									</select> <select required class="form-control" id="Semester_box"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
-										<option value="1" >1</option>
-										<option value="2" >2</option>
-										<option value="3" >3</option>
-										<option value="4" >4</option>
-										<option value="5" >5</option>
-										<option value="6" >6</option>
-										<option value="7" >7</option>
-										<option value="8" >8</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
 									</select> <select required class="form-control"
 										id="subject-semester-box" name="subject-semester-box">
 										<option value="" disabled selected>Select Subject</option>
@@ -181,14 +181,14 @@
 									</select> <select required class="form-control" id="Semester_box5"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
-										<option value="1" >1</option>
-										<option value="2" >2</option>
-										<option value="3" >3</option>
-										<option value="4" >4</option>
-										<option value="5" >5</option>
-										<option value="6" >6</option>
-										<option value="7" >7</option>
-										<option value="8" >8</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
 									</select> <input type="text" class="form-control"
 										name="searchedEnteredField" id="searchedEnteredField"
 										placeholder="Enter Name/Email/Marks/ID">
@@ -198,7 +198,8 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-success" onclick="loadAllResult();">Search</button>
+								<button type="submit" class="btn btn-success"
+									onclick="loadAllResult();">Search</button>
 							</div>
 						</div>
 
@@ -297,27 +298,25 @@
 	function searchBtn() {
 		load_faculty();
 	}
-	
 
 	function loadAllResult() {
 		var table = document.getElementById("tblResult");
 		var tableHeaderRowCount = 1;
 		var rowCount = table.rows.length;
-		alert(rowCount);
+		//alert(rowCount);
 		for (var i = tableHeaderRowCount; i < rowCount; i++) {
-		    table.deleteRow(tableHeaderRowCount);
-		}	
-		var facultyId=document.getElementById("p-faculty-box").value;  
-		var programId=document.getElementById("p-program-box").value;  
-		
-		var batchIdName=document.getElementById("batch-box5").value;  
-		var semesterIdName=document.getElementById("Semester_box5").value;  
-		var nameIdEmailMarks=document.getElementById("searchedEnteredField").value;  
-				
-		
-	//var send="facultyId="+facultyId+"programId="+programId+"batchIdName="+batchIdName+"semesterIdName="+semesterIdName+"nameIdEmailMarks="+nameIdEmailMarks;
-	var send="nameIdEmailMarks="+nameIdEmailMarks;
-	var url = "../ajax_result_load";
+			table.deleteRow(tableHeaderRowCount);
+		}
+		var facultyId = document.getElementById("p-faculty-box").value;
+		var programId = document.getElementById("p-program-box").value;
+
+		var batchIdName = document.getElementById("batch-box5").value;
+		var semesterIdName = document.getElementById("Semester_box5").value;
+		var nameIdEmailMarks = document.getElementById("searchedEnteredField").value;
+
+		//var send="facultyId="+facultyId+"programId="+programId+"batchIdName="+batchIdName+"semesterIdName="+semesterIdName+"nameIdEmailMarks="+nameIdEmailMarks;
+		var send = "nameIdEmailMarks=" + nameIdEmailMarks;
+		var url = "../ajax_result_load";
 		var aj = new XMLHttpRequest();
 		aj.open("POST", url, true);
 		aj
@@ -329,8 +328,7 @@
 				var jSonObject = eval('(' + aj.responseText + ')');
 				//alert("mausam="+jSonObject.StudentName);
 				var i = jSonObject.length;
-				
-				
+
 				for ( var prop in jSonObject) {
 
 					var item = jSonObject[prop];
@@ -463,27 +461,28 @@
 			document.getElementById("exam_type-semester").hidden = true;
 		}
 	}
-	
+
 	function load_batch_year() {
-		
-		var url="../ajax_year_load";
-		var idSend="id=1";
-		var aj=new XMLHttpRequest();
+
+		var url = "../ajax_year_load";
+		var idSend = "id=1";
+		var aj = new XMLHttpRequest();
 		aj.open("POST", url, true);
-		aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		aj.onreadystatechange=function(){
-			if (aj.readyState==4&&aj.status==200) {
-				var return_data=aj.responseText;
-				document.getElementById("batch-box1").innerHTML=return_data;
-				document.getElementById("batch-box2").innerHTML=return_data;
-				document.getElementById("batch-box3").innerHTML=return_data;
-				document.getElementById("batch-box4").innerHTML=return_data;
-				document.getElementById("batch-box5").innerHTML=return_data;
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var return_data = aj.responseText;
+				document.getElementById("batch-box1").innerHTML = return_data;
+				document.getElementById("batch-box2").innerHTML = return_data;
+				document.getElementById("batch-box3").innerHTML = return_data;
+				document.getElementById("batch-box4").innerHTML = return_data;
+				document.getElementById("batch-box5").innerHTML = return_data;
 			}
 		}
 		aj.send(idSend);
 	}
-
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../Resources/js/jquery-3.2.1.min.js"></script>
