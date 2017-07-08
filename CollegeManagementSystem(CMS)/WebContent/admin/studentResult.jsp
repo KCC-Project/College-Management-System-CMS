@@ -46,11 +46,135 @@
 						<button type="button" class="btn btn-info pull-right" id="qqq"
 							data-toggle="modal" data-target=#add_exam_modal-info>
 							Result</button>
-
+						<button id="seacrchBtnClicked" type="button" class="btn btn-info"
+							style="float: left; margin-left: -20px;" data-toggle="modal"
+							data-target=#searchModal onclick="searchBtn();">
+							<span class="glyphicon glyphicon-search"></span> Search
+						</button>
 					</h3>
+				</div>
+
+			</div>
+
+			<!--=======================================Rearching ================================ -->
+			<div class="modal fade" id="searchModal" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Searching</h4>
+
+						</div>
+
+						<div class="modal-body">
+							<div class="row">
+								<div class="form-group col-sm-6">
+									<select required class="form-control" id="p-faculty-box"
+										name="faculty_id" onChange="load_program();">
+									</select>
+								</div>
+								<div class="form-group col-sm-6">
+									<select required class="form-control" id="p-program-box"
+										name="program_id">
+										<option value="" disabled selected>Select Programme</option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<p>
+									<button class="w3-button w3-block w3-teal">Searched By</button>
+								</p>
+								<div class="form-group col-sm-6">
+									<select required class="form-control" id="searchIteam"
+										name="searchIteam" onchange="searcheOption();">
+										<option value="" disabled selected>Select</option>
+										<option value="Name">Name</option>
+										<option value="Batch">Batch</option>
+										<option value="Id">Id</option>
+										<option value="Email">Email</option>
+										<option value="Marks">Marks</option>
+										<option value="Pass/Fail">Pass/Fail</option>
+										<option value="Exam Type">Exam Type</option>
+										<option value="Subject">Subject</option>
+									</select>
+								</div>
+								<div class="form-group col-sm-6" id="semester-batch" hidden>
+									<select class="form-control" id="batch-box" name="batch_id">
+										<option value="" disabled selected>Select Batch</option>
+									</select> <select required class="form-control" id="Semester_box"
+										name="Semester_box">
+										<option value="" disabled selected>Select Semester</option>
+									</select>
+								</div>
+
+
+								<div class="form-group col-sm-6" id="fass-fail-semester" hidden>
+									<select class="form-control" id="batch-box" name="batch_id">
+										<option value="" disabled selected>Select Batch</option>
+									</select> <select required class="form-control" id="Semester_box"
+										name="Semester_box">
+										<option value="" disabled selected>Select Semester</option>
+									</select> <select required class="form-control" id="pass_fail_box"
+										name="pass_fail_box">
+										<option value="" disabled selected>Select Pass/Fail</option>
+									</select>
+								</div>
+
+
+								<div class="form-group col-sm-6" id="exam_type-semester" hidden>
+									<select class="form-control" id="batch-box" name="batch_id">
+										<option value="" disabled selected>Select Batch</option>
+									</select> <select required class="form-control" id="Semester_box"
+										name="Semester_box">
+										<option value="" disabled selected>Select Semester</option>
+									</select> <select required class="form-control"
+										id="exam_type_semester_box" name="exam_type_semester_box">
+										<option value="" disabled selected>Select Exam Type</option>
+									</select>
+								</div>
+
+
+								<div class="form-group col-sm-6" id="subject-semester" hidden>
+									<select class="form-control" id="batch-box" name="batch_id">
+										<option value="" disabled selected>Select Batch</option>
+									</select> <select required class="form-control" id="Semester_box"
+										name="Semester_box">
+										<option value="" disabled selected>Select Semester</option>
+									</select> <select required class="form-control"
+										id="subject-semester-box" name="subject-semester-box">
+										<option value="" disabled selected>Select Subject</option>
+									</select>
+								</div>
+
+
+								<div class="form-group col-sm-6" id="name-email-marks" hidden>
+									<select class="form-control" id="batch-box" name="batch_id">
+										<option value="" disabled selected>Select Batch</option>
+									</select> <select required class="form-control" id="Semester_box"
+										name="Semester_box">
+										<option value="" disabled selected>Select Semester</option>
+									</select> <input type="text" class="form-control"
+										name="searchedEnteredField" id="searchedEnteredField"
+										placeholder="Enter Name/Email/Marks/ID">
+								</div>
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-success">Search</button>
+							</div>
+						</div>
+
+
+
+					</div>
 
 				</div>
 			</div>
+
 
 			<!--====================================================Table==================================================================  -->
 			<div class="box box-primary with-border" style="margin-top: 10px;">
@@ -88,7 +212,7 @@
 												<td class="hidden-xs">Faculty</td>
 											</tr>
 										</thead>
-										
+
 									</table>
 								</div>
 							</div>
@@ -136,6 +260,9 @@
 	</div>
 </div>
 <script type="text/javascript">
+	function searchBtn() {
+		load_faculty();
+	}
 	window.addEventListener('load', function() {
 		loadAllResult();
 	}, true);
@@ -177,21 +304,114 @@
 					cell4.innerHTML = item.examTypeName;
 					cell5.innerHTML = item.fullMarks;
 					cell6.innerHTML = item.examMarksByStudent;
-					var passFailStatus=item.passFailStatus;
-					if(passFailStatus===0){
-						cell7.innerHTML = '<span class="btn btn-sm btn-danger "> <i class="fa fa-sitemap"></i> &nbsp;&nbsp;Fail &nbsp;</span>';	
-					}else{
-					cell7.innerHTML = '<span class="btn btn-sm btn-warning "> <i class="fa fa-sitemap"></i> Pass &nbsp;</span>';
+					var passFailStatus = item.passFailStatus;
+					if (passFailStatus === 0) {
+						cell7.innerHTML = '<span class="btn btn-sm btn-danger "> <i class="fa fa-sitemap"></i> &nbsp;&nbsp;Fail &nbsp;</span>';
+					} else {
+						cell7.innerHTML = '<span class="btn btn-sm btn-warning "> <i class="fa fa-sitemap"></i> Pass &nbsp;</span>';
 					}
 					cell8.innerHTML = '<span class="btn btn-sm btn-info  hidden-xs"> <i class="fa fa-users"></i> BE-Computer &nbsp; </span>';
 					cell9.innerHTML = '<a href='+item.resultId+' value='+item.resultId+' class="btn-sm btn btn-default" title="View Exam Details" data-toggle="modal" data-target=p><i class="fa fa-eye"></i></a><a href='+item.resultId+' value='+item.resultId+'  class="btn-sm btn btn-default" data-toggle="modal" data-target=# title="EditCourseDetails"><i class="fa fa-pencil-square-o"></i></a>	<a href='+item.resultId+' value='+item.resultId+' class="btn-sm btn btn-default" data-toggle="modal" data-target=# title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a>';
-			
+
 					i--;
 				}
 
 			}
 		}
 		aj.send();
+	}
+
+	function load_faculty() {
+		var getid = event.target.id;
+		var url = "../ajax_faculty_load";
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var return_data = aj.responseText;
+				if (getid == "modal-box" || getid == "faculty-box") {
+					document.getElementById("faculty-box").innerHTML = return_data;
+				} else {
+					document.getElementById("p-faculty-box").innerHTML = return_data;
+				}
+
+			}
+		}
+		aj.send();
+	}
+
+	function load_program() {
+		var getid = event.target.id;
+		if (getid == "faculty-box") {
+			var id = document.getElementById("faculty-box").value;
+		} else {
+			var id = document.getElementById("p-faculty-box").value;
+		}
+		var url = "../aja";
+		var idSend = "id=" + id;
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var return_data = aj.responseText;
+				if (getid == "faculty-box") {
+					document.getElementById("program-box").innerHTML = return_data;
+				} else {
+					document.getElementById("p-program-box").innerHTML = return_data;
+				}
+			}
+		}
+		aj.send(idSend);
+	}
+	function searcheOption() {
+		var searchedOption = document.getElementById("searchIteam").value;
+		if (searchedOption === "Name" || searchedOption === "Id"
+				|| searchedOption === "Email" || searchedOption === "Marks") {
+			document.getElementById("name-email-marks").hidden = false;
+
+			document.getElementById("semester-batch").hidden = true;
+			document.getElementById("fass-fail-semester").hidden = true;
+			document.getElementById("exam_type-semester").hidden = true;
+			document.getElementById("subject-semester").hidden = true;
+		} else if (searchedOption === "Batch") {
+			document.getElementById("semester-batch").hidden = false;
+
+			document.getElementById("name-email-marks").hidden = true;
+			document.getElementById("fass-fail-semester").hidden = true;
+			document.getElementById("exam_type-semester").hidden = true;
+			document.getElementById("subject-semester").hidden = true;
+
+		} else if (searchedOption === "Pass/Fail") {
+			document.getElementById("fass-fail-semester").hidden = false;
+
+			document.getElementById("name-email-marks").hidden = true;
+			document.getElementById("semester-batch").hidden = true;
+			document.getElementById("exam_type-semester").hidden = true;
+			document.getElementById("subject-semester").hidden = true;
+
+		} else if (searchedOption === "Exam Type") {
+			document.getElementById("exam_type-semester").hidden = false;
+
+			document.getElementById("name-email-marks").hidden = true;
+			document.getElementById("semester-batch").hidden = true;
+			document.getElementById("fass-fail-semester").hidden = true;
+			document.getElementById("subject-semester").hidden = true;
+
+		} else if (searchedOption === "Subject") {
+			document.getElementById("subject-semester").hidden = false;
+
+			document.getElementById("name-email-marks").hidden = true;
+			document.getElementById("semester-batch").hidden = true;
+			document.getElementById("fass-fail-semester").hidden = true;
+			document.getElementById("exam_type-semester").hidden = true;
+		}
 	}
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

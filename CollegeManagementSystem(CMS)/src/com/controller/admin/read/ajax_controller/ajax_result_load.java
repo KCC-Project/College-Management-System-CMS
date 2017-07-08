@@ -16,12 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.model.ExamInfoModel;
 import com.model.ExamModel;
+import com.model.SemesterModel;
 import com.model.StudentExamResultModel;
 import com.model.StudentModel;
 import com.model.SubjectModel;
+import com.service.SemesterServiceInterface;
 import com.service.StudentExamResultModelServiceInterface;
 import com.serviceimpl.ExamInfoModelServiceImpl;
 import com.serviceimpl.ExamModelServiceImpl;
+import com.serviceimpl.SemesterServiceImpl;
 import com.serviceimpl.StudentExamResultModelServiceImpl;
 import com.serviceimpl.StudentServiceImpl;
 import com.serviceimpl.SubjectModelServiceImpl;
@@ -67,6 +70,7 @@ public class ajax_result_load extends HttpServlet {
 			SubjectModel subjectModel = new SubjectModelServiceImpl().getSelectedSubject(subjectId);
 			String subjectName = subjectModel.getSubjectName();
 			int subjectCredit = subjectModel.getSubjectCredit();
+			
 			
 			studentDataMap.put("resultId",resultId);
 			studentDataMap.put("StudentName", fname + " " + mName + " " + lName);
