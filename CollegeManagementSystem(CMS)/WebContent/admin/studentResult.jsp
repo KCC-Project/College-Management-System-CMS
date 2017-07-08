@@ -101,7 +101,8 @@
 									</select>
 								</div>
 								<div class="form-group col-sm-6" id="semester-batch" hidden>
-									<select class="form-control" id="batch-box" name="batch_id">
+									<select required class="form-control" name="batch_id"
+										id="batch-box1">
 										<option value="" disabled selected>Select Batch</option>
 									</select> <select required class="form-control" id="Semester_box"
 										name="Semester_box">
@@ -111,11 +112,20 @@
 
 
 								<div class="form-group col-sm-6" id="fass-fail-semester" hidden>
-									<select class="form-control" id="batch-box" name="batch_id">
+									<select class="form-control" id="batch-box2" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
 									</select> <select required class="form-control" id="Semester_box"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
+										<option value="1" >1</option>
+										<option value="2" >2</option>
+										<option value="3" >3</option>
+										<option value="4" >4</option>
+										<option value="5" >5</option>
+										<option value="6" >6</option>
+										<option value="7" >7</option>
+										<option value="8" >8</option>
+										
 									</select> <select required class="form-control" id="pass_fail_box"
 										name="pass_fail_box">
 										<option value="" disabled selected>Select Pass/Fail</option>
@@ -124,11 +134,19 @@
 
 
 								<div class="form-group col-sm-6" id="exam_type-semester" hidden>
-									<select class="form-control" id="batch-box" name="batch_id">
+									<select class="form-control" id="batch-box3" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
 									</select> <select required class="form-control" id="Semester_box"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
+										<option value="1" >1</option>
+										<option value="2" >2</option>
+										<option value="3" >3</option>
+										<option value="4" >4</option>
+										<option value="5" >5</option>
+										<option value="6" >6</option>
+										<option value="7" >7</option>
+										<option value="8" >8</option>
 									</select> <select required class="form-control"
 										id="exam_type_semester_box" name="exam_type_semester_box">
 										<option value="" disabled selected>Select Exam Type</option>
@@ -137,11 +155,19 @@
 
 
 								<div class="form-group col-sm-6" id="subject-semester" hidden>
-									<select class="form-control" id="batch-box" name="batch_id">
+									<select class="form-control" id="batch-box4" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
 									</select> <select required class="form-control" id="Semester_box"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
+										<option value="1" >1</option>
+										<option value="2" >2</option>
+										<option value="3" >3</option>
+										<option value="4" >4</option>
+										<option value="5" >5</option>
+										<option value="6" >6</option>
+										<option value="7" >7</option>
+										<option value="8" >8</option>
 									</select> <select required class="form-control"
 										id="subject-semester-box" name="subject-semester-box">
 										<option value="" disabled selected>Select Subject</option>
@@ -150,11 +176,19 @@
 
 
 								<div class="form-group col-sm-6" id="name-email-marks" hidden>
-									<select class="form-control" id="batch-box" name="batch_id">
+									<select class="form-control" id="batch-box5" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
-									</select> <select required class="form-control" id="Semester_box"
+									</select> <select required class="form-control" id="Semester_box5"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
+										<option value="1" >1</option>
+										<option value="2" >2</option>
+										<option value="3" >3</option>
+										<option value="4" >4</option>
+										<option value="5" >5</option>
+										<option value="6" >6</option>
+										<option value="7" >7</option>
+										<option value="8" >8</option>
 									</select> <input type="text" class="form-control"
 										name="searchedEnteredField" id="searchedEnteredField"
 										placeholder="Enter Name/Email/Marks/ID">
@@ -164,7 +198,7 @@
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
-									<button type="submit" class="btn btn-success">Search</button>
+								<button type="submit" class="btn btn-success" onclick="loadAllResult();">Search</button>
 							</div>
 						</div>
 
@@ -263,12 +297,21 @@
 	function searchBtn() {
 		load_faculty();
 	}
-	window.addEventListener('load', function() {
-		loadAllResult();
-	}, true);
+	
 
 	function loadAllResult() {
-		var url = "../ajax_result_load";
+		var facultyId=document.getElementById("p-faculty-box").value;  
+		var programId=document.getElementById("p-program-box").value;  
+		
+		var batchIdName=document.getElementById("batch-box5").value;  
+		var semesterIdName=document.getElementById("Semester_box5").value;  
+		var nameIdEmailMarks=document.getElementById("searchedEnteredField").value;  
+		alert(nameIdEmailMarks);
+		
+		
+	//var send="facultyId="+facultyId+"programId="+programId+"batchIdName="+batchIdName+"semesterIdName="+semesterIdName+"nameIdEmailMarks="+nameIdEmailMarks;
+	var send="nameIdEmailMarks="+nameIdEmailMarks;
+	var url = "../ajax_result_load";
 		var aj = new XMLHttpRequest();
 		aj.open("POST", url, true);
 		aj
@@ -318,7 +361,7 @@
 
 			}
 		}
-		aj.send();
+		aj.send(send);
 	}
 
 	function load_faculty() {
@@ -375,14 +418,14 @@
 		if (searchedOption === "Name" || searchedOption === "Id"
 				|| searchedOption === "Email" || searchedOption === "Marks") {
 			document.getElementById("name-email-marks").hidden = false;
-
+			load_batch_year();
 			document.getElementById("semester-batch").hidden = true;
 			document.getElementById("fass-fail-semester").hidden = true;
 			document.getElementById("exam_type-semester").hidden = true;
 			document.getElementById("subject-semester").hidden = true;
 		} else if (searchedOption === "Batch") {
 			document.getElementById("semester-batch").hidden = false;
-
+			load_batch_year();
 			document.getElementById("name-email-marks").hidden = true;
 			document.getElementById("fass-fail-semester").hidden = true;
 			document.getElementById("exam_type-semester").hidden = true;
@@ -390,7 +433,7 @@
 
 		} else if (searchedOption === "Pass/Fail") {
 			document.getElementById("fass-fail-semester").hidden = false;
-
+			load_batch_year();
 			document.getElementById("name-email-marks").hidden = true;
 			document.getElementById("semester-batch").hidden = true;
 			document.getElementById("exam_type-semester").hidden = true;
@@ -398,7 +441,7 @@
 
 		} else if (searchedOption === "Exam Type") {
 			document.getElementById("exam_type-semester").hidden = false;
-
+			load_batch_year();
 			document.getElementById("name-email-marks").hidden = true;
 			document.getElementById("semester-batch").hidden = true;
 			document.getElementById("fass-fail-semester").hidden = true;
@@ -406,13 +449,34 @@
 
 		} else if (searchedOption === "Subject") {
 			document.getElementById("subject-semester").hidden = false;
-
+			load_batch_year();
 			document.getElementById("name-email-marks").hidden = true;
 			document.getElementById("semester-batch").hidden = true;
 			document.getElementById("fass-fail-semester").hidden = true;
 			document.getElementById("exam_type-semester").hidden = true;
 		}
 	}
+	
+	function load_batch_year() {
+		
+		var url="../ajax_year_load";
+		var idSend="id=1";
+		var aj=new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		aj.onreadystatechange=function(){
+			if (aj.readyState==4&&aj.status==200) {
+				var return_data=aj.responseText;
+				document.getElementById("batch-box1").innerHTML=return_data;
+				document.getElementById("batch-box2").innerHTML=return_data;
+				document.getElementById("batch-box3").innerHTML=return_data;
+				document.getElementById("batch-box4").innerHTML=return_data;
+				document.getElementById("batch-box5").innerHTML=return_data;
+			}
+		}
+		aj.send(idSend);
+	}
+
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../Resources/js/jquery-3.2.1.min.js"></script>
