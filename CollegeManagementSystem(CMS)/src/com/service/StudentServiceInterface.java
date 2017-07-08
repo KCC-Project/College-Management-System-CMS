@@ -10,4 +10,5 @@ public interface StudentServiceInterface {
 	StudentModel readId(int id);
 	int delete(int id);
 	int update(StudentModel stu);
+	List<StudentModel> searchByField(Object obj);
 }

@@ -37,4 +37,9 @@ public class StudentServiceImpl implements StudentServiceInterface {
 		return model.update(stu);
 	}
 
+	@Override
+	public List<StudentModel> searchByField(Object obj) {
+		return model.searchByField(obj);
+	}
+
 }

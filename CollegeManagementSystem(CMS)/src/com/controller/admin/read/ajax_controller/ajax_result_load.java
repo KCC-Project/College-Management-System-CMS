@@ -45,101 +45,60 @@ public class ajax_result_load extends HttpServlet {
 		String batchIdName = request.getParameter("batchIdName");
 		String semesterIdName = request.getParameter("semesterIdName");
 		String nameIdEmailMarks = request.getParameter("nameIdEmailMarks");
-		System.out.println("name=" + nameIdEmailMarks);
-
-		StudentServiceInterface ser = new StudentServiceImpl();
-		int studentIdd = 0;
-		String name = null;
-		List<StudentModel> stModel = ser.getAllRecord();
-		List<Integer> nameListId = new ArrayList<Integer>();
-		
-		for (StudentModel studentModel : stModel) {
-			if (studentModel.getMiddlename().isEmpty()) {
-				String sname = studentModel.getFirstname() + " " + studentModel.getLastname();
-				if (sname.equalsIgnoreCase(nameIdEmailMarks)) {
-					studentIdd = studentModel.getStudentID();
-					nameListId.add(studentIdd);
-
-				}
-
-			} else {
-				String sname = studentModel.getFirstname() + " " + studentModel.getMiddlename() + " "
-						+ studentModel.getLastname();
-				if (sname.equalsIgnoreCase(nameIdEmailMarks)) {
-					studentIdd = studentModel.getStudentID();
-					nameListId.add(studentIdd);
-
-				}
-			}
-
-			if (studentModel.getIdentityCard().equalsIgnoreCase(nameIdEmailMarks)) {
-				studentIdd = studentModel.getStudentID();
-				nameListId.add(studentIdd);
-			} else if (studentModel.getEmail().equalsIgnoreCase(nameIdEmailMarks)) {
-				studentIdd = studentModel.getStudentID();
-				nameListId.add(studentIdd);
-			}
-		}
-		
-		
-
-		System.out.println(" id=" + studentIdd);
 
 		List JsonObject = new ArrayList<>();
+		List<Integer> idList = new ArrayList<Integer>();
 
-		StudentExamResultModelServiceInterface result = new StudentExamResultModelServiceImpl();
-		List<StudentExamResultModel> list = result.getAllRecord();
+		StudentServiceInterface intterface = new StudentServiceImpl();
+		List<StudentModel> stModel = intterface.searchByField(nameIdEmailMarks);
+		for (StudentModel studentModel : stModel) {
+			System.out.println("shahil id=" + studentModel.getStudentID());
+			StudentExamResultModelServiceInterface result = new StudentExamResultModelServiceImpl();
+			StudentExamResultModel list = result.readId(studentModel.getStudentID());
 
-		for (Integer in : nameListId) {
-			for (StudentExamResultModel studentExamResultModel : list) {
+			Map<String, Object> studentDataMap = new HashMap<String, Object>();
 
-				if (studentExamResultModel.getStudentId() == in) {
+			int resultId = list.getExamId();
+			System.out.println("id=" + resultId);
+			int studentId = list.getStudentId();
+			StudentModel studentName = new StudentServiceImpl().readId(studentId);
+			String fname = studentName.getFirstname();
+			String mName = studentName.getMiddlename();
+			String lName = studentName.getLastname();
 
-					Map<String, Object> studentDataMap = new HashMap<String, Object>();
+			ExamInfoModel examInfo = new ExamInfoModelServiceImpl().getSelectedInfo(resultId);
 
-					int resultId = studentExamResultModel.getExamId();
-					System.out.println("id=" + resultId);
-					int studentId = studentExamResultModel.getStudentId();
-					StudentModel studentName = new StudentServiceImpl().readId(studentId);
-					String fname = studentName.getFirstname();
-					String mName = studentName.getMiddlename();
-					String lName = studentName.getLastname();
+			// String date = DateUtil.convertToString(examInfo.getExamStartDate());
+			int fullMarks = examInfo.getFullmarks();
+			int passMarks = examInfo.getPassmarks();
 
-					ExamInfoModel examInfo = new ExamInfoModelServiceImpl().getSelectedInfo(resultId);
+			int subjectId = examInfo.getSubjectId();
+			int examTypeNameId = examInfo.getExamTypeId();
 
-					String date = DateUtil.convertToString(examInfo.getExamStartDate());
-					int fullMarks = examInfo.getFullmarks();
-					int passMarks = examInfo.getPassmarks();
+			ExamModel examModel = new ExamModelServiceImpl().getSelectedExam(examTypeNameId);
+			String examTypeName = examModel.getExamTypeName();
 
-					int subjectId = examInfo.getSubjectId();
-					int examTypeNameId = examInfo.getExamTypeId();
+			SubjectModel subjectModel = new SubjectModelServiceImpl().getSelectedSubject(subjectId);
+			String subjectName = subjectModel.getSubjectName();
+			int subjectCredit = subjectModel.getSubjectCredit();
 
-					ExamModel examModel = new ExamModelServiceImpl().getSelectedExam(examTypeNameId);
-					String examTypeName = examModel.getExamTypeName();
+			studentDataMap.put("resultId", resultId);
+			studentDataMap.put("StudentName", fname + " " + mName + " " + lName);
+			studentDataMap.put("image", studentName.getImage());
+			studentDataMap.put("phone", studentName.getMobileNo());
+			studentDataMap.put("status", studentName.getStatus());
+			studentDataMap.put("examMarksByStudent", list.getExamMarks());
+			studentDataMap.put("passFailStatus", list.getPassFailStatus());
+			studentDataMap.put("subjectName", subjectName);
+			studentDataMap.put("subjectCredit", subjectCredit);
+			studentDataMap.put("examTypeName", examTypeName);
+			// studentDataMap.put("examDate", date);
+			studentDataMap.put("fullMarks", fullMarks);
+			studentDataMap.put("passMarks", passMarks);
 
-					SubjectModel subjectModel = new SubjectModelServiceImpl().getSelectedSubject(subjectId);
-					String subjectName = subjectModel.getSubjectName();
-					int subjectCredit = subjectModel.getSubjectCredit();
-
-					studentDataMap.put("resultId", resultId);
-					studentDataMap.put("StudentName", fname + " " + mName + " " + lName);
-					studentDataMap.put("image", studentName.getImage());
-					studentDataMap.put("phone", studentName.getMobileNo());
-					studentDataMap.put("status", studentName.getStatus());
-					studentDataMap.put("examMarksByStudent", studentExamResultModel.getExamMarks());
-					studentDataMap.put("passFailStatus", studentExamResultModel.getPassFailStatus());
-					studentDataMap.put("subjectName", subjectName);
-					studentDataMap.put("subjectCredit", subjectCredit);
-					studentDataMap.put("examTypeName", examTypeName);
-					studentDataMap.put("examDate", date);
-					studentDataMap.put("fullMarks", fullMarks);
-					studentDataMap.put("passMarks", passMarks);
-
-					JsonObject.add(studentDataMap);
-
-				}
-			}
+			JsonObject.add(studentDataMap);
 		}
+	
 
 		System.out.println(JsonObject);
 		response.getWriter().write(JsonUtil.convertJavaToJson(JsonObject));

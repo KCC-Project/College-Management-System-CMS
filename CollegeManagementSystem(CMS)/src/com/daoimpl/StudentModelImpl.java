@@ -213,4 +213,61 @@ public class StudentModelImpl implements StudentModelInterface {
 		return result;
 	}
 
+	@Override
+	public List<StudentModel> searchByField(Object obj) {
+		List<StudentModel> stModel= new ArrayList<StudentModel>();
+		int spaceCount = 0;
+		for (char c : ((String) obj).toCharArray()) {
+		    if (c == ' ') {
+		         spaceCount++;
+		    }
+		}
+		if (spaceCount==1) {
+			sql = "select * from student where CONCAT(student_firstname,' ',student_lastname)=? ||student_email=?||student_phone=?||student_identitycard=? ";
+			
+		}else{
+			sql = "select * from student where CONCAT(student_firstname,' ',student_middlename,' ',student_lastname)=? ||student_email=?||student_phone=?||student_identitycard=? ";
+			
+		}
+		
+		try {
+			Connection connection = DatabaseConnection.connectToDatabase();
+			
+			pst = connection.prepareStatement(sql);
+			pst.setObject(1, obj);
+			pst.setObject(2, obj);
+			pst.setObject(3, obj);
+			pst.setObject(4, obj);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				StudentModel model = new StudentModel();
+				System.out.println("shahil shah=="+rs.getInt("student_id"));
+				model.setStudentID(rs.getInt("student_id"));
+				model.setFirstname(rs.getString("student_firstname"));
+				model.setMiddlename(rs.getString("student_middlename"));
+				model.setLastname(rs.getString("student_lastname"));
+				model.setEmail(rs.getString("student_email"));
+				model.setMobileNo(rs.getInt("student_phone"));
+				model.setAddress(rs.getString("student_address"));
+				model.setGender(rs.getString("student_gender"));
+				model.setUsername(rs.getString("student_username"));
+				model.setIdentityCard(rs.getString("student_identitycard"));
+				model.setStatus(rs.getInt("status"));
+				stModel.add(model);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return stModel;
+	}
+
 }

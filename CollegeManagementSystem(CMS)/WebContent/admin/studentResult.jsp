@@ -300,14 +300,20 @@
 	
 
 	function loadAllResult() {
+		var table = document.getElementById("tblResult");
+		var tableHeaderRowCount = 1;
+		var rowCount = table.rows.length;
+		alert(rowCount);
+		for (var i = tableHeaderRowCount; i < rowCount; i++) {
+		    table.deleteRow(tableHeaderRowCount);
+		}	
 		var facultyId=document.getElementById("p-faculty-box").value;  
 		var programId=document.getElementById("p-program-box").value;  
 		
 		var batchIdName=document.getElementById("batch-box5").value;  
 		var semesterIdName=document.getElementById("Semester_box5").value;  
 		var nameIdEmailMarks=document.getElementById("searchedEnteredField").value;  
-		alert(nameIdEmailMarks);
-		
+				
 		
 	//var send="facultyId="+facultyId+"programId="+programId+"batchIdName="+batchIdName+"semesterIdName="+semesterIdName+"nameIdEmailMarks="+nameIdEmailMarks;
 	var send="nameIdEmailMarks="+nameIdEmailMarks;
@@ -323,7 +329,8 @@
 				var jSonObject = eval('(' + aj.responseText + ')');
 				//alert("mausam="+jSonObject.StudentName);
 				var i = jSonObject.length;
-
+				
+				
 				for ( var prop in jSonObject) {
 
 					var item = jSonObject[prop];
