@@ -30,7 +30,7 @@ public class ajax_semester_load extends HttpServlet {
 			SemesterServiceInterface semester= new SemesterServiceImpl();
 			
 			Object[] obj = new Object[7];
-			obj[1]=5;
+			obj[0]=1;
 			
 			System.out.println(obj[1]);
 			String jsonSearch=JsonUtil.convertJavaToJson(semester.searchByFields(obj));
