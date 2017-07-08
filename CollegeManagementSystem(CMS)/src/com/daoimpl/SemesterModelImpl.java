@@ -83,8 +83,9 @@ public class SemesterModelImpl implements SemesterModelInterface {
 	}
 
 	@Override
-	public List<SemesterModel> loadByProgramId(int program_id) {
-		List<SemesterModel> semester = new ArrayList<>();
+	public SemesterModel loadByProgramId(int program_id) {
+		//List<SemesterModel> semester = new ArrayList<>();
+		SemesterModel semesterModel = new SemesterModel();
 		try {
 			
 			conn = DatabaseConnection.connectToDatabase();
@@ -95,7 +96,6 @@ public class SemesterModelImpl implements SemesterModelInterface {
 		
 			while(rs.next()){
 			
-				SemesterModel semesterModel = new SemesterModel();
 				semesterModel.setSemester_id(rs.getInt("semester_id"));
 				semesterModel.setSemester_no(rs.getInt("semester_no"));
 				semesterModel.setProgram_id(rs.getInt("program_id"));
@@ -104,7 +104,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 				semesterModel.setEnd_date(rs.getDate("sem_end_date"));
 				semesterModel.setStatus(rs.getInt("status"));
 				
-				semester.add(semesterModel);
+				//semester.add(semesterModel);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -120,7 +120,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 			
 		}
 		
-		return semester;
+		return semesterModel;
 	}
 
 }

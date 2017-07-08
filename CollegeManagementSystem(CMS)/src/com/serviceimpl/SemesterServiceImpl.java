@@ -22,7 +22,7 @@ public class SemesterServiceImpl implements SemesterServiceInterface {
 	}
 
 	@Override
-	public List<SemesterModel> loadByProgramId(int program_id) {
+	public SemesterModel loadByProgramId(int program_id) {
 		return model.loadByProgramId(program_id);
 	}
 
