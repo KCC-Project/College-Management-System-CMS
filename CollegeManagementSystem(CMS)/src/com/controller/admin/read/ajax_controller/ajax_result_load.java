@@ -113,6 +113,12 @@ public class ajax_result_load extends HttpServlet {
 		// System.out.println(JsonObject);
 
 		// converting to json object and send to javascript atonce
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		response.getWriter().write(JsonUtil.convertJavaToJson(JsonObject));
 
 	}

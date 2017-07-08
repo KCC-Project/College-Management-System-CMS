@@ -246,11 +246,15 @@
 												<td>Pass/Fail</td>
 												<td class="hidden-xs">Faculty</td>
 											</tr>
-										</thead>
 
+										</thead>
+										
 									</table>
 								</div>
+								<div class="loader" id="loader" hidden style="margin-left: 40%;"></div>
 							</div>
+							
+							
 						</div>
 					</div>
 				</div>
@@ -307,6 +311,7 @@
 		for (var i = tableHeaderRowCount; i < rowCount; i++) {
 			table.deleteRow(tableHeaderRowCount);
 		}
+		document.getElementById("loader").hidden=false;
 		var facultyId = document.getElementById("p-faculty-box").value;
 		var programId = document.getElementById("p-program-box").value;
 
@@ -324,7 +329,7 @@
 						"application/x-www-form-urlencoded");
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
-
+				document.getElementById("loader").hidden=true;
 				var jSonObject = eval('(' + aj.responseText + ')');
 				//alert("mausam="+jSonObject.StudentName);
 				var i = jSonObject.length;
