@@ -161,15 +161,15 @@ public class SemesterModelImpl implements SemesterModelInterface {
 	            parameters.add(program_id);
 	        }
 	        if (batch_year != 0) {
-	            query.append(" AND batch_year = ?");
+	            query.append(" AND batch_year_id = ?");
 	            parameters.add(batch_year);
 	        }
 			if (sem_start_date_sql != null) {
-	            query.append(" AND sem_start_date_sql = ?");
+	            query.append(" AND sem_start_date = ?");
 	            parameters.add(sem_start_date_sql);
 	        }
 	        if (sem_end_date_sql != null) {
-	            query.append(" AND sem_end_date_sql = ?");
+	            query.append(" AND sem_end_date = ?");
 	            parameters.add(sem_end_date_sql);
 	        }
 	        if (status != 0) {
