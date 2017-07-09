@@ -15,4 +15,9 @@ public class ProgramServiceImpl implements ProgramServiceInterface {
 		return model.getAllRecord();
 	}
 
+	@Override
+	public ProgramModel getRecordById(int id) {
+		return model.getRecordById(id);
+	}
+
 }

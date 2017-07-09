@@ -43,5 +43,34 @@ public class FacultyModelInterfaceImpl implements FacultyModelInterface {
 		return faculty;
 	}
 
+	@Override
+	public FacultyModel getRecordById(int id) {
+
+		FacultyModel model = new FacultyModel();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "Select * from faculty";
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				
+				model.setFaculty_id(rs.getInt("faculty_id"));
+				model.setFaculty_name(rs.getString("faculty_name"));
+				model.setStatus(rs.getInt("status"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return model;
+	}
+
 
 }

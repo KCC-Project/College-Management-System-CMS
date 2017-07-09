@@ -7,4 +7,5 @@ import com.model.ProgramModel;
 
 public interface ProgramServiceInterface {
 	public List<ProgramModel> getAllRecord();
+	ProgramModel getRecordById(int id);
 }

@@ -15,4 +15,9 @@ public class FacultyServiceImpl implements FacultyServiceInterface {
 		return model.getAllRecord();
 	}
 
+	@Override
+	public FacultyModel getRecordById(int id) {
+		return model.getRecordById(id);
+	}
+
 }

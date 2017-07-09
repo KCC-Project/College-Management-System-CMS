@@ -25,8 +25,11 @@ import com.service.StudentExamResultModelServiceInterface;
 import com.service.StudentServiceInterface;
 import com.serviceimpl.ExamInfoModelServiceImpl;
 import com.serviceimpl.ExamModelServiceImpl;
+import com.serviceimpl.FacultyServiceImpl;
+import com.serviceimpl.ProgramServiceImpl;
 import com.serviceimpl.SemesterServiceImpl;
 import com.serviceimpl.StudentExamResultModelServiceImpl;
+import com.serviceimpl.StudentSemesterModelServiceImpl;
 import com.serviceimpl.StudentServiceImpl;
 import com.serviceimpl.SubjectModelServiceImpl;
 import com.util.DateUtil;
@@ -56,8 +59,21 @@ public class ajax_result_load extends HttpServlet {
 		StudentServiceInterface intterface = new StudentServiceImpl();
 		List<StudentModel> stModel = intterface.searchByField(nameIdEmailMarks);
 		for (StudentModel studentModel : stModel) {
-			// System.out.println("shahil id=" + studentModel.getStudentID());
+			
+			//getting datainfo from studentsemestertable with student id
+			int semesterId=new StudentSemesterModelServiceImpl().getSelectedData(studentModel.getStudentID()).getSemesterId();
+			int semesterNo=new SemesterServiceImpl().loadById(semesterId).getSemester_no();
+			int programId1= new SemesterServiceImpl().loadById(semesterId).getProgram_id();
+			int batch=new SemesterServiceImpl().loadById(semesterId).getBatch_year();
+			String programName=new ProgramServiceImpl().getRecordById(semesterId).getProgram_name();
+			int facultyId1=new ProgramServiceImpl().getRecordById(semesterId).getFaculty_id();
+			String facultyName=new FacultyServiceImpl().getRecordById(facultyId1).getFaculty_name();
+			
+			
 
+			
+			
+			
 			// calling result service
 			StudentExamResultModelServiceInterface result = new StudentExamResultModelServiceImpl();
 
@@ -106,6 +122,15 @@ public class ajax_result_load extends HttpServlet {
 			studentDataMap.put("fullMarks", fullMarks);
 			studentDataMap.put("passMarks", passMarks);
 
+			
+			studentDataMap.put("semesterId", semesterId);
+			studentDataMap.put("semesterNo", semesterNo);
+			studentDataMap.put("programId1", programId1);
+			studentDataMap.put("batch", batch);
+			studentDataMap.put("programName", programName);
+			studentDataMap.put("facultyId1", facultyId1);
+			studentDataMap.put("facultyName", facultyName);
+			
 			// adding in list
 			JsonObject.add(studentDataMap);
 		}
@@ -119,6 +144,7 @@ public class ajax_result_load extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(JsonUtil.convertJavaToJson(JsonObject));
 		response.getWriter().write(JsonUtil.convertJavaToJson(JsonObject));
 
 	}

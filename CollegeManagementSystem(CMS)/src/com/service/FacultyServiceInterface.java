@@ -7,4 +7,5 @@ import com.model.Faculty_ProgramModel;
 
 public interface FacultyServiceInterface {
 	List<FacultyModel> getAllRecord();
+	FacultyModel getRecordById(int id);
 }
