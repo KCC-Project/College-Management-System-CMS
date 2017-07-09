@@ -50,10 +50,7 @@ public class ajax_result_load extends HttpServlet {
 		String batchIdName = request.getParameter("batchIdName");
 		String semesterIdName = request.getParameter("semesterIdName");
 		String nameIdEmailMarks = request.getParameter("nameIdEmailMarks");
-		System.out.println("program is is =" + programId);
-		System.out.println("faculty is is =" + facultyId);
-		System.out.println("semested id =" + semesterIdName);
-
+		//System.out.println("faculty id==" + facultyId);
 		// list for json converting and adding
 		List JsonObject = new ArrayList<>();
 
@@ -66,7 +63,7 @@ public class ajax_result_load extends HttpServlet {
 			SemesterServiceInterface semester = new SemesterServiceImpl();
 
 			Object[] obj = new Object[7];
-			
+
 			obj[1] = Integer.parseInt(semesterIdName);
 			obj[2] = Integer.parseInt(programId);
 
@@ -77,92 +74,97 @@ public class ajax_result_load extends HttpServlet {
 			String facultyName = null;
 
 			List<SemesterModel> semModel = semester.searchByFields(obj);
-			System.out.println("semester size=="+semModel.size());
+			//System.out.println("semester size==" + semModel.size());
 			for (SemesterModel sem : semModel) {
+				System.out.println("checkkkkkk");
 				semesterId = sem.getSemester_id();
 				semesterNo = new SemesterServiceImpl().loadById(sem.getSemester_id()).getSemester_no();
 				batch = new SemesterServiceImpl().loadById(sem.getSemester_id()).getBatch_year();
 				programName = new ProgramServiceImpl().getRecordById(sem.getProgram_id()).getProgram_name();
 				facultyName = new FacultyServiceImpl().getRecordById(Integer.parseInt(facultyId)).getFaculty_name();
-				
+
 			}
-			System.out.println("pName==" + programName + "  fNmae==" + facultyName);
-			System.out.println("semId="+semesterId);
+			//System.out.println("pName==" + programName + "  fNmae==" + facultyName);
+			//System.out.println("semId=" + semesterId);
 			StudentSemesterModelServiceInterface interfa = new StudentSemesterModelServiceImpl();
-			Object[] obj1 = new Object[7];
-			obj1[0] = studentModel.getStudentID();
-			obj1[1] = semesterId;
-			List<StudentSemesterModel> semModel1 = interfa.searchByFields(obj1);
-			
-			if (semModel1.size()>0) {
 
-				// calling result service
-				StudentExamResultModelServiceInterface result = new StudentExamResultModelServiceImpl();
+			if (semesterId > 0) {
+				Object[] obj1 = new Object[7];
+				obj1[0] = studentModel.getStudentID();
+				obj1[1] = semesterId;
 
-				// getting result of particular id of student
-				StudentExamResultModel list = result.readId(studentModel.getStudentID());
+				List<StudentSemesterModel> semModel1 = interfa.searchByFields(obj1);
+				System.out.println("semModel1 sizee==" + semModel1.size());
+				if (semModel1.size() > 0) {
 
-				// mapping for json
-				Map<String, Object> studentDataMap = new HashMap<String, Object>();
+					// calling result service
+					StudentExamResultModelServiceInterface result = new StudentExamResultModelServiceImpl();
 
-				int resultId = list.getExamId();
-				System.out.println("id=" + resultId);
-				int studentId = list.getStudentId();
-				StudentModel studentName = new StudentServiceImpl().readId(studentId);
-				String fname = studentName.getFirstname();
-				String mName = studentName.getMiddlename();
-				String lName = studentName.getLastname();
+					// getting result of particular id of student
+					StudentExamResultModel list = result.readId(studentModel.getStudentID());
 
-				// retriving infomatin of exam by partcular id
-				ExamInfoModel examInfo = new ExamInfoModelServiceImpl().getSelectedInfo(resultId);
+					// mapping for json
+					Map<String, Object> studentDataMap = new HashMap<String, Object>();
 
-				String date = DateUtil.convertToString(examInfo.getExamStartDate());
-				int fullMarks = examInfo.getFullmarks();
-				int passMarks = examInfo.getPassmarks();
+					int resultId = list.getExamId();
+				//	System.out.println("id=" + resultId);
+					int studentId = list.getStudentId();
+					StudentModel studentName = new StudentServiceImpl().readId(studentId);
+					String fname = studentName.getFirstname();
+					String mName = studentName.getMiddlename();
+					String lName = studentName.getLastname();
 
-				int subjectId = examInfo.getSubjectId();
-				int examTypeNameId = examInfo.getExamTypeId();
+					// retriving infomatin of exam by partcular id
+					ExamInfoModel examInfo = new ExamInfoModelServiceImpl().getSelectedInfo(resultId);
 
-				ExamModel examModel = new ExamModelServiceImpl().getSelectedExam(examTypeNameId);
-				String examTypeName = examModel.getExamTypeName();
+					String date = DateUtil.convertToString(examInfo.getExamStartDate());
+					int fullMarks = examInfo.getFullmarks();
+					int passMarks = examInfo.getPassmarks();
 
-				SubjectModel subjectModel = new SubjectModelServiceImpl().getSelectedSubject(subjectId);
-				String subjectName = subjectModel.getSubjectName();
-				int subjectCredit = subjectModel.getSubjectCredit();
+					int subjectId = examInfo.getSubjectId();
+					int examTypeNameId = examInfo.getExamTypeId();
 
-				studentDataMap.put("resultId", resultId);
-				studentDataMap.put("StudentName", fname + " " + mName + " " + lName);
-				studentDataMap.put("image", studentName.getImage());
-				studentDataMap.put("phone", studentName.getMobileNo());
-				studentDataMap.put("status", studentName.getStatus());
-				studentDataMap.put("examMarksByStudent", list.getExamMarks());
-				studentDataMap.put("passFailStatus", list.getPassFailStatus());
-				studentDataMap.put("subjectName", subjectName);
-				studentDataMap.put("subjectCredit", subjectCredit);
-				studentDataMap.put("examTypeName", examTypeName);
-				studentDataMap.put("examDate", date);
-				studentDataMap.put("fullMarks", fullMarks);
-				studentDataMap.put("passMarks", passMarks);
+					ExamModel examModel = new ExamModelServiceImpl().getSelectedExam(examTypeNameId);
+					String examTypeName = examModel.getExamTypeName();
 
-				studentDataMap.put("semesterId", semesterId);
-				studentDataMap.put("semesterNo", semesterNo);
+					SubjectModel subjectModel = new SubjectModelServiceImpl().getSelectedSubject(subjectId);
+					String subjectName = subjectModel.getSubjectName();
+					int subjectCredit = subjectModel.getSubjectCredit();
 
-				studentDataMap.put("batch", batch);
-				studentDataMap.put("programName", programName);
+					studentDataMap.put("resultId", resultId);
+					studentDataMap.put("StudentName", fname + " " + mName + " " + lName);
+					studentDataMap.put("image", studentName.getImage());
+					studentDataMap.put("phone", studentName.getMobileNo());
+					studentDataMap.put("status", studentName.getStatus());
+					studentDataMap.put("examMarksByStudent", list.getExamMarks());
+					studentDataMap.put("passFailStatus", list.getPassFailStatus());
+					studentDataMap.put("subjectName", subjectName);
+					studentDataMap.put("subjectCredit", subjectCredit);
+					studentDataMap.put("examTypeName", examTypeName);
+					studentDataMap.put("examDate", date);
+					studentDataMap.put("fullMarks", fullMarks);
+					studentDataMap.put("passMarks", passMarks);
 
-				studentDataMap.put("facultyName", facultyName);
+					studentDataMap.put("semesterId", semesterId);
+					studentDataMap.put("semesterNo", semesterNo);
 
-				JsonObject.add(studentDataMap);
+					studentDataMap.put("batch", batch);
+					studentDataMap.put("programName", programName);
 
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					studentDataMap.put("facultyName", facultyName);
+
+					JsonObject.add(studentDataMap);
+
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					System.out.println(JsonUtil.convertJavaToJson(JsonObject));
+					response.getWriter().write(JsonUtil.convertJavaToJson(JsonObject));
+
 				}
-				System.out.println(JsonUtil.convertJavaToJson(JsonObject));
-				response.getWriter().write(JsonUtil.convertJavaToJson(JsonObject));
-
 			}
 		}
 

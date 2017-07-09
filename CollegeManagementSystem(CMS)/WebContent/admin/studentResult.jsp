@@ -244,7 +244,7 @@
 												<td class="hidden-xs">FullMarks</td>
 												<td class="hidden-xs">Scored</td>
 												<td>Pass/Fail</td>
-												<td class="hidden-xs">Faculty</td>
+												<td class="hidden-xs">Program</td>
 											</tr>
 
 										</thead>
@@ -318,7 +318,7 @@
 		var semesterIdName = document.getElementById("Semester_box5").value;
 		var nameIdEmailMarks = document.getElementById("searchedEnteredField").value;
 
-		alert(semesterIdName);
+		//alert(semesterIdName);
 		//var send="facultyId="+facultyId+"programId="+programId+"batchIdName="+batchIdName+"semesterIdName="+semesterIdName+"nameIdEmailMarks="+nameIdEmailMarks;
 		var send = "nameIdEmailMarks=" + nameIdEmailMarks+"&programId="+programId+"&batchIdName"+batchIdName+"&semesterIdName="+semesterIdName+"&facultyId="+facultyId;
 		var url = "../ajax_result_load";
@@ -359,11 +359,12 @@
 					cell6.innerHTML = item.examMarksByStudent;
 					var passFailStatus = item.passFailStatus;
 					if (passFailStatus === 0) {
-						cell7.innerHTML = '<span class="btn btn-sm btn-danger "> <i class="fa fa-sitemap"></i> &nbsp;&nbsp;Fail &nbsp;</span>';
+						 /*<i class="fa fa-sitemap"> <i class="fa fa-users">*/
+						cell7.innerHTML = '<span class="btn btn-sm btn-danger "> </i> &nbsp;&nbsp;Fail &nbsp;</span>';
 					} else {
-						cell7.innerHTML = '<span class="btn btn-sm btn-warning "> <i class="fa fa-sitemap"></i> Pass &nbsp;</span>';
+						cell7.innerHTML = '<span class="btn btn-sm btn-warning "></i> Pass &nbsp;</span>';
 					}
-					cell8.innerHTML = '<span class="btn btn-sm btn-info  hidden-xs"> <i class="fa fa-users"></i> BE-Computer &nbsp; </span>';
+					cell8.innerHTML = '<span class="btn btn-sm btn-info  hidden-xs"> </i>'+item.programName+'&nbsp; </span>';
 					cell9.innerHTML = '<a href='+item.resultId+' value='+item.resultId+' class="btn-sm btn btn-default" title="View Exam Details" data-toggle="modal" data-target=p><i class="fa fa-eye"></i></a><a href='+item.resultId+' value='+item.resultId+'  class="btn-sm btn btn-default" data-toggle="modal" data-target=# title="EditCourseDetails"><i class="fa fa-pencil-square-o"></i></a>	<a href='+item.resultId+' value='+item.resultId+' class="btn-sm btn btn-default" data-toggle="modal" data-target=# title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a>';
 
 					i--;

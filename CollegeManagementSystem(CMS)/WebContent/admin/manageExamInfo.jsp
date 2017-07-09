@@ -114,19 +114,27 @@
 												<td><span class="btn btn-sm btn-info  hidden-xs hidden-sm">
 														<i class="fa fa-users"></i> BE-computer &nbsp; <span
 														class="badge"> 5 </span>
-												</span> <a href="#?id=<%=model.getExamId()%>"
+												</span> 
+												
+												<a href="#?id=<%=model.getExamId()%>"
 													class="btn-sm btn btn-default hidden-lg hidden-md hidden-sm visible-xs" title="View Exam Details"
 													"
 											data-toggle="modal"
 													data-target=#viewExamDetail
 													onclick="viewExamDetailsOriginal('<%=model.getExamId()%>');"
-													id="viewExamDetails"><i class="fa fa-eye"></i></a> <a
+													id="viewExamDetails"><i class="fa fa-eye"></i></a> 
+													
+													
+													<a
 													onclick="loadUpdate();viewExamDetails('<%=model.getExamId()%>');"
 													class="btn-sm btn btn-default"
 													href="#?id=<%=model.getExamId()%>" data-toggle="modal"
 													data-target=#mad id="updateExamDetail"
 													title="Edit Course Details"><i
-														class="fa fa-pencil-square-o"></i></a> <a
+														class="fa fa-pencil-square-o"></i></a>
+														
+														
+														 <a
 													onclick="viewExamDetails('<%=model.getExamId()%>'); "
 													href="#?id=<%=model.getExamId()%>"
 													class="btn-sm btn btn-default" data-toggle="modal"
