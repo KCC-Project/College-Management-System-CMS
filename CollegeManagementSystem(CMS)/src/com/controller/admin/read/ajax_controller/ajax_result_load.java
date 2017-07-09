@@ -50,7 +50,9 @@ public class ajax_result_load extends HttpServlet {
 		String batchIdName = request.getParameter("batchIdName");
 		String semesterIdName = request.getParameter("semesterIdName");
 		String nameIdEmailMarks = request.getParameter("nameIdEmailMarks");
-		//System.out.println("faculty id==" + facultyId);
+		
+		
+		//System.out.println("batchIdName id==" + batchIdName);
 		// list for json converting and adding
 		List JsonObject = new ArrayList<>();
 
@@ -66,7 +68,7 @@ public class ajax_result_load extends HttpServlet {
 
 			obj[1] = Integer.parseInt(semesterIdName);
 			obj[2] = Integer.parseInt(programId);
-
+			obj[3] = Integer.parseInt(batchIdName);
 			int semesterNo = 0;
 			int batch = 0;
 			String programName = null;
@@ -74,7 +76,7 @@ public class ajax_result_load extends HttpServlet {
 			String facultyName = null;
 
 			List<SemesterModel> semModel = semester.searchByFields(obj);
-			//System.out.println("semester size==" + semModel.size());
+			// System.out.println("semester size==" + semModel.size());
 			for (SemesterModel sem : semModel) {
 				System.out.println("checkkkkkk");
 				semesterId = sem.getSemester_id();
@@ -84,8 +86,9 @@ public class ajax_result_load extends HttpServlet {
 				facultyName = new FacultyServiceImpl().getRecordById(Integer.parseInt(facultyId)).getFaculty_name();
 
 			}
-			//System.out.println("pName==" + programName + "  fNmae==" + facultyName);
-			//System.out.println("semId=" + semesterId);
+			// System.out.println("pName==" + programName + " fNmae==" +
+			// facultyName);
+			// System.out.println("semId=" + semesterId);
 			StudentSemesterModelServiceInterface interfa = new StudentSemesterModelServiceImpl();
 
 			if (semesterId > 0) {
@@ -107,7 +110,7 @@ public class ajax_result_load extends HttpServlet {
 					Map<String, Object> studentDataMap = new HashMap<String, Object>();
 
 					int resultId = list.getExamId();
-				//	System.out.println("id=" + resultId);
+					// System.out.println("id=" + resultId);
 					int studentId = list.getStudentId();
 					StudentModel studentName = new StudentServiceImpl().readId(studentId);
 					String fname = studentName.getFirstname();

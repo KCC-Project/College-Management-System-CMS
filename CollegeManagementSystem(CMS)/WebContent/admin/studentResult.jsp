@@ -318,9 +318,9 @@
 		var semesterIdName = document.getElementById("Semester_box5").value;
 		var nameIdEmailMarks = document.getElementById("searchedEnteredField").value;
 
-		//alert(semesterIdName);
+		alert(batchIdName);
 		//var send="facultyId="+facultyId+"programId="+programId+"batchIdName="+batchIdName+"semesterIdName="+semesterIdName+"nameIdEmailMarks="+nameIdEmailMarks;
-		var send = "nameIdEmailMarks=" + nameIdEmailMarks+"&programId="+programId+"&batchIdName"+batchIdName+"&semesterIdName="+semesterIdName+"&facultyId="+facultyId;
+		var send = "nameIdEmailMarks=" + nameIdEmailMarks+"&programId="+programId+"&batchIdName="+batchIdName+"&semesterIdName="+semesterIdName+"&facultyId="+facultyId;
 		var url = "../ajax_result_load";
 		var aj = new XMLHttpRequest();
 		aj.open("POST", url, true);

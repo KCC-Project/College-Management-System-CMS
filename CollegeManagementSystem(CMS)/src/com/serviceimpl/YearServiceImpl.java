@@ -21,4 +21,9 @@ public class YearServiceImpl implements YearServiceInterface {
 		return model.getAllRecord();
 	}
 
+	@Override
+	public List<YearModel> searchByFields(Object[] obj) {
+		return model.searchByFields(obj);
+	}
+
 }
