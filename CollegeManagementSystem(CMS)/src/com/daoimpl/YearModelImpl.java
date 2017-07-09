@@ -96,8 +96,6 @@ public class YearModelImpl implements YearModelInterface {
 		int year = 0;
 		
 
-		System.out.println(obj[1].toString());
-		System.out.println(obj[2].toString());
 		if (obj[0] != null) {  year_id = Integer.parseInt(obj[0].toString()); }
 		if (obj[1] != null) {  year = Integer.parseInt(obj[1].toString()); }
 		

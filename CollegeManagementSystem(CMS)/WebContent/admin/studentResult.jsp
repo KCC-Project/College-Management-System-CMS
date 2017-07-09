@@ -104,9 +104,18 @@
 									<select required class="form-control" name="batch_id"
 										id="batch-box1">
 										<option value="" disabled selected>Select Batch</option>
-									</select> <select required class="form-control" id="Semester_box"
+									</select> <select required class="form-control" id="Semester_box1"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
+										<option value="" disabled selected>Select Semester</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
 									</select>
 								</div>
 
@@ -114,7 +123,7 @@
 								<div class="form-group col-sm-6" id="fass-fail-semester" hidden>
 									<select class="form-control" id="batch-box2" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
-									</select> <select required class="form-control" id="Semester_box"
+									</select> <select required class="form-control" id="Semester_box2"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
 										<option value="1">1</option>
@@ -136,7 +145,7 @@
 								<div class="form-group col-sm-6" id="exam_type-semester" hidden>
 									<select class="form-control" id="batch-box3" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
-									</select> <select required class="form-control" id="Semester_box"
+									</select> <select required class="form-control" id="Semester_box3"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
 										<option value="1">1</option>
@@ -157,7 +166,7 @@
 								<div class="form-group col-sm-6" id="subject-semester" hidden>
 									<select class="form-control" id="batch-box4" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
-									</select> <select required class="form-control" id="Semester_box"
+									</select> <select required class="form-control" id="Semester_box4"
 										name="Semester_box">
 										<option value="" disabled selected>Select Semester</option>
 										<option value="1">1</option>
@@ -315,7 +324,15 @@
 		var facultyId = document.getElementById("p-faculty-box").value;
 		var programId = document.getElementById("p-program-box").value;
 		var batchIdName = document.getElementById("batch-box5").value;
+		var batchIdName = document.getElementById("batch-box4").value;
+		var batchIdName = document.getElementById("batch-box3").value;
+		var batchIdName = document.getElementById("batch-box2").value;
+		var batchIdName = document.getElementById("batch-box1").value;
 		var semesterIdName = document.getElementById("Semester_box5").value;
+		var semesterIdName = document.getElementById("Semester_box4").value;
+		var semesterIdName = document.getElementById("Semester_box3").value;
+		var semesterIdName = document.getElementById("Semester_box2").value;
+		var semesterIdName = document.getElementById("Semester_box1").value;
 		var nameIdEmailMarks = document.getElementById("searchedEnteredField").value;
 
 		alert(batchIdName);
