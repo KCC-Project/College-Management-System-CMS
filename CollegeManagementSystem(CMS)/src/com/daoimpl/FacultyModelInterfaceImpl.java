@@ -49,8 +49,9 @@ public class FacultyModelInterfaceImpl implements FacultyModelInterface {
 		FacultyModel model = new FacultyModel();
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "Select * from faculty";
+			sql = "Select * from faculty where faculty_id=?";
 			pst = conn.prepareStatement(sql);
+			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				
