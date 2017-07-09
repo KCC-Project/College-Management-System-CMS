@@ -28,7 +28,7 @@ public class ProgramModelInterfaceImpl implements ProgramModelInterface {
 		ProgramModel model = new ProgramModel();
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "Select * from program where faculty_id=?";
+			sql = "Select * from program where program_id=?";
 			pst = conn.prepareStatement(sql);
 			pst.setInt(1, id);
 			rs = pst.executeQuery();

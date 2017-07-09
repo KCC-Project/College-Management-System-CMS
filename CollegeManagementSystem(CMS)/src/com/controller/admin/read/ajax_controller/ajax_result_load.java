@@ -85,7 +85,7 @@ public class ajax_result_load extends HttpServlet {
 			for(SemesterModel sem:semModel){
 			 semesterNo = new SemesterServiceImpl().loadById(sem.getSemester_id()).getSemester_no();
 			 batch = new SemesterServiceImpl().loadById(sem.getSemester_id()).getBatch_year();
-			 programName = new ProgramServiceImpl().getRecordById(Integer.parseInt(programId)).getProgram_name();
+			 programName = new ProgramServiceImpl().getRecordById(sem.getProgram_id()).getProgram_name();
 			 facultyName = new FacultyServiceImpl().getRecordById(Integer.parseInt(facultyId)).getFaculty_name();
 			System.out.println("pName=="+programName+"  fNmae=="+facultyName);
 			}
