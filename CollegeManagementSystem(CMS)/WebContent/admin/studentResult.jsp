@@ -314,13 +314,13 @@
 		document.getElementById("loader").hidden=false;
 		var facultyId = document.getElementById("p-faculty-box").value;
 		var programId = document.getElementById("p-program-box").value;
-
 		var batchIdName = document.getElementById("batch-box5").value;
 		var semesterIdName = document.getElementById("Semester_box5").value;
 		var nameIdEmailMarks = document.getElementById("searchedEnteredField").value;
 
+		alert(semesterIdName);
 		//var send="facultyId="+facultyId+"programId="+programId+"batchIdName="+batchIdName+"semesterIdName="+semesterIdName+"nameIdEmailMarks="+nameIdEmailMarks;
-		var send = "nameIdEmailMarks=" + nameIdEmailMarks+"&programId="+programId+"&batchIdName"+batchIdName+"&semesterIdName"+semesterIdName;
+		var send = "nameIdEmailMarks=" + nameIdEmailMarks+"&programId="+programId+"&batchIdName"+batchIdName+"&semesterIdName="+semesterIdName+"&facultyId="+facultyId;
 		var url = "../ajax_result_load";
 		var aj = new XMLHttpRequest();
 		aj.open("POST", url, true);
