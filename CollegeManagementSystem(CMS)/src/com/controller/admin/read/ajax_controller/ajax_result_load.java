@@ -19,9 +19,11 @@ import com.model.ExamModel;
 import com.model.SemesterModel;
 import com.model.StudentExamResultModel;
 import com.model.StudentModel;
+import com.model.StudentSemesterModel;
 import com.model.SubjectModel;
 import com.service.SemesterServiceInterface;
 import com.service.StudentExamResultModelServiceInterface;
+import com.service.StudentSemesterModelServiceInterface;
 import com.service.StudentServiceInterface;
 import com.serviceimpl.ExamInfoModelServiceImpl;
 import com.serviceimpl.ExamModelServiceImpl;
@@ -50,13 +52,10 @@ public class ajax_result_load extends HttpServlet {
 		String nameIdEmailMarks = request.getParameter("nameIdEmailMarks");
 		System.out.println("program is is =" + programId);
 		System.out.println("faculty is is =" + facultyId);
-		System.out.println("semested id =" +semesterIdName );
-		
+		System.out.println("semested id =" + semesterIdName);
+
 		// list for json converting and adding
 		List JsonObject = new ArrayList<>();
-
-		// list for adding dublicate data if present in same class
-		//List<Integer> idList = new ArrayList<Integer>();
 
 		// calling studentservice and getting student id name etc
 		StudentServiceInterface intterface = new StudentServiceImpl();
@@ -64,33 +63,38 @@ public class ajax_result_load extends HttpServlet {
 		for (StudentModel studentModel : stModel) {
 
 			// getting datainfo from studentsemestertable with student id
-			
 			SemesterServiceInterface semester = new SemesterServiceImpl();
 
-			
 			Object[] obj = new Object[7];
 			
-			obj[1]=Integer.parseInt(semesterIdName);
-			obj[2]=Integer.parseInt(programId);
-			
+			obj[1] = Integer.parseInt(semesterIdName);
+			obj[2] = Integer.parseInt(programId);
+
 			int semesterNo = 0;
-			
-			int batch=0;
-			String programName=null;
-			int semesterId=0;
-			String facultyName=null;
-			
-			List<SemesterModel> semModel=semester.searchByFields(obj);
-			for(SemesterModel sem:semModel){
-				semesterId=sem.getSemester_id();
+			int batch = 0;
+			String programName = null;
+			int semesterId = 0;
+			String facultyName = null;
+
+			List<SemesterModel> semModel = semester.searchByFields(obj);
+			System.out.println("semester size=="+semModel.size());
+			for (SemesterModel sem : semModel) {
+				semesterId = sem.getSemester_id();
 				semesterNo = new SemesterServiceImpl().loadById(sem.getSemester_id()).getSemester_no();
-			 batch = new SemesterServiceImpl().loadById(sem.getSemester_id()).getBatch_year();
-			 programName = new ProgramServiceImpl().getRecordById(sem.getProgram_id()).getProgram_name();
-			 facultyName = new FacultyServiceImpl().getRecordById(Integer.parseInt(facultyId)).getFaculty_name();
-			System.out.println("pName=="+programName+"  fNmae=="+facultyName);
+				batch = new SemesterServiceImpl().loadById(sem.getSemester_id()).getBatch_year();
+				programName = new ProgramServiceImpl().getRecordById(sem.getProgram_id()).getProgram_name();
+				facultyName = new FacultyServiceImpl().getRecordById(Integer.parseInt(facultyId)).getFaculty_name();
+				
 			}
+			System.out.println("pName==" + programName + "  fNmae==" + facultyName);
+			System.out.println("semId="+semesterId);
+			StudentSemesterModelServiceInterface interfa = new StudentSemesterModelServiceImpl();
+			Object[] obj1 = new Object[7];
+			obj1[0] = studentModel.getStudentID();
+			obj1[1] = semesterId;
+			List<StudentSemesterModel> semModel1 = interfa.searchByFields(obj1);
 			
-			if () {
+			if (semModel1.size()>0) {
 
 				// calling result service
 				StudentExamResultModelServiceInterface result = new StudentExamResultModelServiceImpl();
@@ -142,26 +146,25 @@ public class ajax_result_load extends HttpServlet {
 
 				studentDataMap.put("semesterId", semesterId);
 				studentDataMap.put("semesterNo", semesterNo);
-				
+
 				studentDataMap.put("batch", batch);
 				studentDataMap.put("programName", programName);
-				
-				studentDataMap.put("facultyName", facultyName);
 
+				studentDataMap.put("facultyName", facultyName);
 
 				JsonObject.add(studentDataMap);
 
-			}		
-			}
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println(JsonUtil.convertJavaToJson(JsonObject));
+				response.getWriter().write(JsonUtil.convertJavaToJson(JsonObject));
 
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			}
 		}
-		System.out.println(JsonUtil.convertJavaToJson(JsonObject));
-		response.getWriter().write(JsonUtil.convertJavaToJson(JsonObject));
 
 	}
 

@@ -44,11 +44,11 @@ public class StudentSemesterModelImpl implements StudentSemesterModelInterface {
 	            parameters.add(student_id);
 	        }
 	        if (semester_id != 0) {
-	            query.append(" AND semester_no = ?");
+	            query.append(" AND semester_id = ?");
 	            parameters.add(semester_id);
 	        }
 	        if (is_completed != 0) {
-	            query.append(" AND program_id = ?");
+	            query.append(" AND is_completed = ?");
 	            parameters.add(is_completed);
 	        }
 	        if (class_id != 0) {

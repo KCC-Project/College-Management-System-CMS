@@ -134,7 +134,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 		java.sql.Date sem_start_date_sql = null;
 		java.sql.Date sem_end_date_sql = null;
 		int status = 0;
-		System.out.println(obj[0].toString());
+
 		System.out.println(obj[1].toString());
 		System.out.println(obj[2].toString());
 		if (obj[0] != null) {  semester_id = Integer.parseInt(obj[0].toString()); }
