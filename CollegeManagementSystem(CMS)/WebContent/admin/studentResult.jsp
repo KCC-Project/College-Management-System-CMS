@@ -320,7 +320,7 @@
 		var nameIdEmailMarks = document.getElementById("searchedEnteredField").value;
 
 		//var send="facultyId="+facultyId+"programId="+programId+"batchIdName="+batchIdName+"semesterIdName="+semesterIdName+"nameIdEmailMarks="+nameIdEmailMarks;
-		var send = "nameIdEmailMarks=" + nameIdEmailMarks;
+		var send = "nameIdEmailMarks=" + nameIdEmailMarks+"&programId="+programId+"&batchIdName"+batchIdName+"&semesterIdName"+semesterIdName;
 		var url = "../ajax_result_load";
 		var aj = new XMLHttpRequest();
 		aj.open("POST", url, true);

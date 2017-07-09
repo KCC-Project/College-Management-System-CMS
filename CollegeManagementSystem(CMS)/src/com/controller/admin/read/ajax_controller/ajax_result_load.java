@@ -48,7 +48,7 @@ public class ajax_result_load extends HttpServlet {
 		String batchIdName = request.getParameter("batchIdName");
 		String semesterIdName = request.getParameter("semesterIdName");
 		String nameIdEmailMarks = request.getParameter("nameIdEmailMarks");
-
+		System.out.println("program is is =" + programId);
 		// list for json converting and adding
 		List JsonObject = new ArrayList<>();
 
@@ -59,21 +59,18 @@ public class ajax_result_load extends HttpServlet {
 		StudentServiceInterface intterface = new StudentServiceImpl();
 		List<StudentModel> stModel = intterface.searchByField(nameIdEmailMarks);
 		for (StudentModel studentModel : stModel) {
-			
-			//getting datainfo from studentsemestertable with student id
-			int semesterId=new StudentSemesterModelServiceImpl().getSelectedData(studentModel.getStudentID()).getSemesterId();
-			int semesterNo=new SemesterServiceImpl().loadById(semesterId).getSemester_no();
-			int programId1= new SemesterServiceImpl().loadById(semesterId).getProgram_id();
-			int batch=new SemesterServiceImpl().loadById(semesterId).getBatch_year();
-			String programName=new ProgramServiceImpl().getRecordById(semesterId).getProgram_name();
-			int facultyId1=new ProgramServiceImpl().getRecordById(semesterId).getFaculty_id();
-			String facultyName=new FacultyServiceImpl().getRecordById(facultyId1).getFaculty_name();
-			
-			
 
-			
-			
-			
+			// getting datainfo from studentsemestertable with student id
+			int semesterId = new StudentSemesterModelServiceImpl().getSelectedData(studentModel.getStudentID())
+					.getSemesterId();
+
+			int semesterNo = new SemesterServiceImpl().loadById(semesterId).getSemester_no();
+			int programId1 = new SemesterServiceImpl().loadById(semesterId).getProgram_id();
+			int batch = new SemesterServiceImpl().loadById(semesterId).getBatch_year();
+			String programName = new ProgramServiceImpl().getRecordById(semesterId).getProgram_name();
+			int facultyId1 = new ProgramServiceImpl().getRecordById(semesterId).getFaculty_id();
+			String facultyName = new FacultyServiceImpl().getRecordById(facultyId1).getFaculty_name();
+
 			// calling result service
 			StudentExamResultModelServiceInterface result = new StudentExamResultModelServiceImpl();
 
@@ -122,7 +119,6 @@ public class ajax_result_load extends HttpServlet {
 			studentDataMap.put("fullMarks", fullMarks);
 			studentDataMap.put("passMarks", passMarks);
 
-			
 			studentDataMap.put("semesterId", semesterId);
 			studentDataMap.put("semesterNo", semesterNo);
 			studentDataMap.put("programId1", programId1);
@@ -130,7 +126,7 @@ public class ajax_result_load extends HttpServlet {
 			studentDataMap.put("programName", programName);
 			studentDataMap.put("facultyId1", facultyId1);
 			studentDataMap.put("facultyName", facultyName);
-			
+
 			// adding in list
 			JsonObject.add(studentDataMap);
 		}

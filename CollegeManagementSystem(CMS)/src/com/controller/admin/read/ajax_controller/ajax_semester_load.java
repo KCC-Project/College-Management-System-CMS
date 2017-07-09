@@ -36,7 +36,7 @@ public class ajax_semester_load extends HttpServlet {
 			String jsonSearch=JsonUtil.convertJavaToJson(semester.searchByFields(obj));
 			System.out.println("json checking="+jsonSearch);
 			
-			String semesterJson=JsonUtil.convertJavaToJson(semester.loadByProgramId(id));
+			String semesterJson=JsonUtil.convertJavaToJson(semester.loadById(id));
 			
 			response.setContentType("text/xml");
 			response.setHeader("Cache-Control", "no-cache");
