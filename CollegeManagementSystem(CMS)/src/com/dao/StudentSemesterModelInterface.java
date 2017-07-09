@@ -5,5 +5,6 @@ import java.util.List;
 import com.model.StudentSemesterModel;
 
 public interface StudentSemesterModelInterface {
-StudentSemesterModel getSelectedData(int id);
+
+	public List<StudentSemesterModel> searchByFields(Object[] obj);
 }

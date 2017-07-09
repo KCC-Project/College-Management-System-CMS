@@ -3,11 +3,15 @@ package com.daoimpl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.dao.StudentSemesterModelInterface;
+import com.model.SemesterModel;
 import com.model.StudentSemesterModel;
+import com.util.DateUtil;
 
 
 public class StudentSemesterModelImpl implements StudentSemesterModelInterface {
@@ -16,37 +20,89 @@ public class StudentSemesterModelImpl implements StudentSemesterModelInterface {
 	private PreparedStatement pst;
 	private ResultSet rs;
 	private Connection conn;
-
+	
 	@Override
-	public StudentSemesterModel getSelectedData(int id) {
-		StudentSemesterModel model = new StudentSemesterModel();
+	public List<StudentSemesterModel> searchByFields(Object[] obj) {
+		List<Object> parameters = new ArrayList<Object>();
+		List<StudentSemesterModel> studentSemester = new ArrayList<>();
+		int student_id = 0;
+		int semester_id = 0;
+		int is_completed = 0;
+		int class_id = 0;
+		int status = 0;
+		if (obj[0] != null) {  student_id = Integer.parseInt(obj[0].toString()); }
+		if (obj[1] != null) {  semester_id = Integer.parseInt(obj[1].toString()); }
+		if (obj[2] != null) {  is_completed = Integer.parseInt(obj[2].toString()); }
+		if (obj[3] != null) {  class_id = Integer.parseInt(obj[3].toString()); }
+		if (obj[4] != null) {  status = Integer.parseInt(obj[4].toString()); }
+		
 		try {
-			Connection connection = DatabaseConnection.connectToDatabase();
-			sql = "select * from student_semester where student_id=?";
-			pst = connection.prepareStatement(sql);
-			pst.setInt(1, id);
-			rs = pst.executeQuery();
-			while (rs.next()) {
-				
-				model.setStudentId(rs.getInt("student_id"));
-				model.setSemesterId(rs.getInt("semester_id"));
-				model.setIsCompleted(rs.getInt("is_completed"));
-				model.setClassId(rs.getInt("class_id"));
-				model.setStatus(rs.getInt("status"));
-				
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+	        StringBuilder query = new StringBuilder("SELECT * FROM student_semester WHERE 1=1");
+	        
+			if (student_id != 0) {
+	            query.append(" AND student_id = ?");
+	            parameters.add(student_id);
+	        }
+	        if (semester_id != 0) {
+	            query.append(" AND semester_no = ?");
+	            parameters.add(semester_id);
+	        }
+	        if (is_completed != 0) {
+	            query.append(" AND program_id = ?");
+	            parameters.add(is_completed);
+	        }
+	        if (class_id != 0) {
+	            query.append(" AND class_id = ?");
+	            parameters.add(class_id);
+	        }
+	        if (status != 0) {
+	            query.append(" AND status = ?");
+	            parameters.add(status);
+	        }
+	        
+	        String Query = query.toString();
+	        System.out.println(Query);
+	        
+	        conn = DatabaseConnection.connectToDatabase();
+	        pst = conn.prepareStatement(Query);
+
+	        int i = 1;
+	        for (Object parameter : parameters) {
+	            pst.setObject(i++, parameter);
+	        }
+
+	        rs = pst.executeQuery();
+	        if (rs != null) {
+	            
+	        	while(rs.next()){
+	        		StudentSemesterModel studentSemesterModel = new StudentSemesterModel();
+	        		
+	        		studentSemesterModel.setStudent_id(rs.getInt("student_id"));
+	        		studentSemesterModel.setSemester_id(rs.getInt("semester_id"));
+	        		studentSemesterModel.setIs_completed(rs.getInt("is_completed"));
+	        		studentSemesterModel.setClass_id(rs.getInt("class_id"));
+	        		studentSemesterModel.setStatus(rs.getInt("status"));
+	        		
+					studentSemester.add(studentSemesterModel);
+				}
+
+	        }
+
+	    }  catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}
+		finally {
 			try {
 				pst.close();
 				rs.close();
 				conn.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+			
 		}
-		return model;
+		
+		return studentSemester;
 	}
+	
 }

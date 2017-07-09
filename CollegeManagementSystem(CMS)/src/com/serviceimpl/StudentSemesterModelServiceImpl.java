@@ -9,9 +9,10 @@ import com.service.StudentSemesterModelServiceInterface;
 
 public class StudentSemesterModelServiceImpl implements StudentSemesterModelServiceInterface {
 	StudentSemesterModelInterface inter= new StudentSemesterModelImpl();
+	
 	@Override
-	public StudentSemesterModel getSelectedData(int id) {
-		return inter.getSelectedData(id);
+	public List<StudentSemesterModel> searchByFields(Object[] obj){
+		return inter.searchByFields(obj);
 	}
 
 }

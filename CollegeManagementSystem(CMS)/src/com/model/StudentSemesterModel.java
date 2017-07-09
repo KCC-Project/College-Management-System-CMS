@@ -1,46 +1,46 @@
 package com.model;
 
 public class StudentSemesterModel {
-	private int studentId;
-	private int semesterId;
-	private int isCompleted;
-	private int classId;
+	private int student_id;
+	private int semester_id;
+	private int is_completed;
+	private int class_id;
 	private int status;
 	public StudentSemesterModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public StudentSemesterModel(int studentId, int semesterId, int isCompleted, int classId, int status) {
+	public StudentSemesterModel(int student_id, int semester_id, int is_completed, int class_id, int status) {
 		super();
-		this.studentId = studentId;
-		this.semesterId = semesterId;
-		this.isCompleted = isCompleted;
-		this.classId = classId;
+		this.student_id = student_id;
+		this.semester_id = semester_id;
+		this.is_completed = is_completed;
+		this.class_id = class_id;
 		this.status = status;
 	}
-	public int getStudentId() {
-		return studentId;
+	public int getStudent_id() {
+		return student_id;
 	}
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
+	public void setStudent_id(int student_id) {
+		this.student_id = student_id;
 	}
-	public int getSemesterId() {
-		return semesterId;
+	public int getSemester_id() {
+		return semester_id;
 	}
-	public void setSemesterId(int semesterId) {
-		this.semesterId = semesterId;
+	public void setSemester_id(int semester_id) {
+		this.semester_id = semester_id;
 	}
-	public int getIsCompleted() {
-		return isCompleted;
+	public int getIs_completed() {
+		return is_completed;
 	}
-	public void setIsCompleted(int isCompleted) {
-		this.isCompleted = isCompleted;
+	public void setIs_completed(int is_completed) {
+		this.is_completed = is_completed;
 	}
-	public int getClassId() {
-		return classId;
+	public int getClass_id() {
+		return class_id;
 	}
-	public void setClassId(int classId) {
-		this.classId = classId;
+	public void setClass_id(int class_id) {
+		this.class_id = class_id;
 	}
 	public int getStatus() {
 		return status;
@@ -48,10 +48,6 @@ public class StudentSemesterModel {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	@Override
-	public String toString() {
-		return "StudentSemesterModel [studentId=" + studentId + ", semesterId=" + semesterId + ", isCompleted="
-				+ isCompleted + ", classId=" + classId + ", status=" + status + "]";
-	}
+	
 	
 }

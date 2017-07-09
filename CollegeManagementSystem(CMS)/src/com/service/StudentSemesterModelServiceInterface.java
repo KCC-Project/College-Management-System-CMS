@@ -6,5 +6,6 @@ import com.model.StudentSemesterModel;
 
 public interface StudentSemesterModelServiceInterface {
 
-StudentSemesterModel getSelectedData(int id);
+	public List<StudentSemesterModel> searchByFields(Object[] obj);
+
 }
