@@ -124,7 +124,7 @@
 											<td>Exam ID</td>
 										</tr>
 										<tbody id="employee_data">
-										<td data-name='student_name'  data-type='text' contenteditable="true" class="student_name">asdfasdf</td>
+										<td data-name='student_name'  data-type='text'  class="student_name">asdfasdf</td>
 										</tbody>
 										<!-- <tr>
 											<td contenteditable="true" class="student_sn"></td>
@@ -277,9 +277,8 @@
 					var cell8 = row.insertCell(7);
 					var cell9 = row.insertCell(8);
 
-					cell1.innerHTML = '	<td contenteditable="true" class="student_sn">'
-							+ i + '</td>';
-					cell2.innerHTML = "<td data-name='student_name'  data-type='text' class='student_name'>"
+					cell1.innerHTML = '	<td contenteditable="true" class="student_sn">'+ i + '</td>';
+					cell2.innerHTML = "<td data-name=\"student_name\"  data-type=\"text\" class=\"student_name\">"
 							+ item.Name + "</td>";
 							
 					cell3.innerHTML = '<td contenteditable="true" class="student_subject">'
