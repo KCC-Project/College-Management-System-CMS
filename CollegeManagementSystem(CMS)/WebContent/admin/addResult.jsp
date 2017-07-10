@@ -260,35 +260,37 @@
 				alert(jSonObject[0].Name);
 				$("#crud_table").show();
 				var content = '';
-				for (var i = 0; i <jSonObject.length; i++) {
-					content += '<tr>';	
-					content += '<td contenteditable="true" class="student_sn">'+ (i+1) + '</td>';
-					content += "<td data-name=\"student_name\"  data-type=\"text\" class=\"student_name\">"+ jSonObject[i].Name + "</td>";
-							
-							content += '<td  class="student_subject">'
-							+ "math" + '</td>';
-							content += '<td  class="student_examType">'
-							+ "Regular" + '</td>';
-							content += '<td  class="student_attendence">'
-							+ "present" + '</td>';
-							content += '<td  class="student_fullMarks">'
-							+ 100+ '</td>';
-							content +='<td  class="student_score">'
-							+ 50 + '</td>';
+				for (var i = 0; i < jSonObject.length; i++) {
+					content += '<tr>';
+					content += '<td contenteditable="true" class="student_sn">'
+							+ (i + 1) + '</td>';
+					content += "<td data-name=\"student_name\"  data-type=\"text\" class=\"student_name\">"
+							+ jSonObject[i].Name + "</td>";
+
+					content += '<td  class="student_subject">' + "math"
+							+ '</td>';
+					content += '<td  class="student_examType">' + "Regular"
+							+ '</td>';
+					content += '<td  class="student_attendence">' + "present"
+							+ '</td>';
+					content += '<td  class="student_fullMarks">' + 100
+							+ '</td>';
+					content += '<td  class="student_score">'
+							+ jSonObject[i].totalNumber + '</td>';
 					var passFailStatus = 0;
 					if (passFailStatus === 0) {
 						/*<i class="fa fa-sitemap"> <i class="fa fa-users">*/
-						content +='	<td  class="student_passFail"><span class="btn btn-sm btn-danger "> </i> &nbsp;&nbsp;Fail &nbsp;</span></td>';
+						content += '	<td  class="student_passFail"><span class="btn btn-sm btn-danger "> </i> &nbsp;&nbsp;Fail &nbsp;</span></td>';
 					} else {
-						content +='	<td  class="student_passFail"><span class="btn btn-sm btn-warning "> </i> &nbsp;&nbsp;pass &nbsp;</span></td>';
+						content += '	<td  class="student_passFail"><span class="btn btn-sm btn-warning "> </i> &nbsp;&nbsp;pass &nbsp;</span></td>';
 
 					}
-					content +=  '<td  class="exam_id">'+"Left"+'</td>'; 
+					content += '<td  class="exam_id">' + "Left" + '</td>';
 					content += '<tr>';
 					//i--;
-					
+
 				}
-				$("#employee_data").html(content); 
+				$("#employee_data").html(content);
 			}
 		}
 		aj.send(idSend);

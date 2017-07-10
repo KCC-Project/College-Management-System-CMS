@@ -38,6 +38,7 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 		
 		List<Integer> semesterId=new ArrayList<Integer>();
 		List<Integer> studentID= new ArrayList<Integer>();
+		
 		SemesterServiceInterface inter= new SemesterServiceImpl();
 		List<SemesterModel> getSemester_id= inter.searchByFields(obj);
 		
@@ -63,17 +64,22 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 		for (Integer studentID1 : studentID) {
 			Object[] obj1 = new Object[10];
 			obj1[0]=studentID1;
+			
 			StudentServiceInterface inter1= new StudentServiceImpl();
 			List<StudentModel> studentList= inter1.searchByField(obj1);
+			
 			for (StudentModel studentModel : studentList) {
 
 				Map<String , Object> map= new HashMap<String,Object>();
 				map.put("Name", studentModel.getFirstname()+" "+studentModel.getMiddlename()+" "+studentModel.getLastname());
+				map.put("totalNumber", 100);
 				studentName.add(map);
+				
 			}
 		}
 		String jsonSearch=JsonUtil.convertJavaToJson(studentName);
 		System.out.println(semesterId.toString());
+		
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		System.out.println(jsonSearch);
