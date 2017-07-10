@@ -134,9 +134,9 @@ public class SemesterModelImpl implements SemesterModelInterface {
 		java.sql.Date sem_start_date_sql = null;
 		java.sql.Date sem_end_date_sql = null;
 		int status = 0;
+		int start = 0;
+		int limit = 0;
 
-		System.out.println(obj[1].toString());
-		System.out.println(obj[2].toString());
 		if (obj[0] != null) {  semester_id = Integer.parseInt(obj[0].toString()); }
 		if (obj[1] != null) {  semester_no = Integer.parseInt(obj[1].toString()); }
 		if (obj[2] != null) {  program_id = Integer.parseInt(obj[2].toString()); }
@@ -147,8 +147,13 @@ public class SemesterModelImpl implements SemesterModelInterface {
 			sem_end_date_sql = new java.sql.Date(sem_end_date.getTime()); }//converting
 		if (obj[6] != null) {  status = Integer.parseInt(obj[6].toString()); }
 		
+		if (obj[7] != null && obj[8] != null) {  
+			start = Integer.parseInt(obj[7].toString()); 
+			limit = Integer.parseInt(obj[8].toString());
+		}
+		
 		try {
-	        StringBuilder query = new StringBuilder("SELECT * FROM semester WHERE 1=1");
+	        StringBuilder query = new StringBuilder("SELECT *, COUNT(*) as count FROM semester WHERE 1=1");
 	        
 			if (semester_id != 0) {
 	            query.append(" AND semester_id = ?");
@@ -178,6 +183,11 @@ public class SemesterModelImpl implements SemesterModelInterface {
 	            query.append(" AND status = ?");
 	            parameters.add(status);
 	        }
+	        if (start != 0 && limit != 0) {
+	            query.append(" LIMIT ?, ?");
+	            parameters.add(start);
+	            parameters.add(limit);
+	        }
 	        
 	        String Query = query.toString();
 	        System.out.println(Query);
@@ -206,6 +216,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 					
 					semester.add(semesterModel);
 				}
+	        	System.out.println(rs.getInt("count"));
 
 	        }
 

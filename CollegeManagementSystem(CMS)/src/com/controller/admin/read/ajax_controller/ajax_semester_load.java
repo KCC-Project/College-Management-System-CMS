@@ -21,28 +21,45 @@ public class ajax_semester_load extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String program_id = request.getParameter("id");
-		if (program_id.equalsIgnoreCase("")) {
-			System.out.println("no data recevied");
-		}else{
-			
+		String semester_id = request.getParameter("semester_id");
+		int start = 1;
+		int limit = 2;
+		
+		String jsonResponse = null;
+		
+		if (program_id != null && !program_id.isEmpty()) {
 			int id=Integer.parseInt(program_id);
-			System.out.println(program_id);
+			//System.out.println(program_id);
 			SemesterServiceInterface semester= new SemesterServiceImpl();
 			
-			Object[] obj = new Object[7];
-			obj[0]=1;
+			Object[] obj = new Object[10];
+			obj[2]=id;
 			
 			System.out.println(obj[1]);
-			String jsonSearch=JsonUtil.convertJavaToJson(semester.searchByFields(obj));
-			System.out.println("json checking="+jsonSearch);
+			jsonResponse=JsonUtil.convertJavaToJson(semester.searchByFields(obj));
+			System.out.println("json checking="+jsonResponse);
 			
-			String semesterJson=JsonUtil.convertJavaToJson(semester.loadById(id));
+			//String semesterJson=JsonUtil.convertJavaToJson(semester.loadById(id));
 			
-			response.setContentType("text/xml");
-			response.setHeader("Cache-Control", "no-cache");
-			System.out.println("json="+semesterJson);
-			response.getWriter().write(semesterJson);
+			
+		}else if(!semester_id.equalsIgnoreCase("")){
+			int id=Integer.parseInt(semester_id);
+			SemesterServiceInterface semester= new SemesterServiceImpl();
+			
+			Object[] obj = new Object[10];
+			obj[0]=id;
+			
+			jsonResponse=JsonUtil.convertJavaToJson(semester.searchByFields(obj));
+			
+		}else {
+			System.out.println("No data received");
 		}
+		
+		response.setContentType("text/xml");
+		response.setHeader("Cache-Control", "no-cache");
+		
+		System.out.println("json="+jsonResponse);
+		response.getWriter().write(jsonResponse);
 	}
 
 }

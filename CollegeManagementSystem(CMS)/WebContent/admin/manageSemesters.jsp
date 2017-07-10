@@ -33,32 +33,51 @@
 							data-toggle="modal" data-target=#add_semester_modal id="modal-box" >Add
 							Semester
 						</button>
-
+						<button type="button" class="btn btn-info pull-left" style="margin-left: -20px;"
+							data-toggle="modal" data-target=#search_semester_modal id="search-box" >
+							<span class="glyphicon glyphicon-search"> Filter </span>
+						</button>
 					</h3>
 
 				</div>
 			</div>
 			<!-- ============ main title content ends here ============= -->
+			
+			<!-- Semester Delete modal -->
+	<div class="modal fade" id="search_semester_modal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+						<div class="modal-body">
+					    	<div id="faculty">
+					    		<div class="row">
+					    			<div class="col-sm-6">
+									    <label>Faculty: <span class="astriek">*</span></label>
+									    <select required class="form-control" id="p-faculty-box" name="faculty_id" >
+											
+										</select>
+								  	</div>
+									  <div class="col-sm-6">
+									    <label>Programme: <span class="astriek">*</span></label>
+									    <select required class="form-control" id="p-program-box" name="program_id">
+											<option value="" disabled selected>Select Programme</option>
+										</select>
+									  </div>
+					    		</div>
+					    	</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							 <button class="btn btn-success" id="go">Go</button>
+						</div>
+				</div>
+
+			</div>
+		</div>
+	<!-- Semester Delete modal ends here -->
     	
-    	<div class="row">
-    	<div id="faculty">
-    			<div class="form-group col-sm-4">
-			    <label>Faculty: <span class="astriek">*</span></label>
-			    <select required class="form-control" id="p-faculty-box" name="faculty_id" >
-					
-				</select>
-			  </div>
-				  <div class="form-group col-sm-4">
-				    <label>Programme: <span class="astriek">*</span></label>
-				    <select required class="form-control" id="p-program-box" name="program_id">
-						<option value="" disabled selected>Select Programme</option>
-					</select>
-				  </div>
-				  <div class="form-group col-sm-4">
-				    <button class="btn btn-success" id="go">Go</button>
-				  </div>
-    	</div>
-    	</div>
+    	
 		
 		<div class="box-body " style="margin-bottom: 4px;">
 					<div id="accordion" class="box-group">
@@ -159,8 +178,93 @@
 	<!-- Semester Modal ends here -->
 	
 	
+	<!-- Semester Modal starts here -->
+		<div class="modal fade" id="edit_semester_modal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" id="e-title">Edit Semester</h4>
+					</div>
+					<form action="../Semester_update_Controller" enctype="multipart/form-data" method="Post">
+      <div class="modal-body">
+        				<div class="row">
+						  <div class="form-group col-sm-6">
+						    <label>Faculty: <span class="astriek">*</span></label>
+						    <select required class="form-control" id="e-faculty-box" name="faculty_id">
+								
+							</select>
+						  </div>
+						  <div class="form-group col-sm-6">
+						    <label>Programme: <span class="astriek">*</span></label>
+						    <select required class="form-control" id="e-program-box" name="program_id">
+								<option value="" disabled >Select Programme</option>
+							</select>
+						  </div>
+						 </div>
+						 <div class="row">
+						  <div class="form-group col-sm-6">
+						    <label>Batch: <span class="astriek">*</span></label>
+						    <select required class="form-control" name="batch_id" id="e-batch-box">
+								<option value="" disabled>Select Batch</option>
+							</select>
+						  </div>
+						  <div class="form-group col-sm-6">
+						    <label>Semester no.: <span class="astriek">*</span></label>
+						    	<input type="number" id="e-sem-no" name="semester_no" required class="form-control" placeholder="Semester number">
+						  </div>
+						 </div>
+						 <div class="row">
+						  <div class="form-group col-sm-6">
+						    <label>Semester Start Date: </label>
+						    	<input type="date" id="e-start_date" name="start_date" class="form-control" placeholder="yyyy/mm/dd">
+						  </div>
+						  <div class="form-group col-sm-6">
+						    <label>Semester End Date: </label>
+						    <input type="date" id="e-end_date" name="end_date" class="form-control" placeholder="yyyy/mm/dd">
+						  </div>
+						  </div>
+						  <div class="form-group">
+						  	<label>Semester</label>
+						  	<input type="radio" name="e-status" required value="1">Active
+							<input type="radio" name="e-status" value="0">Completed
+						</div>
+						  
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				         <button type="submit" class="btn btn-success" id="e-submit">Update</button>
+				      </div>
+				      </form>
+				</div>
+
+			</div>
+		</div>
+	<!-- Semester Modal ends here -->
 	
-	
+	<!-- Semester Delete modal -->
+	<div class="modal fade" id="delete_semester_modal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+						<div class="modal-body">
+							<h3 >
+								Are you sure you want to delete this item?
+								<br>
+								<strong id="d-semester-id"></strong></h3>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit"  class="btn btn-danger">Delete</button>
+						</div>
+				</div>
+
+			</div>
+		</div>
+	<!-- Semester Delete modal ends here -->
 
 
 <script src="../Resources/js/jquery-3.2.1.min.js"></script>
@@ -184,7 +288,6 @@ if (modalbtn.addEventListener) {                    // For all major browsers, e
 // event listener for p-faculty-box to load program of selected faculty
 var pfacultybtn = document.getElementById("p-faculty-box");
 if (pfacultybtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-    //facultybtn.addEventListener("click", load_program(event));
 	pfacultybtn.addEventListener("change", function(){load_program(event)}, false);
 } else if (pfacultybtn.attachEvent) {                  // For IE 8 and earlier versions
 	pfacultybtn.attachEvent("onchange", load_program(event));
@@ -192,7 +295,6 @@ if (pfacultybtn.addEventListener) {                    // For all major browsers
 
 var facultybtn = document.getElementById("faculty-box");
 if (facultybtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-    //facultybtn.addEventListener("click", load_program(event));
 	facultybtn.addEventListener("change", function(){load_program(event)}, false);
 } else if (facultybtn.attachEvent) {                  // For IE 8 and earlier versions
 	facultybtn.attachEvent("onchange", load_program(event));
@@ -200,10 +302,23 @@ if (facultybtn.addEventListener) {                    // For all major browsers,
 
 var programbtn = document.getElementById("program-box");
 if (programbtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-    //programbtn.addEventListener("click", load_program(event));
-	programbtn.addEventListener("change", function(){load_batch_year()}, false);
+	programbtn.addEventListener("change", function(){load_batch_year(event)}, false);
 } else if (programbtn.attachEvent) {                  // For IE 8 and earlier versions
-	programbtn.attachEvent("onchange", load_batch_year());
+	programbtn.attachEvent("onchange", load_batch_year(event));
+}
+
+var efacultybtn = document.getElementById("e-faculty-box");
+if (efacultybtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
+	efacultybtn.addEventListener("change", function(){load_program(event)}, false);
+} else if (efacultybtn.attachEvent) {                  // For IE 8 and earlier versions
+	efacultybtn.attachEvent("onchange", load_program(event));
+}
+
+var eprogrambtn = document.getElementById("e-program-box");
+if (eprogrambtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
+	eprogrambtn.addEventListener("change", function(){load_batch_year(event)}, false);
+} else if (eprogrambtn.attachEvent) {                  // For IE 8 and earlier versions
+	eprogrambtn.attachEvent("onchange", load_batch_year(event));
 }
 
 var gobtn = document.getElementById("go");
@@ -213,18 +328,10 @@ if (gobtn.addEventListener) {                    // For all major browsers, exce
 } else if (gobtn.attachEvent) {                  // For IE 8 and earlier versions
 	gobtn.attachEvent("onclick", load_semester());
 }
-
-var editbtn = document.getElementById("edit");
-if (editbtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	//editbtn.addEventListener("click", load_program(event));
-	editbtn.addEventListener("click", function(){load_faculty(event)}, false);
-} else if (editbtn.attachEvent) {                  // For IE 8 and earlier versions
-	editbtn.attachEvent("onclick", load_faculty(event));
-}
 	
 function load_faculty(e) {
 	var id=document.getElementById("faculty-box").value;
-	alert("s"+e.target.id);
+	//alert("s"+e.target.id);
 	var getid = e.target.id;
 	var url="../ajax_faculty_load";
 	var aj=new XMLHttpRequest();
@@ -233,8 +340,10 @@ function load_faculty(e) {
 	aj.onreadystatechange=function(){
 		if (aj.readyState==4&&aj.status==200) {
 			var return_data=aj.responseText;
-			if(getid=="modal-box" || getid=="faculty-box" || getid=="edit"){
+			if(getid=="modal-box" || getid=="faculty-box"){
 				document.getElementById("faculty-box").innerHTML=return_data;	
+			}else if(getid=="edit"){
+				document.getElementById("e-faculty-box").innerHTML=return_data;
 			}else {
 				document.getElementById("p-faculty-box").innerHTML=return_data;
 			}
@@ -248,8 +357,14 @@ function load_program(e) {
 	e = e || window.event;
 	//var target = e.target || e.srcElement;
 	var getid = e.target.id;
+	//alert(getid);
+	//var id = getid.value;
+	//alert(id);
+	
 	if(getid=="faculty-box"){
 		var id=document.getElementById("faculty-box").value;
+	}else if(getid=="e-faculty-box"){
+		var id=document.getElementById("e-faculty-box").value;
 	}else {
 		var id=document.getElementById("p-faculty-box").value;
 	}
@@ -263,6 +378,8 @@ function load_program(e) {
 			var return_data=aj.responseText;
 			if(getid=="faculty-box"){
 				document.getElementById("program-box").innerHTML=return_data;	
+			}else if(getid=="e-faculty-box"){
+				document.getElementById("e-program-box").innerHTML=return_data;	
 			}else {
 				document.getElementById("p-program-box").innerHTML=return_data;
 			}
@@ -271,8 +388,15 @@ function load_program(e) {
 	aj.send(idSend);
 }
 
-function load_batch_year() {
-	var id=document.getElementById("program-box").value;
+function load_batch_year(e) {
+	var getid = e.target.id;
+	//alert(getid);
+	if(getid=="program-box"){
+		var id=document.getElementById("program-box").value;
+	}else {
+		var id=document.getElementById("e-program-box").value;
+	}
+	//var id=document.getElementById("program-box").value;
 	var url="../ajax_year_load";
 	var idSend="id="+id;
 	var aj=new XMLHttpRequest();
@@ -281,7 +405,11 @@ function load_batch_year() {
 	aj.onreadystatechange=function(){
 		if (aj.readyState==4&&aj.status==200) {
 			var return_data=aj.responseText;
-			document.getElementById("batch-box").innerHTML=return_data;
+			if(getid=="program-box"){
+				document.getElementById("batch-box").innerHTML=return_data;	
+			}else {
+				document.getElementById("e-batch-box").innerHTML=return_data;
+			}
 		}
 	}
 	aj.send(idSend);
@@ -306,9 +434,9 @@ function load_semester(){
 	        }else {
 	        	$("#mytable").show();
 	            for (var i = 0; i < json.length; i++) {
-	            	content += '<tr>';
+	            	content += '<tr id="\ row'+json[i].semester_id+' "\>';
 	            	content += '<td> <input type="\checkbox"\ class="\checkthis"\ /> </td>';
-		            content += '<td>' + json[i].semester_id + '</td>';
+		            content += '<td class="masuamsdfasdf">' + json[i].semester_id + '</td>';
 		            content += '<td>' + json[i].semester_no + '</td>';
 		            content += '<td>' + json[i].program_id + '</td>';
 		            content += '<td>' + json[i].batch_year + '</td>';
@@ -316,25 +444,71 @@ function load_semester(){
 		            content += '<td>' + json[i].end_date + '</td>';
 		            content += '<td>' + json[i].status + '</td>';
 		            
-		            content += '<td><button type="button" class="btn btn-info pull-right" \
-								data-toggle="modal" data-target=#add_semester_modal id="edit" onClick="load_edit();">Edit\
-			            <span class="glyphicon glyphicon-pencil"></span></button></td>';
+		            content += '<td><button type="\button"\ class="\btn btn-info pull-right"\ data-toggle="\modal"\ data-target=#edit_semester_modal id="\edit"\ onClick="\load_edit('+json[i].semester_id+');"\>Edit <span class="\glyphicon glyphicon-pencil"\></span></button></td>';
 		            
-		            content += '<td><a href="#" class="btn btn-danger" data-placement="top" data-toggle="tooltip" title="Delete"> \
-		            <span class="glyphicon glyphicon-trash"></span></a></td>';
-		            
+		            content += '<td><button type="\button"\ class="\btn btn-danger pull-right"\ data-toggle="\modal"\ data-target=#delete_semester_modal id="\delete"\ onClick="\load_delete('+json[i].semester_id+');"\>Delete <span class="\glyphicon glyphicon-trash"\></span></button></td>';		            
 		            content += '</tr>';
+		            
 	            }
+	            
 	        }
 	          
-	             $('#table-body').html(content);  
+	             $('#table-body').html(content); 
+	             
 	     }
 	}
 	aj.send(idSend);
 }
-function load_edit(){
+function load_edit(id){
+	//alert(x);
+	document.getElementById("e-title").innerHTML="Lets Update this";	
 	load_faculty(event);
-	alert("this is running");
+	var url="../ajax_semester_load";
+	var idSend="semester_id="+id;
+	var aj=new XMLHttpRequest();
+	aj.open("POST", url, true);
+	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	
+	aj.onreadystatechange = function() {
+		if (aj.readyState == 4 && aj.status == 200) {
+			
+			var json = eval('(' + aj.responseText + ')');
+	        
+	        if(json.length<1){
+	        }else {
+	            for (var i = 0; i < json.length; i++) {
+	            	
+	            	//document.getElementById("e-faculty-box").value=1;
+	            	//document.getElementById("e-faculty-box").change();
+	            	//document.getElementById("e-program-box").value=json[i].program_id;
+	            	//document.getElementById("e-batch-box").value=json[i].batch_year;
+	            	document.getElementById("e-sem-no").value=json[i].semester_no;
+	            	document.getElementById("e-start_date").value=json[i].start_date;
+	            	document.getElementById("e-end_date").value=json[i].end_date;
+	            	//document.getElementById("e-status").value=json[i].status;
+		            
+	            }
+	        }
+	     }
+	}
+	aj.send(idSend);
+	
+}
+
+function load_delete(id){
+	document.getElementById("d-semester-id").innerHTML="semester_id: "+id;
+	var idSend="semester_id="+id;
+	var url="../semester_delete";
+	var aj=new XMLHttpRequest();
+	aj.open("POST", url, true);
+	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	
+	aj.onreadystatechange = function() {
+		if (aj.readyState == 4 && aj.status == 200) {
+			//$('#"\ row'+json[i].semester_id+'"\ ').hide();
+	     }
+	}
+	aj.send(idSend);
 }
 
 
