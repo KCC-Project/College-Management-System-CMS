@@ -124,7 +124,6 @@
 											<td>Exam ID</td>
 										</tr>
 										<tbody id="employee_data">
-										<td data-name='student_name'  data-type='text'  class="student_name">asdfasdf</td>
 										</tbody>
 										<!-- <tr>
 											<td contenteditable="true" class="student_sn"></td>
@@ -258,51 +257,38 @@
 			if (aj.readyState == 4 && aj.status == 200) {
 				var jSonObject = eval('(' + aj.responseText + ')');
 				var i = jSonObject.length;
-				alert(i);
-
-				for ( var prop in jSonObject) {
-
-					var item = jSonObject[prop];
-
-					var table = document.getElementById("crud_table");
-					var row = table.insertRow(1);
-
-					var cell1 = row.insertCell(0);
-					var cell2 = row.insertCell(1);
-					var cell3 = row.insertCell(2);
-					var cell4 = row.insertCell(3);
-					var cell5 = row.insertCell(4);
-					var cell6 = row.insertCell(5);
-					var cell7 = row.insertCell(6);
-					var cell8 = row.insertCell(7);
-					var cell9 = row.insertCell(8);
-
-					cell1.innerHTML = '	<td contenteditable="true" class="student_sn">'+ i + '</td>';
-					cell2.innerHTML = "<td data-name=\"student_name\"  data-type=\"text\" class=\"student_name\">"
-							+ item.Name + "</td>";
+				alert(jSonObject[0].Name);
+				$("#crud_table").show();
+				var content = '';
+				for (var i = 0; i <jSonObject.length; i++) {
+					content += '<tr>';	
+					content += '<td contenteditable="true" class="student_sn">'+ (i+1) + '</td>';
+					content += "<td data-name=\"student_name\"  data-type=\"text\" class=\"student_name\">"+ jSonObject[i].Name + "</td>";
 							
-					cell3.innerHTML = '<td contenteditable="true" class="student_subject">'
+							content += '<td  class="student_subject">'
 							+ "math" + '</td>';
-					cell4.innerHTML = '<td contenteditable="true" class="student_examType">'
+							content += '<td  class="student_examType">'
 							+ "Regular" + '</td>';
-					cell5.innerHTML = '<td contenteditable="true" class="student_attendence">'
+							content += '<td  class="student_attendence">'
 							+ "present" + '</td>';
-					cell6.innerHTML = '<td contenteditable="true" class="student_fullMarks">'
+							content += '<td  class="student_fullMarks">'
 							+ 100+ '</td>';
-							cell7.innerHTML =	'<td contenteditable="true" class="student_score">'
+							content +='<td  class="student_score">'
 							+ 50 + '</td>';
 					var passFailStatus = 0;
 					if (passFailStatus === 0) {
 						/*<i class="fa fa-sitemap"> <i class="fa fa-users">*/
-						cell8.innerHTML = '	<td contenteditable="true" class="student_passFail"><span class="btn btn-sm btn-danger "> </i> &nbsp;&nbsp;Fail &nbsp;</span></td>';
+						content +='	<td  class="student_passFail"><span class="btn btn-sm btn-danger "> </i> &nbsp;&nbsp;Fail &nbsp;</span></td>';
 					} else {
-						cell8.innerHTML = '	<td contenteditable="true" class="student_passFail"><span class="btn btn-sm btn-warning "> </i> &nbsp;&nbsp;pass &nbsp;</span></td>';
+						content +='	<td  class="student_passFail"><span class="btn btn-sm btn-warning "> </i> &nbsp;&nbsp;pass &nbsp;</span></td>';
 
 					}
-					cell9.innerHTML = '	<td contenteditable="true" class="exam_id">'+"Left"+'</td>';
-
-					i--;
+					content +=  '<td  class="exam_id">'+"Left"+'</td>'; 
+					content += '<tr>';
+					//i--;
+					
 				}
+				$("#employee_data").html(content); 
 			}
 		}
 		aj.send(idSend);

@@ -101,9 +101,7 @@
 
 											</tr>
 										</thead>
-										<tbody id="table-body">
 										
-										</tbody>
 									</table>
 								</div>
 							</div>
@@ -427,33 +425,33 @@ function load_semester(){
 		if (aj.readyState == 4 && aj.status == 200) {
 			
 			var json = eval('(' + aj.responseText + ')');
-	        var content = '';
+	        var c = '';
 	        
 	        if(json.length<1){
 	        	$("#mytable").hide();
 	        }else {
 	        	$("#mytable").show();
 	            for (var i = 0; i < json.length; i++) {
-	            	content += '<tr id="\ row'+json[i].semester_id+' "\>';
-	            	content += '<td> <input type="\checkbox"\ class="\checkthis"\ /> </td>';
-		            content += '<td class="masuamsdfasdf">' + json[i].semester_id + '</td>';
-		            content += '<td>' + json[i].semester_no + '</td>';
-		            content += '<td>' + json[i].program_id + '</td>';
-		            content += '<td>' + json[i].batch_year + '</td>';
-		            content += '<td>' + json[i].start_date + '</td>';
-		            content += '<td>' + json[i].end_date + '</td>';
-		            content += '<td>' + json[i].status + '</td>';
+	            	c += '<tr id="\ row'+json[i].semester_id+' "\>';
+	            	c += '<td> <input type="\checkbox"\ class="\checkthis"\ /> </td>';
+		            c += '<td class="masuamsdfasdf">' + json[i].semester_id + '</td>';
+		            c += '<td>' + json[i].semester_no + '</td>';
+		            c += '<td>' + json[i].program_id + '</td>';
+		            c += '<td>' + json[i].batch_year + '</td>';
+		            c += '<td>' + json[i].start_date + '</td>';
+		            c += '<td>' + json[i].end_date + '</td>';
+		            c += '<td>' + json[i].status + '</td>';
 		            
-		            content += '<td><button type="\button"\ class="\btn btn-info pull-right"\ data-toggle="\modal"\ data-target=#edit_semester_modal id="\edit"\ onClick="\load_edit('+json[i].semester_id+');"\>Edit <span class="\glyphicon glyphicon-pencil"\></span></button></td>';
+		            c += '<td><button type="\button"\ class="\btn btn-info pull-right"\ data-toggle="\modal"\ data-target=#edit_semester_modal id="\edit"\ onClick="\load_edit('+json[i].semester_id+');"\>Edit <span class="\glyphicon glyphicon-pencil"\></span></button></td>';
 		            
-		            content += '<td><button type="\button"\ class="\btn btn-danger pull-right"\ data-toggle="\modal"\ data-target=#delete_semester_modal id="\delete"\ onClick="\load_delete('+json[i].semester_id+');"\>Delete <span class="\glyphicon glyphicon-trash"\></span></button></td>';		            
-		            content += '</tr>';
+		            c += '<td><button type="\button"\ class="\btn btn-danger pull-right"\ data-toggle="\modal"\ data-target=#delete_semester_modal id="\delete"\ onClick="\load_delete('+json[i].semester_id+');"\>Delete <span class="\glyphicon glyphicon-trash"\></span></button></td>';		            
+		            c += '</tr>';
 		            
 	            }
 	            
 	        }
 	          
-	             $('#table-body').html(content); 
+	             $('#table-body').html(c); 
 	             
 	     }
 	}

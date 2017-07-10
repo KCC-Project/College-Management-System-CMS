@@ -35,7 +35,7 @@ public class ajax_semester_load extends HttpServlet {
 			Object[] obj = new Object[10];
 			obj[2]=id;
 			
-			System.out.println(obj[1]);
+			//System.out.println(obj[1]);
 			jsonResponse=JsonUtil.convertJavaToJson(semester.searchByFields(obj));
 			System.out.println("json checking="+jsonResponse);
 			

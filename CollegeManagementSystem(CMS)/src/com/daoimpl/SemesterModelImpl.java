@@ -153,7 +153,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 		}
 		
 		try {
-	        StringBuilder query = new StringBuilder("SELECT *, COUNT(*) as count FROM semester WHERE 1=1");
+	        StringBuilder query = new StringBuilder("SELECT * FROM semester WHERE 1=1 ");
 	        
 			if (semester_id != 0) {
 	            query.append(" AND semester_id = ?");
@@ -204,7 +204,6 @@ public class SemesterModelImpl implements SemesterModelInterface {
 	        if (rs != null) {
 	            
 	        	while(rs.next()){
-	        		System.out.println("From Db="+rs.getInt("program_id"));
 					SemesterModel semesterModel = new SemesterModel();
 					semesterModel.setSemester_id(rs.getInt("semester_id"));
 					semesterModel.setSemester_no(rs.getInt("semester_no"));
@@ -213,11 +212,8 @@ public class SemesterModelImpl implements SemesterModelInterface {
 					semesterModel.setStart_date(rs.getDate("sem_start_date"));
 					semesterModel.setEnd_date(rs.getDate("sem_end_date"));
 					semesterModel.setStatus(rs.getInt("status"));
-					
 					semester.add(semesterModel);
 				}
-	        	System.out.println(rs.getInt("count"));
-
 	        }
 
 	    }  catch (Exception e) {

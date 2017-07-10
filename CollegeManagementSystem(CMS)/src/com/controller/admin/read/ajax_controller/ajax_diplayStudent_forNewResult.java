@@ -31,7 +31,7 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 		int programId=Integer.parseInt(request.getParameter("programId"));
 		int batchNo=Integer.parseInt(request.getParameter("batchNo"));
 		int semesterNo=Integer.parseInt(request.getParameter("semesterNo"));
-		Object[] obj = new Object[7];
+		Object[] obj = new Object[10];
 		obj[1]=semesterNo;
 		obj[2]=programId;
 		obj[3]=batchNo;
@@ -49,7 +49,7 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 		
 		//for getting student id from semester student table and adding id to list
 		for (Integer semesterId1 : semesterId) {
-			Object[] obj1 = new Object[7];
+			Object[] obj1 = new Object[10];
 			obj1[1]=semesterId1;
 			StudentSemesterModelServiceInterface inter1= new StudentSemesterModelServiceImpl();
 			List<StudentSemesterModel> model=inter1.searchByFields(obj1);
@@ -61,7 +61,7 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 		System.out.println("completed");
 		List studentName= new ArrayList();
 		for (Integer studentID1 : studentID) {
-			Object[] obj1 = new Object[7];
+			Object[] obj1 = new Object[10];
 			obj1[0]=studentID1;
 			StudentServiceInterface inter1= new StudentServiceImpl();
 			List<StudentModel> studentList= inter1.searchByField(obj1);
