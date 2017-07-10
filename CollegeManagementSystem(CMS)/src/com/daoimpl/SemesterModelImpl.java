@@ -153,7 +153,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 		}
 		
 		try {
-	        StringBuilder query = new StringBuilder("SELECT * FROM semester WHERE 1=1 ");
+	        StringBuilder query = new StringBuilder("SELECT SQL_CALC_FOUND_ROWS * FROM semester WHERE 1=1");
 	        
 			if (semester_id != 0) {
 	            query.append(" AND semester_id = ?");
@@ -201,7 +201,6 @@ public class SemesterModelImpl implements SemesterModelInterface {
 	        }
 
 	        rs = pst.executeQuery();
-	        if (rs != null) {
 	            
 	        	while(rs.next()){
 					SemesterModel semesterModel = new SemesterModel();
@@ -214,7 +213,6 @@ public class SemesterModelImpl implements SemesterModelInterface {
 					semesterModel.setStatus(rs.getInt("status"));
 					semester.add(semesterModel);
 				}
-	        }
 
 	    }  catch (Exception e) {
 			e.printStackTrace();

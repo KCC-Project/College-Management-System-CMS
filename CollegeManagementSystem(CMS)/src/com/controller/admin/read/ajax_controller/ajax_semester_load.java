@@ -29,20 +29,14 @@ public class ajax_semester_load extends HttpServlet {
 		
 		if (program_id != null && !program_id.isEmpty()) {
 			int id=Integer.parseInt(program_id);
-			//System.out.println(program_id);
 			SemesterServiceInterface semester= new SemesterServiceImpl();
 			
 			Object[] obj = new Object[10];
 			obj[2]=id;
 			
-			//System.out.println(obj[1]);
 			jsonResponse=JsonUtil.convertJavaToJson(semester.searchByFields(obj));
-			System.out.println("json checking="+jsonResponse);
 			
-			//String semesterJson=JsonUtil.convertJavaToJson(semester.loadById(id));
-			
-			
-		}else if(!semester_id.equalsIgnoreCase("")){
+		}else if(semester_id != null && !semester_id.isEmpty()){
 			int id=Integer.parseInt(semester_id);
 			SemesterServiceInterface semester= new SemesterServiceImpl();
 			

@@ -101,6 +101,9 @@
 
 											</tr>
 										</thead>
+										<tbody id="table-body">
+										
+										</tbody>
 										
 									</table>
 								</div>
@@ -423,7 +426,6 @@ function load_semester(){
 	
 	aj.onreadystatechange = function() {
 		if (aj.readyState == 4 && aj.status == 200) {
-			
 			var json = eval('(' + aj.responseText + ')');
 	        var c = '';
 	        
@@ -432,9 +434,9 @@ function load_semester(){
 	        }else {
 	        	$("#mytable").show();
 	            for (var i = 0; i < json.length; i++) {
-	            	c += '<tr id="\ row'+json[i].semester_id+' "\>';
-	            	c += '<td> <input type="\checkbox"\ class="\checkthis"\ /> </td>';
-		            c += '<td class="masuamsdfasdf">' + json[i].semester_id + '</td>';
+	            	c += '<tr id=\"row'+json[i].semester_id+' \">';
+	            	c += '<td><input type=\"checkbox\" class=\"checkthis\" /></td>';
+		            c += '<td>' + json[i].semester_id + '</td>';
 		            c += '<td>' + json[i].semester_no + '</td>';
 		            c += '<td>' + json[i].program_id + '</td>';
 		            c += '<td>' + json[i].batch_year + '</td>';
@@ -442,20 +444,15 @@ function load_semester(){
 		            c += '<td>' + json[i].end_date + '</td>';
 		            c += '<td>' + json[i].status + '</td>';
 		            
-		            c += '<td><button type="\button"\ class="\btn btn-info pull-right"\ data-toggle="\modal"\ data-target=#edit_semester_modal id="\edit"\ onClick="\load_edit('+json[i].semester_id+');"\>Edit <span class="\glyphicon glyphicon-pencil"\></span></button></td>';
-		            
-		            c += '<td><button type="\button"\ class="\btn btn-danger pull-right"\ data-toggle="\modal"\ data-target=#delete_semester_modal id="\delete"\ onClick="\load_delete('+json[i].semester_id+');"\>Delete <span class="\glyphicon glyphicon-trash"\></span></button></td>';		            
+		            c += '<td><button type=\"button\" class=\"btn btn-info pull-right\" data-toggle=\"modal\" data-target=#edit_semester_modal id=\"edit\" onClick=\"load_edit('+json[i].semester_id+');\">Edit <span class=\"glyphicon glyphicon-pencil\"></span></button></td>';
+		            c += '<td><button type=\"button\" class=\"btn btn-danger pull-right\" data-toggle=\"modal\" data-target=#delete_semester_modal id=\"delete\" onClick=\"load_delete('+json[i].semester_id+');\">Delete <span class=\"glyphicon glyphicon-trash\"></span></button></td>';
 		            c += '</tr>';
-		            
 	            }
-	            
+	            $('#table-body').html(c); 
 	        }
-	          
-	             $('#table-body').html(c); 
-	             
 	     }
 	}
-	aj.send(idSend);
+aj.send(idSend);
 }
 function load_edit(id){
 	//alert(x);
