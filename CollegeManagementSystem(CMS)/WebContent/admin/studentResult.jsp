@@ -43,9 +43,9 @@
 				<div style="position: relative;">
 					<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
 
-						<button type="button" class="btn btn-info pull-right" id="qqq"
+						<a href="addResult.jsp"><button type="button" class="btn btn-info pull-right" id="qqq"
 							data-toggle="modal" data-target=#add_exam_modal-info>
-							Add Result</button>
+							Add Result</button></a>
 						<button id="seacrchBtnClicked" type="button" class="btn btn-info"
 							style="float: left; margin-left: -20px;" data-toggle="modal"
 							data-target=#searchModal onclick="searchBtn();">

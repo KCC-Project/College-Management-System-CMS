@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.dao.StudentModelInterface;
 import com.model.StudentModel;
+import com.model.StudentSemesterModel;
 
 public class StudentModelImpl implements StudentModelInterface {
 
@@ -214,34 +215,31 @@ public class StudentModelImpl implements StudentModelInterface {
 	}
 
 	@Override
-	public List<StudentModel> searchByField(Object obj) {
-		List<StudentModel> stModel= new ArrayList<StudentModel>();
-		int spaceCount = 0;
-		for (char c : ((String) obj).toCharArray()) {
-		    if (c == ' ') {
-		         spaceCount++;
-		    }
-		}
-		if (spaceCount==1) {
-			sql = "select * from student where CONCAT(student_firstname,' ',student_lastname)=? ||student_email=?||student_phone=?||student_identitycard=? ";
-			
-		}else{
-			sql = "select * from student where CONCAT(student_firstname,' ',student_middlename,' ',student_lastname)=? ||student_email=?||student_phone=?||student_identitycard=? ";
-			
-		}
-		
+	public List<StudentModel> searchByField(Object[] obj) {
+		List<Object> parameters = new ArrayList<Object>();
+		List<StudentModel> stModel = new ArrayList<>();
+		int student_id = 0;
+		if (obj[0] != null) {  student_id = Integer.parseInt(obj[0].toString()); }
 		try {
+			 StringBuilder query = new StringBuilder("SELECT * FROM student WHERE 1=1");
+		        
+				if (student_id != 0) {
+		            query.append(" AND student_id = ?");
+		            parameters.add(student_id);
+		        }
 			Connection connection = DatabaseConnection.connectToDatabase();
 			
-			pst = connection.prepareStatement(sql);
-			pst.setObject(1, obj);
-			pst.setObject(2, obj);
-			pst.setObject(3, obj);
-			pst.setObject(4, obj);
+			 String Query = query.toString();
+		        conn = DatabaseConnection.connectToDatabase();
+		        pst = conn.prepareStatement(Query);
+
+		        int i = 1;
+		        for (Object parameter : parameters) {
+		            pst.setObject(i++, parameter);
+		        }
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				StudentModel model = new StudentModel();
-				System.out.println("shahil shah=="+rs.getInt("student_id"));
 				model.setStudentID(rs.getInt("student_id"));
 				model.setFirstname(rs.getString("student_firstname"));
 				model.setMiddlename(rs.getString("student_middlename"));
@@ -256,8 +254,7 @@ public class StudentModelImpl implements StudentModelInterface {
 				stModel.add(model);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("error for search student table="+e.getMessage());
 		} finally {
 			try {
 				pst.close();
