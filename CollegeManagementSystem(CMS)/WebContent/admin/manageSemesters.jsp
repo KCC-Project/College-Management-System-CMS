@@ -428,24 +428,25 @@ function load_semester(){
 		if (aj.readyState == 4 && aj.status == 200) {
 			var json = eval('(' + aj.responseText + ')');
 	        var c = '';
-	        
-	        if(json.length<1){
-	        	$("#mytable").hide();
+	        alert(json.tableData[0].batch_year);
+	        alert("total row="+json.TotalRowCount);
+	        if(json.tableData.length<1){
+	        	//$("#mytable").hide();
 	        }else {
 	        	$("#mytable").show();
-	            for (var i = 0; i < json.length; i++) {
-	            	c += '<tr id=\"row'+json[i].semester_id+' \">';
+	            for (var i = 0; i < json.tableData.length; i++) {
+	            	c += '<tr id=\"row'+json.tableData[i].semester_id+' \">';
 	            	c += '<td><input type=\"checkbox\" class=\"checkthis\" /></td>';
-		            c += '<td>' + json[i].semester_id + '</td>';
-		            c += '<td>' + json[i].semester_no + '</td>';
-		            c += '<td>' + json[i].program_id + '</td>';
-		            c += '<td>' + json[i].batch_year + '</td>';
-		            c += '<td>' + json[i].start_date + '</td>';
-		            c += '<td>' + json[i].end_date + '</td>';
-		            c += '<td>' + json[i].status + '</td>';
+		            c += '<td>' + json.tableData[i].semester_id + '</td>';
+		            c += '<td>' + json.tableData[i].semester_no + '</td>';
+		            c += '<td>' + json.tableData[i].program_id + '</td>';
+		            c += '<td>' + json.tableData[i].batch_year + '</td>';
+		            c += '<td>' + json.tableData[i].start_date + '</td>';
+		            c += '<td>' + json.tableData[i].end_date + '</td>';
+		            c += '<td>' + json.tableData[i].status + '</td>';
 		            
-		            c += '<td><button type=\"button\" class=\"btn btn-info pull-right\" data-toggle=\"modal\" data-target=#edit_semester_modal id=\"edit\" onClick=\"load_edit('+json[i].semester_id+');\">Edit <span class=\"glyphicon glyphicon-pencil\"></span></button></td>';
-		            c += '<td><button type=\"button\" class=\"btn btn-danger pull-right\" data-toggle=\"modal\" data-target=#delete_semester_modal id=\"delete\" onClick=\"load_delete('+json[i].semester_id+');\">Delete <span class=\"glyphicon glyphicon-trash\"></span></button></td>';
+		            c += '<td><button type=\"button\" class=\"btn btn-info pull-right\" data-toggle=\"modal\" data-target=#edit_semester_modal id=\"edit\" onClick=\"load_edit('+json.tableData[i].semester_id+');\">Edit <span class=\"glyphicon glyphicon-pencil\"></span></button></td>';
+		            c += '<td><button type=\"button\" class=\"btn btn-danger pull-right\" data-toggle=\"modal\" data-target=#delete_semester_modal id=\"delete\" onClick=\"load_delete('+json.tableData[i].semester_id+');\">Delete <span class=\"glyphicon glyphicon-trash\"></span></button></td>';
 		            c += '</tr>';
 	            }
 	            $('#table-body').html(c); 

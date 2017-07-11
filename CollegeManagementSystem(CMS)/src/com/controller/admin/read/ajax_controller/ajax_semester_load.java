@@ -2,7 +2,9 @@ package com.controller.admin.read.ajax_controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.model.SemesterModel;
 import com.service.SemesterServiceInterface;
 import com.serviceimpl.SemesterServiceImpl;
 import com.util.JsonUtil;
@@ -37,11 +40,14 @@ public class ajax_semester_load extends HttpServlet {
 			//obj[7]=1; //start limit
 			//obj[8]=3; // limit
 			
-			jsonResponse=JsonUtil.convertJavaToJson(semester.searchByFields(obj));
+		
+			List<SemesterModel> mode= semester.searchByFields(obj);
+			Map<String, Object> map= new HashMap<String,Object>();
 			System.out.println("here is the total rows count: "+Table.getRowsCount());
 			int total = Table.getRowsCount();
-			
-			
+			map.put("tableData",mode );
+			map.put("TotalRowCount", total);
+			jsonResponse=JsonUtil.convertJavaToJson(map);
 		}else if(semester_id != null && !semester_id.isEmpty()){
 			int id=Integer.parseInt(semester_id);
 			SemesterServiceInterface semester= new SemesterServiceImpl();

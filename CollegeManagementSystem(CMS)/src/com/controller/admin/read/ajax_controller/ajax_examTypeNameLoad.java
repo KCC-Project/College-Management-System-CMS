@@ -20,12 +20,12 @@ public class ajax_examTypeNameLoad extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+		//System.out.println("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 		int subjectId = Integer.parseInt(request.getParameter("subjectId"));
-		System.out.println("subId=="+subjectId);
+		//System.out.println("subId=="+subjectId);
 		Object[] obj = new Object[10];
-		obj[0] = subjectId;
-		obj[8] = 1;
+		obj[1] = subjectId;
+		obj[8] = 0;
 		
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
@@ -33,13 +33,14 @@ public class ajax_examTypeNameLoad extends HttpServlet {
 		out.write("<option disabled selected>Select Exam Type</option>");
 		
 		ExamInfoModelServiceInterface inter= new ExamInfoModelServiceImpl();
+		
 		List<ExamInfoModel> model= inter.searchByField(obj);
+		//System.out.println("model size="+model.size());
+		
 		for (ExamInfoModel examInfoModel : model) {
 			System.out.println("examTypename="+examInfoModel.getExamTypeName()+"  "+"exmInfoId="+examInfoModel.getExamId());
 			out.write("<option value="+examInfoModel.getExamId()+">" + examInfoModel.getExamTypeName() + "</option>");
 		}
-
-		
 		out.flush();
 	}
 

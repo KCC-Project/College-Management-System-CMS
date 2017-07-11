@@ -95,13 +95,13 @@
 								class="fa fa-graduation-cap"></i> Add Exam result</span>
 							<div class="form-group col-sm-3 col-sm-offset-3" style="margin-bottom: 0px;">
 								<select required class="form-control"
-									id="p-subject-box" name="subject_id" >
+									id="p-subject-box" name="subject_id" onchange="load_examType();" >
 									<option value="" disabled selected>Select Subject</option>
 								</select>
 							</div>
 							<div class="form-group col-sm-3" style="margin-bottom: 0px;">
 								<select required class="form-control "
-									id="p-examType-box" name="examtype_id" onclick="load_examType();">
+									id="p-examType-box" name="examtype_id" >
 									<option value="" disabled selected>Select exam Type</option>
 								</select>
 							</div>
@@ -271,7 +271,7 @@
 		var url = "../ajax_examTypeNameLoad";
 		var idSend = "subjectId="+subjectId;
 		var aj = new XMLHttpRequest();
-		alert("subjectId="+subjectId);
+		//alert("subjectId="+subjectId);
 		aj.open("POST", url, true);
 		aj
 				.setRequestHeader("Content-type",

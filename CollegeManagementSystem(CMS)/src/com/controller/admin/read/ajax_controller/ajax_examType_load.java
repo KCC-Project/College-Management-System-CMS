@@ -23,6 +23,7 @@ public class ajax_examType_load extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Here in examTypeLoad 1st ajax");
 		ExamModelServiceInterface intferace= new ExamModelServiceImpl();
 		List<ExamModel> examType = intferace.getAllExamType();
 		
