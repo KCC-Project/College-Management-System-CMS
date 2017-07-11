@@ -297,6 +297,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 						examModel.setSubjectName(subjectModel.getSubjectName());
 					}
 				
+
 					examInfoModel.add(examModel);
 				}
 					
