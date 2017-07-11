@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +18,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 
 	private String sql;
 	private PreparedStatement pst;
-	private ResultSet rs;
+	private ResultSet rs,r;
 	private Connection conn;
 	
 	// method for saving semester information
@@ -202,7 +203,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 	        }
 
 	        rs = pst.executeQuery();
-	            
+	        
 	        	while(rs.next()){
 					SemesterModel semesterModel = new SemesterModel();
 					semesterModel.setSemester_id(rs.getInt("semester_id"));
@@ -215,9 +216,9 @@ public class SemesterModelImpl implements SemesterModelInterface {
 					semester.add(semesterModel);
 				}
 	        	
-	        	pst = conn.prepareStatement("SELECT FOUND_ROWS() as count");
-	        	rs = pst.executeQuery();
-	        	System.out.println("row count is: "+rs.getInt("count"));
+	        	Statement st = conn.createStatement();
+	 	        r = st.executeQuery("SELECT FOUND_ROWS() as count");
+	         	System.out.println("row count is: "+r.getInt("count"));
 	        	
 	        	//Table.setRowsCount(rs.getInt("count"));
 
