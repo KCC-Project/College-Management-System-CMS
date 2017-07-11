@@ -30,8 +30,12 @@ public class ExamInfoModelServiceImpl implements ExamInfoModelServiceInterface {
 	}
 
 	@Override
-	public ExamInfoModel getSelectedInfo(int id) {
-	return inter.getSelectedInfo(id);
+	public List<ExamInfoModel> searchByField(Object[] obj) {
+		return inter.searchByField(obj);
 	}
 
-}
+	
+
+	}
+
+
