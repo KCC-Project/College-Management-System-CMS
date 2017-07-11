@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.service.SemesterServiceInterface;
 import com.serviceimpl.SemesterServiceImpl;
 import com.util.JsonUtil;
+import com.util.Table;
 
 @WebServlet("/ajax_semester_load")
 public class ajax_semester_load extends HttpServlet {
@@ -34,7 +35,10 @@ public class ajax_semester_load extends HttpServlet {
 			Object[] obj = new Object[10];
 			obj[2]=id;
 			
+			//System.out.println("here is the total rows count: "+Table.getRowsCount());
+			
 			jsonResponse=JsonUtil.convertJavaToJson(semester.searchByFields(obj));
+			
 			
 		}else if(semester_id != null && !semester_id.isEmpty()){
 			int id=Integer.parseInt(semester_id);

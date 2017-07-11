@@ -11,6 +11,7 @@ import java.util.List;
 import com.dao.SemesterModelInterface;
 import com.model.SemesterModel;
 import com.util.DateUtil;
+import com.util.Table;
 
 public class SemesterModelImpl implements SemesterModelInterface {
 
@@ -213,6 +214,12 @@ public class SemesterModelImpl implements SemesterModelInterface {
 					semesterModel.setStatus(rs.getInt("status"));
 					semester.add(semesterModel);
 				}
+	        	
+	        	pst = conn.prepareStatement("SELECT FOUND_ROWS() as count");
+	        	rs = pst.executeQuery();
+	        	System.out.println("row count is: "+rs.getInt("count"));
+	        	
+	        	//Table.setRowsCount(rs.getInt("count"));
 
 	    }  catch (Exception e) {
 			e.printStackTrace();
