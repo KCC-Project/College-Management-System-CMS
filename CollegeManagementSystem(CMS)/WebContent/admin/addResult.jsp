@@ -3,9 +3,7 @@
 <%@page import="com.service.ExamInfoModelServiceInterface"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="com.model.ExamModel"%>
-<%@page import="java.util.List"%>
 <%@page import="com.serviceimpl.ExamModelServiceImpl"%>
 <%@page import="com.service.ExamModelServiceInterface"%>
 <link href="../Resources/css/w3school.css" rel="stylesheet"
@@ -262,30 +260,29 @@
 				var content = '';
 				for (var i = 0; i < jSonObject.length; i++) {
 					content += '<tr>';
-					content += '<td contenteditable="true" class="student_sn">'
+					content += '<td contenteditable="false" class="student_sn">'
 							+ (i + 1) + '</td>';
-					content += "<td data-name=\"student_name\"  data-type=\"text\" class=\"student_name\">"
+					content += "<td data-pk="+jSonObject[i].studentId+" value="+jSonObject[i].studentId+" data-name=\"student_name\"  data-type=\"text\" class=\"student_name\">"
 							+ jSonObject[i].Name + "</td>";
 
 					content += '<td  class="student_subject">' + "math"
 							+ '</td>';
 					content += '<td  class="student_examType">' + "Regular"
 							+ '</td>';
-					content += '<td  class="student_attendence">' + "present"
+					content += '<td  data-name="student_attendence" data-type="select" class="student_attendence" data-pk="'+jSonObject[i].Name +'">' + "present"
 							+ '</td>';
 					content += '<td  class="student_fullMarks">' + 100
 							+ '</td>';
-					content += '<td  class="student_score">'
-							+ jSonObject[i].totalNumber + '</td>';
+					content += '<td  data-type="text" data-name="student_score" class="student_score"  ></td>';
 					var passFailStatus = 0;
 					if (passFailStatus === 0) {
 						/*<i class="fa fa-sitemap"> <i class="fa fa-users">*/
-						content += '	<td  class="student_passFail"><span class="btn btn-sm btn-danger "> </i> &nbsp;&nbsp;Fail &nbsp;</span></td>';
+						content += '	<td><span class="btn btn-sm btn-danger student_passFail" data-name="student_passFail" data-type="select"  data-pk="'+0+'"> </i> &nbsp;&nbsp;Fail &nbsp;</span></td>';
 					} else {
-						content += '	<td  class="student_passFail"><span class="btn btn-sm btn-warning "> </i> &nbsp;&nbsp;pass &nbsp;</span></td>';
+						content += '	<td ><span class="btn btn-sm btn-warning student_passFail " data-name="student_passFail" data-type="select"   data-pk="'+1+'"> </i> &nbsp;&nbsp;pass &nbsp;</span></td>';
 
 					}
-					content += '<td  class="exam_id">' + "Left" + '</td>';
+					content += '<td  class="exam_id" data-name="student_attendence" data-type="select" class="student_attendence" data-pk="'+jSonObject[i].Name +'">' + "Left" + '</td>';
 					content += '<tr>';
 					//i--;
 
@@ -294,12 +291,6 @@
 			}
 		}
 		aj.send(idSend);
-
-		/* alert("faultyID="+facultyId);
-		alert("programId"+programId);
-		alert("batchIdName"+batchNo);
-		alert("semesterNo"+semesterNo); */
-
 	}
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

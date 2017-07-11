@@ -63,5 +63,50 @@ $(document).ready(function() {
 			}
 		}
 	});
+	 $('#employee_data').editable({
+		  container: 'body',
+		  selector: 'span.student_passFail',
+		  title: 'Pass/Fail',
+		  type: "POST",
+		 source: [{value: "1", text: "Pass"}, {value: "0", text: "Fail"}],
+		  validate: function(value){
+		   if($.trim(value) == '')
+		   {
+		    return 'This field is required';
+		   }
+		  }
+		 });
+	 
+	 $('#employee_data').editable({
+		  container: 'body',
+		  selector: 'td.student_attendence',
+		  title: 'Attendence',
+		  source: [{value: 1, text: "Present"}, {value: 0, text: "Absent"}],
+		  validate: function(value){
+		   if($.trim(value) == '')
+		   {
+		    return 'This field is required';
+		   }
+		  }
+		 });
+	 
+	 $('#employee_data').editable({
+		  container: 'body',
+		  selector: 'td.student_score',
+		  title: 'Marks',
+		 
+		  
+		  validate: function(value){
+			   if($.trim(value) == '')
+			   {
+			    return 'This field is required';
+			   }
+			   var regex = /^[0-9]+$/;
+			   if(! regex.test(value))
+			   {
+			    return 'Numbers only!';
+			   }
+			  }
+		 });
 
 });
