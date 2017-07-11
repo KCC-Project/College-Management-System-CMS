@@ -1,20 +1,21 @@
 package com.daoimpl;
 
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.dao.ExamInfoModelInterface;
 import com.model.ExamInfoModel;
-import com.model.ExamModel;
 import com.model.SubjectModel;
 import com.service.ExamModelServiceInterface;
 import com.service.SubjectModelServiceInterface;
 import com.serviceimpl.ExamModelServiceImpl;
 import com.serviceimpl.SubjectModelServiceImpl;
+import com.util.DateUtil;
 
 public class ExamInfoModelImpl implements ExamInfoModelInterface {
 	private Connection conn;
@@ -180,57 +181,141 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 		return result;
 	}
 
+	
 	@Override
-	public ExamInfoModel getSelectedInfo(int id) {
+	public List<ExamInfoModel> searchByField(Object[] obj) {
+		List<Object> parameters = new ArrayList<Object>();
+		List<ExamInfoModel> examInfoModel = new ArrayList<>();
+		
+		int exam_id = 0;
+		int subject_id = 0;
+		int exam_type_id = 0;
+		Date exam_date = null;
+		String exam_starttime = null;
+		String exam_endtime = null;
+		int full_marks = 0;
+		int pass_marks = 0;
+		int status = 0;
+		
+		int start = 0;
+		int limit = 0;
 
-		ExamInfoModel model= new ExamInfoModel();
+		if (obj[0] != null) {  exam_id = Integer.parseInt(obj[0].toString()); }
+		if (obj[1] != null) {  subject_id = Integer.parseInt(obj[1].toString()); }
+		if (obj[2] != null) {  exam_type_id = Integer.parseInt(obj[2].toString()); }
+		if (obj[3] != null) {
+			exam_date = DateUtil.convertToDate(obj[3].toString());
+			java.sql.Date exam_date_sql = new java.sql.Date(exam_date.getTime());  
+		}
+		if (obj[4] != null) {  exam_starttime = obj[4].toString(); }
+		if (obj[5] != null) {  exam_endtime = obj[5].toString(); }
+		if (obj[6] != null) {  full_marks = Integer.parseInt(obj[6].toString()); }
+		if (obj[7] != null) {  pass_marks = Integer.parseInt(obj[7].toString()); }
+		if (obj[8] != null) {  status = Integer.parseInt(obj[8].toString()); }
+		
+		if (obj[9] != null && obj[10] != null) {  
+			start = Integer.parseInt(obj[9].toString()); 
+			limit = Integer.parseInt(obj[10].toString());
+		}
+		
 		try {
-			conn = DatabaseConnection.connectToDatabase();
-			sql = "select * from exam  where exam_id=?";
-			pst = conn.prepareStatement(sql);
-			pst.setInt(1, id);
-			rs = pst.executeQuery();
+	        StringBuilder query = new StringBuilder("SELECT * FROM exam WHERE 1=1");
+	        
+			if (exam_id != 0) {
+	            query.append(" AND exam_id = ?");
+	            parameters.add(exam_id);
+	        }
+	        if (subject_id != 0) {
+	            query.append(" AND subject_id = ?");
+	            parameters.add(subject_id);
+	        }
+	        if (exam_type_id != 0) {
+	            query.append(" AND exam_type_id = ?");
+	            parameters.add(exam_type_id);
+	        }
+	        if (exam_starttime != null) {
+	            query.append(" AND exam_starttime = ?");
+	            parameters.add(exam_starttime);
+	        }
+	        if (exam_endtime != null) {
+	            query.append(" AND exam_endtime = ?");
+	            parameters.add(exam_endtime);
+	        }
+	        if (full_marks != 0) {
+	            query.append(" AND full_marks = ?");
+	            parameters.add(full_marks);
+	        }
+	        if (pass_marks != 0) {
+	            query.append(" AND pass_marks = ?");
+	            parameters.add(pass_marks);
+	        }
+	        if (status != 0) {
+	            query.append(" AND status = ?");
+	            parameters.add(status);
+	        }
+	        if (start != 0 && limit != 0) {
+	            query.append(" LIMIT ?, ?");
+	            parameters.add(start);
+	            parameters.add(limit);
+	        }
+	        
+	        String Query = query.toString();
+	        System.out.println(Query);
+	        
+	        conn = DatabaseConnection.connectToDatabase();
+	        pst = conn.prepareStatement(Query);
 
-			while (rs.next()) {
+	        int i = 1;
+	        for (Object parameter : parameters) {
+	            pst.setObject(i++, parameter);
+	        }
+
+	        rs = pst.executeQuery();
+	            
+	        	while(rs.next()){
+	        		ExamInfoModel examModel = new ExamInfoModel();
+	        		
+	        		examModel.setSubjectId(rs.getInt("subject_id"));
+	        		examModel.setExamTypeId(rs.getInt("exam_type_id"));
+	        		examModel.setExamStartDate(rs.getDate("exam_date"));
+	        		examModel.setExamEndDate(rs.getDate("exam_end_date"));
+	        		examModel.setExamStartTime(rs.getString("exam_starttime"));
+	        		examModel.setExamEndTime(rs.getString("exam_endtime"));
+	        		examModel.setFullmarks(rs.getInt("full_marks"));
+	        		examModel.setPassmarks(rs.getInt("pass_marks"));
+	        		examModel.setStatus(rs.getInt("status"));
+	        		examModel.setExamId(rs.getInt("exam_id"));
+					int id1=rs.getInt("exam_type_id");
+					ExamModelServiceInterface examModelType = new ExamModelServiceImpl();
+					examModel.setExamTypeName(examModelType.getSelectedExam(id1).getExamTypeName());
+					
+					SubjectModelServiceInterface inter= new SubjectModelServiceImpl();
+					Object[] obj1 = new Object[10];
+					obj1[0] = rs.getInt("subject_id");
+					List<SubjectModel> sub=inter.searchByFields(obj1);
+					for (SubjectModel subjectModel : sub) {
+						examModel.setSubjectName(subjectModel.getSubjectName());
+					}
 				
-				model.setSubjectId(rs.getInt("subject_id"));
-				model.setExamTypeId(rs.getInt("exam_type_id"));
-				model.setExamStartDate(rs.getDate("exam_date"));
-				model.setExamEndDate(rs.getDate("exam_end_date"));
-				model.setExamStartTime(rs.getString("exam_starttime"));
-				model.setExamEndTime(rs.getString("exam_endtime"));
-				model.setFullmarks(rs.getInt("full_marks"));
-				model.setPassmarks(rs.getInt("pass_marks"));
-				model.setStatus(rs.getInt("status"));
-				model.setExamId(rs.getInt("exam_id"));
-				int id1=rs.getInt("exam_type_id");
-				ExamModelServiceInterface examModelType = new ExamModelServiceImpl();
-				model.setExamTypeName(examModelType.getSelectedExam(id1).getExamTypeName());
-				
-				SubjectModelServiceInterface inter= new SubjectModelServiceImpl();
-				Object[] obj1 = new Object[10];
-				obj1[0] = rs.getInt("subject_id");
-				List<SubjectModel> sub=inter.searchByFields(obj1);
-				for (SubjectModel subjectModel : sub) {
-					model.setSubjectName(subjectModel.getSubjectName());
+					examInfoModel.add(examModel);
 				}
-			
-				
-				
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
+					
+	    }  catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
 			try {
 				pst.close();
 				rs.close();
 				conn.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
+			
 		}
-		return model;
-	
+		
+		return examInfoModel;
 	}
 
 }
+
