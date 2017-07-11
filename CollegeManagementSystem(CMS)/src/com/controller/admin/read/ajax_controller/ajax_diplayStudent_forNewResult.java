@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.model.SemesterModel;
+import com.model.SemesterSubjectModel;
 import com.model.StudentModel;
 import com.model.StudentSemesterModel;
 import com.service.SemesterServiceInterface;
 import com.service.StudentSemesterModelServiceInterface;
 import com.service.StudentServiceInterface;
 import com.serviceimpl.SemesterServiceImpl;
+import com.serviceimpl.SemesterSubjectServiceImpl;
 import com.serviceimpl.StudentSemesterModelServiceImpl;
 import com.serviceimpl.StudentServiceImpl;
 import com.util.JsonUtil;
@@ -39,7 +41,6 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 
 		List<Integer> semesterId = new ArrayList<Integer>();
 		List<Integer> studentID = new ArrayList<Integer>();
-		List<Integer> storingSubjectId= new ArrayList<Integer>();
 
 		SemesterServiceInterface inter = new SemesterServiceImpl();
 		List<SemesterModel> getSemester_id = inter.searchByFields(obj);
@@ -61,7 +62,6 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 			}
 		}
 
-		System.out.println("completed");
 		List studentName = new ArrayList();
 		for (Integer studentID1 : studentID) {
 			Object[] obj1 = new Object[10];
@@ -80,12 +80,8 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 
 			}
 		}
-		
-		
-		
-		String jsonSearch = JsonUtil.convertJavaToJson(studentName);
-		System.out.println(semesterId.toString());
 
+		String jsonSearch = JsonUtil.convertJavaToJson(studentName);
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		System.out.println(jsonSearch);

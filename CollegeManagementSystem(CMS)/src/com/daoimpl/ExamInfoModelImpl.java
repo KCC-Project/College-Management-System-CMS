@@ -10,6 +10,7 @@ import java.util.List;
 import com.dao.ExamInfoModelInterface;
 import com.model.ExamInfoModel;
 import com.model.ExamModel;
+import com.model.SubjectModel;
 import com.service.ExamModelServiceInterface;
 import com.service.SubjectModelServiceInterface;
 import com.serviceimpl.ExamModelServiceImpl;
@@ -90,8 +91,12 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 				model.setExamTypeName(examModelType.getSelectedExam(id1).getExamTypeName());
 				
 				SubjectModelServiceInterface inter= new SubjectModelServiceImpl();
-				model.setSubjectName(inter.getSelectedSubject(rs.getInt("subject_id")).getSubjectName());
-				
+				Object[] obj1 = new Object[10];
+				obj1[0] = rs.getInt("subject_id");
+				List<SubjectModel> sub=inter.searchByFields(obj1);
+				for (SubjectModel subjectModel : sub) {
+					model.setSubjectName(subjectModel.getSubjectName());
+				}
 				examModel.add(model);
 				
 				
@@ -203,8 +208,12 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 				model.setExamTypeName(examModelType.getSelectedExam(id1).getExamTypeName());
 				
 				SubjectModelServiceInterface inter= new SubjectModelServiceImpl();
-				model.setSubjectName(inter.getSelectedSubject(rs.getInt("subject_id")).getSubjectName());
-				
+				Object[] obj1 = new Object[10];
+				obj1[0] = rs.getInt("subject_id");
+				List<SubjectModel> sub=inter.searchByFields(obj1);
+				for (SubjectModel subjectModel : sub) {
+					model.setSubjectName(subjectModel.getSubjectName());
+				}
 			
 				
 				
