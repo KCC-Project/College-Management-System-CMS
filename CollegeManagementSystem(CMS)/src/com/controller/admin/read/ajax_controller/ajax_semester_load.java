@@ -34,10 +34,12 @@ public class ajax_semester_load extends HttpServlet {
 			
 			Object[] obj = new Object[10];
 			obj[2]=id;
-			
-			//System.out.println("here is the total rows count: "+Table.getRowsCount());
+			//obj[7]=1; //start limit
+			//obj[8]=3; // limit
 			
 			jsonResponse=JsonUtil.convertJavaToJson(semester.searchByFields(obj));
+			System.out.println("here is the total rows count: "+Table.getRowsCount());
+			int total = Table.getRowsCount();
 			
 			
 		}else if(semester_id != null && !semester_id.isEmpty()){

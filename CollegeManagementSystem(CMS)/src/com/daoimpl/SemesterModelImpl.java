@@ -216,11 +216,13 @@ public class SemesterModelImpl implements SemesterModelInterface {
 					semester.add(semesterModel);
 				}
 	        	
-	        	Statement st = conn.createStatement();
-	 	        r = st.executeQuery("SELECT FOUND_ROWS() as count");
-	         	System.out.println("row count is: "+r.getInt("count"));
+	        	PreparedStatement ps = conn.prepareStatement("SELECT FOUND_ROWS()");
+	        	rs = ps.executeQuery();
+	        	while(rs.next()){
+	        		System.out.println("row count is: "+rs.getInt("FOUND_ROWS()"));
+	        		Table.setRowsCount(rs.getInt("FOUND_ROWS()"));
+	        	}
 	        	
-	        	//Table.setRowsCount(rs.getInt("count"));
 
 	    }  catch (Exception e) {
 			e.printStackTrace();
