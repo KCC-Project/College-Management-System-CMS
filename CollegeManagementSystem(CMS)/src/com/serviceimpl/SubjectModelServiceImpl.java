@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dao.SubjectModelInterface;
 import com.daoimpl.SubjectModelImpl;
+import com.model.SemesterModel;
 import com.model.SubjectModel;
 import com.service.SubjectModelServiceInterface;
 
@@ -14,8 +15,8 @@ SubjectModelInterface inter= new SubjectModelImpl();
 		return inter.getAllrecord();
 	}
 	@Override
-	public SubjectModel getSelectedSubject(int id) {
-		return inter.getSelectedSubject(id);
+	public List<SubjectModel> searchByFields(Object[] obj){
+		return inter.searchByFields(obj);
 	}
 
 }

@@ -6,5 +6,5 @@ import com.model.SubjectModel;
 
 public interface SubjectModelServiceInterface {
 	List<SubjectModel> getAllrecord();
-	SubjectModel getSelectedSubject(int id);
+	public List<SubjectModel> searchByFields(Object[] obj);
 }
