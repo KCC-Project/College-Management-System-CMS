@@ -12,13 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.daoimpl.ExamInfoModelImpl;
+import com.model.ExamInfoModel;
 import com.model.SemesterModel;
 import com.model.SemesterSubjectModel;
 import com.model.StudentModel;
 import com.model.StudentSemesterModel;
+import com.service.ExamInfoModelServiceInterface;
 import com.service.SemesterServiceInterface;
 import com.service.StudentSemesterModelServiceInterface;
 import com.service.StudentServiceInterface;
+import com.serviceimpl.ExamInfoModelServiceImpl;
 import com.serviceimpl.SemesterServiceImpl;
 import com.serviceimpl.SemesterSubjectServiceImpl;
 import com.serviceimpl.StudentSemesterModelServiceImpl;
@@ -34,6 +38,8 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 		int programId = Integer.parseInt(request.getParameter("programId"));
 		int batchNo = Integer.parseInt(request.getParameter("batchNo"));
 		int semesterNo = Integer.parseInt(request.getParameter("semesterNo"));
+		
+		int examId=Integer.parseInt(request.getParameter("examId"));
 		Object[] obj = new Object[10];
 		obj[1] = semesterNo;
 		obj[2] = programId;
@@ -62,7 +68,9 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 			}
 		}
 
-		List studentName = new ArrayList();
+		List ExamInfoDetail = new ArrayList();
+		List studentName= new ArrayList(); 
+		Map<String, Object> finalDataJson=new HashMap<String,Object>();
 		for (Integer studentID1 : studentID) {
 			Object[] obj1 = new Object[10];
 			obj1[0] = studentID1;
@@ -80,8 +88,24 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 
 			}
 		}
-
-		String jsonSearch = JsonUtil.convertJavaToJson(studentName);
+		
+		ExamInfoModelServiceInterface interExamInfo=new ExamInfoModelServiceImpl();
+		Object[] obj5 = new Object[10];
+		obj5[0] = examId;
+		List<ExamInfoModel> examinfoModel= interExamInfo.searchByField(obj5);
+		for (ExamInfoModel examInfoModel2 : examinfoModel) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("ExamtypeName", examInfoModel2.getExamTypeName());
+			map.put("FullMarks", examInfoModel2.getFullmarks());
+			map.put("PassMarks", examInfoModel2.getPassmarks());
+			map.put("ExamId", examInfoModel2.getExamId());
+			map.put("SubjectName", examInfoModel2.getSubjectName());
+			ExamInfoDetail.add(map);
+		}
+		finalDataJson.put("StudentInfo", studentName);
+		finalDataJson.put("ExamInfo", ExamInfoDetail);
+		
+		String jsonSearch = JsonUtil.convertJavaToJson(finalDataJson);
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		System.out.println(jsonSearch);

@@ -35,7 +35,7 @@ public class ajax_examTypeNameLoad extends HttpServlet {
 		ExamInfoModelServiceInterface inter= new ExamInfoModelServiceImpl();
 		
 		List<ExamInfoModel> model= inter.searchByField(obj);
-		//System.out.println("model size="+model.size());
+		System.out.println("model size="+model.size());
 		
 		for (ExamInfoModel examInfoModel : model) {
 			System.out.println("examTypename="+examInfoModel.getExamTypeName()+"  "+"exmInfoId="+examInfoModel.getExamId());

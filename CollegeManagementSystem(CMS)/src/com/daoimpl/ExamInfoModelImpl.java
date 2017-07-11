@@ -195,7 +195,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 		String exam_endtime = null;
 		int full_marks = 0;
 		int pass_marks = 0;
-		int status = 0;
+		int status = 5;
 		
 		int start = 0;
 		int limit = 0;
@@ -249,7 +249,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 	            query.append(" AND pass_marks = ?");
 	            parameters.add(pass_marks);
 	        }
-	        if (status != 0) {
+	        if (status != 5) {
 	            query.append(" AND status = ?");
 	            parameters.add(status);
 	        }
