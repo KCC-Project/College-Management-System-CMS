@@ -213,10 +213,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 				List<SubjectModel> sub=inter.searchByFields(obj1);
 				for (SubjectModel subjectModel : sub) {
 					model.setSubjectName(subjectModel.getSubjectName());
-				}
-			
-				
-				
+				}	
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
