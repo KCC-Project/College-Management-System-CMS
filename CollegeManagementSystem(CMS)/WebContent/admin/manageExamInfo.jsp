@@ -529,18 +529,19 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var jSonObject = eval('(' + aj.responseText + ')');
-				document.getElementById("exam_start_datee").value = jSonObject.examStartDate;
-				document.getElementById("exam_end_datee").value = jSonObject.examEndDate;
-				document.getElementById("exam_start_timee").value = jSonObject.examStartTime;
-				document.getElementById("exam_end_timee").value = jSonObject.examEndTime;
-				document.getElementById("exam_fullMarkss").value = jSonObject.fullmarks;
-				document.getElementById("exam_passMarkss").value = jSonObject.passmarks;
-				document.getElementById("deleteIdJs").value = jSonObject.examId;
-				document.getElementById("iteamNameJson").innerHTML = jSonObject.examId;
-				document.getElementById("hiddenValueToUpdate").value = jSonObject.examId;
+				
+				document.getElementById("exam_start_datee").value = jSonObject[0].examStartDate;
+				document.getElementById("exam_end_datee").value = jSonObject[0].examEndDate;
+				document.getElementById("exam_start_timee").value = jSonObject[0].examStartTime;
+				document.getElementById("exam_end_timee").value = jSonObject[0].examEndTime;
+				document.getElementById("exam_fullMarkss").value = jSonObject[0].fullmarks;
+				document.getElementById("exam_passMarkss").value = jSonObject[0].passmarks;
+				document.getElementById("deleteIdJs").value = jSonObject[0].examId;
+				document.getElementById("iteamNameJson").innerHTML = jSonObject[0].examId;
+				document.getElementById("hiddenValueToUpdate").value = jSonObject[0].examId;
 
 				/* For selecting Selected subject automatically */
-				var subjectid = jSonObject.subjectId;
+				var subjectid = jSonObject[0].subjectId;
 				var temp = subjectid;
 				var mySelect = document.getElementById('subject-boxx');
 				for (var i, j = 0; i = mySelect.options[j]; j++) {
@@ -551,7 +552,7 @@
 				}
 
 				/* For Selecting selected examType automatically */
-				var examTypeId = jSonObject.examTypeId;
+				var examTypeId = jSonObject[0].examTypeId;
 				var temp = examTypeId;
 				var mySelect = document.getElementById('examType-boxx');
 				for (var i, j = 0; i = mySelect.options[j]; j++) {
@@ -562,7 +563,7 @@
 				}
 
 				/*For Selecting radio btn automatically  */
-				var StatusId = jSonObject.status;
+				var StatusId = jSonObject[0].status;
 				var elements = document.getElementsByName('status');
 				for (i = 0; i < elements.length; i++) {
 					if (elements[i].value == StatusId) {

@@ -160,6 +160,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 	@Override
 	public int deleteExamInfo(int id) {
 		int result = 0;
+		//System.out.println("deleting id form ecaminfoModel="+id);
 		try {
 			Connection connection = DatabaseConnection.connectToDatabase();
 			sql = "delete from exam where exam_id =?";
@@ -167,8 +168,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 			pst.setInt(1, id);
 			result = pst.executeUpdate();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error in deleting examInfo model="+e.getMessage());
 		} finally {
 			try {
 				pst.close();

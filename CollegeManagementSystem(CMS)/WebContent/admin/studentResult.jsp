@@ -43,9 +43,9 @@
 				<div style="position: relative;">
 					<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
 
-						<a href="addResult.jsp"><button type="button" class="btn btn-info pull-right" id="qqq"
-							data-toggle="modal" data-target=#add_exam_modal-info>
-							Add Result</button></a>
+						<a href="addResult.jsp"><button type="button"
+								class="btn btn-info pull-right" id="qqq" data-toggle="modal"
+								data-target=#add_exam_modal-info>Add Result</button></a>
 						<button id="seacrchBtnClicked" type="button" class="btn btn-info"
 							style="float: left; margin-left: -20px;" data-toggle="modal"
 							data-target=#searchModal onclick="searchBtn();">
@@ -88,7 +88,7 @@
 								</p>
 								<div class="form-group col-sm-6">
 									<select required class="form-control" id="searchIteam"
-										name="searchIteam" onchange="searcheOption();">
+										name="searchIteam" onchange="searcheOption(); ">
 										<option value="" disabled selected>Select</option>
 										<option value="Name">Name</option>
 										<option value="Batch">Batch</option>
@@ -100,12 +100,14 @@
 										<option value="Subject">Subject</option>
 									</select>
 								</div>
+
+								<!-- For Batch -->
 								<div class="form-group col-sm-6" id="semester-batch" hidden>
 									<select required class="form-control" name="batch_id"
 										id="batch-box1">
 										<option value="" disabled selected>Select Batch</option>
 									</select> <select required class="form-control" id="Semester_box1"
-										name="Semester_box">
+										name="Semester_box" onclick="load_exam_type();">
 										<option value="" disabled selected>Select Semester</option>
 										<option value="" disabled selected>Select Semester</option>
 										<option value="1">1</option>
@@ -116,6 +118,9 @@
 										<option value="6">6</option>
 										<option value="7">7</option>
 										<option value="8">8</option>
+									</select> <select required class="form-control" id="examType-box"
+										name="examType_id">
+										<option value="" disabled selected>Select Exam Type</option>
 									</select>
 								</div>
 
@@ -208,7 +213,7 @@
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 								<button type="submit" class="btn btn-success"
-									onclick="loadAllResult();" data-dismiss="modal">Search</button>
+									onclick="loadResult();" data-dismiss="modal">Search</button>
 							</div>
 						</div>
 
@@ -257,13 +262,13 @@
 											</tr>
 
 										</thead>
-										
+
 									</table>
 								</div>
 								<div class="loader" id="loader" hidden style="margin-left: 40%;"></div>
 							</div>
-							
-							
+
+
 						</div>
 					</div>
 				</div>
@@ -312,7 +317,14 @@
 		load_faculty();
 	}
 
-	function loadAllResult() {
+	function loadResult() {
+		var searchFilter = document.getElementById("searchIteam").value;
+	//	alert("searchFilter=" + searchFilter);
+		if (searchFilter === 'Batch') {
+			loadResultByBatch();
+		}
+	}
+	function loadResultByBatch() {
 		var table = document.getElementById("tblResult");
 		var tableHeaderRowCount = 1;
 		var rowCount = table.rows.length;
@@ -320,25 +332,17 @@
 		for (var i = tableHeaderRowCount; i < rowCount; i++) {
 			table.deleteRow(tableHeaderRowCount);
 		}
-		document.getElementById("loader").hidden=false;
+		document.getElementById("loader").hidden = false;
 		var facultyId = document.getElementById("p-faculty-box").value;
 		var programId = document.getElementById("p-program-box").value;
-		var batchIdName = document.getElementById("batch-box5").value;
-		var batchIdName = document.getElementById("batch-box4").value;
-		var batchIdName = document.getElementById("batch-box3").value;
-		var batchIdName = document.getElementById("batch-box2").value;
-		var batchIdName = document.getElementById("batch-box1").value;
-		var semesterIdName = document.getElementById("Semester_box5").value;
-		var semesterIdName = document.getElementById("Semester_box4").value;
-		var semesterIdName = document.getElementById("Semester_box3").value;
-		var semesterIdName = document.getElementById("Semester_box2").value;
-		var semesterIdName = document.getElementById("Semester_box1").value;
-		var nameIdEmailMarks = document.getElementById("searchedEnteredField").value;
-
-		alert(batchIdName);
-		//var send="facultyId="+facultyId+"programId="+programId+"batchIdName="+batchIdName+"semesterIdName="+semesterIdName+"nameIdEmailMarks="+nameIdEmailMarks;
-		var send = "nameIdEmailMarks=" + nameIdEmailMarks+"&programId="+programId+"&batchIdName="+batchIdName+"&semesterIdName="+semesterIdName+"&facultyId="+facultyId;
-		var url = "../ajax_result_load";
+		var batchNo = document.getElementById("batch-box1").value;
+		var semesterNo = document.getElementById("Semester_box1").value;
+		var examTypeId = document.getElementById("examType-box").value;
+		alert("examTypeId="+examTypeId);
+		var send = "&programId=" + programId + "&batchNo=" + batchNo
+				+ "&semesterNo=" + semesterNo + "&facultyId=" + facultyId
+				+ "&examTypeId=" + examTypeId;
+		var url = "../ajax_result_load_by_Batch";
 		var aj = new XMLHttpRequest();
 		aj.open("POST", url, true);
 		aj
@@ -346,46 +350,8 @@
 						"application/x-www-form-urlencoded");
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
-				document.getElementById("loader").hidden=true;
+				document.getElementById("loader").hidden = true;
 				var jSonObject = eval('(' + aj.responseText + ')');
-				//alert("mausam="+jSonObject.StudentName);
-				var i = jSonObject.length;
-
-				for ( var prop in jSonObject) {
-
-					var item = jSonObject[prop];
-
-					var table = document.getElementById("tblResult");
-					var row = table.insertRow(1);
-
-					var cell1 = row.insertCell(0);
-					var cell2 = row.insertCell(1);
-					var cell3 = row.insertCell(2);
-					var cell4 = row.insertCell(3);
-					var cell5 = row.insertCell(4);
-					var cell6 = row.insertCell(5);
-					var cell7 = row.insertCell(6);
-					var cell8 = row.insertCell(7);
-					var cell9 = row.insertCell(8);
-
-					cell1.innerHTML = i;
-					cell2.innerHTML = item.StudentName;
-					cell3.innerHTML = item.subjectName;
-					cell4.innerHTML = item.examTypeName;
-					cell5.innerHTML = item.fullMarks;
-					cell6.innerHTML = item.examMarksByStudent;
-					var passFailStatus = item.passFailStatus;
-					if (passFailStatus === 0) {
-						 /*<i class="fa fa-sitemap"> <i class="fa fa-users">*/
-						cell7.innerHTML = '<span class="btn btn-sm btn-danger "> </i> &nbsp;&nbsp;Fail &nbsp;</span>';
-					} else {
-						cell7.innerHTML = '<span class="btn btn-sm btn-warning "></i> Pass &nbsp;</span>';
-					}
-					cell8.innerHTML = '<span class="btn btn-sm btn-info  hidden-xs"> </i>'+item.programName+'&nbsp; </span>';
-					cell9.innerHTML = '<a href='+item.resultId+' value='+item.resultId+' class="btn-sm btn btn-default" title="View Exam Details" data-toggle="modal" data-target=p><i class="fa fa-eye"></i></a><a href='+item.resultId+' value='+item.resultId+'  class="btn-sm btn btn-default" data-toggle="modal" data-target=# title="EditCourseDetails"><i class="fa fa-pencil-square-o"></i></a>	<a href='+item.resultId+' value='+item.resultId+' class="btn-sm btn btn-default" data-toggle="modal" data-target=# title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a>';
-
-					i--;
-				}
 
 			}
 		}
@@ -505,6 +471,25 @@
 			}
 		}
 		aj.send(idSend);
+	}
+	function load_exam_type() {
+		var id = document.getElementById("examType-box").value;
+		var url = "../ajax_examType_load";
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var return_data = aj.responseText;
+
+				document.getElementById("examType-box").innerHTML = return_data;
+				document.getElementById("examType-boxx").innerHTML = return_data;
+
+			}
+		}
+		aj.send(id);
 	}
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

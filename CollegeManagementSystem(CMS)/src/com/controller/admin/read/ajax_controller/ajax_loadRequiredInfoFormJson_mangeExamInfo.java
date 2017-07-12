@@ -23,8 +23,10 @@ public class ajax_loadRequiredInfoFormJson_mangeExamInfo extends HttpServlet {
 
 		}else{
 			int iD=Integer.parseInt(id);
+			Object[] obj = new Object[10];
+			obj[0]=id;
 			ExamInfoModelServiceInterface inter= new ExamInfoModelServiceImpl();
-			String examInfoJson=JsonUtil.convertJavaToJson(inter.getSelectedInfo(iD));
+			String examInfoJson=JsonUtil.convertJavaToJson(inter.searchByField(obj));
 			response.setContentType("text/xml");
 			response.setHeader("Cache-Control", "no-cache");
 		//	System.out.println("mausamJson="+examInfoJson);

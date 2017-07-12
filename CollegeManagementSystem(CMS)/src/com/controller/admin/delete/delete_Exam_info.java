@@ -19,11 +19,13 @@ public class delete_Exam_info extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String deleteExamId = request.getParameter("deleteIdJson");
+	//	System.out.println("deleted exmid="+deleteExamId);
 	ExamInfoModelServiceInterface interfaceExamInfo= new ExamInfoModelServiceImpl();
 		if (deleteExamId.equalsIgnoreCase("")) {
 			response.sendRedirect("admin/manageExamInfo.jsp?error=deletingexamInfo");
 		} else {
 			int id = Integer.parseInt(deleteExamId);
+			//System.out.println("examId from ajax="+id);
 			int delete=interfaceExamInfo.deleteExamInfo(id);
 			if (delete==1) {
 				response.sendRedirect("admin/manageExamInfo.jsp?error=sucessfuldelete");	
