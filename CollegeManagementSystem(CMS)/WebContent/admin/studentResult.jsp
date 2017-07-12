@@ -260,8 +260,10 @@
 												<td>Pass/Fail</td>
 												<td class="hidden-xs">Program</td>
 											</tr>
+										<tbody id="result_data">
+										</tbody>
 
-										</thead>
+
 
 									</table>
 								</div>
@@ -319,7 +321,7 @@
 
 	function loadResult() {
 		var searchFilter = document.getElementById("searchIteam").value;
-	//	alert("searchFilter=" + searchFilter);
+		//	alert("searchFilter=" + searchFilter);
 		if (searchFilter === 'Batch') {
 			loadResultByBatch();
 		}
@@ -338,7 +340,7 @@
 		var batchNo = document.getElementById("batch-box1").value;
 		var semesterNo = document.getElementById("Semester_box1").value;
 		var examTypeId = document.getElementById("examType-box").value;
-		alert("examTypeId="+examTypeId);
+		alert("examTypeId=" + examTypeId);
 		var send = "&programId=" + programId + "&batchNo=" + batchNo
 				+ "&semesterNo=" + semesterNo + "&facultyId=" + facultyId
 				+ "&examTypeId=" + examTypeId;
@@ -353,6 +355,40 @@
 				document.getElementById("loader").hidden = true;
 				var jSonObject = eval('(' + aj.responseText + ')');
 
+				
+				
+				var content = '';
+				for (var i = 0; i < jSonObject.length; i++) {
+					content += '<tr>';
+					content += '<td  class="student_sn">' + (i + 1) + '</td>';
+					content += "<td data-pk="+jSonObject[i].StudentName+" value="+jSonObject[i].StudentName+" data-name=\"student_name\"  data-type=\"text\" class=\"student_name\" id='student_name'>"
+							+ jSonObject[i].StudentName + "</td>";
+
+					content += '<td  class="student_subject">'
+							+ jSonObject[i].subjectName + '</td>';
+					content += '<td  class="student_examType">'
+							+ jSonObject[i].ExamType + '</td>';
+					content += '<td  class="student_fullMarks">'
+							+ jSonObject[i].FullMarks + '</td>';
+					content += '<td  class="student_passmarks">'
+							+ jSonObject[i].ScoredMarks + '</td>';
+					var passFailStatus = jSonObject[i].PassFailStatus;
+					if (passFailStatus === 0) {
+						/*<i class="fa fa-sitemap"> <i class="fa fa-users">*/
+						content += '	<td><span class="btn btn-sm btn-danger student_passFail" data-name="student_passFail" data-type="select"  data-pk="'+0+'"> </i> &nbsp;&nbsp; Fail &nbsp;</span></td>';
+					} else {
+						content += '	<td ><span class="btn btn-sm btn-warning student_passFail " data-name="student_passFail" data-type="select"   data-pk="'+1+'"> </i> &nbsp;&nbsp;Pass &nbsp;</span></td>';
+
+					}
+					content += '<td   class="program" data-name="program" data-type="select"  ><button type="button" class="btn btn-info">'+ jSonObject[i].ProgramName+ '</button></td>';
+					content += '<tr>';
+				}
+				$("#result_data").html(content);
+				
+				
+				
+				
+				
 			}
 		}
 		aj.send(send);

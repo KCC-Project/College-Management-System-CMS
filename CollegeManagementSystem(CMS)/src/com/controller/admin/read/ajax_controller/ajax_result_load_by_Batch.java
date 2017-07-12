@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.model.ExamInfoModel;
 import com.model.ExamModel;
+import com.model.ProgramModel;
 import com.model.SemesterModel;
 import com.model.StudentExamResultModel;
 import com.model.StudentModel;
@@ -23,6 +24,7 @@ import com.model.StudentSemesterModel;
 import com.model.SubjectModel;
 import com.model.YearModel;
 import com.service.ExamInfoModelServiceInterface;
+import com.service.ProgramServiceInterface;
 import com.service.SemesterServiceInterface;
 import com.service.StudentExamResultModelServiceInterface;
 import com.service.StudentSemesterModelServiceInterface;
@@ -53,9 +55,9 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 		int batchNo = Integer.parseInt(request.getParameter("batchNo"));
 		int semesterNo = Integer.parseInt(request.getParameter("semesterNo"));
 		int facultyId = Integer.parseInt(request.getParameter("facultyId"));
-		int  examTypeId = Integer.parseInt(request.getParameter("examTypeId"));
-		
-		//System.out.println("examTypeId="+examTypeId);
+		int examTypeId = Integer.parseInt(request.getParameter("examTypeId"));
+
+		// System.out.println("examTypeId="+examTypeId);
 		// System.out.println("From Batch="+" programId="+programId+"
 		// batchNo="+batchNo+ " semesterno="+semesterNo+ " faculty="+facultyId);
 
@@ -68,7 +70,7 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 		obj[2] = programId;
 		obj[3] = batchNo;
 		List<SemesterModel> model = semInterface.searchByFields(obj);
-		System.out.println("size of semester="+model.size());
+		System.out.println("size of semester=" + model.size());
 		for (SemesterModel semesterModel : model) {
 
 			//////////////////////////////
@@ -76,35 +78,54 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 			obj1[1] = semesterModel.getSemester_id();
 			StudentSemesterModelServiceInterface inter = new StudentSemesterModelServiceImpl();
 			List<StudentSemesterModel> modelSemStudent = inter.searchByFields(obj1);
-			System.out.println("size of student_semester="+modelSemStudent.size());
+			System.out.println("size of student_semester=" + modelSemStudent.size());
 			for (StudentSemesterModel studentSemesterModel : modelSemStudent) {
 				Object[] obj11 = new Object[10];
 				obj11[0] = studentSemesterModel.getStudent_id();
 				StudentServiceInterface studentInter = new StudentServiceImpl();
 				List<StudentModel> stModel = studentInter.searchByField(obj11);
 				for (StudentModel studentModel : stModel) {
-					Map<String, Object> map = new HashMap<String, Object>();
-					map.put("StudentName", studentModel.getFirstname()+" "+studentModel.getMiddlename()+" "+studentModel.getLastname());
-					tempList.add(map);
 					
-					
-					ExamInfoModelServiceInterface examInfoModel= new ExamInfoModelServiceImpl();
+					// tempList.add(map);
+
+					ExamInfoModelServiceInterface examInfoModel = new ExamInfoModelServiceImpl();
 					Object[] obj111 = new Object[10];
 					obj111[2] = examTypeId;
-					List<ExamInfoModel>examInfo= examInfoModel.searchByField(obj111);
+					List<ExamInfoModel> examInfo = examInfoModel.searchByField(obj111);
 					for (ExamInfoModel examInfoModel2 : examInfo) {
 						Object[] obj1111 = new Object[10];
 						obj1111[0] = studentModel.getStudentID();
 						obj1111[1] = examInfoModel2.getExamId();
-						StudentExamResultModelServiceInterface result= new StudentExamResultModelServiceImpl();
-						//List<StudentExamResultModel> resultModel= result.
+						StudentExamResultModelServiceInterface result = new StudentExamResultModelServiceImpl();
+						List<StudentExamResultModel> resultModel = result.searchByField(obj1111);
+						if (resultModel.size() != 0) {
+							System.out.println("size of result=" + resultModel.size());
+							for (StudentExamResultModel studentExamResultModel : resultModel) {
+								Map<String, Object> map = new HashMap<String, Object>();
+								map.put("ProgramName",
+										new ProgramServiceImpl().getRecordById(programId).getProgram_name());
+								map.put("subjectName", examInfoModel2.getSubjectName());
+								map.put("ExamType", examInfoModel2.getExamTypeName());
+								map.put("FullMarks", examInfoModel2.getFullmarks());
+								map.put("ScoredMarks", studentExamResultModel.getExamMarks());
+								map.put("PassFailStatus", studentExamResultModel.getPassFailStatus());
+								map.put("StudentName", studentModel.getFirstname() + " " + studentModel.getMiddlename()
+										+ " " + studentModel.getLastname());
+								tempList.add(map);
+							}
+						}
 					}
 				}
-				
+
 			}
 		}
-		String jsonString=JsonUtil.convertJavaToJson(tempList);
-		System.out.println("TempList="+jsonString);
+		response.setContentType("text/xml");
+		response.setHeader("Cache-Control", "no-cache");
+		
+	
+		String jsonString = JsonUtil.convertJavaToJson(tempList);
+		System.out.println("TempList=" + jsonString);
+		response.getWriter().write(jsonString);
 	}
 
 }
