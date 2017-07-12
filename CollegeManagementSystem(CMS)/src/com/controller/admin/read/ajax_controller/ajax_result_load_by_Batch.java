@@ -56,11 +56,7 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 		int semesterNo = Integer.parseInt(request.getParameter("semesterNo"));
 		int facultyId = Integer.parseInt(request.getParameter("facultyId"));
 		int examTypeId = Integer.parseInt(request.getParameter("examTypeId"));
-
-		// System.out.println("examTypeId="+examTypeId);
-		// System.out.println("From Batch="+" programId="+programId+"
-		// batchNo="+batchNo+ " semesterno="+semesterNo+ " faculty="+facultyId);
-
+		
 		List tempList = new ArrayList();
 
 		// For getting semester id
@@ -72,8 +68,6 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 		List<SemesterModel> model = semInterface.searchByFields(obj);
 		System.out.println("size of semester=" + model.size());
 		for (SemesterModel semesterModel : model) {
-
-			//////////////////////////////
 			Object[] obj1 = new Object[10];
 			obj1[1] = semesterModel.getSemester_id();
 			StudentSemesterModelServiceInterface inter = new StudentSemesterModelServiceImpl();
@@ -85,9 +79,6 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 				StudentServiceInterface studentInter = new StudentServiceImpl();
 				List<StudentModel> stModel = studentInter.searchByField(obj11);
 				for (StudentModel studentModel : stModel) {
-					
-					// tempList.add(map);
-
 					ExamInfoModelServiceInterface examInfoModel = new ExamInfoModelServiceImpl();
 					Object[] obj111 = new Object[10];
 					obj111[2] = examTypeId;
@@ -121,8 +112,6 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 		}
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
-		
-	
 		String jsonString = JsonUtil.convertJavaToJson(tempList);
 		System.out.println("TempList=" + jsonString);
 		response.getWriter().write(jsonString);
