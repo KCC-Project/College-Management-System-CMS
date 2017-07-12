@@ -49,11 +49,12 @@ $(document).ready(function() {
 				student_passFail : student_passFail
 			},
 			success : function(data) {
-				alert(data);
+				//alert(data);
 				$('#crud_table tr:not(:first)').remove();
+				   $('#sucessfulDialog').modal('show');
 			},
 			error : function() {
-				alert('error');
+				   $('#errorDialog').modal('show');
 			}
 		});
 		

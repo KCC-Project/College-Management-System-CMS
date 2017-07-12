@@ -83,17 +83,19 @@
 							<div class="modal-body">
 								<div class="row">
 									<div class="col-sm-12">
-									<div class="col-sm-3">
-										<div class="form-group " style="margin-bottom: 0px;">
-											<select required class="form-control" id="p-faculty-box"
-												name="faculty_id" onChange="load_program();" onclick="onClick();">
-											</select>
-										</div>
+										<div class="col-sm-3">
+											<div class="form-group " style="margin-bottom: 0px;">
+												<select required class="form-control" id="p-faculty-box"
+													name="faculty_id" onChange="load_program();"
+													onclick="onClick();">
+												</select>
+											</div>
 										</div>
 										<div class="form-group col-sm-3" style="margin-bottom: 0px;">
 
 											<select required class="form-control" id="p-program-box"
-												name="program_id" onchange="load_batch_year();" onclick="onClick1();" disabled>
+												name="program_id" onchange="load_batch_year();"
+												onclick="onClick1();" disabled>
 												<option value="" disabled selected>Select Programme</option>
 											</select>
 										</div>
@@ -106,8 +108,8 @@
 										<div class="form-group col-sm-3" id="semester-batch"
 											style="margin-bottom: 0px;">
 											<select required class="form-control" id="Semester_box"
-												name="Semester_box" disabled
-												onchange="load_subject();" onclick="onClick3();">
+												name="Semester_box" disabled onchange="load_subject();"
+												onclick="onClick3();">
 												<option value="" disabled selected>Select Semester</option>
 												<option value="1">1</option>
 												<option value="2">2</option>
@@ -124,15 +126,17 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12" style="margin-top: 10px;">
-											<div class="form-group col-sm-6 " style="margin-bottom: 0px;margin-bottom: 10px;">
+											<div class="form-group col-sm-6 "
+												style="margin-bottom: 0px; margin-bottom: 10px;">
 												<select required class="form-control" id="p-subject-box"
-													name="subject_id" onchange="load_examType();" onclick="onClick4();"disabled>
+													name="subject_id" onchange="load_examType();"
+													onclick="onClick4();" disabled>
 													<option value="" disabled selected>Select Subject</option>
 												</select>
 											</div>
 											<div class="form-group col-sm-6" style="margin-bottom: 0px;">
-												<select required class="form-control " id="p-examType-box" disabled
-													name="examtype_id" onclick="onClick5();">
+												<select required class="form-control " id="p-examType-box"
+													disabled name="examtype_id" onclick="onClick5();">
 													<option value="" disabled selected>Select exam
 														Type</option>
 												</select>
@@ -145,7 +149,8 @@
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">Close</button>
 									<button type="submit" class="btn btn-success"
-										onclick="load_student();" id="searchbtnClicked" disabled data-dismiss="modal">Search</button>
+										onclick="load_student();" id="searchbtnClicked" disabled
+										data-dismiss="modal">Search</button>
 								</div>
 							</div>
 
@@ -200,8 +205,38 @@
 				<!-- ======================end of exam type============= -->
 			</div>
 		</div>
-
-
+		<div class="modal fade" id="sucessfulDialog" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Sucessfull</h4>
+					</div>
+					<div class="modal-body">
+						<p>Information has sucessfully saved into database.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="modal fade" id="errorDialog" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Error in saving information,Either data was already inserted or some fields empty.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!--=========================================================================================  -->
 	</div>
@@ -213,7 +248,7 @@
 	function onClick() {
 		document.getElementById("p-program-box").disabled = false;
 	}
-	
+
 	function onClick1() {
 		document.getElementById("batch-box").disabled = false;
 	}
@@ -240,7 +275,7 @@
 
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
-			
+
 				var return_data = aj.responseText;
 				if (getid == "modal-box" || getid == "faculty-box") {
 					document.getElementById("faculty-box").innerHTML = return_data;
@@ -297,7 +332,7 @@
 		}
 		aj.send(idSend);
 	}
-	
+
 	function load_subject() {
 		var programId = document.getElementById("p-program-box").value;
 		var batchNo = document.getElementById("batch-box").value;
@@ -365,8 +400,7 @@
 				var content = '';
 				for (var i = 0; i < jSonObject.StudentInfo.length; i++) {
 					content += '<tr>';
-					content += '<td  class="student_sn">'
-							+ (i + 1) + '</td>';
+					content += '<td  class="student_sn">' + (i + 1) + '</td>';
 					content += "<td data-pk="+jSonObject.StudentInfo[i].studentId+" value="+jSonObject.StudentInfo[i].studentId+" data-name=\"student_name\"  data-type=\"text\" class=\"student_name\" id='student_name'>"
 							+ jSonObject.StudentInfo[i].Name + "</td>";
 
