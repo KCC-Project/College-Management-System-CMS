@@ -83,6 +83,7 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 					Object[] obj111 = new Object[10];
 					obj111[2] = examTypeId;
 					List<ExamInfoModel> examInfo = examInfoModel.searchByField(obj111);
+					System.out.println("examInfo table size="+examInfo.size());
 					for (ExamInfoModel examInfoModel2 : examInfo) {
 						Object[] obj1111 = new Object[10];
 						obj1111[0] = studentModel.getStudentID();
@@ -98,6 +99,7 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 								map.put("subjectName", examInfoModel2.getSubjectName());
 								map.put("ExamType", examInfoModel2.getExamTypeName());
 								map.put("FullMarks", examInfoModel2.getFullmarks());
+								map.put("passMarks", examInfoModel2.getPassmarks());
 								map.put("ScoredMarks", studentExamResultModel.getExamMarks());
 								map.put("PassFailStatus", studentExamResultModel.getPassFailStatus());
 								map.put("StudentName", studentModel.getFirstname() + " " + studentModel.getMiddlename()
