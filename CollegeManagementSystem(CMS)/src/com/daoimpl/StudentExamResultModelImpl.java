@@ -123,7 +123,7 @@ public class StudentExamResultModelImpl implements StudentExamResultModelInterfa
 	            query.append(" AND is_attended = ?");
 	            parameters.add(is_attended);
 	        }
-	        if (pass_fail_status != 0) {
+	        if (pass_fail_status != 5) {
 	            query.append(" AND pass_fail_status = ?");
 	            parameters.add(pass_fail_status);
 	        }
