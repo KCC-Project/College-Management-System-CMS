@@ -44,7 +44,7 @@
 					<div
 						style="margin: 0px; padding: 0px; height: 35px; margin-bottom: 0px;">
 						<button type="button" class="btn btn-info pull-right" id="qqq"
-							data-toggle="modal" data-target=#filterModal>Add Result</button>
+							data-toggle="modal" data-target=#filterModal>Add Filter</button>
 					</div>
 				</div>
 
@@ -372,7 +372,7 @@
 					content += '<tr>';
 					content += '<td contenteditable="false" class="student_sn">'
 							+ (i + 1) + '</td>';
-					content += "<td data-pk="+jSonObject.StudentInfo[i].studentId+" value="+jSonObject.StudentInfo[i].studentId+" data-name=\"student_name\"  data-type=\"text\" class=\"student_name\">"
+					content += "<td data-pk="+jSonObject.StudentInfo[i].studentId+" value="+jSonObject.StudentInfo[i].studentId+" data-name=\"student_name\"  data-type=\"text\" class=\"student_name\" id='student_name'>"
 							+ jSonObject.StudentInfo[i].Name + "</td>";
 
 					content += '<td  class="student_subject">'
