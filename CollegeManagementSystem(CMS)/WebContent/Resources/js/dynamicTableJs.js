@@ -1,9 +1,7 @@
 $(document).ready(function() {
-	var rowCount = $('#crud_table >tbody >tr').length;
+
 
 	$('#save').click(function() {
-		//alert("table row=" + rowCount);
-		//alert("value="+$(".student_name").val());
 		var student_id = [];
 		var student_examid = [];
 		var exam_marks = [];
@@ -36,12 +34,7 @@ $(document).ready(function() {
 			}	
 		});
 
-	alert("student id="+student_id);
-	alert("att="+student_attendence);
-	alert("student_passFail ="+student_passFail);
-	alert("exam_marks="+exam_marks);
-	alert("student_examid="+student_examid);
-		   
+	
 	
 		$.ajax({
 			url : "../ajax_add_result",
@@ -57,11 +50,7 @@ $(document).ready(function() {
 			},
 			success : function(data) {
 				alert(data);
-				$("td[contentEditable='true']").text("");
-				for (var i = 2; i <= rowCount; i++) {
-					$('tr#' + i + '').remove();
-				}
-				// fetch_item_data();
+				$('#crud_table tr:not(:first)').remove();
 			},
 			error : function() {
 				alert('error');

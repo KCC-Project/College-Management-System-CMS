@@ -328,7 +328,6 @@
 		var url = "../ajax_examTypeNameLoad";
 		var idSend = "subjectId=" + subjectId;
 		var aj = new XMLHttpRequest();
-		//alert("subjectId="+subjectId);
 		aj.open("POST", url, true);
 		aj
 				.setRequestHeader("Content-type",
@@ -362,15 +361,11 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var jSonObject = eval('(' + aj.responseText + ')');
-				//var i = jSonObject.length;
-				//alert(jSonObject.StudentInfo[0].Name);
 				$("#crud_table").show();
 				var content = '';
 				for (var i = 0; i < jSonObject.StudentInfo.length; i++) {
-					//alert("inside");
-					//alert("Student anme=" + jSonObject.StudentInfo[i].Name);
 					content += '<tr>';
-					content += '<td contenteditable="false" class="student_sn">'
+					content += '<td  class="student_sn">'
 							+ (i + 1) + '</td>';
 					content += "<td data-pk="+jSonObject.StudentInfo[i].studentId+" value="+jSonObject.StudentInfo[i].studentId+" data-name=\"student_name\"  data-type=\"text\" class=\"student_name\" id='student_name'>"
 							+ jSonObject.StudentInfo[i].Name + "</td>";
@@ -396,8 +391,6 @@
 					content += '<td  hidden class="exam_id" data-name="examId" data-type="select" class="examId" data-pk="'+jSonObject.ExamInfo[0].ExamId+'" value="'+jSonObject.ExamInfo[0].ExamId+'">'
 							+ jSonObject.ExamInfo[0].ExamId + '</td>';
 					content += '<tr>';
-					//i--;
-
 				}
 				$("#employee_data").html(content);
 			}

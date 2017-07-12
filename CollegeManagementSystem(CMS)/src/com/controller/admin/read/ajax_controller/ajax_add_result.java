@@ -23,7 +23,6 @@ public class ajax_add_result extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("called from jquery ");
 		PrintWriter out = response.getWriter();
 		String[] studentId = request.getParameterValues("student_id[]");
 		String[] student_examid = request.getParameterValues("student_examid[]");
@@ -42,7 +41,6 @@ public class ajax_add_result extends HttpServlet {
 			isSucess = inter.saveInformation(result);
 		}
 		if (isSucess == true) {
-			
 			out.println("Successfull");
 		}else{
 			out.println("not sucessful");
