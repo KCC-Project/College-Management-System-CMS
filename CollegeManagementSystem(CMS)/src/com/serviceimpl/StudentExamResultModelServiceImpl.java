@@ -21,8 +21,8 @@ StudentExamResultModelInterface inter= new StudentExamResultModelImpl();
 	}
 
 	
-	public StudentExamResultModel readId(int id) {
-		return inter.readId(id);
+	public List<StudentExamResultModel> searchByField(Object[] obj) {
+		return inter.searchByField(obj);
 		
 	}
 

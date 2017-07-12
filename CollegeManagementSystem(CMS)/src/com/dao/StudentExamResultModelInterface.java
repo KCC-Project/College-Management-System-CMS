@@ -9,7 +9,7 @@ public interface StudentExamResultModelInterface {
 
 	List<StudentExamResultModel> getAllRecord();
 
-	StudentExamResultModel readId(int id);
+	List<StudentExamResultModel> searchByField(Object[] obj);
 
 	int delete(int id);
 
