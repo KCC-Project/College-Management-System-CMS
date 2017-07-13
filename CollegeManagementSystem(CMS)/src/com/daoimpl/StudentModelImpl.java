@@ -219,13 +219,87 @@ public class StudentModelImpl implements StudentModelInterface {
 		List<Object> parameters = new ArrayList<Object>();
 		List<StudentModel> stModel = new ArrayList<>();
 		int student_id = 0;
+		String student_firstname = null;
+		String student_middlename = null;
+		String student_lastname = null;
+		String student_email = null;
+		int student_phone = 0;
+		String student_address = null;
+		int student_gender = 0;
+		String student_username = null;
+		String student_identitycard = null;
+		int status = 0;
+		
+		int start = 0;
+		int limit = 0;
 		if (obj[0] != null) {  student_id = Integer.parseInt(obj[0].toString()); }
+		if (obj[1] != null) {  student_firstname = obj[1].toString(); }
+		if (obj[2] != null) {  student_middlename = obj[2].toString(); }
+		if (obj[3] != null) {  student_lastname = obj[3].toString(); }
+		if (obj[4] != null) {  student_email = obj[4].toString(); }
+		if (obj[5] != null) {  student_phone = Integer.parseInt(obj[5].toString()); }
+		if (obj[6] != null) {  student_address = obj[6].toString(); }
+		if (obj[7] != null) {  student_gender = Integer.parseInt(obj[7].toString()); }
+		if (obj[8] != null) {  student_username = obj[8].toString(); }
+		if (obj[9] != null) {  student_identitycard = obj[9].toString(); }
+		if (obj[10] != null) {  status = Integer.parseInt(obj[10].toString()); }
+		if (obj[11] != null) {  start = Integer.parseInt(obj[11].toString()); }
+		if (obj[12] != null) {  limit = Integer.parseInt(obj[12].toString()); }
+		
 		try {
 			 StringBuilder query = new StringBuilder("SELECT * FROM student WHERE 1=1");
 		        
 				if (student_id != 0) {
 		            query.append(" AND student_id = ?");
 		            parameters.add(student_id);
+		        }
+				if (student_firstname != null) {
+		            query.append(" AND student_firstname = ?");
+		            parameters.add(student_firstname);
+		        }
+				if (student_middlename != null) {
+		            query.append(" AND student_middlename = ?");
+		            parameters.add(student_middlename);
+		        }
+				if (student_lastname != null) {
+		            query.append(" AND student_lastname = ?");
+		            parameters.add(student_lastname);
+		        }
+				if (student_email != null) {
+		            query.append(" AND student_email = ?");
+		            parameters.add(student_email);
+		        }
+				if (student_phone != 0) {
+		            query.append(" AND student_phone = ?");
+		            parameters.add(student_phone);
+		        }
+				if (student_address != null) {
+		            query.append(" AND student_address = ?");
+		            parameters.add(student_address);
+		        }
+				if (student_gender != 0) {
+		            query.append(" AND student_gender = ?");
+		            parameters.add(student_gender);
+		        }
+				if (student_username != null) {
+		            query.append(" AND student_username = ?");
+		            parameters.add(student_username);
+		        }
+				if (student_identitycard != null) {
+		            query.append(" AND student_identitycard = ?");
+		            parameters.add(student_identitycard);
+		        }
+				if (status != 0) {
+		            query.append(" AND status = ?");
+		            parameters.add(status);
+		        }
+				if (start != 0) {
+		            query.append(" AND start = ?");
+		            parameters.add(start);
+		        }
+				if (limit != 0) {
+		            query.append(" AND limit = ?");
+		            parameters.add(limit);
 		        }
 			Connection connection = DatabaseConnection.connectToDatabase();
 			
