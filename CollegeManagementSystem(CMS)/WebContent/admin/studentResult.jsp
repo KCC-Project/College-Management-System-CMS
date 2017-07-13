@@ -124,7 +124,7 @@
 									</select>
 								</div>
 
-
+								<!--Pass fail  -->
 								<div class="form-group col-sm-6" id="fass-fail-semester" hidden>
 									<select class="form-control" id="batch-box2" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
@@ -146,28 +146,7 @@
 									</select>
 								</div>
 
-
-								<div class="form-group col-sm-6" id="exam_type-semester" hidden>
-									<select class="form-control" id="batch-box3" name="batch_id">
-										<option value="" disabled selected>Select Batch</option>
-									</select> <select required class="form-control" id="Semester_box3"
-										name="Semester_box">
-										<option value="" disabled selected>Select Semester</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-									</select> <select required class="form-control"
-										id="exam_type_semester_box" name="exam_type_semester_box">
-										<option value="" disabled selected>Select Exam Type</option>
-									</select>
-								</div>
-
-
+								<!--subject  -->
 								<div class="form-group col-sm-6" id="subject-semester" hidden>
 									<select class="form-control" id="batch-box4" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
@@ -188,12 +167,12 @@
 									</select>
 								</div>
 
-
+								<!-- Name email id marks -->
 								<div class="form-group col-sm-6" id="name-email-marks" hidden>
 									<select class="form-control" id="batch-box5" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
 									</select> <select required class="form-control" id="Semester_box5"
-										name="Semester_box">
+										name="Semester_box" onclick="load_exam_type();">
 										<option value="" disabled selected>Select Semester</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -203,6 +182,9 @@
 										<option value="6">6</option>
 										<option value="7">7</option>
 										<option value="8">8</option>
+									</select> <select required class="form-control" id="examType-box5"
+										name="examType_id5">
+										<option value="" disabled selected>Select Exam Type</option>
 									</select> <input type="text" class="form-control"
 										name="searchedEnteredField" id="searchedEnteredField"
 										placeholder="Enter Name/Email/Marks/ID">
@@ -262,9 +244,6 @@
 											</tr>
 										<tbody id="result_data">
 										</tbody>
-
-
-
 									</table>
 								</div>
 								<div class="loader" id="loader" hidden style="margin-left: 40%;"></div>
@@ -321,32 +300,51 @@
 
 	function loadResult() {
 		var searchFilter = document.getElementById("searchIteam").value;
-		//	alert("searchFilter=" + searchFilter);
+		alert("searchFilter=" + searchFilter);
+
 		if (searchFilter === 'Batch') {
-			loadResultByBatch();
+			var facultyId = document.getElementById("p-faculty-box").value;
+			var programId = document.getElementById("p-program-box").value;
+			var batchNo = document.getElementById("batch-box1").value;
+			var semesterNo = document.getElementById("Semester_box1").value;
+			var examTypeId = document.getElementById("examType-box").value;
+
+			var send = "&programId=" + programId + "&batchNo=" + batchNo
+					+ "&semesterNo=" + semesterNo + "&facultyId=" + facultyId
+					+ "&examTypeId=" + examTypeId;
+
+			var url = "../ajax_result_load_by_Batch";
+			var arr = [ url, send ];
+			loadResults(arr);
+		} else if (searchFilter === 'Name' || searchFilter === 'Id'
+				|| searchFilter === 'Email' || searchFilter === 'Marks') {
+
+			var facultyId = document.getElementById("p-faculty-box").value;
+			var programId = document.getElementById("p-program-box").value;
+			var batchNo = document.getElementById("batch-box5").value;
+			var semesterNo = document.getElementById("Semester_box5").value;
+			var examTypeId = document.getElementById("examType-box5").value;
+			var enterField = document.getElementById("searchedEnteredField").value;
+			var send = "&programId=" + programId + "&batchNo=" + batchNo
+					+ "&semesterNo=" + semesterNo + "&facultyId=" + facultyId
+					+ "&examTypeId=" + examTypeId+"&enterField="+enterField;
+			var url = "../ajax_result_load_by_nameEmailMarksId";
+			var arr = [ url, send ];
+			loadResults(arr);
 		}
 	}
-	function loadResultByBatch() {
+	function loadResults(arr) {
+
 		var table = document.getElementById("tblResult");
 		var tableHeaderRowCount = 1;
 		var rowCount = table.rows.length;
-		//alert(rowCount);
 		for (var i = tableHeaderRowCount; i < rowCount; i++) {
 			table.deleteRow(tableHeaderRowCount);
 		}
 		document.getElementById("loader").hidden = false;
-		var facultyId = document.getElementById("p-faculty-box").value;
-		var programId = document.getElementById("p-program-box").value;
-		var batchNo = document.getElementById("batch-box1").value;
-		var semesterNo = document.getElementById("Semester_box1").value;
-		var examTypeId = document.getElementById("examType-box").value;
-		alert("examTypeId=" + examTypeId);
-		var send = "&programId=" + programId + "&batchNo=" + batchNo
-				+ "&semesterNo=" + semesterNo + "&facultyId=" + facultyId
-				+ "&examTypeId=" + examTypeId;
-		var url = "../ajax_result_load_by_Batch";
+
 		var aj = new XMLHttpRequest();
-		aj.open("POST", url, true);
+		aj.open("POST", arr[0], true);
 		aj
 				.setRequestHeader("Content-type",
 						"application/x-www-form-urlencoded");
@@ -354,9 +352,6 @@
 			if (aj.readyState == 4 && aj.status == 200) {
 				document.getElementById("loader").hidden = true;
 				var jSonObject = eval('(' + aj.responseText + ')');
-
-				
-				
 				var content = '';
 				for (var i = 0; i < jSonObject.length; i++) {
 					content += '<tr>';
@@ -380,18 +375,14 @@
 						content += '	<td ><span class="btn btn-sm btn-warning student_passFail " data-name="student_passFail" data-type="select"   data-pk="'+1+'"> </i> &nbsp;&nbsp;Pass &nbsp;</span></td>';
 
 					}
-					content += '<td   class="program" data-name="program" data-type="select"  ><button type="button" class="btn btn-info">'+ jSonObject[i].ProgramName+ '</button></td>';
+					content += '<td   class="program" data-name="program" data-type="select"  ><button type="button" class="btn btn-info">'
+							+ jSonObject[i].ProgramName + '</button></td>';
 					content += '<tr>';
 				}
 				$("#result_data").html(content);
-				
-				
-				
-				
-				
 			}
 		}
-		aj.send(send);
+		aj.send(arr[1]);
 	}
 
 	function load_faculty() {
@@ -500,9 +491,6 @@
 			if (aj.readyState == 4 && aj.status == 200) {
 				var return_data = aj.responseText;
 				document.getElementById("batch-box1").innerHTML = return_data;
-				document.getElementById("batch-box2").innerHTML = return_data;
-				document.getElementById("batch-box3").innerHTML = return_data;
-				document.getElementById("batch-box4").innerHTML = return_data;
 				document.getElementById("batch-box5").innerHTML = return_data;
 			}
 		}
@@ -520,8 +508,8 @@
 			if (aj.readyState == 4 && aj.status == 200) {
 				var return_data = aj.responseText;
 
+				document.getElementById("examType-box5").innerHTML = return_data;
 				document.getElementById("examType-box").innerHTML = return_data;
-				document.getElementById("examType-boxx").innerHTML = return_data;
 
 			}
 		}
