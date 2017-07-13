@@ -74,7 +74,7 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 			List<StudentSemesterModel> modelSemStudent = inter.searchByFields(obj1);
 			System.out.println("size of student_semester=" + modelSemStudent.size());
 			for (StudentSemesterModel studentSemesterModel : modelSemStudent) {
-				Object[] obj11 = new Object[10];
+				Object[] obj11 = new Object[15];
 				obj11[0] = studentSemesterModel.getStudent_id();
 				StudentServiceInterface studentInter = new StudentServiceImpl();
 				List<StudentModel> stModel = studentInter.searchByField(obj11);
@@ -82,6 +82,7 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 					ExamInfoModelServiceInterface examInfoModel = new ExamInfoModelServiceImpl();
 					Object[] obj111 = new Object[10];
 					obj111[2] = examTypeId;
+					obj111[8]=semesterNo;
 					List<ExamInfoModel> examInfo = examInfoModel.searchByField(obj111);
 					System.out.println("examInfo table size="+examInfo.size());
 					for (ExamInfoModel examInfoModel2 : examInfo) {

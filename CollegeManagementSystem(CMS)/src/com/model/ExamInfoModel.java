@@ -17,6 +17,7 @@ public class ExamInfoModel {
 
 	private int fullmarks;
 	private int passmarks;
+	private int semester_id;
 	private int status;
 	public ExamInfoModel() {
 		super();
@@ -24,7 +25,7 @@ public class ExamInfoModel {
 	}
 	public ExamInfoModel(int examId, String subjectName, int subjectId, int examTypeId, String examTypeName,
 			Date examStartDate, Date examEndDate, String examStartTime, String examEndTime, int fullmarks,
-			int passmarks, int status) {
+			int passmarks, int semester_id, int status) {
 		super();
 		this.examId = examId;
 		this.subjectName = subjectName;
@@ -37,6 +38,7 @@ public class ExamInfoModel {
 		this.examEndTime = examEndTime;
 		this.fullmarks = fullmarks;
 		this.passmarks = passmarks;
+		this.semester_id = semester_id;
 		this.status = status;
 	}
 	public int getExamId() {
@@ -108,6 +110,13 @@ public class ExamInfoModel {
 	public int getStatus() {
 		return status;
 	}
+	
+	public int getSemester_id() {
+		return semester_id;
+	}
+	public void setSemester_id(int semester_id) {
+		this.semester_id = semester_id;
+	}
 	public void setStatus(int status) {
 		this.status = status;
 	}
@@ -116,8 +125,10 @@ public class ExamInfoModel {
 		return "ExamInfoModel [examId=" + examId + ", subjectName=" + subjectName + ", subjectId=" + subjectId
 				+ ", examTypeId=" + examTypeId + ", examTypeName=" + examTypeName + ", examStartDate=" + examStartDate
 				+ ", examEndDate=" + examEndDate + ", examStartTime=" + examStartTime + ", examEndTime=" + examEndTime
-				+ ", fullmarks=" + fullmarks + ", passmarks=" + passmarks + ", status=" + status + "]";
+				+ ", fullmarks=" + fullmarks + ", passmarks=" + passmarks + ", semester_id=" + semester_id + ", status="
+				+ status + "]";
 	}
+	
 	
 	
 }

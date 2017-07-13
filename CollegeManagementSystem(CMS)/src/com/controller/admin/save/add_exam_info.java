@@ -28,6 +28,9 @@ public class add_exam_info extends HttpServlet {
 		String examFullmarks=request.getParameter("exam_fullMarks");
 		String examPassmarks=request.getParameter("exam_passMarks");
 		String examStatus=request.getParameter("status");
+		int semesterNo = Integer.parseInt(request.getParameter("Semester_box1"));
+		
+		System.out.println("semester id from add exam innfo="+semesterNo);
 		
 		if (subject.equalsIgnoreCase("")||examTypeId.equalsIgnoreCase("")||examStartdate.equalsIgnoreCase("")||examenddate.equalsIgnoreCase("")||examStartTime.equalsIgnoreCase("")||examEndTime.equalsIgnoreCase("")||examStatus.equalsIgnoreCase("")) {
 			response.sendRedirect("admin/manageExamInfo.jsp?error=addExamInfo");
@@ -37,6 +40,7 @@ public class add_exam_info extends HttpServlet {
 			int examId=Integer.parseInt(examTypeId);
 			ExamInfoModel model= new ExamInfoModel();
 			model.setSubjectId(subId);
+			model.setSemester_id(semesterNo);
 			model.setExamTypeId(examId);
 			model.setExamStartDate(DateUtil.convertToDate(examStartdate));
 			model.setExamEndDate(DateUtil.convertToDate(examenddate));

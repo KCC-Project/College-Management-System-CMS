@@ -45,7 +45,8 @@ public class ajax_result_load_by_nameEmailMarksId extends HttpServlet {
 		int examTypeId = Integer.parseInt(request.getParameter("examTypeId"));
 		String nameIdEmailMarks = request.getParameter("enterField");
 		System.out.println("sub=" + nameIdEmailMarks.substring(0, 2));
-
+String identityCard=nameIdEmailMarks.substring(0, 2);
+System.out.println("ID==="+identityCard);
 		int spaceCount = 0;
 		for (char c : nameIdEmailMarks.trim().toCharArray()) {
 			if (c == ' ') {
@@ -100,19 +101,22 @@ public class ajax_result_load_by_nameEmailMarksId extends HttpServlet {
 			boolean isValidEmail = isValidEmailAddress(nameIdEmailMarks);
 			System.out.println(isValidEmail);
 			for (StudentSemesterModel studentSemesterModel : modelSemStudent) {
-				Object[] obj11 = new Object[10];
+				Object[] obj11 = new Object[15];
 				obj11[0] = studentSemesterModel.getStudent_id();
 				if (isValidEmail == true) {
-					obj11[6] = nameIdEmailMarks;
+					obj11[4] = nameIdEmailMarks.trim();
 					System.out.println("Inside emxail");
-				} else if (nameIdEmailMarks.substring(0, 2).equalsIgnoreCase("ID")) {
-					obj11[11] = nameIdEmailMarks;
+				} else if (identityCard.equalsIgnoreCase("ID")) {
+					obj11[9] = nameIdEmailMarks.trim();
+					System.out.println("By id");
 				} else {
-					obj11[3] = firstName;
-					obj11[4] = middleName;
-					obj11[5] = lastName;
+					obj11[1] = firstName.trim();
+					obj11[2] = middleName.trim();
+					obj11[3] = lastName.trim();
 					System.out.println("Inside first middle last name");
 				}
+				System.out.println("student iD="+studentSemesterModel.getStudent_id());
+				System.out.println("enter ID="+obj11[9].toString());
 				StudentServiceInterface studentInter = new StudentServiceImpl();
 				List<StudentModel> stModel = studentInter.searchByField(obj11);
 				System.out.println("student Table size="+stModel.size());
@@ -121,6 +125,7 @@ public class ajax_result_load_by_nameEmailMarksId extends HttpServlet {
 					ExamInfoModelServiceInterface examInfoModel = new ExamInfoModelServiceImpl();
 					Object[] obj111 = new Object[10];
 					obj111[2] = examTypeId;
+					obj111[8]=semesterNo;
 					System.out.println("selected student name="+studentModel.getFirstname());
 					List<ExamInfoModel> examInfo = examInfoModel.searchByField(obj111);
 					System.out.println("examInfo table size="+examInfo.size());
@@ -152,6 +157,11 @@ public class ajax_result_load_by_nameEmailMarksId extends HttpServlet {
 
 			}
 		}
+		response.setContentType("text/xml");
+		response.setHeader("Cache-Control", "no-cache");
+		String jsonString = JsonUtil.convertJavaToJson(tempList);
+		System.out.println("TempList=" + jsonString);
+		response.getWriter().write(jsonString);
 
 	}
 

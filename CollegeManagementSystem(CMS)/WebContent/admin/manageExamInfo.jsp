@@ -81,6 +81,7 @@
 												<td>S.No</td>
 												<td>Subject</td>
 												<td class="hidden-xs">Exam Type</td>
+												<td class="hidden-xs">Semester</td>
 												<td>Start Date</td>
 												<!-- <td class="hidden-xs">End Date</td> -->
 												<td class="hidden-xs">Start Time</td>
@@ -103,6 +104,7 @@
 												<td><%=i%>.</td>
 												<td><%=model.getSubjectName()%></td>
 												<td class="hidden-xs"><%=model.getExamTypeName()%></td>
+												<td class="hidden-xs"><%=model.getSemester_id()%></td>
 												<td><%=model.getExamStartDate()%></td>
 												<%-- <td class="hidden-xs"><%=model.getExamEndDate()%></td> --%>
 												<td class="hidden-xs"><%=model.getExamStartTime()%></td>
@@ -111,30 +113,23 @@
 												<td class="hidden-xs"><%=model.getPassmarks()%></td>
 												<td class="hidden-xs"><%=model.getStatus()%></td>
 
-												<td><span class="btn btn-sm btn-info  hidden-xs hidden-sm">
-														<i class="fa fa-users"></i> BE-computer &nbsp; <span
+												<td><span
+													class="btn btn-sm btn-info  hidden-xs hidden-sm"> <i
+														class="fa fa-users"></i> BE-computer &nbsp; <span
 														class="badge"> 5 </span>
-												</span> 
-												
-												<a href="#?id=<%=model.getExamId()%>"
-													class="btn-sm btn btn-default hidden-lg hidden-md hidden-sm visible-xs" title="View Exam Details"
-													"
+												</span> <a href="#?id=<%=model.getExamId()%>"
+													class="btn-sm btn btn-default hidden-lg hidden-md hidden-sm visible-xs"
+													title="View Exam Details" "
 											data-toggle="modal"
 													data-target=#viewExamDetail
 													onclick="viewExamDetailsOriginal('<%=model.getExamId()%>');"
-													id="viewExamDetails"><i class="fa fa-eye"></i></a> 
-													
-													
-													<a
+													id="viewExamDetails"><i class="fa fa-eye"></i></a> <a
 													onclick="loadUpdate();viewExamDetails('<%=model.getExamId()%>');"
 													class="btn-sm btn btn-default"
 													href="#?id=<%=model.getExamId()%>" data-toggle="modal"
 													data-target=#mad id="updateExamDetail"
 													title="Edit Course Details"><i
-														class="fa fa-pencil-square-o"></i></a>
-														
-														
-														 <a
+														class="fa fa-pencil-square-o"></i></a> <a
 													onclick="viewExamDetails('<%=model.getExamId()%>'); "
 													href="#?id=<%=model.getExamId()%>"
 													class="btn-sm btn btn-default" data-toggle="modal"
@@ -190,6 +185,22 @@
 								</select>
 							</div>
 
+							<div class="form-group">
+								<label>Select Semester: <span class="astriek">*</span></label> 
+								<select required class="form-control" id="Semester_box1"
+										name="Semester_box1" >
+										<option value="" disabled selected>Select Semester</option>
+										
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+									</select> 
+							</div>
 
 							<div class="form-group">
 								<label>Exam Date: </label> <input type="date"
@@ -499,7 +510,7 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var jSonObject = eval('(' + aj.responseText + ')');
-				alert("form mausam="+jSonObject.subjectName);
+				alert("form mausam=" + jSonObject.subjectName);
 				document.getElementById("subjectJsonXXX").innerHTML = jSonObject.subjectName;
 				document.getElementById("examTypeJsonXXX").innerHTML = jSonObject.examTypeName;
 
@@ -529,7 +540,7 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var jSonObject = eval('(' + aj.responseText + ')');
-				
+
 				document.getElementById("exam_start_datee").value = jSonObject[0].examStartDate;
 				document.getElementById("exam_end_datee").value = jSonObject[0].examEndDate;
 				document.getElementById("exam_start_timee").value = jSonObject[0].examStartTime;

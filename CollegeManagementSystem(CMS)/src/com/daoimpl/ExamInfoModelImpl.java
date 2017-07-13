@@ -27,7 +27,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 	public boolean saveExamInfo(ExamInfoModel model) {
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "insert into exam(subject_id,exam_type_id,exam_date,exam_end_date,exam_starttime,exam_endtime,full_marks,pass_marks,status) values(?,?,?,?,?,?,?,?,?)";
+			sql = "insert into exam(subject_id,exam_type_id,exam_date,exam_end_date,exam_starttime,exam_endtime,full_marks,pass_marks,semester_id,status) values(?,?,?,?,?,?,?,?,?,?)";
 			pst = conn.prepareStatement(sql);
 			int col = 1;
 			pst.setInt(col++, model.getSubjectId());
@@ -46,6 +46,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 			pst.setString(col++, model.getExamStartTime());
 			pst.setInt(col++, model.getFullmarks());
 			pst.setInt(col++, model.getPassmarks());
+			pst.setInt(col++, model.getSemester_id());
 			pst.setInt(col++, model.getStatus());
 			int count = pst.executeUpdate();
 			if (count > 0) {
@@ -85,6 +86,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 				model.setExamEndTime(rs.getString("exam_endtime"));
 				model.setFullmarks(rs.getInt("full_marks"));
 				model.setPassmarks(rs.getInt("pass_marks"));
+				model.setSemester_id(rs.getInt("semester_id"));
 				model.setStatus(rs.getInt("status"));
 				model.setExamId(rs.getInt("exam_id"));
 			int id1=rs.getInt("exam_type_id");
@@ -120,7 +122,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 	public boolean updateExamInfo(ExamInfoModel model) {
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "update  exam set subject_id=?,exam_type_id=?,exam_date=?,exam_end_date=?,exam_starttime=?,exam_endtime=?,full_marks=?,pass_marks=?,status=? where exam_id=?";
+			sql = "update  exam set subject_id=?,exam_type_id=?,exam_date=?,exam_end_date=?,exam_starttime=?,exam_endtime=?,full_marks=?,pass_marks=?,semester_id=?,status=? where exam_id=?";
 			pst = conn.prepareStatement(sql);
 			int col = 1;
 			pst.setInt(col++, model.getSubjectId());
@@ -137,6 +139,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 			pst.setString(col++, model.getExamEndTime());
 			pst.setInt(col++, model.getFullmarks());
 			pst.setInt(col++, model.getPassmarks());
+			pst.setInt(col++, model.getSemester_id());
 			pst.setInt(col++, model.getStatus());
 			pst.setInt(col++, model.getExamId());
 			int count = pst.executeUpdate();
@@ -195,6 +198,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 		String exam_endtime = null;
 		int full_marks = 0;
 		int pass_marks = 0;
+		int semester_id = 0;
 		int status = 5;
 		
 		int start = 0;
@@ -211,11 +215,12 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 		if (obj[5] != null) {  exam_endtime = obj[5].toString(); }
 		if (obj[6] != null) {  full_marks = Integer.parseInt(obj[6].toString()); }
 		if (obj[7] != null) {  pass_marks = Integer.parseInt(obj[7].toString()); }
-		if (obj[8] != null) {  status = Integer.parseInt(obj[8].toString()); }
+		if (obj[8] != null) {  semester_id = Integer.parseInt(obj[8].toString()); }
+		if (obj[9] != null) {  status = Integer.parseInt(obj[9].toString()); }
 		
-		if (obj[9] != null && obj[10] != null) {  
-			start = Integer.parseInt(obj[9].toString()); 
-			limit = Integer.parseInt(obj[10].toString());
+		if (obj[10] != null && obj[11] != null) {  
+			start = Integer.parseInt(obj[10].toString()); 
+			limit = Integer.parseInt(obj[11].toString());
 		}
 		
 		try {
@@ -248,6 +253,10 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 	        if (pass_marks != 0) {
 	            query.append(" AND pass_marks = ?");
 	            parameters.add(pass_marks);
+	        }
+	        if (semester_id != 0) {
+	            query.append(" AND semester_id = ?");
+	            parameters.add(semester_id);
 	        }
 	        if (status != 5) {
 	            query.append(" AND status = ?");
@@ -283,6 +292,7 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 	        		examModel.setExamEndTime(rs.getString("exam_endtime"));
 	        		examModel.setFullmarks(rs.getInt("full_marks"));
 	        		examModel.setPassmarks(rs.getInt("pass_marks"));
+	        		examModel.setSemester_id(rs.getInt("semester_id"));
 	        		examModel.setStatus(rs.getInt("status"));
 	        		examModel.setExamId(rs.getInt("exam_id"));
 					int id1=rs.getInt("exam_type_id");

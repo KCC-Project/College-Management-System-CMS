@@ -94,9 +94,7 @@
 										<option value="Batch">Batch</option>
 										<option value="Id">Id</option>
 										<option value="Email">Email</option>
-										<option value="Marks">Marks</option>
 										<option value="Pass/Fail">Pass/Fail</option>
-										<option value="Exam Type">Exam Type</option>
 										<option value="Subject">Subject</option>
 									</select>
 								</div>
@@ -187,7 +185,7 @@
 										<option value="" disabled selected>Select Exam Type</option>
 									</select> <input type="text" class="form-control"
 										name="searchedEnteredField" id="searchedEnteredField"
-										placeholder="Enter Name/Email/Marks/ID">
+										placeholder="Enter Name/Email/ID">
 								</div>
 
 							</div>
@@ -238,6 +236,7 @@
 												<td>Subject</td>
 												<td class="hidden-xs">Exam Type</td>
 												<td class="hidden-xs">FullMarks</td>
+													<td class="hidden-xs">PassMarks</td>
 												<td class="hidden-xs">Scored</td>
 												<td>Pass/Fail</td>
 												<td class="hidden-xs">Program</td>
@@ -317,7 +316,7 @@
 			var arr = [ url, send ];
 			loadResults(arr);
 		} else if (searchFilter === 'Name' || searchFilter === 'Id'
-				|| searchFilter === 'Email' || searchFilter === 'Marks') {
+				|| searchFilter === 'Email') {
 
 			var facultyId = document.getElementById("p-faculty-box").value;
 			var programId = document.getElementById("p-program-box").value;
@@ -352,6 +351,7 @@
 			if (aj.readyState == 4 && aj.status == 200) {
 				document.getElementById("loader").hidden = true;
 				var jSonObject = eval('(' + aj.responseText + ')');
+				alert(jSonObject);
 				var content = '';
 				for (var i = 0; i < jSonObject.length; i++) {
 					content += '<tr>';
@@ -365,7 +365,9 @@
 							+ jSonObject[i].ExamType + '</td>';
 					content += '<td  class="student_fullMarks">'
 							+ jSonObject[i].FullMarks + '</td>';
-					content += '<td  class="student_passmarks">'
+							content += '<td  class="student_passMarks">'
+								+ jSonObject[i].passMarks + '</td>';
+					content += '<td  class="student_scoredmarks">'
 							+ jSonObject[i].ScoredMarks + '</td>';
 					var passFailStatus = jSonObject[i].PassFailStatus;
 					if (passFailStatus === 0) {
@@ -437,7 +439,7 @@
 	function searcheOption() {
 		var searchedOption = document.getElementById("searchIteam").value;
 		if (searchedOption === "Name" || searchedOption === "Id"
-				|| searchedOption === "Email" || searchedOption === "Marks") {
+				|| searchedOption === "Email" ) {
 			document.getElementById("name-email-marks").hidden = false;
 			load_batch_year();
 			document.getElementById("semester-batch").hidden = true;
@@ -460,15 +462,7 @@
 			document.getElementById("exam_type-semester").hidden = true;
 			document.getElementById("subject-semester").hidden = true;
 
-		} else if (searchedOption === "Exam Type") {
-			document.getElementById("exam_type-semester").hidden = false;
-			load_batch_year();
-			document.getElementById("name-email-marks").hidden = true;
-			document.getElementById("semester-batch").hidden = true;
-			document.getElementById("fass-fail-semester").hidden = true;
-			document.getElementById("subject-semester").hidden = true;
-
-		} else if (searchedOption === "Subject") {
+		}else if (searchedOption === "Subject") {
 			document.getElementById("subject-semester").hidden = false;
 			load_batch_year();
 			document.getElementById("name-email-marks").hidden = true;
