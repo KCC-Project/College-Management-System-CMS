@@ -225,10 +225,10 @@ public class StudentModelImpl implements StudentModelInterface {
 		String student_email = null;
 		int student_phone = 0;
 		String student_address = null;
-		int student_gender = 0;
+		int student_gender = 5;
 		String student_username = null;
 		String student_identitycard = null;
-		int status = 0;
+		int status = 5;
 		
 		int start = 0;
 		int limit = 0;
@@ -277,7 +277,7 @@ public class StudentModelImpl implements StudentModelInterface {
 		            query.append(" AND student_address = ?");
 		            parameters.add(student_address);
 		        }
-				if (student_gender != 0) {
+				if (student_gender != 5) {
 		            query.append(" AND student_gender = ?");
 		            parameters.add(student_gender);
 		        }
@@ -289,7 +289,7 @@ public class StudentModelImpl implements StudentModelInterface {
 		            query.append(" AND student_identitycard = ?");
 		            parameters.add(student_identitycard);
 		        }
-				if (status != 0) {
+				if (status != 5) {
 		            query.append(" AND status = ?");
 		            parameters.add(status);
 		        }
