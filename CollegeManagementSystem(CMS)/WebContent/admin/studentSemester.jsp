@@ -21,7 +21,7 @@
 
        <ol class="breadcrumb">
         <li><a href="admin-dashboard.jsp"><span class="glyphicon glyphicon-home"> Home</span></a></li>
-        <li><a><span class="glyphicon glyphicon-education black"> Semester</span></a></li>
+        <li><a><span class="glyphicon glyphicon-education black"> Student Semester</span></a></li>
       </ol>
 
 		<!-- ============= Main title content ============= -->
@@ -30,11 +30,11 @@
 					<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
 
 						<button type="button" class="btn btn-info pull-right"
-							data-toggle="modal" data-target=#add_semester_modal id="modal-box" >Add
+							data-toggle="modal" data-target=#add_student_semester id="modal-box" onClick="load_faculty(event);">Add
 							Semester
 						</button>
 						<button type="button" class="btn btn-info pull-left" style="margin-left: -20px;"
-							data-toggle="modal" data-target=#search_semester_modal id="search-box" >
+							data-toggle="modal" data-target=#search_student_semester id="search-box" >
 							<span class="glyphicon glyphicon-search"> Filter </span>
 						</button>
 					</h3>
@@ -43,40 +43,58 @@
 			</div>
 			<!-- ============ main title content ends here ============= -->
 			
-			<!-- Semester Delete modal -->
-	<div class="modal fade" id="search_semester_modal" role="dialog">
-			<div class="modal-dialog">
-
-				<!-- Modal content-->
-				<div class="modal-content">
-						<div class="modal-body">
-					    	<div id="faculty">
-					    		<div class="row">
-					    			<div class="col-sm-6">
-									    <label>Faculty: <span class="astriek">*</span></label>
-									    <select required class="form-control" id="p-faculty-box" name="faculty_id" >
-											
-										</select>
-								  	</div>
-									  <div class="col-sm-6">
-									    <label>Programme: <span class="astriek">*</span></label>
-									    <select required class="form-control" id="p-program-box" name="program_id">
-											<option value="" disabled selected>Select Programme</option>
-										</select>
-									  </div>
-					    		</div>
-					    	</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							 <button class="btn btn-success" id="go">Go</button>
-						</div>
+	<!-- Search Modal Modal -->
+	<div id="search_student_semester" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Filter</h4>
+	      </div>
+	      <div class="modal-body">
+	        <div class="row">
+    			<div  class="col-sm-6 form-group">
+    				<label>Student id: <span class="astriek">*</span></label>
+					<input type="number" class="form-control" placeholder="search student by Id" name="st_search" id="st_search">
 				</div>
-
 			</div>
+			<div class="row">
+				<div  class="col-sm-4 form-group">
+					<label>Program Name: <span class="astriek">*</span></label>
+					<input type="text" class="form-control" placeholder="search by program" name="pr_search" id="pr_search">
+				</div>
+				<div  class="col-sm-4 form-group">
+					<label>Batch Year: <span class="astriek">*</span></label>
+					<input type="text" class="form-control" placeholder="Batch Year" name="ba_search" id="ba_search">
+				</div>
+				<div  class="col-sm-4 form-group">
+					<label>Semester no: <span class="astriek">*</span></label>
+					<input type="text" class="form-control" placeholder="Semester" name="se_search" id="se_search">
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-6">
+					<label>Class Name:</label>
+					<input type="text" class="form-control" placeholder="search by Class Name" name="cl_search" id="cl_search">
+				</div>
+				<div class="form-group col-sm-6">
+				  	<label>Semester Status</label>
+				  	<input type="radio" name="s-completed" value="1">Completed
+					<input type="radio" name="s-completed" value="0">OnGoing
+				</div>
+  			</div>
 		</div>
-	<!-- Semester Delete modal ends here -->
-    	
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							 <button class="btn btn-success" id="Search">Search</button>
+	      </div>
+	    </div>
+	
+	  </div>
+	</div>
+	<!-- Search Modal ends here -->
     	
 		
 		<div class="box-body " style="margin-bottom: 4px;">
@@ -90,12 +108,10 @@
 										<thead>
 											<tr>
 												<th><input type="checkbox" id="checkall" /></th>
+												<th>student_id</th>
 												<th>semester_id</th>
-												<th>semester_no</th>
-												<th>program_id</th>
-												<th>batch_year_id</th>
-												<th>sem_start_date</th>
-												<th>sem_end_date</th>
+												<th>is_completed</th>
+												<th>class_id</th>
 												<th>status</th>
 												<th colspan="2">Options</th>
 
@@ -124,18 +140,19 @@
 </div>
 
 	<!-- Semester Modal starts here -->
-		<div class="modal fade" id="add_semester_modal" role="dialog">
+		<div class="modal fade" id="add_student_semester" role="dialog">
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" id="modal-title">Add Semester</h4>
+						<h4 class="modal-title" id="modal-title">Student_Semester</h4>
 					</div>
-					<form action="../Semester_Add_Controller" enctype="multipart/form-data" method="Post">
+					<form action="../Add_Student_Semester" enctype="multipart/form-data" method="Post">
       <div class="modal-body">
-        
+        				
+						  
 						  <div class="form-group">
 						    <label>Faculty: <span class="astriek">*</span></label>
 						    <select required class="form-control" id="faculty-box" name="faculty_id">
@@ -159,15 +176,7 @@
 						    	<input type="number" id="sem-no" name="semester_no" required class="form-control" placeholder="Semester number">
 						  </div>
 						  <div class="form-group">
-						    <label>Semester Start Date: </label>
-						    	<input type="date" id="start_date" name="start_date" class="form-control" placeholder="yyyy/mm/dd">
-						  </div>
-						  <div class="form-group">
-						    <label>Semester End Date: </label>
-						    <input type="date" id="end_date" name="end_date" class="form-control" placeholder="yyyy/mm/dd">
-						  </div>
-						  <div class="form-group">
-						  	<label>Semester</label>
+						  	<label>Semester Status</label>
 						  	<input type="radio" name="status" required checked value="1">Active
 							<input type="radio" name="status" value="0">Completed
 						</div>
@@ -282,61 +291,6 @@
 
 <script>
 
-window.addEventListener("load", function() {load_faculty(event); }, false)
-
-// event listener for modal-box, to load faculty
-var modalbtn = document.getElementById("modal-box");
-if (modalbtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	//modalbtn.addEventListener("click", load_program(event));
-	modalbtn.addEventListener("click", function(){load_faculty(event)}, false);
-} else if (modalbtn.attachEvent) {                  // For IE 8 and earlier versions
-	modalbtn.attachEvent("onclick", load_faculty(event));
-}
-
-// event listener for p-faculty-box to load program of selected faculty
-var pfacultybtn = document.getElementById("p-faculty-box");
-if (pfacultybtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	pfacultybtn.addEventListener("change", function(){load_program(event)}, false);
-} else if (pfacultybtn.attachEvent) {                  // For IE 8 and earlier versions
-	pfacultybtn.attachEvent("onchange", load_program(event));
-}
-
-var facultybtn = document.getElementById("faculty-box");
-if (facultybtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	facultybtn.addEventListener("change", function(){load_program(event)}, false);
-} else if (facultybtn.attachEvent) {                  // For IE 8 and earlier versions
-	facultybtn.attachEvent("onchange", load_program(event));
-}
-
-var programbtn = document.getElementById("program-box");
-if (programbtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	programbtn.addEventListener("change", function(){load_batch_year(event)}, false);
-} else if (programbtn.attachEvent) {                  // For IE 8 and earlier versions
-	programbtn.attachEvent("onchange", load_batch_year(event));
-}
-
-var efacultybtn = document.getElementById("e-faculty-box");
-if (efacultybtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	efacultybtn.addEventListener("change", function(){load_program(event)}, false);
-} else if (efacultybtn.attachEvent) {                  // For IE 8 and earlier versions
-	efacultybtn.attachEvent("onchange", load_program(event));
-}
-
-var eprogrambtn = document.getElementById("e-program-box");
-if (eprogrambtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	eprogrambtn.addEventListener("change", function(){load_batch_year(event)}, false);
-} else if (eprogrambtn.attachEvent) {                  // For IE 8 and earlier versions
-	eprogrambtn.attachEvent("onchange", load_batch_year(event));
-}
-
-var gobtn = document.getElementById("go");
-if (gobtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	//gobtn.addEventListener("click", load_program(event));
-	gobtn.addEventListener("click", function(){load_semester()}, false);
-} else if (gobtn.attachEvent) {                  // For IE 8 and earlier versions
-	gobtn.attachEvent("onclick", load_semester());
-}
-	
 function load_faculty(e) {
 	var id=document.getElementById("faculty-box").value;
 	//alert("s"+e.target.id);
@@ -422,6 +376,25 @@ function load_batch_year(e) {
 	}
 	aj.send(idSend);
 }
+
+$('#st_search').click(function() {
+	var id = $('#st_search').val();
+	alert(id);
+	var url="../ajax_student_search";
+	var idSend="id="+id;
+	var aj=new XMLHttpRequest();
+	aj.open("POST", url, true);
+	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	
+	aj.onreadystatechange = function() {
+		if (aj.readyState == 4 && aj.status == 200) {
+			var json = eval('(' + aj.responseText + ')');
+		}
+	}
+	aj.send(idSend);
+});
+
+
 
 function load_semester(){
 	var id=document.getElementById("p-program-box").value;
