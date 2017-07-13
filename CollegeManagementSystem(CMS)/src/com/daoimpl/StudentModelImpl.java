@@ -230,6 +230,7 @@ public class StudentModelImpl implements StudentModelInterface {
 			Connection connection = DatabaseConnection.connectToDatabase();
 			
 			 String Query = query.toString();
+			    System.out.println("From student Model="+Query);
 		        conn = DatabaseConnection.connectToDatabase();
 		        pst = conn.prepareStatement(Query);
 
