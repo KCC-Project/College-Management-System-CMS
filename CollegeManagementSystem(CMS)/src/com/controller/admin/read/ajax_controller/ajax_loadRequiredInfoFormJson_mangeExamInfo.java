@@ -19,6 +19,7 @@ public class ajax_loadRequiredInfoFormJson_mangeExamInfo extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("value");
+		System.out.println("id="+id);
 		if (id.equalsIgnoreCase("")) {
 
 		}else{

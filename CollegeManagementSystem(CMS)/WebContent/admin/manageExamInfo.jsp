@@ -161,7 +161,7 @@
 		<!-- ============================================================================================================================ -->
 		<!-- Modal  Addd-->
 		<div id="add_exam_modal-info" class="modal fade" role="dialog">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 
 				<!-- Modal content-->
 				<div class="modal-content">
@@ -171,81 +171,129 @@
 					</div>
 					<form action="../add_exam_info" method="Post" id="formOfInfo">
 						<div class="modal-body">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="col-sm-3">
+										<div class="form-group " style="margin-bottom: 0px;">
+											<select required class="form-control" id="p-faculty-box"
+												name="faculty_id" onChange="load_program_add();">
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-sm-3" style="margin-bottom: 0px;">
 
-							<div class="form-group">
-								<label>Subject: <span class="astriek">*</span></label> <select
-									required class="form-control" id="subject-box"
-									name="subject_id"></select>
+										<select required class="form-control" id="p-program-box"
+											name="program_id" onchange="load_batch_year();">
+											<option value="" disabled selected>Select Programme</option>
+										</select>
+									</div>
+									<div class="form-group col-sm-3" style="margin-bottom: 0px;">
+										<select required class="form-control" name="batch_id"
+											id="batch-box">
+											<option value="" disabled selected>Select Batch</option>
+										</select>
+									</div>
+									<div class="form-group col-sm-3" id="semester-batch"
+										style="margin-bottom: 0px;">
+										<select required class="form-control" id="Semester_box"
+											name="Semester_box"
+											onchange="load_subject_add();getSemesterId();">
+											<option value="" disabled selected>Select Semester</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+										</select>
+									</div>
+								</div>
 							</div>
-							<div class="form-group">
-								<label>Exam Type: <span class="astriek">*</span></label> <select
-									required class="form-control" id="examType-box"
-									name="examType_id">
-									<option value="" disabled selected>Select Exam Type</option>
-								</select>
-							</div>
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-sm-12">
+									<div class="form-group col-sm-6">
+										<label>Subject: <span class="astriek">*</span></label> <select
+											required class="form-control" id="subject-box"
+											onclick="load_exam_type();" name="subject_id">
+											<option value="" disabled selected>Select Subject</option>
+										</select>
+									</div>
+									<div class="form-group col-sm-6">
+										<label>Exam Type: <span class="astriek">*</span></label> <select
+											required class="form-control" id="examType-box"
+											name="examType_id">
+											<option value="" disabled selected>Select Exam Type</option>
+										</select>
+									</div>
 
-							<div class="form-group">
-								<label>Select Semester: <span class="astriek">*</span></label> 
-								<select required class="form-control" id="Semester_box1"
-										name="Semester_box1" >
-										<option value="" disabled selected>Select Semester</option>
-										
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-									</select> 
-							</div>
-
-							<div class="form-group">
-								<label>Exam Date: </label> <input type="date"
-									id="exam_start_date" name="exam_start_date"
-									class="form-control" placeholder="yyyy/mm/dd">
-							</div>
-							<div class="form-group">
-								<label>Exam End Date: </label> <input type="date"
-									id="exam_end_date" name="exam_end_date" class="form-control"
-									placeholder="yyyy/mm/dd">
-							</div>
-
-
-							<div class="form-group">
-								<label>Exam Start Time: </label> <input type="time"
-									id="exam_start_time" name="exam_start_time"
-									class="form-control" placeholder="yyyy/mm/dd">
-							</div>
-							<div class="form-group">
-								<label>Exam End Time: </label> <input type="time"
-									id="exam_end_time" name="exam_end_time" class="form-control"
-									placeholder="yyyy/mm/dd">
-							</div>
-
-
-							<div class="form-group">
-								<label>Full Marks: </label> <input type="number"
-									id="exam_fullMarks" name="exam_fullMarks" class="form-control"
-									placeholder="Fullmarks">
-							</div>
-							<div class="form-group">
-								<label>Pass Marks: </label> <input type="number"
-									id="exam_passMarks" name="exam_passMarks" class="form-control"
-									placeholder="Passmarks">
+								</div>
 							</div>
 
-							<div class="form-group">
-								<label>Status :</label> <input type="radio" name="status"
-									required checked value="1">Active <input type="radio"
-									name="status" value="0">Completed
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-sm-12">
+
+									<div class="form-group col-sm-6">
+										<label>Exam Date: </label> <input type="date"
+											id="exam_start_date" name="exam_start_date"
+											class="form-control" placeholder="yyyy/mm/dd">
+									</div>
+									<div class="form-group col-sm-6">
+										<label>Exam End Date: </label> <input type="date"
+											id="exam_end_date" name="exam_end_date" class="form-control"
+											placeholder="yyyy/mm/dd">
+									</div>
+								</div>
 							</div>
+
+
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-sm-12">
+									<div class="form-group col-sm-6">
+										<label>Exam Start Time: </label> <input type="time"
+											id="exam_start_time" name="exam_start_time"
+											class="form-control" placeholder="yyyy/mm/dd">
+									</div>
+									<div class="form-group col-sm-6">
+										<label>Exam End Time: </label> <input type="time"
+											id="exam_end_time" name="exam_end_time" class="form-control"
+											placeholder="yyyy/mm/dd">
+									</div>
+
+								</div>
+							</div>
+
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-sm-12">
+									<div class="form-group col-sm-6">
+										<label>Full Marks: </label> <input type="number"
+											id="exam_fullMarks" name="exam_fullMarks"
+											class="form-control" placeholder="Fullmarks">
+									</div>
+									<div class="form-group col-sm-6">
+										<label>Pass Marks: </label> <input type="number"
+											id="exam_passMarks" name="exam_passMarks"
+											class="form-control" placeholder="Passmarks">
+									</div>
+								</div>
+							</div>
+
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-sm-12">
+									<div class="form-group col-sm-6">
+										<label>Status :</label> <input type="radio" name="status"
+											required checked value="1">Active <input type="radio"
+											name="status" value="0">Completed
+									</div>
+								</div>
+							</div>
+
 
 						</div>
 						<div class="modal-footer">
-
+							<input type="hidden" id="SemesterIdPrimary"
+								name="SemesterIdPrimary">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit" class="btn btn-success">Submit</button>
@@ -260,7 +308,7 @@
 		<!-- ==================================================================================== -->
 		<!-- Update -->
 		<div id="mad" class="modal fade" role="dialog">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 
 				<!-- Modal content-->
 				<div class="modal-content">
@@ -270,62 +318,124 @@
 					</div>
 					<form action="../update_exam_info" method="Post" id="formOfInfo">
 						<div class="modal-body">
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-sm-12">
+									<div class="col-sm-3">
+										<div class="form-group " style="margin-bottom: 0px;">
+											<select required class="form-control" id="p-faculty-box1"
+												name="faculty_id1" onChange="load_program_update();">
+											</select>
+										</div>
+									</div>
+									<div class="form-group col-sm-3" style="margin-bottom: 0px;">
 
-							<div class="form-group">
-								<label>Subject: <span class="astriek">*</span></label> <select
-									required class="form-control" id="subject-boxx"
-									name="subject_idd"></select>
-							</div>
-							<div class="form-group">
-								<label>Exam Type: <span class="astriek">*</span></label> <select
-									required class="form-control" id="examType-boxx"
-									name="examType_idd">
-									<option value="" disabled selected>Select Exam Type</option>
-								</select>
-							</div>
-
-
-							<div class="form-group">
-								<label>Exam Date: </label> <input type="date"
-									id="exam_start_datee" name="exam_start_datee"
-									class="form-control" placeholder="yyyy/mm/dd">
-							</div>
-							<div class="form-group">
-								<label>Exam End Date: </label> <input type="date"
-									id="exam_end_datee" name="exam_end_datee" class="form-control"
-									placeholder="yyyy/mm/dd">
-							</div>
-
-
-							<div class="form-group">
-								<label>Exam Start Time: </label> <input type="time"
-									id="exam_start_timee" name="exam_start_timee"
-									class="form-control" placeholder="yyyy/mm/dd">
-							</div>
-							<div class="form-group">
-								<label>Exam End Time: </label> <input type="time"
-									id="exam_end_timee" name="exam_end_timee" class="form-control"
-									placeholder="yyyy/mm/dd">
-							</div>
-
-
-							<div class="form-group">
-								<label>Full Marks: </label> <input type="number"
-									id="exam_fullMarkss" name="exam_fullMarkss"
-									class="form-control" placeholder="Fullmarks">
-							</div>
-							<div class="form-group">
-								<label>Pass Marks: </label> <input type="number"
-									id="exam_passMarkss" name="exam_passMarkss"
-									class="form-control" placeholder="Passmarks">
+										<select required class="form-control" id="p-program-box1"
+											name="program_id1" onchange="load_batch_year();">
+											<option value="" disabled selected>Select Programme</option>
+										</select>
+									</div>
+									<div class="form-group col-sm-3" style="margin-bottom: 0px;">
+										<select required class="form-control" name="batch_id1"
+											id="batch-box1">
+											<option value="" disabled selected>Select Batch</option>
+										</select>
+									</div>
+									<div class="form-group col-sm-3" style="margin-bottom: 0px;">
+										<select required class="form-control" id="Semester_box1"
+											name="Semester_box1" onchange="load_subject_update();">
+											<option value="" disabled selected>Select Semester</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+										</select>
+									</div>
+								</div>
 							</div>
 
-							<div class="form-group">
-								<label>Status :</label> <input type="radio" name="statuss"
-									required checked value="1">Active <input type="radio"
-									name="statuss" value="0">Completed
+
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-sm-12">
+									<div class="form-group col-sm-6">
+										<label>Subject: <span class="astriek">*</span></label> <select
+											required class="form-control" id="subject-boxx"
+											name="subject_idd">
+											<option value="" disabled selected>Select Subject</option>
+										</select>
+									</div>
+									<div class="form-group col-sm-6">
+										<label>Exam Type: <span class="astriek">*</span></label> <select
+											required class="form-control" id="examType-boxx"
+											name="examType_idd">
+											<option value="" disabled selected>Select Exam Type</option>
+										</select>
+									</div>
+
+								</div>
 							</div>
 
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-sm-12">
+
+
+									<div class="form-group col-sm-6">
+										<label>Exam Date: </label> <input type="date"
+											id="exam_start_datee" name="exam_start_datee"
+											class="form-control" placeholder="yyyy/mm/dd">
+									</div>
+									<div class="form-group col-sm-6">
+										<label>Exam End Date: </label> <input type="date"
+											id="exam_end_datee" name="exam_end_datee"
+											class="form-control" placeholder="yyyy/mm/dd">
+									</div>
+
+								</div>
+							</div>
+
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-sm-12">
+									<div class="form-group col-sm-6">
+										<label>Exam Start Time: </label> <input type="time"
+											id="exam_start_timee" name="exam_start_timee"
+											class="form-control" placeholder="yyyy/mm/dd">
+									</div>
+									<div class="form-group col-sm-6">
+										<label>Exam End Time: </label> <input type="time"
+											id="exam_end_timee" name="exam_end_timee"
+											class="form-control" placeholder="yyyy/mm/dd">
+									</div>
+
+								</div>
+							</div>
+
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-sm-12">
+									<div class="form-group col-sm-6">
+										<label>Full Marks: </label> <input type="number"
+											id="exam_fullMarkss" name="exam_fullMarkss"
+											class="form-control" placeholder="Fullmarks">
+									</div>
+									<div class="form-group col-sm-6">
+										<label>Pass Marks: </label> <input type="number"
+											id="exam_passMarkss" name="exam_passMarkss"
+											class="form-control" placeholder="Passmarks">
+									</div>
+								</div>
+							</div>
+
+							<div class="row" style="margin-top: 10px;">
+								<div class="col-sm-12">
+									<div class="form-group col-sm-6">
+										<label>Status :</label> <input type="radio" name="statuss"
+											required checked value="1">Active <input type="radio"
+											name="statuss" value="0">Completed
+									</div>
+								</div>
+							</div>
 						</div>
 						<div class="modal-footer">
 							<input type="hidden" id="hiddenValueToUpdate"
@@ -446,16 +556,32 @@
 <script src="../Resources/plugins/summernote/dist/summernote.min.js"></script>
 
 <script>
-	function loadAdd() {
-		document.getElementById("formOfInfo").reset();
+	window.addEventListener("load", function() {
 		load_faculty();
-		load_exam_type();
+	}, true)
+
+	function load_subject_add() {
+		var programId = document.getElementById("p-program-box").value;
+		var batchNo = document.getElementById("batch-box").value;
+		var semesterNo = document.getElementById("Semester_box").value;
+
+		var idSend = "programId=" + programId + "&batchNo=" + batchNo
+				+ "&semesterNo=" + semesterNo;
+		load_subject(idSend);
 	}
 
-	function load_faculty() {
+	function load_subject_update() {
+		var programId = document.getElementById("p-program-box1").value;
+		var batchNo = document.getElementById("batch-box1").value;
+		var semesterNo = document.getElementById("Semester_box1").value;
 
-		var id = document.getElementById("subject-box").value;
-		var url = "../ajax_subject_load";
+		var idSend = "programId=" + programId + "&batchNo=" + batchNo
+				+ "&semesterNo=" + semesterNo;
+		load_subject(idSend);
+	}
+
+	function load_subject(idSend) {
+		var url = "../ajax_load_subject";
 		var aj = new XMLHttpRequest();
 		aj.open("POST", url, true);
 		aj
@@ -464,12 +590,125 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var return_data = aj.responseText;
+
 				document.getElementById("subject-box").innerHTML = return_data;
 				document.getElementById("subject-boxx").innerHTML = return_data;
 
 			}
 		}
-		aj.send(id);
+		aj.send(idSend);
+
+	}
+
+	function getSemesterId() {
+		var programId = document.getElementById("p-program-box").value;
+		var batchNo = document.getElementById("batch-box").value;
+		var semesterNo = document.getElementById("Semester_box").value;
+
+		var idSend = "programId=" + programId + "&batchNo=" + batchNo
+				+ "&semesterNo=" + semesterNo;
+		var url = "../ajax_getSemesterId";
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var return_data = aj.responseText;
+				alert(return_data);
+				document.getElementById("SemesterIdPrimary").value = return_data;
+			}
+		}
+		aj.send(idSend);
+	}
+
+	function load_faculty() {
+		var getid = event.target.id;
+		var url = "../ajax_faculty_load";
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+
+				var return_data = aj.responseText;
+				if (getid == "modal-box" || getid == "faculty-box") {
+					document.getElementById("faculty-box").innerHTML = return_data;
+					document.getElementById("faculty-box1").innerHTML = return_data;
+				} else {
+					document.getElementById("p-faculty-box").innerHTML = return_data;
+					document.getElementById("p-faculty-box1").innerHTML = return_data;
+				}
+
+			}
+		}
+		aj.send();
+	}
+
+	function load_program_add() {
+		var getid = event.target.id;
+		if (getid == "faculty-box") {
+			var id = document.getElementById("faculty-box").value;
+
+		} else {
+			var id = document.getElementById("p-faculty-box").value;
+		}
+		load_program(id);
+	}
+
+	function load_program_update() {
+		var getid = event.target.id;
+		if (getid == "faculty-box1") {
+			var id = document.getElementById("faculty-box1").value;
+
+		} else {
+			var id = document.getElementById("p-faculty-box1").value;
+		}
+		load_program(id);
+	}
+
+	function load_program(id) {
+
+		var url = "../aja";
+		var idSend = "id=" + id;
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var return_data = aj.responseText;
+
+				document.getElementById("p-program-box").innerHTML = return_data;
+				document.getElementById("p-program-box1").innerHTML = return_data;
+
+			}
+		}
+		aj.send(idSend);
+	}
+
+	function load_batch_year() {
+
+		var url = "../ajax_year_load";
+		var idSend = "id=1";
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var return_data = aj.responseText;
+				document.getElementById("batch-box").innerHTML = return_data;
+				document.getElementById("batch-box1").innerHTML = return_data;
+			}
+		}
+		aj.send(idSend);
 	}
 
 	function load_exam_type() {
@@ -486,6 +725,8 @@
 
 				document.getElementById("examType-box").innerHTML = return_data;
 				document.getElementById("examType-boxx").innerHTML = return_data;
+				document.getElementById("examType-box1").innerHTML = return_data;
+				document.getElementById("examType-boxx1").innerHTML = return_data;
 
 			}
 		}
@@ -528,8 +769,8 @@
 		}
 		aj.send(idSend);
 	}
-	function viewExamDetails(id) {
 
+	function viewExamDetails(id) {
 		var url = "../ajax_loadRequiredInfoFormJson_mangeExamInfo";
 		var idSend = "value=" + id;
 		var aj = new XMLHttpRequest();
@@ -540,7 +781,7 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var jSonObject = eval('(' + aj.responseText + ')');
-
+				alert(jSonObject);
 				document.getElementById("exam_start_datee").value = jSonObject[0].examStartDate;
 				document.getElementById("exam_end_datee").value = jSonObject[0].examEndDate;
 				document.getElementById("exam_start_timee").value = jSonObject[0].examStartTime;

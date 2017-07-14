@@ -28,7 +28,7 @@ public class add_exam_info extends HttpServlet {
 		String examFullmarks=request.getParameter("exam_fullMarks");
 		String examPassmarks=request.getParameter("exam_passMarks");
 		String examStatus=request.getParameter("status");
-		int semesterNo = Integer.parseInt(request.getParameter("Semester_box1"));
+		int semesterNo = Integer.parseInt(request.getParameter("SemesterIdPrimary"));
 		
 		System.out.println("semester id from add exam innfo="+semesterNo);
 		
