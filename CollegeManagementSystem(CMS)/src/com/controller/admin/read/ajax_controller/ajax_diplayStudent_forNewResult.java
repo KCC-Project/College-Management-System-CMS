@@ -40,7 +40,7 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 		int semesterNo = Integer.parseInt(request.getParameter("semesterNo"));
 		
 		int examId=Integer.parseInt(request.getParameter("examId"));
-		Object[] obj = new Object[10];
+		Object[] obj = new Object[15];
 		obj[1] = semesterNo;
 		obj[2] = programId;
 		obj[3] = batchNo;
@@ -59,7 +59,7 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 		// for getting student id from semester student table and adding id to
 		// list
 		for (Integer semesterId1 : semesterId) {
-			Object[] obj1 = new Object[10];
+			Object[] obj1 = new Object[15];
 			obj1[1] = semesterId1;
 			StudentSemesterModelServiceInterface inter1 = new StudentSemesterModelServiceImpl();
 			List<StudentSemesterModel> model = inter1.searchByFields(obj1);
@@ -72,7 +72,7 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 		List studentName= new ArrayList(); 
 		Map<String, Object> finalDataJson=new HashMap<String,Object>();
 		for (Integer studentID1 : studentID) {
-			Object[] obj1 = new Object[10];
+			Object[] obj1 = new Object[15];
 			obj1[0] = studentID1;
 
 			StudentServiceInterface inter1 = new StudentServiceImpl();
@@ -90,7 +90,7 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 		}
 		
 		ExamInfoModelServiceInterface interExamInfo=new ExamInfoModelServiceImpl();
-		Object[] obj5 = new Object[10];
+		Object[] obj5 = new Object[15];
 		obj5[0] = examId;
 		List<ExamInfoModel> examinfoModel= interExamInfo.searchByField(obj5);
 		for (ExamInfoModel examInfoModel2 : examinfoModel) {

@@ -22,8 +22,8 @@ public class ajax_examTypeNameLoad extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//System.out.println("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 		int subjectId = Integer.parseInt(request.getParameter("subjectId"));
-		//System.out.println("subId=="+subjectId);
-		Object[] obj = new Object[10];
+		System.out.println("subId=="+subjectId);
+		Object[] obj = new Object[15];
 		obj[1] = subjectId;
 		obj[8] = 0;
 		

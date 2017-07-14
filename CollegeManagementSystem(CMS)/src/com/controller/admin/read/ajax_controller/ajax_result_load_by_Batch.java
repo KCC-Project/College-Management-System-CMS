@@ -54,6 +54,7 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 		int programId = Integer.parseInt(request.getParameter("programId"));
 		int batchNo = Integer.parseInt(request.getParameter("batchNo"));
 		int semesterNo = Integer.parseInt(request.getParameter("semesterNo"));
+		int semesterID = Integer.parseInt(request.getParameter("semesterID"));
 		int facultyId = Integer.parseInt(request.getParameter("facultyId"));
 		int examTypeId = Integer.parseInt(request.getParameter("examTypeId"));
 		
@@ -61,14 +62,14 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 
 		// For getting semester id
 		SemesterServiceInterface semInterface = new SemesterServiceImpl();
-		Object[] obj = new Object[10];
+		Object[] obj = new Object[15];
 		obj[1] = semesterNo;
 		obj[2] = programId;
 		obj[3] = batchNo;
 		List<SemesterModel> model = semInterface.searchByFields(obj);
 		System.out.println("size of semester=" + model.size());
 		for (SemesterModel semesterModel : model) {
-			Object[] obj1 = new Object[10];
+			Object[] obj1 = new Object[15];
 			obj1[1] = semesterModel.getSemester_id();
 			StudentSemesterModelServiceInterface inter = new StudentSemesterModelServiceImpl();
 			List<StudentSemesterModel> modelSemStudent = inter.searchByFields(obj1);
@@ -80,13 +81,14 @@ public class ajax_result_load_by_Batch extends HttpServlet {
 				List<StudentModel> stModel = studentInter.searchByField(obj11);
 				for (StudentModel studentModel : stModel) {
 					ExamInfoModelServiceInterface examInfoModel = new ExamInfoModelServiceImpl();
-					Object[] obj111 = new Object[10];
+					Object[] obj111 = new Object[15];
 					obj111[2] = examTypeId;
-					obj111[8]=semesterNo;
+					obj111[8]=semesterID;
+					System.out.println(examTypeId+"  " +semesterNo );
 					List<ExamInfoModel> examInfo = examInfoModel.searchByField(obj111);
 					System.out.println("examInfo table size="+examInfo.size());
 					for (ExamInfoModel examInfoModel2 : examInfo) {
-						Object[] obj1111 = new Object[10];
+						Object[] obj1111 = new Object[15];
 						obj1111[0] = studentModel.getStudentID();
 						obj1111[1] = examInfoModel2.getExamId();
 						StudentExamResultModelServiceInterface result = new StudentExamResultModelServiceImpl();

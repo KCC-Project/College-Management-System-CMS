@@ -32,9 +32,6 @@ public class ajax_load_subject extends HttpServlet {
 		int batchNo = Integer.parseInt(request.getParameter("batchNo"));
 		int semesterNo = Integer.parseInt(request.getParameter("semesterNo"));
 		
-		
-		
-		
 		Object[] obj = new Object[10];
 		obj[1] = semesterNo;
 		obj[2] = programId;
@@ -66,7 +63,7 @@ public class ajax_load_subject extends HttpServlet {
 		response.setHeader("Cache-Control", "no-cache");
 		PrintWriter out = response.getWriter();
 		out.write("<option disabled selected>Select Subject </option>");
-		
+		System.out.println("size="+subjectId.size());
 		for (Integer subjectId1 : subjectId) {
 			Object[] obj1 = new Object[10];
 			obj1[0] = subjectId1;

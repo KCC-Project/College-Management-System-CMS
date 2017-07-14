@@ -27,7 +27,7 @@ public class update_exam_info extends HttpServlet {
 		String examPassmarks=request.getParameter("exam_passMarkss");
 		String examStatus=request.getParameter("statuss");
 		String examID=request.getParameter("hiddenValueToUpdate");//primarykey
-		
+		int semesterNo = Integer.parseInt(request.getParameter("SemesterIdPrimaryUpdate"));
 		if (examID.equalsIgnoreCase("")||subject.equalsIgnoreCase("")||examTypeId.equalsIgnoreCase("")||examStartdate.equalsIgnoreCase("")||examenddate.equalsIgnoreCase("")||examStartTime.equalsIgnoreCase("")||examEndTime.equalsIgnoreCase("")||examStatus.equalsIgnoreCase("")) {
 			response.sendRedirect("admin/manageExamInfo.jsp?error=updateErrorInExamInfo");
 			
@@ -46,6 +46,7 @@ public class update_exam_info extends HttpServlet {
 			model.setPassmarks(Integer.parseInt(examPassmarks));
 			model.setStatus(Integer.parseInt(examStatus));
 			model.setExamId(primaryKey);
+			model.setSemester_id(semesterNo);
 			ExamInfoModelServiceInterface intface= new ExamInfoModelServiceImpl();
 			boolean status= intface.updateExamInfo(model);
 			System.out.println(status);

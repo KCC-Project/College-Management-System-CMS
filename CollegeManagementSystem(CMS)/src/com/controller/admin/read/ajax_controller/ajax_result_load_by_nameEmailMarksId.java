@@ -41,12 +41,13 @@ public class ajax_result_load_by_nameEmailMarksId extends HttpServlet {
 		int programId = Integer.parseInt(request.getParameter("programId"));
 		int batchNo = Integer.parseInt(request.getParameter("batchNo"));
 		int semesterNo = Integer.parseInt(request.getParameter("semesterNo"));
+		int semesterID = Integer.parseInt(request.getParameter("semesterID"));
 		int facultyId = Integer.parseInt(request.getParameter("facultyId"));
 		int examTypeId = Integer.parseInt(request.getParameter("examTypeId"));
 		String nameIdEmailMarks = request.getParameter("enterField");
-		System.out.println("sub=" + nameIdEmailMarks.substring(0, 2));
-String identityCard=nameIdEmailMarks.substring(0, 2);
-System.out.println("ID==="+identityCard);
+		//System.out.println("sub=" + nameIdEmailMarks.substring(0, 2));
+		String identityCard = nameIdEmailMarks.substring(0, 2);
+		//System.out.println("ID===" + identityCard);
 		int spaceCount = 0;
 		for (char c : nameIdEmailMarks.trim().toCharArray()) {
 			if (c == ' ') {
@@ -64,36 +65,36 @@ System.out.println("ID==="+identityCard);
 			System.out.println("lane=" + lastName);
 		} else if (spaceCount == 2) {
 			int spaceC = 0;
-			int count=0;
+			int count = 0;
 			char[] arr = nameIdEmailMarks.trim().toCharArray();
 			System.out.println(arr.length);
-			int[] space= new int[2];
+			int[] space = new int[2];
 			for (int i = 0; i < arr.length; i++) {
 				if (arr[i] == ' ') {
-					space[count]=i;
+					space[count] = i;
 					count++;
 				}
 			}
-			firstName = nameIdEmailMarks.substring(0,space[0] );
-			middleName=nameIdEmailMarks.substring(space[0],space[1] );
-			lastName=nameIdEmailMarks.substring(space[1],nameIdEmailMarks.length());
+			firstName = nameIdEmailMarks.substring(0, space[0]);
+			middleName = nameIdEmailMarks.substring(space[0], space[1]);
+			lastName = nameIdEmailMarks.substring(space[1], nameIdEmailMarks.length());
 			System.out.println("f=" + firstName.trim());
 			System.out.println("M=" + middleName.trim());
 			System.out.println("L=" + lastName.trim());
 		}
-		
+
 		List tempList = new ArrayList();
 
 		// For getting semester id
 		SemesterServiceInterface semInterface = new SemesterServiceImpl();
-		Object[] obj = new Object[10];
+		Object[] obj = new Object[15];
 		obj[1] = semesterNo;
 		obj[2] = programId;
 		obj[3] = batchNo;
 		List<SemesterModel> model = semInterface.searchByFields(obj);
 		System.out.println("size of semester=" + model.size());
 		for (SemesterModel semesterModel : model) {
-			Object[] obj1 = new Object[10];
+			Object[] obj1 = new Object[15];
 			obj1[1] = semesterModel.getSemester_id();
 			StudentSemesterModelServiceInterface inter = new StudentSemesterModelServiceImpl();
 			List<StudentSemesterModel> modelSemStudent = inter.searchByFields(obj1);
@@ -115,23 +116,23 @@ System.out.println("ID==="+identityCard);
 					obj11[3] = lastName.trim();
 					System.out.println("Inside first middle last name");
 				}
-				System.out.println("student iD="+studentSemesterModel.getStudent_id());
-				System.out.println("enter ID="+obj11[9].toString());
+				//System.out.println("student iD=" + studentSemesterModel.getStudent_id());
+				//System.out.println("enter ID=" + obj11[9].toString());
 				StudentServiceInterface studentInter = new StudentServiceImpl();
 				List<StudentModel> stModel = studentInter.searchByField(obj11);
-				System.out.println("student Table size="+stModel.size());
-				System.out.println("student Table json="+JsonUtil.convertJavaToJson(stModel));
+				System.out.println("student Table size=" + stModel.size());
+				System.out.println("student Table json=" + JsonUtil.convertJavaToJson(stModel));
 				for (StudentModel studentModel : stModel) {
 					ExamInfoModelServiceInterface examInfoModel = new ExamInfoModelServiceImpl();
-					Object[] obj111 = new Object[10];
+					Object[] obj111 = new Object[15];
 					obj111[2] = examTypeId;
-					obj111[8]=semesterNo;
-					System.out.println("selected student name="+studentModel.getFirstname());
+					obj111[8] = semesterID;
+					System.out.println("selected student name=" + studentModel.getFirstname());
 					List<ExamInfoModel> examInfo = examInfoModel.searchByField(obj111);
-					System.out.println("examInfo table size="+examInfo.size());
+					System.out.println("examInfo table size=" + examInfo.size());
 					for (ExamInfoModel examInfoModel2 : examInfo) {
-					
-						Object[] obj1111 = new Object[10];
+
+						Object[] obj1111 = new Object[15];
 						obj1111[0] = studentModel.getStudentID();
 						obj1111[1] = examInfoModel2.getExamId();
 						StudentExamResultModelServiceInterface result = new StudentExamResultModelServiceImpl();
@@ -140,7 +141,8 @@ System.out.println("ID==="+identityCard);
 							System.out.println("size of result=" + resultModel.size());
 							for (StudentExamResultModel studentExamResultModel : resultModel) {
 								Map<String, Object> map = new HashMap<String, Object>();
-								map.put("ProgramName", new ProgramServiceImpl().getRecordById(programId).getProgram_name());
+								map.put("ProgramName",
+										new ProgramServiceImpl().getRecordById(programId).getProgram_name());
 								map.put("subjectName", examInfoModel2.getSubjectName());
 								map.put("ExamType", examInfoModel2.getExamTypeName());
 								map.put("FullMarks", examInfoModel2.getFullmarks());

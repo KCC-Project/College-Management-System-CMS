@@ -236,7 +236,7 @@
 												<td>Subject</td>
 												<td class="hidden-xs">Exam Type</td>
 												<td class="hidden-xs">FullMarks</td>
-													<td class="hidden-xs">PassMarks</td>
+												<td class="hidden-xs">PassMarks</td>
 												<td class="hidden-xs">Scored</td>
 												<td>Pass/Fail</td>
 												<td class="hidden-xs">Program</td>
@@ -300,7 +300,7 @@
 	function loadResult() {
 		var searchFilter = document.getElementById("searchIteam").value;
 		alert("searchFilter=" + searchFilter);
-
+		var semesterID;
 		if (searchFilter === 'Batch') {
 			var facultyId = document.getElementById("p-faculty-box").value;
 			var programId = document.getElementById("p-program-box").value;
@@ -308,9 +308,15 @@
 			var semesterNo = document.getElementById("Semester_box1").value;
 			var examTypeId = document.getElementById("examType-box").value;
 
+			var idSend = "programId=" + programId + "&batchNo=" + batchNo
+					+ "&semesterNo=" + semesterNo;
+	
+			semesterID = getSemesterId(idSend);
+			
+
 			var send = "&programId=" + programId + "&batchNo=" + batchNo
 					+ "&semesterNo=" + semesterNo + "&facultyId=" + facultyId
-					+ "&examTypeId=" + examTypeId;
+					+ "&examTypeId=" + examTypeId + "&semesterID=" + semesterID;
 
 			var url = "../ajax_result_load_by_Batch";
 			var arr = [ url, send ];
@@ -324,13 +330,38 @@
 			var semesterNo = document.getElementById("Semester_box5").value;
 			var examTypeId = document.getElementById("examType-box5").value;
 			var enterField = document.getElementById("searchedEnteredField").value;
+			
+			var idSend = "programId=" + programId + "&batchNo=" + batchNo
+			+ "&semesterNo=" + semesterNo;
+			semesterID = getSemesterId(idSend);
+			
 			var send = "&programId=" + programId + "&batchNo=" + batchNo
 					+ "&semesterNo=" + semesterNo + "&facultyId=" + facultyId
-					+ "&examTypeId=" + examTypeId+"&enterField="+enterField;
+					+ "&examTypeId=" + examTypeId + "&enterField=" + enterField+ "&semesterID=" + semesterID;
+			
 			var url = "../ajax_result_load_by_nameEmailMarksId";
 			var arr = [ url, send ];
 			loadResults(arr);
 		}
+	}
+	function getSemesterId(idSend) {
+		var output;
+		var url = "../ajax_getSemesterId";
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, false);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var return_data = aj.responseText;
+				
+				output = return_data;
+
+			}
+		}
+		aj.send(idSend);
+		return output;
 	}
 	function loadResults(arr) {
 
@@ -365,8 +396,8 @@
 							+ jSonObject[i].ExamType + '</td>';
 					content += '<td  class="student_fullMarks">'
 							+ jSonObject[i].FullMarks + '</td>';
-							content += '<td  class="student_passMarks">'
-								+ jSonObject[i].passMarks + '</td>';
+					content += '<td  class="student_passMarks">'
+							+ jSonObject[i].passMarks + '</td>';
 					content += '<td  class="student_scoredmarks">'
 							+ jSonObject[i].ScoredMarks + '</td>';
 					var passFailStatus = jSonObject[i].PassFailStatus;
@@ -439,7 +470,7 @@
 	function searcheOption() {
 		var searchedOption = document.getElementById("searchIteam").value;
 		if (searchedOption === "Name" || searchedOption === "Id"
-				|| searchedOption === "Email" ) {
+				|| searchedOption === "Email") {
 			document.getElementById("name-email-marks").hidden = false;
 			load_batch_year();
 			document.getElementById("semester-batch").hidden = true;
@@ -462,7 +493,7 @@
 			document.getElementById("exam_type-semester").hidden = true;
 			document.getElementById("subject-semester").hidden = true;
 
-		}else if (searchedOption === "Subject") {
+		} else if (searchedOption === "Subject") {
 			document.getElementById("subject-semester").hidden = false;
 			load_batch_year();
 			document.getElementById("name-email-marks").hidden = true;

@@ -184,7 +184,7 @@
 
 										<select required class="form-control" id="p-program-box"
 											name="program_id" onchange="load_batch_year();">
-											<option value="" disabled selected>Select Programme</option>
+											<option value="0" disabled selected>Select Programme</option>
 										</select>
 									</div>
 									<div class="form-group col-sm-3" style="margin-bottom: 0px;">
@@ -439,7 +439,8 @@
 						</div>
 						<div class="modal-footer">
 							<input type="hidden" id="hiddenValueToUpdate"
-								name="hiddenValueToUpdate">
+								name="hiddenValueToUpdate"> <input type="hidden"
+								id="SemesterIdPrimaryUpdate" name="SemesterIdPrimaryUpdate">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
 							<button type="submit" class="btn btn-success">Update</button>
@@ -492,10 +493,7 @@
 			<div class="modal-body">
 				<div style="overflow-x: auto;">
 					<table class="tblThTd ">
-						<tr>
-							<Th>S.No :</Th>
-							<td>1.</td>
-						</tr>
+						
 
 						<tr>
 							<Th>Subject :</Th>
@@ -505,6 +503,7 @@
 							<Th>Exam Type :</Th>
 							<td id="examTypeJsonXXX"></td>
 						</tr>
+						
 						<tr>
 							<Th>Start Date :</Th>
 							<td id="startDateJsonXXX"></td>
@@ -581,6 +580,7 @@
 	}
 
 	function load_subject(idSend) {
+		//alert(idSend)
 		var url = "../ajax_load_subject";
 		var aj = new XMLHttpRequest();
 		aj.open("POST", url, true);
@@ -590,10 +590,10 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var return_data = aj.responseText;
-
-				document.getElementById("subject-box").innerHTML = return_data;
 				document.getElementById("subject-boxx").innerHTML = return_data;
+				document.getElementById("subject-box").innerHTML = return_data;
 
+				//alert(return_data);
 			}
 		}
 		aj.send(idSend);
@@ -616,7 +616,7 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var return_data = aj.responseText;
-				alert(return_data);
+				//alert(return_data);
 				document.getElementById("SemesterIdPrimary").value = return_data;
 			}
 		}
@@ -737,12 +737,13 @@
 		document.getElementById("formOfInfo").reset();
 		load_faculty();
 		load_exam_type();
-
+		load_batch_year();
 	}
 
 	function viewExamDetailsOriginal(id) {
 		var url = "../ajax_loadRequiredInfoFormJson_mangeExamInfo";
 		var idSend = "value=" + id;
+
 		var aj = new XMLHttpRequest();
 		aj.open("POST", url, true);
 		aj
@@ -751,19 +752,19 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var jSonObject = eval('(' + aj.responseText + ')');
-				alert("form mausam=" + jSonObject.subjectName);
-				document.getElementById("subjectJsonXXX").innerHTML = jSonObject.subjectName;
-				document.getElementById("examTypeJsonXXX").innerHTML = jSonObject.examTypeName;
+				//alert("form mausam=" + jSonObject.subjectName);
+				document.getElementById("subjectJsonXXX").innerHTML = jSonObject[0].examInfo[0].subjectName;
+				document.getElementById("examTypeJsonXXX").innerHTML = jSonObject[0].examInfo[0].examTypeName;
+				document.getElementById("semNo").innerHTML = jSonObject[0].semester_no;
+				document.getElementById("startDateJsonXXX").innerHTML = jSonObject[0].examInfo[0].examStartDate;
+				document.getElementById("endDateJsonXXX").innerHTML = jSonObject[0].examInfo[0].examEndDate;
+				document.getElementById("startTimeJsonXXX").innerHTML = jSonObject[0].examInfo[0].examStartTime;
+				document.getElementById("endTimeJsonXXX").innerHTML = jSonObject[0].examInfo[0].examEndTime;
 
-				document.getElementById("startDateJsonXXX").innerHTML = jSonObject.examStartDate;
-				document.getElementById("endDateJsonXXX").innerHTML = jSonObject.examEndDate;
-				document.getElementById("startTimeJsonXXX").innerHTML = jSonObject.examStartTime;
-				document.getElementById("endTimeJsonXXX").innerHTML = jSonObject.examEndTime;
-
-				document.getElementById("fullMarksJsonXXX").innerHTML = jSonObject.fullmarks;
-				document.getElementById("passMarksJsonXXX").innerHTML = jSonObject.passmarks;
-				document.getElementById("statusJsonXXX").innerHTML = jSonObject.status;
-				document.getElementById("facultyJsonXXX").innerHTML = "Science and Tech(No)";
+				document.getElementById("fullMarksJsonXXX").innerHTML = jSonObject[0].examInfo[0].fullmarks;
+				document.getElementById("passMarksJsonXXX").innerHTML = jSonObject[0].examInfo[0].passmarks;
+				document.getElementById("statusJsonXXX").innerHTML = jSonObject[0].examInfo[0].status;
+				document.getElementById("facultyJsonXXX").innerHTML = jSonObject[0].faculty_name;
 
 			}
 		}
@@ -773,27 +774,51 @@
 	function viewExamDetails(id) {
 		var url = "../ajax_loadRequiredInfoFormJson_mangeExamInfo";
 		var idSend = "value=" + id;
+		//alert("ID="+id);
 		var aj = new XMLHttpRequest();
-		aj.open("POST", url, true);
+		aj.open("POST", url, false);
 		aj
 				.setRequestHeader("Content-type",
 						"application/x-www-form-urlencoded");
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var jSonObject = eval('(' + aj.responseText + ')');
-				alert(jSonObject);
-				document.getElementById("exam_start_datee").value = jSonObject[0].examStartDate;
-				document.getElementById("exam_end_datee").value = jSonObject[0].examEndDate;
-				document.getElementById("exam_start_timee").value = jSonObject[0].examStartTime;
-				document.getElementById("exam_end_timee").value = jSonObject[0].examEndTime;
-				document.getElementById("exam_fullMarkss").value = jSonObject[0].fullmarks;
-				document.getElementById("exam_passMarkss").value = jSonObject[0].passmarks;
-				document.getElementById("deleteIdJs").value = jSonObject[0].examId;
-				document.getElementById("iteamNameJson").innerHTML = jSonObject[0].examId;
-				document.getElementById("hiddenValueToUpdate").value = jSonObject[0].examId;
+				//alert(jSonObject);
+				//alert("full="+jSonObject[0].examInfo[0].fullmarks);
+				document.getElementById("exam_start_datee").value = jSonObject[0].examInfo[0].examStartDate;
+				document.getElementById("exam_end_datee").value = jSonObject[0].examInfo[0].examEndDate;
+				document.getElementById("exam_start_timee").value = jSonObject[0].examInfo[0].examStartTime;
+				document.getElementById("exam_end_timee").value = jSonObject[0].examInfo[0].examEndTime;
+				document.getElementById("exam_fullMarkss").value = jSonObject[0].examInfo[0].fullmarks;
+				document.getElementById("exam_passMarkss").value = jSonObject[0].examInfo[0].passmarks;
+				document.getElementById("deleteIdJs").value = jSonObject[0].examInfo[0].examId;
+				document.getElementById("iteamNameJson").innerHTML = jSonObject[0].examInfo[0].examId;
+				document.getElementById("hiddenValueToUpdate").value = jSonObject[0].examInfo[0].examId;
+				document.getElementById("SemesterIdPrimaryUpdate").value = jSonObject[0].Semester_id;
+				var idSend = "programId=" + jSonObject[0].program_id
+						+ "&batchNo=" + jSonObject[0].batchYear_id
+						+ "&semesterNo=" + jSonObject[0].semester_no;
+				//alert(idSend);
+				load_program(jSonObject[0].faculty_id);
+				load_subject(idSend);
+
+				/* For selecting Selected program automatically */
+				var programid = jSonObject[0].program_id;
+				var temp = programid;
+				//alert("programid="+programid);
+				var mySelect = document.getElementById('p-program-box1');
+				//alert("valuemmm=="+mySelect.options[0].value);
+				for (var i, j = 0; i = mySelect.options[j]; j++) {
+					//alert("program value="+i.value);
+					if (i.value == temp) {
+						mySelect.selectedIndex = j;
+						alert("program match");
+						break;
+					}
+				}
 
 				/* For selecting Selected subject automatically */
-				var subjectid = jSonObject[0].subjectId;
+				var subjectid = jSonObject[0].examInfo[0].subjectId;
 				var temp = subjectid;
 				var mySelect = document.getElementById('subject-boxx');
 				for (var i, j = 0; i = mySelect.options[j]; j++) {
@@ -804,24 +829,68 @@
 				}
 
 				/* For Selecting selected examType automatically */
-				var examTypeId = jSonObject[0].examTypeId;
+				var examTypeId = jSonObject[0].examInfo[0].examTypeId;
 				var temp = examTypeId;
 				var mySelect = document.getElementById('examType-boxx');
 				for (var i, j = 0; i = mySelect.options[j]; j++) {
+					//alert("examtype value="+i.value);
 					if (i.value == temp) {
 						mySelect.selectedIndex = j;
+						//alert("exam type match");
 						break;
 					}
 				}
 
 				/*For Selecting radio btn automatically  */
-				var StatusId = jSonObject[0].status;
-				var elements = document.getElementsByName('status');
+				var StatusId = jSonObject[0].examInfo[0].status;
+				var elements = document.getElementsByName('statuss');
 				for (i = 0; i < elements.length; i++) {
+					
 					if (elements[i].value == StatusId) {
 						elements[i].checked = true;
+
 					}
 				}
+
+				//selecting semester no
+				var semester_no = jSonObject[0].semester_no;
+				var temp = semester_no;
+				var mySelect = document.getElementById('Semester_box1');
+				for (var i, j = 0; i = mySelect.options[j]; j++) {
+					//alert("examtype value="+i.value);
+					if (i.value == temp) {
+						mySelect.selectedIndex = j;
+						//alert("exam type match");
+						break;
+					}
+				}
+
+				//selecting faculty
+				var faculty_id = jSonObject[0].faculty_id;
+				var temp = faculty_id;
+				var mySelect = document.getElementById('p-faculty-box1');
+				for (var i, j = 0; i = mySelect.options[j]; j++) {
+					//alert("examtype value="+i.value);
+					if (i.value == temp) {
+						mySelect.selectedIndex = j;
+						//alert("exam type match");
+						break;
+					}
+				}
+
+				//selecting batch
+				var batchYear_id = jSonObject[0].batchYear_id;
+				var temp = batchYear_id;
+				var mySelect = document.getElementById('batch-box1');
+				for (var i, j = 0; i = mySelect.options[j]; j++) {
+					//alert("examtype value="+i.value);
+					if (i.value == temp) {
+						mySelect.selectedIndex = j;
+						//alert("exam type match");
+						break;
+					}
+				}
+
 			}
 		}
 		aj.send(idSend);
