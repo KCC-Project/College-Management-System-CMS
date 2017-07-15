@@ -260,4 +260,7 @@ a {
   padding: 15px;
   background-color: #fff;
 }
+#page-links a {
+	color:blue;
+}
 

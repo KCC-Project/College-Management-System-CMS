@@ -152,6 +152,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 		if (obj[7] != null && obj[8] != null) {  
 			start = Integer.parseInt(obj[7].toString()); 
 			limit = Integer.parseInt(obj[8].toString());
+			System.out.println(limit);
 		}
 		
 		try {
@@ -185,7 +186,7 @@ public class SemesterModelImpl implements SemesterModelInterface {
 	            query.append(" AND status = ?");
 	            parameters.add(status);
 	        }
-	        if (start != 0 && limit != 0) {
+	        if (start != 0 || limit != 0) {
 	            query.append(" LIMIT ?, ?");
 	            parameters.add(start);
 	            parameters.add(limit);
@@ -220,7 +221,9 @@ public class SemesterModelImpl implements SemesterModelInterface {
 	        	rs = ps.executeQuery();
 	        	while(rs.next()){
 	        		System.out.println("row count is: "+rs.getInt("FOUND_ROWS()"));
-	        		Table.setRowsCount(rs.getInt("FOUND_ROWS()"));
+	        		Table.setTotalRows(rs.getInt("FOUND_ROWS()"));
+	        		int page = (int) Math.ceil((double) rs.getInt("FOUND_ROWS()")/limit);
+	        		Table.setTotalPage(page);
 	        	}
 	        	
 

@@ -26,8 +26,13 @@ public class ajax_semester_load extends HttpServlet {
 			throws ServletException, IOException {
 		String program_id = request.getParameter("id");
 		String semester_id = request.getParameter("semester_id");
-		int start = 1;
-		int limit = 2;
+		String starts = request.getParameter("start");
+		//System.out.println(Integer.parseInt(starts));
+		int start = 0;
+		if (starts!=null){ 
+			start = Integer.parseInt(starts);
+		}
+		int limit = 10;
 		
 		String jsonResponse = null;
 		
@@ -37,16 +42,18 @@ public class ajax_semester_load extends HttpServlet {
 			
 			Object[] obj = new Object[10];
 			obj[2]=id;
-			//obj[7]=1; //start limit
-			//obj[8]=3; // limit
+			obj[7]=start; //start limit
+			obj[8]=5; // limit
 			
 		
 			List<SemesterModel> mode= semester.searchByFields(obj);
 			Map<String, Object> map= new HashMap<String,Object>();
-			System.out.println("here is the total rows count: "+Table.getRowsCount());
-			int total = Table.getRowsCount();
+			System.out.println("here is the total rows count: "+Table.getTotalRows());
+			int total = Table.getTotalRows();
+			int totalPage = Table.getTotalPage();
 			map.put("tableData",mode );
-			map.put("TotalRowCount", total);
+			map.put("TotalRow", total);
+			map.put("TotalPage", totalPage);
 			jsonResponse=JsonUtil.convertJavaToJson(map);
 		}else if(semester_id != null && !semester_id.isEmpty()){
 			int id=Integer.parseInt(semester_id);

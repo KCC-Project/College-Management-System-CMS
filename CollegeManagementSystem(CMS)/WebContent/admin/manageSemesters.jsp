@@ -113,8 +113,11 @@
 				</div>
 				
 				<div class="row">
-					<div class="pager_outer">
-    					<ul class="pager">
+					<div class="pull-left col-sm-2">
+    					<p id="page-info"></p>
+    				</div>
+					<div class="pager_outer pull-right col-sm-10">
+    					<ul class="pager" id="page-links">
     					</ul>
     				</div>
 				</div>
@@ -282,65 +285,19 @@
 
 <script>
 
-window.addEventListener("load", function() {load_faculty(event); }, false)
+$(document).ready(function(){
+	$("#search-box").click(function(event){ load_faculty(event, "p-faculty-box"); });
+	$("#modal-box").click(function(event){ load_faculty(event, "faculty-box"); });
+	$("#p-faculty-box").change(function(event){ load_program(event, "p-program-box"); });
+	$("#faculty-box").change(function(event){ load_program(event, "program-box"); });
+	$("#program-box").change(function(event){ load_batch_year(event, "batch-box"); });
+	$("#e-faculty-box").change(function(event){ load_program(event, "e-program-box"); });
+	$("#e-program-box").change(function(event){ load_batch_year(event, "e-batch-box"); });
+	$("#go").click(function(event){ load_semester(); });
 
-// event listener for modal-box, to load faculty
-var modalbtn = document.getElementById("modal-box");
-if (modalbtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	//modalbtn.addEventListener("click", load_program(event));
-	modalbtn.addEventListener("click", function(){load_faculty(event)}, false);
-} else if (modalbtn.attachEvent) {                  // For IE 8 and earlier versions
-	modalbtn.attachEvent("onclick", load_faculty(event));
-}
-
-// event listener for p-faculty-box to load program of selected faculty
-var pfacultybtn = document.getElementById("p-faculty-box");
-if (pfacultybtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	pfacultybtn.addEventListener("change", function(){load_program(event)}, false);
-} else if (pfacultybtn.attachEvent) {                  // For IE 8 and earlier versions
-	pfacultybtn.attachEvent("onchange", load_program(event));
-}
-
-var facultybtn = document.getElementById("faculty-box");
-if (facultybtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	facultybtn.addEventListener("change", function(){load_program(event)}, false);
-} else if (facultybtn.attachEvent) {                  // For IE 8 and earlier versions
-	facultybtn.attachEvent("onchange", load_program(event));
-}
-
-var programbtn = document.getElementById("program-box");
-if (programbtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	programbtn.addEventListener("change", function(){load_batch_year(event)}, false);
-} else if (programbtn.attachEvent) {                  // For IE 8 and earlier versions
-	programbtn.attachEvent("onchange", load_batch_year(event));
-}
-
-var efacultybtn = document.getElementById("e-faculty-box");
-if (efacultybtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	efacultybtn.addEventListener("change", function(){load_program(event)}, false);
-} else if (efacultybtn.attachEvent) {                  // For IE 8 and earlier versions
-	efacultybtn.attachEvent("onchange", load_program(event));
-}
-
-var eprogrambtn = document.getElementById("e-program-box");
-if (eprogrambtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	eprogrambtn.addEventListener("change", function(){load_batch_year(event)}, false);
-} else if (eprogrambtn.attachEvent) {                  // For IE 8 and earlier versions
-	eprogrambtn.attachEvent("onchange", load_batch_year(event));
-}
-
-var gobtn = document.getElementById("go");
-if (gobtn.addEventListener) {                    // For all major browsers, except IE 8 and earlier
-	//gobtn.addEventListener("click", load_program(event));
-	gobtn.addEventListener("click", function(){load_semester()}, false);
-} else if (gobtn.attachEvent) {                  // For IE 8 and earlier versions
-	gobtn.attachEvent("onclick", load_semester());
-}
+});
 	
-function load_faculty(e) {
-	var id=document.getElementById("faculty-box").value;
-	//alert("s"+e.target.id);
-	var getid = e.target.id;
+function load_faculty(e, target) {
 	var url="../ajax_faculty_load";
 	var aj=new XMLHttpRequest();
 	aj.open("POST", url, true);
@@ -348,34 +305,15 @@ function load_faculty(e) {
 	aj.onreadystatechange=function(){
 		if (aj.readyState==4&&aj.status==200) {
 			var return_data=aj.responseText;
-			if(getid=="modal-box" || getid=="faculty-box"){
-				document.getElementById("faculty-box").innerHTML=return_data;	
-			}else if(getid=="edit"){
-				document.getElementById("e-faculty-box").innerHTML=return_data;
-			}else {
-				document.getElementById("p-faculty-box").innerHTML=return_data;
-			}
-			
+			$('#' + target).html(return_data);
 		}
 	}
-	aj.send(id);
+	aj.send();
 }
 
-function load_program(e) {
-	e = e || window.event;
-	//var target = e.target || e.srcElement;
+function load_program(e, target) {
 	var getid = e.target.id;
-	//alert(getid);
-	//var id = getid.value;
-	//alert(id);
-	
-	if(getid=="faculty-box"){
-		var id=document.getElementById("faculty-box").value;
-	}else if(getid=="e-faculty-box"){
-		var id=document.getElementById("e-faculty-box").value;
-	}else {
-		var id=document.getElementById("p-faculty-box").value;
-	}
+	var id = $('#'+getid).find(":selected").val();
 	var url="../aja";
 	var idSend="id="+id;
 	var aj=new XMLHttpRequest();
@@ -384,27 +322,15 @@ function load_program(e) {
 	aj.onreadystatechange=function(){
 		if (aj.readyState==4&&aj.status==200) {
 			var return_data=aj.responseText;
-			if(getid=="faculty-box"){
-				document.getElementById("program-box").innerHTML=return_data;	
-			}else if(getid=="e-faculty-box"){
-				document.getElementById("e-program-box").innerHTML=return_data;	
-			}else {
-				document.getElementById("p-program-box").innerHTML=return_data;
-			}
+			$('#' + target).html(return_data);
 		}
 	}
 	aj.send(idSend);
 }
 
-function load_batch_year(e) {
+function load_batch_year(e, target) {
 	var getid = e.target.id;
-	//alert(getid);
-	if(getid=="program-box"){
-		var id=document.getElementById("program-box").value;
-	}else {
-		var id=document.getElementById("e-program-box").value;
-	}
-	//var id=document.getElementById("program-box").value;
+	var id = $('#'+getid).find(":selected").val();
 	var url="../ajax_year_load";
 	var idSend="id="+id;
 	var aj=new XMLHttpRequest();
@@ -413,20 +339,23 @@ function load_batch_year(e) {
 	aj.onreadystatechange=function(){
 		if (aj.readyState==4&&aj.status==200) {
 			var return_data=aj.responseText;
-			if(getid=="program-box"){
-				document.getElementById("batch-box").innerHTML=return_data;	
-			}else {
-				document.getElementById("e-batch-box").innerHTML=return_data;
-			}
+			$('#' + target).html(return_data);
 		}
 	}
 	aj.send(idSend);
 }
 
 function load_semester(){
+	var pageId = getParameterByName('pageId');
+	alert("aa:"+pageId);
+	var start = 0;
+	if(pageId!=null){	var pageNo = pageId; var start=(pageNo-1)*5; }
+	else{	var pageNo = 1; }
+	
 	var id=document.getElementById("p-program-box").value;
+	alert("id:"+id);
 	var url="../ajax_semester_load";
-	var idSend="id="+id;
+	var idSend='id=' + id + '&start=' + start;
 	var aj=new XMLHttpRequest();
 	aj.open("POST", url, true);
 	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -435,13 +364,14 @@ function load_semester(){
 		if (aj.readyState == 4 && aj.status == 200) {
 			var json = eval('(' + aj.responseText + ')');
 	        var c = '';
-	        alert(json.tableData[0].batch_year);
-	        alert("total row="+json.TotalRowCount);
+	        //alert(json.tableData[0].batch_year);
+	        //alert("total row="+json.TotalRowCount);
 	        if(json.tableData.length<1){
 	        	//$("#mytable").hide();
 	        }else {
 	        	$("#mytable").show();
 	            for (var i = 0; i < json.tableData.length; i++) {
+	            	alert(aj.responseText);
 	            	c += '<tr id=\"row'+json.tableData[i].semester_id+' \">';
 	            	c += '<td><input type=\"checkbox\" class=\"checkthis\" /></td>';
 		            c += '<td>' + json.tableData[i].semester_id + '</td>';
@@ -457,6 +387,35 @@ function load_semester(){
 		            c += '</tr>';
 	            }
 	            $('#table-body').html(c); 
+	            $('#page-info').html(json.tableData.length+" out of "+json.TotalRow+" results");
+	            var p ='';
+	            if(pageNo>1)
+	            {
+	                //show previous, if its in page 1 then it is inactive
+	               	//p+= '<li><a href=\"?pageId=' +(pageNo-1)+'\" class=\"button\">PREVIOUS</a></li>';
+	                p+= "<li><a href='?pageId="+(pageNo-1)+"' class='button'>PREVIOUS</a></li>";
+	            }
+	               
+
+	            //show all the page link with page number. 
+	                    for(var x=1;x<=json.TotalPage;x++)
+	                    {
+	                        if(x==pageNo) { p+= "<li><a href='' class='active'>"+ x +"</li>"; }
+	                        
+	                        else { p+= "<li><a href='?pageId="+x+"'>"+ x +"</a></li>"; }
+	                    }
+
+
+	            if(pageNo!=json.TotalPage)
+	            {
+	                //Go to previous page to show next 10 items.
+	                p+= "<li align='right'><a href='?pageId="+(pageNo+1)+"' class='button'>NEXT</a></li>";
+	            }
+	            $('#page-links').html(p);
+	            $('#page-links a[href]').click(function(e) { 
+	            	//e.preventDefault();
+	            	load_semester();
+	            });
 	            
 	        }
 	     }
@@ -515,7 +474,15 @@ function load_delete(id){
 	aj.send(idSend);
 }
 
-
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 
 // for table
 $(document).ready(function(){

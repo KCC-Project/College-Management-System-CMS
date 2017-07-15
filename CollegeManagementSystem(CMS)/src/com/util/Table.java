@@ -1,13 +1,23 @@
 package com.util;
 
 public class Table {
-	static int rows;
+	static int totalRows;
+	static int totalPage;
 	
-	public static void setRowsCount(int n){
-		rows = n;
+	public static int getTotalRows() {
+		return totalRows;
+	}
+
+	public static void setTotalRows(int totalRows) {
+		Table.totalRows = totalRows;
+	}
+
+	public static int getTotalPage() {
+		return totalPage;
+	}
+
+	public static void setTotalPage(int totalPage) {
+		Table.totalPage = totalPage;
 	}
 	
-	public static int getRowsCount(){
-		return rows;
-	}
 }
