@@ -382,7 +382,7 @@
 			if (aj.readyState == 4 && aj.status == 200) {
 				document.getElementById("loader").hidden = true;
 				var jSonObject = eval('(' + aj.responseText + ')');
-				alert(jSonObject);
+				//alert(jSonObject);
 				var content = '';
 				for (var i = 0; i < jSonObject.length; i++) {
 					content += '<tr>';

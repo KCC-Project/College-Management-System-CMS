@@ -776,7 +776,7 @@
 		var idSend = "value=" + id;
 		//alert("ID="+id);
 		var aj = new XMLHttpRequest();
-		aj.open("POST", url, false);
+		aj.open("POST", url, true);
 		aj
 				.setRequestHeader("Content-type",
 						"application/x-www-form-urlencoded");

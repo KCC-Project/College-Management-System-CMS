@@ -39,7 +39,7 @@ $(document).ready(function() {
 		$.ajax({
 			url : "../ajax_add_result",
 			method : "POST",
-			cache : false,
+			cache : true,
 
 			data : {
 				student_id : student_id,
