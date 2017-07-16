@@ -127,7 +127,7 @@
 									<select class="form-control" id="batch-box2" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
 									</select> <select required class="form-control" id="Semester_box2"
-										name="Semester_box">
+										name="Semester_box" onclick="load_exam_type();">
 										<option value="" disabled selected>Select Semester</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -138,9 +138,14 @@
 										<option value="7">7</option>
 										<option value="8">8</option>
 
+									</select> <select required class="form-control" id="examType-boxPass"
+										name="examType_idPass">
+										<option value="" disabled selected>Select Exam Type</option>
 									</select> <select required class="form-control" id="pass_fail_box"
 										name="pass_fail_box">
 										<option value="" disabled selected>Select Pass/Fail</option>
+										<option value="1">Pass</option>
+										<option value="0">Fail</option>
 									</select>
 								</div>
 
@@ -149,7 +154,7 @@
 									<select class="form-control" id="batch-box4" name="batch_id">
 										<option value="" disabled selected>Select Batch</option>
 									</select> <select required class="form-control" id="Semester_box4"
-										name="Semester_box">
+										name="Semester_box" onclick="load_exam_type();">
 										<option value="" disabled selected>Select Semester</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -159,6 +164,9 @@
 										<option value="6">6</option>
 										<option value="7">7</option>
 										<option value="8">8</option>
+									</select> <select required class="form-control" id="examType-boxSubject"
+										name="examType_idSubject" onchange="load_subject();">
+										<option value="" disabled selected>Select Exam Type</option>
 									</select> <select required class="form-control"
 										id="subject-semester-box" name="subject-semester-box">
 										<option value="" disabled selected>Select Subject</option>
@@ -310,13 +318,13 @@
 
 			var idSend = "programId=" + programId + "&batchNo=" + batchNo
 					+ "&semesterNo=" + semesterNo;
-	
+
 			semesterID = getSemesterId(idSend);
-			
 
 			var send = "&programId=" + programId + "&batchNo=" + batchNo
 					+ "&semesterNo=" + semesterNo + "&facultyId=" + facultyId
-					+ "&examTypeId=" + examTypeId + "&semesterID=" + semesterID;
+					+ "&examTypeId=" + examTypeId + "&semesterID=" + semesterID
+					+ "&searchFilter=" + searchFilter;
 
 			var url = "../ajax_result_load_by_Batch";
 			var arr = [ url, send ];
@@ -330,18 +338,59 @@
 			var semesterNo = document.getElementById("Semester_box5").value;
 			var examTypeId = document.getElementById("examType-box5").value;
 			var enterField = document.getElementById("searchedEnteredField").value;
-			
+
 			var idSend = "programId=" + programId + "&batchNo=" + batchNo
-			+ "&semesterNo=" + semesterNo;
+					+ "&semesterNo=" + semesterNo;
 			semesterID = getSemesterId(idSend);
-			
+
 			var send = "&programId=" + programId + "&batchNo=" + batchNo
 					+ "&semesterNo=" + semesterNo + "&facultyId=" + facultyId
-					+ "&examTypeId=" + examTypeId + "&enterField=" + enterField+ "&semesterID=" + semesterID;
-			
+					+ "&examTypeId=" + examTypeId + "&enterField=" + enterField
+					+ "&semesterID=" + semesterID;
+
 			var url = "../ajax_result_load_by_nameEmailMarksId";
 			var arr = [ url, send ];
 			loadResults(arr);
+		} else if (searchFilter === 'Pass/Fail') {
+			var facultyId = document.getElementById("p-faculty-box").value;
+			var programId = document.getElementById("p-program-box").value;
+			var batchNo = document.getElementById("batch-box2").value;
+			var semesterNo = document.getElementById("Semester_box2").value;
+			var examTypeId = document.getElementById("examType-boxPass").value;
+			var pass_fail = document.getElementById("pass_fail_box").value;
+			var idSend = "programId=" + programId + "&batchNo=" + batchNo
+					+ "&semesterNo=" + semesterNo;
+			semesterID = getSemesterId(idSend);
+
+			var send = "&programId=" + programId + "&batchNo=" + batchNo
+					+ "&semesterNo=" + semesterNo + "&facultyId=" + facultyId
+					+ "&examTypeId=" + examTypeId + "&semesterID=" + semesterID
+					+ "&pass_fail=" + pass_fail;
+
+			var url = "../ajax_result_load_by_passFail";
+			var arr = [ url, send ];
+			loadResults(arr);
+		} else if (searchFilter === 'Subject') {
+			var facultyId = document.getElementById("p-faculty-box").value;
+			var programId = document.getElementById("p-program-box").value;
+			var batchNo = document.getElementById("batch-box4").value;
+			var semesterNo = document.getElementById("Semester_box4").value;
+
+			var examTypeId = document.getElementById("examType-boxSubject").value;
+			var subjectID = document.getElementById("subject-semester-box").value;
+
+			var idSend = "programId=" + programId + "&batchNo=" + batchNo
+					+ "&semesterNo=" + semesterNo;
+			semesterID = getSemesterId(idSend);
+			var send = "&programId=" + programId + "&batchNo=" + batchNo
+					+ "&semesterNo=" + semesterNo + "&facultyId=" + facultyId
+					+ "&examTypeId=" + examTypeId + "&semesterID=" + semesterID
+					+ "&subjectID=" + subjectID;
+
+			var url = "../ajax_result_load_by_subject";
+			var arr = [ url, send ];
+			loadResults(arr);
+
 		}
 	}
 	function getSemesterId(idSend) {
@@ -355,7 +404,7 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var return_data = aj.responseText;
-				
+
 				output = return_data;
 
 			}
@@ -517,6 +566,9 @@
 				var return_data = aj.responseText;
 				document.getElementById("batch-box1").innerHTML = return_data;
 				document.getElementById("batch-box5").innerHTML = return_data;
+				document.getElementById("batch-box2").innerHTML = return_data;
+				document.getElementById("batch-box4").innerHTML = return_data;
+
 			}
 		}
 		aj.send(idSend);
@@ -536,9 +588,36 @@
 				document.getElementById("examType-box5").innerHTML = return_data;
 				document.getElementById("examType-box").innerHTML = return_data;
 
+				document.getElementById("examType-boxPass").innerHTML = return_data;
+				document.getElementById("examType-boxSubject").innerHTML = return_data;
+
 			}
 		}
 		aj.send(id);
+	}
+	function load_subject() {
+		var programId = document.getElementById("p-program-box").value;
+		var batchNo = document.getElementById("batch-box4").value;
+		var semesterNo = document.getElementById("Semester_box4").value;
+
+		var idSend = "programId=" + programId + "&batchNo=" + batchNo
+				+ "&semesterNo=" + semesterNo;
+		var url = "../ajax_load_subject";
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var return_data = aj.responseText;
+				document.getElementById("subject-semester-box").innerHTML = return_data;
+
+				//alert(return_data);
+			}
+		}
+		aj.send(idSend);
+
 	}
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
