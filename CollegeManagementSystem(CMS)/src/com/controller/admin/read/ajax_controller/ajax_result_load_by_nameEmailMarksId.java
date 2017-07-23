@@ -151,6 +151,9 @@ public class ajax_result_load_by_nameEmailMarksId extends HttpServlet {
 								map.put("PassFailStatus", studentExamResultModel.getPassFailStatus());
 								map.put("StudentName", studentModel.getFirstname() + " " + studentModel.getMiddlename()
 										+ " " + studentModel.getLastname());
+								map.put("exam_id", studentExamResultModel.getExamId());
+								map.put("student_id", studentModel.getStudentID());
+								map.put("is_attended", studentExamResultModel.getIsAttended());
 								tempList.add(map);
 							}
 						}

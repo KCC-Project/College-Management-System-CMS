@@ -58,15 +58,6 @@ $(document).ready(
 
 			});
 
-			/*
-			 * $('#result_data').editable({ container : 'body', selector :
-			 * 'td.student_name', title : 'Student Name', type : "POST",
-			 * validate : function(value) { alert("done"); if ($.trim(value) ==
-			 * '') { return 'This field is required'; } }
-			 * 
-			 * });
-			 */
-
 			$('#employee_data').editable({
 				container : 'body',
 				selector : 'span.student_passFail',
@@ -121,73 +112,87 @@ $(document).ready(
 			});
 
 			// for update result
-			$('#result_data').editable({
-				container : 'body',
-				selector : 'td.student_score',
-				title : 'Marks',
-				validate : function(value) {
-					var regex = /^[0-9]+$/;
-					if ($.trim(value) == '') {
-						return 'This field is required';
-					}
-
-					else if (!regex.test(value)) {
-						return 'Numbers only!';
-					} else {
-						var examScore = $.trim(value);
-						var student_id;
-						var exam_id;
-						var is_attended;
-						var passFailStat;
-						var $row = $(this).closest("tr"), // Finds the closest
-															// row
-						// <tr>
-						$tds = $row.find("td:nth-child(1)"); // Finds the 1nd
-																// <td>
-						// element
-
-						$td = $row.find("td:nth-child(2)");
-						$isAttended = $row.find("td:nth-child(8)");
-						$passFail = $row.find("td:nth-child(9)");
-						$.each($tds, function() { // Visits every single <td>
-													// element
-							student_id = $(this).attr('value'); // Prints out
-																// the text
-							// within the <td>
-						});
-						$.each($td, function() {
-							exam_id = $(this).attr('value');
-						});
-
-						$.each($isAttended, function() {
-							is_attended = $(this).attr('value');
-						});
-						$.each($passFail, function() {
-							passFailStat = $(this).attr('value');
-						});
-
-						$.ajax({
-							url : "../update_result",
-							method : "POST",
-							cache : true,
-
-							data : {
-								student_id : student_id,
-								exam_id : exam_id,
-								examScore : examScore,
-								is_attended : is_attended,
-								passFailStatus : passFailStat
-							},
-							success : function(data) {
-								alert("from ajax=" + data);
-							},
-							error : function() {
-								alert("from ajax=" + data);
+			$('#result_data').editable(
+					{
+						container : 'body',
+						selector : 'td.student_score',
+						title : 'Marks',
+						validate : function(value) {
+							var regex = /^[0-9]+$/;
+							if ($.trim(value) == '') {
+								return 'This field is required';
 							}
-						});
-					}
-				}
-			});
+
+							else if (!regex.test(value)) {
+								return 'Numbers only!';
+							} else {
+								var examScore = $.trim(value);
+								var student_id;
+								var exam_id;
+								var is_attended;
+								var passFailStat;
+								var $row = $(this).closest("tr"), // Finds the
+								// closest
+								// row
+								// <tr>
+								$tds = $row.find("td:nth-child(1)"); // Finds
+								// the
+								// 1nd
+								// <td>
+								// element
+
+								$td = $row.find("td:nth-child(2)");
+								$isAttended = $row.find("td:nth-child(8)");
+								$passFail = $row.find("td:nth-child(9)");
+								$.each($tds, function() { // Visits every
+									// single <td>
+									// element
+									student_id = $(this).attr('value'); // Prints
+									// out
+									// the text
+									// within the <td>
+								});
+								$.each($td, function() {
+									exam_id = $(this).attr('value');
+								});
+
+								$.each($isAttended, function() {
+									is_attended = $(this).attr('value');
+								});
+								$.each($passFail, function() {
+									passFailStat = $(this).attr('value');
+								});
+
+								$.ajax({
+									url : "../update_result",
+									method : "POST",
+									cache : true,
+
+									data : {
+										student_id : student_id,
+										exam_id : exam_id,
+										examScore : examScore,
+										is_attended : is_attended,
+										passFailStatus : passFailStat
+									},
+									success : function(data) {
+										$('#sucessFulBtn')
+												.removeClass("hidden");
+										$('#sucessFulBtn').show();
+										$('#sucessFulBtn').delay(1000).fadeOut(
+												'slow');
+									},
+									error : function() {
+										$('#unsucessfulBtn').removeClass(
+												"hidden");
+										$('#unsucessfulBtn').show();
+										$('#unsucessfulBtn').delay(1000)
+												.fadeOut('slow');
+									}
+								});
+							}
+						}
+					});
 			$('#result_data').editable(
 					{
 
@@ -210,29 +215,15 @@ $(document).ready(
 								var student_id;
 								var exam_id;
 								var is_attended;
-								var passFailStat=$.trim(value);
-								var $row = $(this).closest("tr"), // Finds the
-																	// closest
-																	// row
-								// <tr>
-								$tds = $row.find("td:nth-child(1)"); // Finds
-																		// the
-																		// 1nd
-																		// <td>
-								// element
-
+								var passFailStat = $.trim(value);
+								var $row = $(this).closest("tr"), $tds = $row
+										.find("td:nth-child(1)");
 								$td = $row.find("td:nth-child(2)");
 								$score = $row.find("td:nth-child(7)");
 								$isAttended = $row.find("td:nth-child(8)");
 
-								$.each($tds, function() { // Visits every
-															// single <td>
-															// element
-									student_id = $(this).attr('value'); // Prints
-																		// out
-																		// the
-																		// text
-									// within the <td>
+								$.each($tds, function() {
+									student_id = $(this).attr('value');
 								});
 								$.each($td, function() {
 									exam_id = $(this).attr('value');
@@ -242,13 +233,20 @@ $(document).ready(
 									is_attended = $(this).attr('value');
 								});
 
-								
 								$.each($score, function() {
 									examScore = $(this).text();
 								});
-								alert("examScore=" + examScore
-										+ " passFailStat=" + passFailStat
-										+ " is_attended=" + is_attended);
+								
+								// yo vayena
+								if (passFailStat == 1) {
+									$('.student_passFail', this).addClass(
+											"btn btn-warning");
+
+								} else {
+									$('.student_passFail', this).addClass(
+											"btn-danger");
+								}
+
 								$.ajax({
 									url : "../update_result",
 									method : "POST",
@@ -262,83 +260,92 @@ $(document).ready(
 										passFailStatus : passFailStat
 									},
 									success : function(data) {
-										alert("from ajax=" + data);
+										$('#sucessFulBtn')
+												.removeClass("hidden");
+										$('#sucessFulBtn').show();
+										$('#sucessFulBtn').delay(1000).fadeOut(
+												'slow');
 									},
 									error : function() {
-										alert("from ajax=" + data);
+										$('#unsucessfulBtn').removeClass(
+												"hidden");
+										$('#unsucessfulBtn').show();
+										$('#unsucessfulBtn').delay(1000)
+												.fadeOut('slow');
 									}
 								});
 							}
 						}
 					});
 
-			$('#result_data').editable({
-				container : 'body',
-				selector : 'td.student_attendence',
-				title : 'Attendence',
-				source : [ {
-					value : 1,
-					text : "Present"
-				}, {
-					value : 0,
-					text : "Absent"
-				} ],
-				validate : function(value) {
-					if ($.trim(value) == '') {
-						return 'This field is required';
-					}else{
-						var examScore;
-						var student_id;
-						var exam_id;
-						var is_attended=$.trim(value);
-						var passFailStat;
-						var $row = $(this).closest("tr"), // Finds the closest
-															// row
-						// <tr>
-						$tds = $row.find("td:nth-child(1)"); // Finds the 1nd
-																// <td>
-						// element
+			$('#result_data').editable(
+					{
+						container : 'body',
+						selector : 'td.student_attendence',
+						title : 'Attendence',
+						source : [ {
+							value : 1,
+							text : "Present"
+						}, {
+							value : 0,
+							text : "Absent"
+						} ],
+						validate : function(value) {
+							if ($.trim(value) == '') {
+								return 'This field is required';
+							} else {
+								var examScore;
+								var student_id;
+								var exam_id;
+								var is_attended = $.trim(value);
+								var passFailStat;
+								var $row = $(this).closest("tr"), $tds = $row
+										.find("td:nth-child(1)");
+								$td = $row.find("td:nth-child(2)");
+								$score = $row.find("td:nth-child(7)");
+								$passFail = $row.find("td:nth-child(9)");
+								$.each($tds, function() {
+									student_id = $(this).attr('value');
+								});
+								$.each($td, function() {
+									exam_id = $(this).attr('value');
+								});
+								$.each($score, function() {
+									examScore = $(this).text();
+								});
 
-						$td = $row.find("td:nth-child(2)");
-						$score = $row.find("td:nth-child(7)");
-						$passFail = $row.find("td:nth-child(9)");
-						$.each($tds, function() { // Visits every single <td>
-													// element
-							student_id = $(this).attr('value'); // Prints out
-																// the text
-							// within the <td>
-						});
-						$.each($td, function() {
-							exam_id = $(this).attr('value');
-						});
-						$.each($score, function() {
-							examScore = $(this).text();
-						});
-						
-						$.each($passFail, function() {
-							passFailStat = $(this).attr('value');
-						});
+								$.each($passFail, function() {
+									passFailStat = $(this).attr('value');
+								});
 
-						$.ajax({
-							url : "../update_result",
-							method : "POST",
-							cache : true,
+								$.ajax({
+									url : "../update_result",
+									method : "POST",
+									cache : true,
+									data : {
+										student_id : student_id,
+										exam_id : exam_id,
+										examScore : examScore,
+										is_attended : is_attended,
+										passFailStatus : passFailStat
+									},
+									success : function(data) {
+										$('#sucessFulBtn')
+												.removeClass("hidden");
+										$('#sucessFulBtn').show();
+										$('#sucessFulBtn').delay(1000).fadeOut(
+												'slow');
 
-							data : {
-								student_id : student_id,
-								exam_id : exam_id,
-								examScore : examScore,
-								is_attended : is_attended,
-								passFailStatus : passFailStat
-							},
-							success : function(data) {
-								alert("from ajax=" + data);
-							},
-							error : function() {
-								alert("from ajax=" + data);
+									},
+									error : function() {
+										$('#unsucessfulBtn').removeClass(
+												"hidden");
+										$('#unsucessfulBtn').show();
+										$('#unsucessfulBtn').delay(1000)
+												.fadeOut('slow');
+									}
+								});
 							}
-						});
-					}
-				}
-			});
+						}
+					});
 		});

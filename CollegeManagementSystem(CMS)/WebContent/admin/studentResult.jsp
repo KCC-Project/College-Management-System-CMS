@@ -223,7 +223,10 @@
 								class="visible-xs"
 								style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
 								class="fa fa-graduation-cap"></i> Exam result</span>
+										<button   type="button"  id="sucessFulBtn" class="btn btn-warning center-block hidden ">Updated</button>
+										<button   type="button"  id="unsucessfulBtn" class="btn btn-warning center-block hidden ">Error in update</button>
 						</h3>
+				
 					</div>
 				</div>
 
