@@ -204,14 +204,14 @@ public class StudentExamResultModelImpl implements StudentExamResultModelInterfa
 	public boolean update(StudentExamResultModel model) {
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "update student_exam set exam_id=?,exam_marks=?,is_attended=?,pass_fail_status=? where  student_id=?";
+			sql = "update student_exam set exam_marks=?,is_attended=?,pass_fail_status=? where  (student_id=? && exam_id=?)";
 			pst = conn.prepareStatement(sql);
 			int col = 1;
-			pst.setInt(col++, model.getExamId());
 			pst.setInt(col++, model.getExamMarks());
 			pst.setInt(col++, model.getIsAttended());
 			pst.setInt(col++, model.getPassFailStatus());
 			pst.setInt(col++, model.getStudentId());
+			pst.setInt(col++, model.getExamId());
 			int count = pst.executeUpdate();
 			if (count > 0) {
 				return true;

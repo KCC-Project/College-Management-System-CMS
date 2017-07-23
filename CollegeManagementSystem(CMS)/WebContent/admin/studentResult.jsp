@@ -14,7 +14,7 @@
 	href="../Resources/font-awesome/css/font-awesome.min.css">
 <link href="../Resources/css/manageExam.css" rel="stylesheet"
 	type="text/css">
-
+<link href="../Resources/css/bootstrap-editable.css" rel="stylesheet" />
 <jsp:include page="admin-header.jsp" />
 
 
@@ -49,7 +49,7 @@
 						<button id="seacrchBtnClicked" type="button" class="btn btn-info"
 							style="float: left; margin-left: -20px;" data-toggle="modal"
 							data-target=#searchModal onclick="searchBtn();">
-							<span class="glyphicon glyphicon-search"></span> Search
+							<span class="glyphicon glyphicon-search"></span> Result Search
 						</button>
 					</h3>
 				</div>
@@ -106,7 +106,6 @@
 										<option value="" disabled selected>Select Batch</option>
 									</select> <select required class="form-control" id="Semester_box1"
 										name="Semester_box" onclick="load_exam_type();">
-										<option value="" disabled selected>Select Semester</option>
 										<option value="" disabled selected>Select Semester</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -246,8 +245,9 @@
 												<td class="hidden-xs">FullMarks</td>
 												<td class="hidden-xs">PassMarks</td>
 												<td class="hidden-xs">Scored</td>
+												<td class="hidden-xs">Attendence</td>
 												<td>Pass/Fail</td>
-												<td class="hidden-xs">Program</td>
+
 											</tr>
 										<tbody id="result_data">
 										</tbody>
@@ -432,11 +432,13 @@
 				document.getElementById("loader").hidden = true;
 				var jSonObject = eval('(' + aj.responseText + ')');
 				//alert(jSonObject);
+
 				var content = '';
 				for (var i = 0; i < jSonObject.length; i++) {
 					content += '<tr>';
-					content += '<td  class="student_sn">' + (i + 1) + '</td>';
-					content += "<td data-pk="+jSonObject[i].StudentName+" value="+jSonObject[i].StudentName+" data-name=\"student_name\"  data-type=\"text\" class=\"student_name\" id='student_name'>"
+					content += '<td  value='+jSonObject[i].student_id+' class="student_sn">'
+							+ (i + 1) + '</td>';
+					content += "<td value="+jSonObject[i].exam_id+" data-name=\"student_name\"  data-type=\"text\" class=\"student_name\" id='student_name'>"
 							+ jSonObject[i].StudentName + "</td>";
 
 					content += '<td  class="student_subject">'
@@ -447,18 +449,27 @@
 							+ jSonObject[i].FullMarks + '</td>';
 					content += '<td  class="student_passMarks">'
 							+ jSonObject[i].passMarks + '</td>';
-					content += '<td  class="student_scoredmarks">'
+					content += '<td  class="student_score">'
 							+ jSonObject[i].ScoredMarks + '</td>';
+
+					var isAttended = jSonObject[i].is_attended;
+					var isAttendedString;
+					if (isAttended === 0) {
+						isAttendedString="Absent";
+					}else if(isAttended === 1){
+						isAttendedString="Present";
+					}
+					content += '<td value='+isAttended+' data-type="select" class="student_attendence" >'
+							+ isAttendedString + '</td>';
 					var passFailStatus = jSonObject[i].PassFailStatus;
 					if (passFailStatus === 0) {
 						/*<i class="fa fa-sitemap"> <i class="fa fa-users">*/
-						content += '	<td><span class="btn btn-sm btn-danger student_passFail" data-name="student_passFail" data-type="select"  data-pk="'+0+'"> </i> &nbsp;&nbsp; Fail &nbsp;</span></td>';
+						content += '	<td value='+passFailStatus+'><span  class="btn btn-sm btn-danger student_passFail" data-name="student_passFail" data-type="select"  data-pk="'+0+'"> </i> &nbsp;&nbsp; Fail &nbsp;</span></td>';
 					} else {
-						content += '	<td ><span class="btn btn-sm btn-warning student_passFail " data-name="student_passFail" data-type="select"   data-pk="'+1+'"> </i> &nbsp;&nbsp;Pass &nbsp;</span></td>';
+						content += '	<td value='+passFailStatus+'><span  class="btn btn-sm btn-warning student_passFail " data-name="student_passFail" data-type="select"   data-pk="'+1+'"> </i> &nbsp;&nbsp;Pass &nbsp;</span></td>';
 
 					}
-					content += '<td   class="program" data-name="program" data-type="select"  ><button type="button" class="btn btn-info">'
-							+ jSonObject[i].ProgramName + '</button></td>';
+
 					content += '<tr>';
 				}
 				$("#result_data").html(content);
@@ -627,7 +638,8 @@
 <script src="../Resources/js/bootstrap.min.js"></script>
 <script src="../Resources/js/default.js"></script>
 <script src="../Resources/plugins/summernote/dist/summernote.min.js"></script>
-
+<script src="../Resources/js/bootstrap-editable.min.js"></script>
+<script src="../Resources/js/dynamicTableJs.js"></script>
 
 
 </body>
