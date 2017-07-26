@@ -10,9 +10,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
-<link href="Resources/css/w3school.css" rel="stylesheet"
-	type="text/css">
-<link rel="stylesheet" href="Resources/font-awesome/css/font-awesome.min.css">
+<link href="Resources/css/w3school.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="Resources/font-awesome/css/font-awesome.min.css">
 <link href="Resources/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css">
 <link href="Resources/css/loginAndResetPassword.css" rel="stylesheet"
@@ -21,7 +21,7 @@
 
 </head>
 <body>
-<div id="google_translate_element"></div>
+	<div id="google_translate_element"></div>
 	<div class="container">
 
 		<form method="post" action="login">
@@ -119,7 +119,7 @@
 							id="forgotemailname" placeholder="Email">
 					</div>
 					<div class="rotationIcon text-center" hidden id="rotationIcon">
-						<i class='fa fa-refresh w3-spin' style="font-size: 50px; "></i>
+						<i class='fa fa-refresh w3-spin' style="font-size: 50px;"></i>
 					</div>
 					<Button onclick="send();" type="submit" id="btnn"
 						class="btn btn-primary active btn-block submit-btn login-btnReset">
@@ -159,6 +159,7 @@
 						document.getElementById("forgotemailname").disabled = true;
 						document.getElementById("btnn").innerHTML = "Sucessfull";
 						document.getElementById("rotationIcon").style.display = "none";
+						verificationTimeLimit(email);
 					} else {
 						document.getElementById("rotationIcon").style.display = "none";
 						document.getElementById("btnn").style.display = "block";
@@ -172,7 +173,25 @@
 			}
 			aj.send(sendEmail);
 		}
+		function verificationTimeLimit(email) {
+			setTimeout(function() {
+				var url = "forgotPassword_verificationTimeLimit";
+				var sendEmail = "email=" + email;
+				var aj = new XMLHttpRequest();
+				aj.open("POST", url, true);
+				aj.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+				aj.onreadystatechange = function() {
 
+					if (aj.readyState == 4 && aj.status == 200) {
+						var return_data = aj.responseText;
+						alert(return_data);
+					}
+				}
+				aj.send(sendEmail);
+			}, 600000);//10 minutes600000
+		}
+		
 		function showSubmit() {
 			document.getElementById("rotationIcon").style.display = "none";
 			document.getElementById("btnn").disabled = false;
@@ -187,16 +206,18 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
+
 	<script type="text/javascript">
 		function googleTranslateElementInit() {
-  			new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+			new google.translate.TranslateElement({
+				pageLanguage : 'en'
+			}, 'google_translate_element');
 		}
 	</script>
 
-	<script type="text/javascript" 
+	<script type="text/javascript"
 		src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-		
+
 
 </body>
 </html>
