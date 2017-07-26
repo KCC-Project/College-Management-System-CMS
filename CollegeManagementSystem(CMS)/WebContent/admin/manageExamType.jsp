@@ -84,8 +84,7 @@
 
 									<%=i%>.<%=model.getExamTypeName()%>
 
-									<div class="pull-right"
-										style="margin: 0px; padding: 0px; position: relative; margin-top: -6px;">
+									<div class="pull-right" style="margin: 0px; padding: 0px; position: relative; margin-top: -6px;">
 										<span class="btn btn-sm btn-info  hidden-xs"> <i
 											class="fa fa-users"></i> Students &nbsp; <span class="badge">
 												5 </span>
@@ -283,10 +282,9 @@
 			if (aj.readyState==4&&aj.status==200) {
 				var return_data=aj.responseText;
 				
-				if (return_data==0) {
+				if (return_data==1) {
 					alert("Data already Exit");
 					document.getElementById("submitBtn").disabled = true;
-					
 				}
 			
 				}

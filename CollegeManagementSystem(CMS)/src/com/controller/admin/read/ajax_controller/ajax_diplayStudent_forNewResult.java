@@ -81,8 +81,20 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 			for (StudentModel studentModel : studentList) {
 
 				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("Name", studentModel.getFirstname() + " " + studentModel.getMiddlename() + " "
-						+ studentModel.getLastname());
+				boolean isEmpty = false;
+				try {
+					isEmpty = studentModel.getMiddlename().isEmpty();
+				} catch (Exception e) {
+					isEmpty=true;
+				}
+				if (isEmpty==true) {
+					map.put("Name", studentModel.getFirstname()  + " "
+							+ studentModel.getLastname());
+				}else {
+					map.put("Name", studentModel.getFirstname() + " " + studentModel.getMiddlename() + " "
+							+ studentModel.getLastname());
+				}
+				
 				map.put("studentId", studentModel.getStudentID());
 				studentName.add(map);
 

@@ -225,6 +225,7 @@
 								class="fa fa-graduation-cap"></i> Exam result</span>
 										<button   type="button"  id="sucessFulBtn" class="btn btn-warning center-block hidden ">Updated</button>
 										<button   type="button"  id="unsucessfulBtn" class="btn btn-warning center-block hidden ">Error in update</button>
+										<span class="glyphicon glyphicon-info-sign text-success pull-right " style="margin-right:10px;margin-top: 4px;cursor:pointer " data-toggle="modal" data-target="#infoModal"></span>
 						</h3>
 				
 					</div>
@@ -300,6 +301,29 @@
 
 			</div>
 		</div>
+		
+		
+		<div class="modal fade" id="infoModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Information</h4>
+        </div>
+        <div class="modal-body">
+          <p>Only</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;1.Score</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;2.Attendence</p>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;3.Pass/Fail</p>
+          <p>Are updatable.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+		
 		<!--=========================================================================================  -->
 	</div>
 </div>
@@ -538,14 +562,14 @@
 			load_batch_year();
 			document.getElementById("semester-batch").hidden = true;
 			document.getElementById("fass-fail-semester").hidden = true;
-			document.getElementById("exam_type-semester").hidden = true;
+			
 			document.getElementById("subject-semester").hidden = true;
 		} else if (searchedOption === "Batch") {
 			document.getElementById("semester-batch").hidden = false;
 			load_batch_year();
 			document.getElementById("name-email-marks").hidden = true;
 			document.getElementById("fass-fail-semester").hidden = true;
-			document.getElementById("exam_type-semester").hidden = true;
+			
 			document.getElementById("subject-semester").hidden = true;
 
 		} else if (searchedOption === "Pass/Fail") {
@@ -553,7 +577,7 @@
 			load_batch_year();
 			document.getElementById("name-email-marks").hidden = true;
 			document.getElementById("semester-batch").hidden = true;
-			document.getElementById("exam_type-semester").hidden = true;
+			
 			document.getElementById("subject-semester").hidden = true;
 
 		} else if (searchedOption === "Subject") {
@@ -562,7 +586,7 @@
 			document.getElementById("name-email-marks").hidden = true;
 			document.getElementById("semester-batch").hidden = true;
 			document.getElementById("fass-fail-semester").hidden = true;
-			document.getElementById("exam_type-semester").hidden = true;
+		
 		}
 	}
 
@@ -636,7 +660,6 @@
 </script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../Resources/js/jquery-3.2.1.min.js"></script>
-<!-- Muzi Budaa...yo chaii halna pardaina -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../Resources/js/bootstrap.min.js"></script>
 <script src="../Resources/js/default.js"></script>

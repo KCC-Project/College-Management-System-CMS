@@ -149,8 +149,19 @@ public class ajax_result_load_by_nameEmailMarksId extends HttpServlet {
 								map.put("passMarks", examInfoModel2.getPassmarks());
 								map.put("ScoredMarks", studentExamResultModel.getExamMarks());
 								map.put("PassFailStatus", studentExamResultModel.getPassFailStatus());
-								map.put("StudentName", studentModel.getFirstname() + " " + studentModel.getMiddlename()
-										+ " " + studentModel.getLastname());
+								boolean isEmpty = false;
+								try {
+									isEmpty = studentModel.getMiddlename().isEmpty();
+								} catch (Exception e) {
+									isEmpty=true;
+								}
+								if (isEmpty==true) {
+									map.put("StudentName", studentModel.getFirstname()  + " "
+											+ studentModel.getLastname());
+								}else {
+									map.put("StudentName", studentModel.getFirstname() + " " + studentModel.getMiddlename() + " "
+											+ studentModel.getLastname());
+								}
 								map.put("exam_id", studentExamResultModel.getExamId());
 								map.put("student_id", studentModel.getStudentID());
 								map.put("is_attended", studentExamResultModel.getIsAttended());

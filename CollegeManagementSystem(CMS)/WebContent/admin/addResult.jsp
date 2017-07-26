@@ -414,14 +414,10 @@
 							+ jSonObject.ExamInfo[0].PassMarks + '</td>';
 					content += '<td  data-name="student_attendence" data-type="select" class="student_attendence" ></td>';
 					content += '<td  data-type="text" data-name="student_score" class="student_score"  ></td>';
-					var passFailStatus = 0;
-					if (passFailStatus === 0) {
-						/*<i class="fa fa-sitemap"> <i class="fa fa-users">*/
-						content += '	<td><span class="btn btn-sm btn-danger student_passFail" data-name="student_passFail" data-type="select"  data-pk="'+0+'"> </i> &nbsp;&nbsp; &nbsp;</span></td>';
-					} else {
+					
 						content += '	<td ><span class="btn btn-sm btn-warning student_passFail " data-name="student_passFail" data-type="select"   data-pk="'+1+'"> </i> &nbsp;&nbsp; &nbsp;</span></td>';
 
-					}
+		
 					content += '<td  hidden class="exam_id" data-name="examId" data-type="select" class="examId" data-pk="'+jSonObject.ExamInfo[0].ExamId+'" value="'+jSonObject.ExamInfo[0].ExamId+'">'
 							+ jSonObject.ExamInfo[0].ExamId + '</td>';
 					content += '<tr>';

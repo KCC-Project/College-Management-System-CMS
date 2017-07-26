@@ -27,13 +27,15 @@ public class ajax_checkIf_ExamType_exit extends HttpServlet {
 		PrintWriter out= response.getWriter();
 		
 		int sucess=0;
+		if(list.size()>0) {
 		for (ExamModel examModel : list) {
 			if (examTypeName.equalsIgnoreCase(examModel.getExamTypeName())) {
-			sucess=0;
+			sucess=1;
 			break;
 			}else{
-				sucess=1;
+				sucess=0;
 			}
+		}
 		}
 		out.write(""+sucess);
 		out.flush();
