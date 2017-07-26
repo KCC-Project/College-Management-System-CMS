@@ -311,11 +311,11 @@
           <h4 class="modal-title">Information</h4>
         </div>
         <div class="modal-body">
-          <p>Only</p>
+          <p>Click To.............</p>
           <p>&nbsp;&nbsp;&nbsp;&nbsp;1.Score</p>
           <p>&nbsp;&nbsp;&nbsp;&nbsp;2.Attendence</p>
           <p>&nbsp;&nbsp;&nbsp;&nbsp;3.Pass/Fail</p>
-          <p>Are updatable.</p>
+          <p> To Update.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

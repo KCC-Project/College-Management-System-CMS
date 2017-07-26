@@ -59,13 +59,10 @@ public class forgotPassword extends HttpServlet {
 					request.setAttribute("Message", resultMessage);
 				}
 			}
-
 		}
-
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		out.flush();
-
 	}
 
 }
