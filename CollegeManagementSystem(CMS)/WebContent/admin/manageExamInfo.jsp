@@ -886,6 +886,7 @@
 					content += '<td>'+ jSonObject[i].fullMarks + '</td>';
 					content += '<td>'+ jSonObject[i].passMarks + '</td>';
 					content += '<td>'+ jSonObject[i].status + '</td>';
+					content += '<td><span class="btn btn-sm btn-info  hidden-xs hidden-sm"> <i class="fa fa-users"></i> BE-computer &nbsp; <span class="badge"> 5 </span></span> </td>';
 					content += '</tr>';
 				}
 				$("#examInfoData").html(content);
