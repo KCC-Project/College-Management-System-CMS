@@ -87,7 +87,7 @@
 												<td class="hidden-xs">Semester</td>
 												<td>Start Date</td>
 												<!-- <td class="hidden-xs">End Date</td> -->
-												<td class="hidden-xs">Start Time</td>
+												<td>Start Time</td>
 												<!-- <td class="hidden-xs">End Time</td> -->
 												<td class="hidden-xs">Full Marks</td>
 												<td class="hidden-xs">Pass Marks</td>
@@ -877,16 +877,20 @@
 					content += '<tr>';
 					content += '<td>'+ (i + 1) + '</td>';
 					content += '<td>'+ jSonObject[i].subjectName + '</td>';
-					content += '<td>'+jSonObject[i].examType  + '</td>';
-					content += '<td>'+ jSonObject[i].semesterNo + '</td>';
+					content += '<td class="hidden-xs">'+jSonObject[i].examType  + '</td>';
+					content += '<td class="hidden-xs">'+ jSonObject[i].semesterNo + '</td>';
 					content += '<td>'+ jSonObject[i].startDate + '</td>';
-					/* content += '<td>'+ jSonObject[i].endDate + '</td>'; */
+					/* content += '<td class="hidden-xs"> '+ jSonObject[i].endDate + '</td>'; */
 					content += '<td>'+ jSonObject[i].startTime + '</td>';
-					/* content += '<td>'+ jSonObject[i].endTime + '</td>'; */
-					content += '<td>'+ jSonObject[i].fullMarks + '</td>';
-					content += '<td>'+ jSonObject[i].passMarks + '</td>';
-					content += '<td>'+ jSonObject[i].status + '</td>';
-					content += '<td><span class="btn btn-sm btn-info  hidden-xs hidden-sm"> <i class="fa fa-users"></i> BE-computer &nbsp; <span class="badge"> 5 </span></span> </td>';
+					/* content += '<td class="hidden-xs">'+ jSonObject[i].endTime + '</td>'; */
+					content += '<td class="hidden-xs">'+ jSonObject[i].fullMarks + '</td>';
+					content += '<td class="hidden-xs">'+ jSonObject[i].passMarks + '</td>';
+					content += '<td class="hidden-xs">'+ jSonObject[i].status + '</td>';
+					content += '<td><span class="btn btn-sm btn-info  hidden-xs hidden-sm"> <i class="fa fa-users"></i> BE-computer &nbsp; <span class="badge"> 5 </span></span> \
+						<a href="#?id="+jSonObject[i].examId +" class="btn-sm btn btn-default hidden-lg hidden-md hidden-sm visible-xs" title="View Exam Details" " data-toggle="modal" data-target=#viewExamDetail onclick="viewExamDetailsOriginal("+jSonObject[i].examId+");" id="viewExamDetails"><i class="fa fa-eye"></i></a>\
+						<a onclick="loadUpdate();viewExamDetails("+jSonObject[i].examId +");" class="btn-sm btn btn-default" href="#?id="+jSonObject[i].examId +"" data-toggle="modal" data-target=#mad id="updateExamDetail" title="Edit Course Details"><i class="fa fa-pencil-square-o"></i></a>\
+						<a onclick="viewExamDetails("+jSonObject[i].examId +"); " href="#?id="+jSonObject[i].examId +"" class="btn-sm btn btn-default" data-toggle="modal" data-target=#deleteExamType title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a>\
+								</td>';
 					content += '</tr>';
 				}
 				$("#examInfoData").html(content);

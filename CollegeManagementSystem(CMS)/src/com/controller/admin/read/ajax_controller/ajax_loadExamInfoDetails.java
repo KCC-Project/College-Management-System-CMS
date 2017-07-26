@@ -52,6 +52,7 @@ public class ajax_loadExamInfoDetails extends HttpServlet {
 			map.put("passMarks", examInfoModel.getPassmarks());
 			map.put("status", examInfoModel.getStatus());
 			map.put("semesterNo", semesterModel.getSemester_no());
+			map.put("examId", examInfoModel.getExamId());
 			listRandom.add(map);
 		}
 	}
