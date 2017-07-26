@@ -62,8 +62,8 @@
 								Information</span> <span class="visible-xs"
 								style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
 								class="fa fa-graduation-cap"></i> Manage Exam info</span> <label
-								class="switch pull-right"> <input type="checkbox" checked>
-								<span class="slider round"></span>
+								class="switch pull-right" > <input type="checkbox" checked>
+								<span class="slider round" onclick="loadExamInfoData();"></span>
 							</label>
 						</h3>
 					</div>
@@ -78,9 +78,9 @@
 							<div class="box-header with-border">
 								<br>
 								<div class="table-responsive">
-									<table class="table table-hover">
+									<table class="table table-hover" id="examInfoDataTable">
 										<thead>
-											<tr>
+											<tr >
 												<td>S.No</td>
 												<td>Subject</td>
 												<td class="hidden-xs">Exam Type</td>
@@ -88,61 +88,14 @@
 												<td>Start Date</td>
 												<!-- <td class="hidden-xs">End Date</td> -->
 												<td class="hidden-xs">Start Time</td>
-												<td class="hidden-xs">End Time</td>
+												<!-- <td class="hidden-xs">End Time</td> -->
 												<td class="hidden-xs">Full Marks</td>
 												<td class="hidden-xs">Pass Marks</td>
 												<td class="hidden-xs">Status</td>
 
 											</tr>
 										</thead>
-										<tbody>
-											<%
-												ExamInfoModelServiceInterface interfaceModel = new ExamInfoModelServiceImpl();
-												List<ExamInfoModel> list = interfaceModel.getAllExamInfo();
-												int i = 0;
-												for (ExamInfoModel model : list) {
-													i++;
-											%>
-											<tr>
-												<td><%=i%>.</td>
-												<td><%=model.getSubjectName()%></td>
-												<td class="hidden-xs"><%=model.getExamTypeName()%></td>
-												<td class="hidden-xs"><%=model.getSemester_id()%></td>
-												<td><%=model.getExamStartDate()%></td>
-												<%-- <td class="hidden-xs"><%=model.getExamEndDate()%></td> --%>
-												<td class="hidden-xs"><%=model.getExamStartTime()%></td>
-												<td class="hidden-xs"><%=model.getExamEndTime()%></td>
-												<td class="hidden-xs"><%=model.getFullmarks()%></td>
-												<td class="hidden-xs"><%=model.getPassmarks()%></td>
-												<td class="hidden-xs"><%=model.getStatus()%></td>
-
-												<td><span
-													class="btn btn-sm btn-info  hidden-xs hidden-sm"> <i
-														class="fa fa-users"></i> BE-computer &nbsp; <span
-														class="badge"> 5 </span>
-												</span> <a href="#?id=<%=model.getExamId()%>"
-													class="btn-sm btn btn-default hidden-lg hidden-md hidden-sm visible-xs"
-													title="View Exam Details" "
-											data-toggle="modal"
-													data-target=#viewExamDetail
-													onclick="viewExamDetailsOriginal('<%=model.getExamId()%>');"
-													id="viewExamDetails"><i class="fa fa-eye"></i></a> <a
-													onclick="loadUpdate();viewExamDetails('<%=model.getExamId()%>');"
-													class="btn-sm btn btn-default"
-													href="#?id=<%=model.getExamId()%>" data-toggle="modal"
-													data-target=#mad id="updateExamDetail"
-													title="Edit Course Details"><i
-														class="fa fa-pencil-square-o"></i></a> <a
-													onclick="viewExamDetails('<%=model.getExamId()%>'); "
-													href="#?id=<%=model.getExamId()%>"
-													class="btn-sm btn btn-default" data-toggle="modal"
-													data-target=#deleteExamType title="Delete"
-													data-method="post"><i class="fa fa-trash-o"></i></a></td>
-											</tr>
-											<%
-												}
-											%>
-										</tbody>
+										<tbody id="examInfoData" ></tbody>
 									</table>
 								</div>
 							</div>
@@ -897,6 +850,49 @@
 			}
 		}
 		aj.send(idSend);
+	}
+	var count=1;
+	function loadExamInfoData(){
+		var aj = new XMLHttpRequest();
+		var url="../ajax_loadExamInfoDetails";
+		var status;
+		if (count%2===0) {
+			console.log("div by 2");
+			 status="status=1"
+		}else{
+			console.log("Not by 2");
+			status="status=0"
+		}
+		
+		aj.open("POST",url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var jSonObject = eval('(' + aj.responseText + ')');
+				//alert("jSonObject="+jSonObject.length);
+				var content = '';
+				for (var i = 0; i < jSonObject.length; i++) {
+					content += '<tr>';
+					content += '<td>'+ (i + 1) + '</td>';
+					content += '<td>'+ jSonObject[i].subjectName + '</td>';
+					content += '<td>'+jSonObject[i].examType  + '</td>';
+					content += '<td>'+ jSonObject[i].semesterNo + '</td>';
+					content += '<td>'+ jSonObject[i].startDate + '</td>';
+					/* content += '<td>'+ jSonObject[i].endDate + '</td>'; */
+					content += '<td>'+ jSonObject[i].startTime + '</td>';
+					/* content += '<td>'+ jSonObject[i].endTime + '</td>'; */
+					content += '<td>'+ jSonObject[i].fullMarks + '</td>';
+					content += '<td>'+ jSonObject[i].passMarks + '</td>';
+					content += '<td>'+ jSonObject[i].status + '</td>';
+					content += '</tr>';
+				}
+				$("#examInfoData").html(content);
+			}
+		}
+		aj.send(status);
+		count++;
 	}
 </script>
 
