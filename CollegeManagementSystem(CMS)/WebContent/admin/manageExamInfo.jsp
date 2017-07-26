@@ -61,7 +61,10 @@
 								class="fa fa-graduation-cap"></i> Manage Current Active Exam
 								Information</span> <span class="visible-xs"
 								style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
-								class="fa fa-graduation-cap"></i> Manage Exam info</span>
+								class="fa fa-graduation-cap"></i> Manage Exam info</span> <label
+								class="switch pull-right"> <input type="checkbox" checked>
+								<span class="slider round"></span>
+							</label>
 						</h3>
 					</div>
 				</div>
@@ -493,7 +496,7 @@
 			<div class="modal-body">
 				<div style="overflow-x: auto;">
 					<table class="tblThTd ">
-						
+
 
 						<tr>
 							<Th>Subject :</Th>
@@ -503,7 +506,7 @@
 							<Th>Exam Type :</Th>
 							<td id="examTypeJsonXXX"></td>
 						</tr>
-						
+
 						<tr>
 							<Th>Start Date :</Th>
 							<td id="startDateJsonXXX"></td>
@@ -845,7 +848,7 @@
 				var StatusId = jSonObject[0].examInfo[0].status;
 				var elements = document.getElementsByName('statuss');
 				for (i = 0; i < elements.length; i++) {
-					
+
 					if (elements[i].value == StatusId) {
 						elements[i].checked = true;
 
