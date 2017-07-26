@@ -26,13 +26,14 @@ public class ajax_semester_load extends HttpServlet {
 			throws ServletException, IOException {
 		String program_id = request.getParameter("id");
 		String semester_id = request.getParameter("semester_id");
-		String starts = request.getParameter("start");
-		//System.out.println(Integer.parseInt(starts));
+		String pageNo = request.getParameter("page");
+		String req_limit = request.getParameter("limit");
+		
+		int limit = 5; //default limit
+		if(req_limit!=null){ limit = Integer.parseInt(req_limit); }
+		int page;
 		int start = 0;
-		if (starts!=null){ 
-			start = Integer.parseInt(starts);
-		}
-		int limit = 10;
+		if(pageNo!=null){	page = Integer.parseInt(pageNo); start=(page-1)*limit; }
 		
 		String jsonResponse = null;
 		
@@ -43,7 +44,7 @@ public class ajax_semester_load extends HttpServlet {
 			Object[] obj = new Object[10];
 			obj[2]=id;
 			obj[7]=start; //start limit
-			obj[8]=5; // limit
+			obj[8]=limit; // limit
 			
 		
 			List<SemesterModel> mode= semester.searchByFields(obj);

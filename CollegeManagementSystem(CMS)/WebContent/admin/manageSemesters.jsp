@@ -34,7 +34,7 @@
 							Semester
 						</button>
 						<button type="button" class="btn btn-info pull-left" style="margin-left: -20px;"
-							data-toggle="modal" data-target=#search_semester_modal id="search-box" >
+							data-toggle="modal" data-target=#search_semester_modal id="filter-box" >
 							<span class="glyphicon glyphicon-search"> Filter </span>
 						</button>
 					</h3>
@@ -113,12 +113,19 @@
 				</div>
 				
 				<div class="row">
-					<div class="pull-left col-sm-2">
-    					<p id="page-info"></p>
+					<div class="pull-left col-sm-2" id="page-info">
+						 <label>Limit: </label>
+    					<select class="form-control" id="limit-box" name="limit">
+								<option value="5" selected>5</option>
+								<option value="10" >10</option>
+								<option value="25" >25</option>
+								<option value="50" >50</option>
+						</select>
     				</div>
 					<div class="pager_outer pull-right col-sm-10">
     					<ul class="pager" id="page-links">
     					</ul>
+    					
     				</div>
 				</div>
 										
@@ -286,15 +293,22 @@
 <script>
 
 $(document).ready(function(){
-	$("#search-box").click(function(event){ load_faculty(event, "p-faculty-box"); });
+	$("#filter-box").click(function(event){ load_faculty(event, "p-faculty-box"); });
 	$("#modal-box").click(function(event){ load_faculty(event, "faculty-box"); });
 	$("#p-faculty-box").change(function(event){ load_program(event, "p-program-box"); });
 	$("#faculty-box").change(function(event){ load_program(event, "program-box"); });
 	$("#program-box").change(function(event){ load_batch_year(event, "batch-box"); });
 	$("#e-faculty-box").change(function(event){ load_program(event, "e-program-box"); });
 	$("#e-program-box").change(function(event){ load_batch_year(event, "e-batch-box"); });
-	$("#go").click(function(event){ load_semester(); });
-
+	$("#go").click(function(event){ 
+		var id=document.getElementById("p-program-box").value;
+		var data = "id=" + id ;
+		var arr = [data];
+		alert(data);
+		//var limit=document.getElementById("limit-box").value;
+		load_semester(arr,1,5);
+	});
+	$("#page-info").hide();
 });
 	
 function load_faculty(e, target) {
@@ -345,17 +359,22 @@ function load_batch_year(e, target) {
 	aj.send(idSend);
 }
 
-function load_semester(){
-	var pageId = getParameterByName('pageId');
-	alert("aa:"+pageId);
-	var start = 0;
-	if(pageId!=null){	var pageNo = pageId; var start=(pageNo-1)*5; }
-	else{	var pageNo = 1; }
-	
-	var id=document.getElementById("p-program-box").value;
-	alert("id:"+id);
+
+function load_semester(arr,page, limit){
+	//var pageId = getParameterByName('pageId');
+	//var pageId = $.urlParam('pageId');
+	//if(pageId!=null){	
+	//	var page = pageId; }
+	//else {	
+	//	var page = 1; }
+	var data = arr[0];
+	arr[0]+="&page="+ page + "&limit="+limit;
+	//alert("page:"+pageId);
+	//alert("data:"+arr[0]);
 	var url="../ajax_semester_load";
-	var idSend='id=' + id + '&start=' + start;
+	//alert(arr[0]);
+	//var idSend='id=' + id + '&page=' + page;
+	//var arr = [ url, send ];
 	var aj=new XMLHttpRequest();
 	aj.open("POST", url, true);
 	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -364,14 +383,14 @@ function load_semester(){
 		if (aj.readyState == 4 && aj.status == 200) {
 			var json = eval('(' + aj.responseText + ')');
 	        var c = '';
-	        //alert(json.tableData[0].batch_year);
-	        //alert("total row="+json.TotalRowCount);
 	        if(json.tableData.length<1){
-	        	//$("#mytable").hide();
+	        	$("#mytable").hide();
+	        	$("#page-info").hide();
 	        }else {
 	        	$("#mytable").show();
+	        	$("#page-info").show();
 	            for (var i = 0; i < json.tableData.length; i++) {
-	            	alert(aj.responseText);
+	            	//alert(aj.responseText);
 	            	c += '<tr id=\"row'+json.tableData[i].semester_id+' \">';
 	            	c += '<td><input type=\"checkbox\" class=\"checkthis\" /></td>';
 		            c += '<td>' + json.tableData[i].semester_id + '</td>';
@@ -386,42 +405,63 @@ function load_semester(){
 		            c += '<td><button type=\"button\" class=\"btn btn-danger pull-right\" data-toggle=\"modal\" data-target=#delete_semester_modal id=\"delete\" onClick=\"load_delete('+json.tableData[i].semester_id+');\">Delete <span class=\"glyphicon glyphicon-trash\"></span></button></td>';
 		            c += '</tr>';
 	            }
-	            $('#table-body').html(c); 
-	            $('#page-info').html(json.tableData.length+" out of "+json.TotalRow+" results");
-	            var p ='';
-	            if(pageNo>1)
-	            {
-	                //show previous, if its in page 1 then it is inactive
-	               	//p+= '<li><a href=\"?pageId=' +(pageNo-1)+'\" class=\"button\">PREVIOUS</a></li>';
-	                p+= "<li><a href='?pageId="+(pageNo-1)+"' class='button'>PREVIOUS</a></li>";
-	            }
-	               
-
-	            //show all the page link with page number. 
-	                    for(var x=1;x<=json.TotalPage;x++)
-	                    {
-	                        if(x==pageNo) { p+= "<li><a href='' class='active'>"+ x +"</li>"; }
-	                        
-	                        else { p+= "<li><a href='?pageId="+x+"'>"+ x +"</a></li>"; }
-	                    }
-
-
-	            if(pageNo!=json.TotalPage)
-	            {
-	                //Go to previous page to show next 10 items.
-	                p+= "<li align='right'><a href='?pageId="+(pageNo+1)+"' class='button'>NEXT</a></li>";
-	            }
-	            $('#page-links').html(p);
-	            $('#page-links a[href]').click(function(e) { 
-	            	//e.preventDefault();
-	            	load_semester();
-	            });
 	            
+	            $('#table-body').html(c); 
+	            var total_pages = json.TotalPage;
+	            pagination_view(data, total_pages, page);
 	        }
 	     }
 	}
-aj.send(idSend);
+aj.send(arr);
 }
+
+function pagination_view(data, total_pages, current_page) {
+	//var pageId = getParameterByName('pageId');
+	//var pageId = $.urlParam('pageId');
+	if(current_page!=null){	
+		var pageNo = current_page; }
+	else {	
+		var pageNo = 1; }
+	//$('#page-info').html(json.tableData.length+" out of "+json.TotalRow+" results");
+    var p ='';
+    if(pageNo>1)
+    {
+        //show previous, if its in page 1 then it is inactive
+        p+= "<li><a href='#' data-page='" + (pageNo-1) + "' class='button'>PREVIOUS</a></li>";
+    }
+       
+
+    //show all the page link with page number. 
+            for(var x=1;x<=total_pages;x++)
+            {
+                if(x==pageNo) { p+= "<li><a href='#' data-page='" + (pageNo-1) + "' class='active'>"+ x +"</li>"; }
+                
+                else { p+= "<li><a href='#' data-page='"+x+"'>"+ x +"</a></li>"; }
+            }
+
+
+    if(pageNo!=total_pages)
+    {
+        //Go to previous page to show next 10 items.
+        p+= "<li align='right'><a href='#' data-page='" + (Number(pageNo)+1) + "' class='button'>NEXT</a></li>";
+    }
+    $('#page-links').html(p);
+    $('#page-links a[href]').click(function(e) {
+    	e.preventDefault();
+    	var arr = [data];
+    	var page = $(this).attr("data-page");
+		alert(page);
+		var limit=document.getElementById("limit-box").value;
+		alert("page:"+page+"limit: "+ limit);
+    	load_semester(arr, page,limit); 
+    });
+    $('#limit-box').change(function(e){
+    	var arr = [data];
+		var limit=document.getElementById("limit-box").value;
+    	load_semester(arr, 1,limit);
+    });
+}
+
 function load_edit(id){
 	//alert(x);
 	document.getElementById("e-title").innerHTML="Lets Update this";	
@@ -483,7 +523,6 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-
 // for table
 $(document).ready(function(){
 	$("#mytable").hide();
