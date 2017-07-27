@@ -13,10 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.model.ExamInfoModel;
 import com.model.SemesterModel;
+import com.model.StudentSemesterModel;
 import com.service.ExamInfoModelServiceInterface;
 import com.service.SemesterServiceInterface;
+import com.service.StudentSemesterModelServiceInterface;
 import com.serviceimpl.ExamInfoModelServiceImpl;
 import com.serviceimpl.SemesterServiceImpl;
+import com.serviceimpl.StudentSemesterModelServiceImpl;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 import com.util.JsonUtil;
 
@@ -40,10 +43,13 @@ public class ajax_loadExamInfoDetails extends HttpServlet {
 		SemesterServiceInterface inter= new SemesterServiceImpl();
 		java.util.List<SemesterModel> model= inter.searchByFields(obj1);
 		for (SemesterModel semesterModel : model) {
+			Object[] obj2 = new Object[15];
+			obj2[1]=semesterModel.getSemester_id();
+			StudentSemesterModelServiceInterface studentInter= new StudentSemesterModelServiceImpl();
+			java.util.List<StudentSemesterModel> semModel=studentInter.searchByFields(obj2);
 			Map<String, Object> map= new HashMap<String,Object>();
 			map.put("subjectName", examInfoModel.getSubjectName());
 			map.put("examType", examInfoModel.getExamTypeName());
-			
 			map.put("startDate", examInfoModel.getExamStartDate());
 			map.put("endDate", examInfoModel.getExamEndDate());
 			map.put("startTime", examInfoModel.getExamStartTime());
@@ -53,6 +59,7 @@ public class ajax_loadExamInfoDetails extends HttpServlet {
 			map.put("status", examInfoModel.getStatus());
 			map.put("semesterNo", semesterModel.getSemester_no());
 			map.put("examId", examInfoModel.getExamId());
+			map.put("TotalStudent", semModel.size());
 			listRandom.add(map);
 		}
 	}

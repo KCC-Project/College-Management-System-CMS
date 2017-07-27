@@ -459,7 +459,10 @@
 							<Th>Exam Type :</Th>
 							<td id="examTypeJsonXXX"></td>
 						</tr>
-
+<tr>
+							<Th>Semester No :</Th>
+							<td id="SemesterXXX"></td>
+						</tr>
 						<tr>
 							<Th>Start Date :</Th>
 							<td id="startDateJsonXXX"></td>
@@ -711,7 +714,7 @@
 				//alert("form mausam=" + jSonObject.subjectName);
 				document.getElementById("subjectJsonXXX").innerHTML = jSonObject[0].examInfo[0].subjectName;
 				document.getElementById("examTypeJsonXXX").innerHTML = jSonObject[0].examInfo[0].examTypeName;
-				document.getElementById("semNo").innerHTML = jSonObject[0].semester_no;
+				document.getElementById("SemesterXXX").innerHTML = jSonObject[0].semester_no;
 				document.getElementById("startDateJsonXXX").innerHTML = jSonObject[0].examInfo[0].examStartDate;
 				document.getElementById("endDateJsonXXX").innerHTML = jSonObject[0].examInfo[0].examEndDate;
 				document.getElementById("startTimeJsonXXX").innerHTML = jSonObject[0].examInfo[0].examStartTime;
@@ -886,10 +889,10 @@
 					content += '<td class="hidden-xs">'+ jSonObject[i].fullMarks + '</td>';
 					content += '<td class="hidden-xs">'+ jSonObject[i].passMarks + '</td>';
 					content += '<td class="hidden-xs">'+ jSonObject[i].status + '</td>';
-					content += '<td><span class="btn btn-sm btn-info  hidden-xs hidden-sm"> <i class="fa fa-users"></i> BE-computer &nbsp; <span class="badge"> 5 </span></span> \
-						<a href="#?id="+jSonObject[i].examId +" class="btn-sm btn btn-default hidden-lg hidden-md hidden-sm visible-xs" title="View Exam Details" " data-toggle="modal" data-target=#viewExamDetail onclick="viewExamDetailsOriginal("+jSonObject[i].examId+");" id="viewExamDetails"><i class="fa fa-eye"></i></a>\
-						<a onclick="loadUpdate();viewExamDetails("+jSonObject[i].examId +");" class="btn-sm btn btn-default" href="#?id="+jSonObject[i].examId +"" data-toggle="modal" data-target=#mad id="updateExamDetail" title="Edit Course Details"><i class="fa fa-pencil-square-o"></i></a>\
-						<a onclick="viewExamDetails("+jSonObject[i].examId +"); " href="#?id="+jSonObject[i].examId +"" class="btn-sm btn btn-default" data-toggle="modal" data-target=#deleteExamType title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a>\
+					content += '<td><span class="btn btn-sm btn-info  hidden-xs hidden-sm"> <i class="fa fa-users"></i> BE-computer &nbsp; <span class="badge"> '+jSonObject[i].TotalStudent+'</span></span> \
+					<a href="#?id='+jSonObject[i].examId+'"  class="btn-sm btn btn-default hidden-lg hidden-md hidden-sm visible-xs" title="View Exam Details" " data-toggle="modal" data-target=#viewExamDetail onclick="viewExamDetailsOriginal('+jSonObject[i].examId+');" id="viewExamDetails"><i class="fa fa-eye"></i></a>\
+						<a onclick="loadUpdate();viewExamDetails('+jSonObject[i].examId +');" class="btn-sm btn btn-default" href="#?id='+jSonObject[i].examId+'" data-toggle="modal" data-target=#mad id="updateExamDetail" title="Edit Course Details"><i class="fa fa-pencil-square-o"></i></a>\
+						<a onclick="viewExamDetails('+jSonObject[i].examId +'); " href="#?id='+jSonObject[i].examId+'" class="btn-sm btn btn-default" data-toggle="modal" data-target=#deleteExamType title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a>\
 								</td>';
 					content += '</tr>';
 				}
