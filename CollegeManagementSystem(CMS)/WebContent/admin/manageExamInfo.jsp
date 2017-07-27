@@ -77,7 +77,7 @@
 						<div class="panel box box-default">
 							<div class="box-header with-border">
 								<br>
-								<div class="table-responsive">
+								<div class="table-responsive" >
 									<table class="table table-hover" id="examInfoDataTable">
 										<thead>
 											<tr >
@@ -95,7 +95,7 @@
 
 											</tr>
 										</thead>
-										<tbody id="examInfoData" ></tbody>
+										<tbody id="examInfoData"  ></tbody>
 									</table>
 								</div>
 							</div>
@@ -252,7 +252,7 @@
 								name="SemesterIdPrimary">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-success">Submit</button>
+							<button type="submit" class="btn btn-success" >Submit</button>
 						</div>
 					</form>
 				</div>
@@ -399,7 +399,7 @@
 								id="SemesterIdPrimaryUpdate" name="SemesterIdPrimaryUpdate">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-success">Update</button>
+							<button type="submit" class="btn btn-success" >Update</button>
 						</div>
 					</form>
 				</div>
@@ -652,7 +652,6 @@
 	}
 
 	function load_batch_year() {
-
 		var url = "../ajax_year_load";
 		var idSend = "id=1";
 		var aj = new XMLHttpRequest();
@@ -681,7 +680,6 @@
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
 				var return_data = aj.responseText;
-
 				document.getElementById("examType-box").innerHTML = return_data;
 				document.getElementById("examType-boxx").innerHTML = return_data;
 				document.getElementById("examType-box1").innerHTML = return_data;
@@ -719,7 +717,6 @@
 				document.getElementById("endDateJsonXXX").innerHTML = jSonObject[0].examInfo[0].examEndDate;
 				document.getElementById("startTimeJsonXXX").innerHTML = jSonObject[0].examInfo[0].examStartTime;
 				document.getElementById("endTimeJsonXXX").innerHTML = jSonObject[0].examInfo[0].examEndTime;
-
 				document.getElementById("fullMarksJsonXXX").innerHTML = jSonObject[0].examInfo[0].fullmarks;
 				document.getElementById("passMarksJsonXXX").innerHTML = jSonObject[0].examInfo[0].passmarks;
 				document.getElementById("statusJsonXXX").innerHTML = jSonObject[0].examInfo[0].status;
@@ -771,7 +768,7 @@
 					//alert("program value="+i.value);
 					if (i.value == temp) {
 						mySelect.selectedIndex = j;
-						alert("program match");
+						//alert("program match");
 						break;
 					}
 				}
@@ -859,6 +856,7 @@
 		var aj = new XMLHttpRequest();
 		var url="../ajax_loadExamInfoDetails";
 		var status;
+		
 		if (count%2===0) {
 			console.log("div by 2");
 			 status="status=1"
@@ -885,14 +883,14 @@
 					content += '<td>'+ jSonObject[i].startDate + '</td>';
 					/* content += '<td class="hidden-xs"> '+ jSonObject[i].endDate + '</td>'; */
 					content += '<td>'+ jSonObject[i].startTime + '</td>';
-					/* content += '<td class="hidden-xs">'+ jSonObject[i].endTime + '</td>'; */
+					/* content += '<td class="hidden-xs">'+ jSonObject[i].endTime + '</td>';  BE-computer*/
 					content += '<td class="hidden-xs">'+ jSonObject[i].fullMarks + '</td>';
 					content += '<td class="hidden-xs">'+ jSonObject[i].passMarks + '</td>';
 					content += '<td class="hidden-xs">'+ jSonObject[i].status + '</td>';
-					content += '<td><span class="btn btn-sm btn-info  hidden-xs hidden-sm"> <i class="fa fa-users"></i> BE-computer &nbsp; <span class="badge"> '+jSonObject[i].TotalStudent+'</span></span> \
-					<a href="#?id='+jSonObject[i].examId+'"  class="btn-sm btn btn-default hidden-lg hidden-md hidden-sm visible-xs" title="View Exam Details" " data-toggle="modal" data-target=#viewExamDetail onclick="viewExamDetailsOriginal('+jSonObject[i].examId+');" id="viewExamDetails"><i class="fa fa-eye"></i></a>\
+					content += '<td><span class="btn btn-sm btn-info  hidden-xs hidden-sm"> <i class="fa fa-users"></i> '+jSonObject[i].ProgramName+' &nbsp; <span class="badge"> '+jSonObject[i].TotalStudent+'</span></span> \
+					<br><div class="pull-left"><a href="#?id='+jSonObject[i].examId+'"  class="btn-sm btn btn-default hidden-lg hidden-md hidden-sm visible-xs" title="View Exam Details" " data-toggle="modal" data-target=#viewExamDetail onclick="viewExamDetailsOriginal('+jSonObject[i].examId+');" id="viewExamDetails"><i class="fa fa-eye"></i></a>\
 						<a onclick="loadUpdate();viewExamDetails('+jSonObject[i].examId +');" class="btn-sm btn btn-default" href="#?id='+jSonObject[i].examId+'" data-toggle="modal" data-target=#mad id="updateExamDetail" title="Edit Course Details"><i class="fa fa-pencil-square-o"></i></a>\
-						<a onclick="viewExamDetails('+jSonObject[i].examId +'); " href="#?id='+jSonObject[i].examId+'" class="btn-sm btn btn-default" data-toggle="modal" data-target=#deleteExamType title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a>\
+						<a onclick="viewExamDetails('+jSonObject[i].examId +'); " href="#?id='+jSonObject[i].examId+'" class="btn-sm btn btn-default" data-toggle="modal" data-target=#deleteExamType title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a></div>\
 								</td>';
 					content += '</tr>';
 				}

@@ -12,12 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.model.ExamInfoModel;
+import com.model.ProgramModel;
 import com.model.SemesterModel;
 import com.model.StudentSemesterModel;
 import com.service.ExamInfoModelServiceInterface;
+import com.service.ProgramServiceInterface;
 import com.service.SemesterServiceInterface;
 import com.service.StudentSemesterModelServiceInterface;
 import com.serviceimpl.ExamInfoModelServiceImpl;
+import com.serviceimpl.ProgramServiceImpl;
 import com.serviceimpl.SemesterServiceImpl;
 import com.serviceimpl.StudentSemesterModelServiceImpl;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
@@ -47,6 +50,10 @@ public class ajax_loadExamInfoDetails extends HttpServlet {
 			obj2[1]=semesterModel.getSemester_id();
 			StudentSemesterModelServiceInterface studentInter= new StudentSemesterModelServiceImpl();
 			java.util.List<StudentSemesterModel> semModel=studentInter.searchByFields(obj2);
+			
+			ProgramServiceInterface program= new ProgramServiceImpl();
+			ProgramModel mo=program.getRecordById(semesterModel.getProgram_id());
+		
 			Map<String, Object> map= new HashMap<String,Object>();
 			map.put("subjectName", examInfoModel.getSubjectName());
 			map.put("examType", examInfoModel.getExamTypeName());
@@ -60,6 +67,7 @@ public class ajax_loadExamInfoDetails extends HttpServlet {
 			map.put("semesterNo", semesterModel.getSemester_no());
 			map.put("examId", examInfoModel.getExamId());
 			map.put("TotalStudent", semModel.size());
+			map.put("ProgramName", mo.getProgram_name());
 			listRandom.add(map);
 		}
 	}
