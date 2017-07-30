@@ -90,13 +90,13 @@
 										<thead>
 											<tr>
 												<th><input type="checkbox" id="checkall" /></th>
-												<th>semester_id</th>
-												<th>semester_no</th>
-												<th>program_id</th>
-												<th>batch_year_id</th>
-												<th>sem_start_date</th>
-												<th>sem_end_date</th>
-												<th>status</th>
+												<th>Semester_id</th>
+												<th>Batch_year</th>
+												<th>Program_name</th>
+												<th>Semester_no</th>
+												<th>Sem_start_date</th>
+												<th>Sem_end_date</th>
+												<th>Status</th>
 												<th colspan="2">Options</th>
 
 											</tr>
@@ -319,6 +319,7 @@ function load_faculty(e, target) {
 	aj.onreadystatechange=function(){
 		if (aj.readyState==4&&aj.status==200) {
 			var return_data=aj.responseText;
+			alert('#' + target);
 			$('#' + target).html(return_data);
 		}
 	}
@@ -390,15 +391,14 @@ function load_semester(arr,page, limit){
 	        	$("#mytable").show();
 	        	$("#page-info").show();
 	            for (var i = 0; i < json.tableData.length; i++) {
-	            	//alert(aj.responseText);
 	            	c += '<tr id=\"row'+json.tableData[i].semester_id+' \">';
 	            	c += '<td><input type=\"checkbox\" class=\"checkthis\" /></td>';
 		            c += '<td>' + json.tableData[i].semester_id + '</td>';
-		            c += '<td>' + json.tableData[i].semester_no + '</td>';
-		            c += '<td>' + json.tableData[i].program_id + '</td>';
 		            c += '<td>' + json.tableData[i].batch_year + '</td>';
-		            c += '<td>' + json.tableData[i].start_date + '</td>';
-		            c += '<td>' + json.tableData[i].end_date + '</td>';
+		            c += '<td>' + json.tableData[i].program_name + '</td>';
+		            c += '<td>' + json.tableData[i].semester_no + ' sem</td>';
+		            c += '<td>' + json.tableData[i].sem_start_date + '</td>';
+		            c += '<td>' + json.tableData[i].sem_end_date + '</td>';
 		            c += '<td>' + json.tableData[i].status + '</td>';
 		            
 		            c += '<td><button type=\"button\" class=\"btn btn-info pull-right\" data-toggle=\"modal\" data-target=#edit_semester_modal id=\"edit\" onClick=\"load_edit('+json.tableData[i].semester_id+');\">Edit <span class=\"glyphicon glyphicon-pencil\"></span></button></td>';
@@ -465,7 +465,7 @@ function pagination_view(data, total_pages, current_page) {
 function load_edit(id){
 	//alert(x);
 	document.getElementById("e-title").innerHTML="Lets Update this";	
-	load_faculty(event);
+	//load_faculty(event);
 	var url="../ajax_semester_load";
 	var idSend="semester_id="+id;
 	var aj=new XMLHttpRequest();
@@ -479,12 +479,14 @@ function load_edit(id){
 	        
 	        if(json.length<1){
 	        }else {
+	        	alert(aj.responseText);
 	            for (var i = 0; i < json.length; i++) {
-	            	
-	            	//document.getElementById("e-faculty-box").value=1;
+	            	load_faculty(event, "e-faculty-box");
 	            	//document.getElementById("e-faculty-box").change();
-	            	//document.getElementById("e-program-box").value=json[i].program_id;
-	            	//document.getElementById("e-batch-box").value=json[i].batch_year;
+	            	load_program(event, "p-program-box");
+	            	document.getElementById("e-program-box").value=json[i].program_id;
+	            	load_batch_year(event, "e-batch-box");
+	            	document.getElementById("e-batch-box").value=json[i].batch_year;
 	            	document.getElementById("e-sem-no").value=json[i].semester_no;
 	            	document.getElementById("e-start_date").value=json[i].start_date;
 	            	document.getElementById("e-end_date").value=json[i].end_date;
