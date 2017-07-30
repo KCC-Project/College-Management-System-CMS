@@ -27,10 +27,17 @@ public class ExamInfoModelImpl implements ExamInfoModelInterface {
 	public boolean saveExamInfo(ExamInfoModel model) {
 		try {
 			conn = DatabaseConnection.connectToDatabase();
+			if (model.getSubjectId()<0) {
+				sql = "insert into exam(exam_type_id,exam_date,exam_end_date,exam_starttime,exam_endtime,full_marks,pass_marks,semester_id,status) values(?,?,?,?,?,?,?,?,?)";
+					
+			}else {
 			sql = "insert into exam(subject_id,exam_type_id,exam_date,exam_end_date,exam_starttime,exam_endtime,full_marks,pass_marks,semester_id,status) values(?,?,?,?,?,?,?,?,?,?)";
+			}
 			pst = conn.prepareStatement(sql);
 			int col = 1;
-			pst.setInt(col++, model.getSubjectId());
+			if (model.getSubjectId()>0) {
+				pst.setInt(col++, model.getSubjectId());
+			}
 			pst.setInt(col++, model.getExamTypeId());
 			
 

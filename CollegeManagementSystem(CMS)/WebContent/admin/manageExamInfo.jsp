@@ -40,13 +40,24 @@
 
 			<div class="box box-default with-border">
 				<div style="position: relative;">
-					<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
+					<div style="margin: 0px; padding-left: 20px; height: 35px;">
+						<div class="dropdown pull-right">
+							<button class="btn btn-default dropdown-toggle"
+								onclick="loadAdd();" type="button" id="dropdownMenu1"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								Add Exam Info <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="#" data-toggle="modal"
+									data-target=#add_exam_modal-info
+									onclick="particularSubject(1);">Particular Subject</a></li>
+								<li><a href="#" data-toggle="modal"
+									data-target=#add_exam_modal-info
+									onclick="particularSubject(2);">Whole Semester</a></li>
+							</ul>
+						</div>
 
-						<button type="button" class="btn btn-info pull-right"
-							onclick="loadAdd();" data-toggle="modal"
-							data-target=#add_exam_modal-info>Add Exam info</button>
-
-					</h3>
+					</div>
 
 				</div>
 			</div>
@@ -62,8 +73,9 @@
 								Information</span> <span class="visible-xs"
 								style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
 								class="fa fa-graduation-cap"></i> Manage Exam info</span> <label
-								class="switch pull-right" > <input type="checkbox" checked>
-								<span class="slider round" onclick="loadExamInfoData();"></span>
+								class="switch pull-right"> <input type="checkbox"
+								checked> <span class="slider round"
+								onclick="loadExamInfoDataTemp();"></span>
 							</label>
 						</h3>
 					</div>
@@ -77,10 +89,10 @@
 						<div class="panel box box-default">
 							<div class="box-header with-border">
 								<br>
-								<div class="table-responsive" >
+								<div class="table-responsive">
 									<table class="table table-hover" id="examInfoDataTable">
 										<thead>
-											<tr >
+											<tr>
 												<td>S.No</td>
 												<td>Subject</td>
 												<td class="hidden-xs">Exam Type</td>
@@ -95,7 +107,7 @@
 
 											</tr>
 										</thead>
-										<tbody id="examInfoData"  ></tbody>
+										<tbody id="examInfoData"></tbody>
 									</table>
 								</div>
 							</div>
@@ -105,7 +117,6 @@
 
 
 				<!-- ======================end of exam type============= -->
-
 
 				<!--=========================================================================================  -->
 
@@ -169,14 +180,14 @@
 							</div>
 							<div class="row" style="margin-top: 10px;">
 								<div class="col-sm-12">
-									<div class="form-group col-sm-6">
+									<div class="form-group col-sm-6" id="subEnable" hidden>
 										<label>Subject: <span class="astriek">*</span></label> <select
 											required class="form-control" id="subject-box"
 											onclick="load_exam_type();" name="subject_id">
 											<option value="" disabled selected>Select Subject</option>
 										</select>
 									</div>
-									<div class="form-group col-sm-6">
+									<div class="form-group col-sm-6" id="examTypeEnable">
 										<label>Exam Type: <span class="astriek">*</span></label> <select
 											required class="form-control" id="examType-box"
 											name="examType_id">
@@ -249,10 +260,11 @@
 						</div>
 						<div class="modal-footer">
 							<input type="hidden" id="SemesterIdPrimary"
-								name="SemesterIdPrimary">
+								name="SemesterIdPrimary"> <input type="hidden"
+								id="subIdHidden" name="subIdHidden">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-success" >Submit</button>
+							<button type="submit" class="btn btn-success">Submit</button>
 						</div>
 					</form>
 				</div>
@@ -316,7 +328,7 @@
 
 							<div class="row" style="margin-top: 10px;">
 								<div class="col-sm-12">
-									<div class="form-group col-sm-6">
+									<div class="form-group col-sm-6 ">
 										<label>Subject: <span class="astriek">*</span></label> <select
 											required class="form-control" id="subject-boxx"
 											name="subject_idd">
@@ -399,7 +411,7 @@
 								id="SemesterIdPrimaryUpdate" name="SemesterIdPrimaryUpdate">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-success" >Update</button>
+							<button type="submit" class="btn btn-success">Update</button>
 						</div>
 					</form>
 				</div>
@@ -459,7 +471,7 @@
 							<Th>Exam Type :</Th>
 							<td id="examTypeJsonXXX"></td>
 						</tr>
-<tr>
+						<tr>
 							<Th>Semester No :</Th>
 							<td id="SemesterXXX"></td>
 						</tr>
@@ -517,7 +529,19 @@
 	window.addEventListener("load", function() {
 		load_faculty();
 	}, true)
-
+	window.addEventListener('load', function() {
+		var url = location.href;
+		var urls = new URL(url);
+		var c = urls.searchParams.get("error");
+		if (c === "sucessfullEntryAddExamInfo") {
+			var status = "status=1";
+			loadExamInfoData(status);
+		} 
+		else if(c==="sucessfuldelete"){
+			var status = "status=1";
+			loadExamInfoData(status);
+		}
+	})
 	function load_subject_add() {
 		var programId = document.getElementById("p-program-box").value;
 		var batchNo = document.getElementById("batch-box").value;
@@ -851,21 +875,25 @@
 		}
 		aj.send(idSend);
 	}
-	var count=1;
-	function loadExamInfoData(){
-		var aj = new XMLHttpRequest();
-		var url="../ajax_loadExamInfoDetails";
+	var count = 1;
+	function loadExamInfoDataTemp() {
 		var status;
-		
-		if (count%2===0) {
+
+		if (count % 2 === 0) {
 			console.log("div by 2");
-			 status="status=1"
-		}else{
+			status = "status=1"
+		} else {
 			console.log("Not by 2");
-			status="status=0"
+			status = "status=0"
 		}
+		loadExamInfoData(status);
+	}
+	function loadExamInfoData(status) {
+		var aj = new XMLHttpRequest();
+		var url = "../ajax_loadExamInfoDetails";
 		
-		aj.open("POST",url, true);
+
+		aj.open("POST", url, true);
 		aj
 				.setRequestHeader("Content-type",
 						"application/x-www-form-urlencoded");
@@ -876,21 +904,42 @@
 				var content = '';
 				for (var i = 0; i < jSonObject.length; i++) {
 					content += '<tr>';
-					content += '<td>'+ (i + 1) + '</td>';
-					content += '<td>'+ jSonObject[i].subjectName + '</td>';
-					content += '<td class="hidden-xs">'+jSonObject[i].examType  + '</td>';
-					content += '<td class="hidden-xs">'+ jSonObject[i].semesterNo + '</td>';
-					content += '<td>'+ jSonObject[i].startDate + '</td>';
+					content += '<td>' + (i + 1) + '</td>';
+					content += '<td>' + jSonObject[i].subjectName + '</td>';
+					content += '<td class="hidden-xs">'
+							+ jSonObject[i].examType + '</td>';
+					content += '<td class="hidden-xs">'
+							+ jSonObject[i].semesterNo + '</td>';
+					content += '<td>' + jSonObject[i].startDate + '</td>';
 					/* content += '<td class="hidden-xs"> '+ jSonObject[i].endDate + '</td>'; */
-					content += '<td>'+ jSonObject[i].startTime + '</td>';
+					content += '<td>' + jSonObject[i].startTime + '</td>';
 					/* content += '<td class="hidden-xs">'+ jSonObject[i].endTime + '</td>';  BE-computer*/
-					content += '<td class="hidden-xs">'+ jSonObject[i].fullMarks + '</td>';
-					content += '<td class="hidden-xs">'+ jSonObject[i].passMarks + '</td>';
-					content += '<td class="hidden-xs">'+ jSonObject[i].status + '</td>';
-					content += '<td><span class="btn btn-sm btn-info  hidden-xs hidden-sm"> <i class="fa fa-users"></i> '+jSonObject[i].ProgramName+' &nbsp; <span class="badge"> '+jSonObject[i].TotalStudent+'</span></span> \
-					<br><div class="pull-left"><a href="#?id='+jSonObject[i].examId+'"  class="btn-sm btn btn-default hidden-lg hidden-md hidden-sm visible-xs" title="View Exam Details" " data-toggle="modal" data-target=#viewExamDetail onclick="viewExamDetailsOriginal('+jSonObject[i].examId+');" id="viewExamDetails"><i class="fa fa-eye"></i></a>\
-						<a onclick="loadUpdate();viewExamDetails('+jSonObject[i].examId +');" class="btn-sm btn btn-default" href="#?id='+jSonObject[i].examId+'" data-toggle="modal" data-target=#mad id="updateExamDetail" title="Edit Course Details"><i class="fa fa-pencil-square-o"></i></a>\
-						<a onclick="viewExamDetails('+jSonObject[i].examId +'); " href="#?id='+jSonObject[i].examId+'" class="btn-sm btn btn-default" data-toggle="modal" data-target=#deleteExamType title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a></div>\
+					content += '<td class="hidden-xs">'
+							+ jSonObject[i].fullMarks + '</td>';
+					content += '<td class="hidden-xs">'
+							+ jSonObject[i].passMarks + '</td>';
+					content += '<td class="hidden-xs">' + jSonObject[i].status
+							+ '</td>';
+					content += '<td><span class="btn btn-sm btn-info  hidden-xs hidden-sm"> <i class="fa fa-users"></i> '
+							+ jSonObject[i].ProgramName
+							+ ' &nbsp; <span class="badge"> '
+							+ jSonObject[i].TotalStudent
+							+ '</span></span> \
+					<br><div class="pull-left"><a href="#?id='
+							+ jSonObject[i].examId
+							+ '"  class="btn-sm btn btn-default hidden-lg hidden-md hidden-sm visible-xs" title="View Exam Details" " data-toggle="modal" data-target=#viewExamDetail onclick="viewExamDetailsOriginal('
+							+ jSonObject[i].examId
+							+ ');" id="viewExamDetails"><i class="fa fa-eye"></i></a>\
+						<a onclick="loadUpdate();viewExamDetails('
+							+ jSonObject[i].examId
+							+ ');" class="btn-sm btn btn-default" href="#?id='
+							+ jSonObject[i].examId
+							+ '" data-toggle="modal" data-target=#mad id="updateExamDetail" title="Edit Course Details"><i class="fa fa-pencil-square-o"></i></a>\
+						<a onclick="viewExamDetails('
+							+ jSonObject[i].examId
+							+ '); " href="#?id='
+							+ jSonObject[i].examId
+							+ '" class="btn-sm btn btn-default" data-toggle="modal" data-target=#deleteExamType title="Delete" data-method="post"><i class="fa fa-trash-o"></i></a></div>\
 								</td>';
 					content += '</tr>';
 				}
@@ -899,6 +948,22 @@
 		}
 		aj.send(status);
 		count++;
+	}
+
+	function particularSubject(num) {
+		if (num === 1) {
+			document.getElementById('subEnable').hidden = false;
+			$('#examTypeEnable').removeClass("col-sm-12");
+			$('#examTypeEnable').addClass("col-sm-6");
+			document.getElementById('subIdHidden').value = 0;
+
+		} else if (num === 2) {
+			document.getElementById('subEnable').hidden = true;
+			$('#examTypeEnable').removeClass("col-sm-6");
+			$('#examTypeEnable').addClass("col-sm-12");
+			document.getElementById('subIdHidden').value = -100;
+			load_exam_type();
+		}
 	}
 </script>
 
