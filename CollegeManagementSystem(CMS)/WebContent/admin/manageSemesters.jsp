@@ -93,10 +93,10 @@
 												<th>Semester_id</th>
 												<th>Batch_year</th>
 												<th>Program_name</th>
-												<th>Semester_no</th>
+												<th class="bg-info">Semester_no</th>
 												<th>Sem_start_date</th>
 												<th>Sem_end_date</th>
-												<th>Status</th>
+												<th class="bg-info">Status</th>
 												<th colspan="2">Options</th>
 
 											</tr>
@@ -288,6 +288,7 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../Resources/js/bootstrap.min.js"></script>
 <script src="../Resources/js/default.js"></script>
+<script src="../Resources/js/bootstrap-editable.min.js"></script>
 
 
 <script>
@@ -396,7 +397,7 @@ function load_semester(arr,page, limit){
 		            c += '<td>' + json.tableData[i].semester_id + '</td>';
 		            c += '<td>' + json.tableData[i].batch_year + '</td>';
 		            c += '<td>' + json.tableData[i].program_name + '</td>';
-		            c += '<td>' + json.tableData[i].semester_no + ' sem</td>';
+		            c += '<td class="semester_no">' + json.tableData[i].semester_no + '</td>';
 		            c += '<td>' + json.tableData[i].sem_start_date + '</td>';
 		            c += '<td>' + json.tableData[i].sem_end_date + '</td>';
 		            c += '<td>' + json.tableData[i].status + '</td>';
@@ -528,6 +529,52 @@ function getParameterByName(name, url) {
 // for table
 $(document).ready(function(){
 	$("#mytable").hide();
+	
+	// call makeEditable function (target-id, (td)selector-class, number-string-any )
+	makeEditable("table-body", "semester_no", "number");
+	
+	$('#save').click(function() {
+		var semester_no = [];
+		$('.semester_no').each(function() {
+			semester_no.push($(this).text());
+		});
+		alert(semester_no[0]);
+	});
+	
+	function makeEditable(target, selector, fieldType){
+		$('#'+target).editable({
+			container : 'body',
+			selector : 'td.'+selector+'',
+			title: selector,
+			validate : function(value) {
+				if(fieldType == 'number'){
+						if ($.trim(value) == '') {
+							return 'This field is required';
+						}
+						var regex = /^[0-9]+$/;
+						if (!regex.test(value)) {
+							return 'Numbers only!';
+						}
+					}
+				else if(fieldType=="string") {
+						if ($.trim(value) == '') {
+							return 'This field is required';
+						}
+						var regex = /^[A-z]+$/;
+						if (!regex.test(value)) {
+							return 'Numbers not allowed!';
+						}
+				}
+				else {
+						if ($.trim(value) == '') {
+							return 'This field is required';
+						}
+				}
+			}
+		});
+	}
+
+	
 	$("#mytable #checkall").click(function () {
 	        if ($("#mytable #checkall").is(':checked')) {
 	            $("#mytable input[type=checkbox]").each(function () {
