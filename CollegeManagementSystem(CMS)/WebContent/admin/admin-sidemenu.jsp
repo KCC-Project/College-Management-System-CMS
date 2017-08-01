@@ -58,6 +58,17 @@
           </ul>
         </li>
         <!--====================================================================================  -->
+         <li class="link">
+          <a href="#collapse-account" data-toggle="collapse"  aria-controls="collapse-comments">
+            <i class="fa fa-usd" aria-hidden="true"></i>
+            <span class="hidden-xs hidden-sm">Account</span>
+            <span class="caret pull-right"></span>
+          </a>
+          <ul class="collapse collapseable" id="collapse-account">
+            <li><a href="addAccount.jsp" id="add-staff">Add New</a></li>
+          </ul>
+        </li>
+        <!--====================================================================================  -->
           <li class="link">
           <a href="#collapse-notice" data-toggle="collapse"  aria-controls="collapse-notice">
             <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
