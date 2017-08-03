@@ -20,13 +20,9 @@
 
 <div class="container-fluid display-table">
 	<div class="row display-table-row">
-
 		<jsp:include page="admin-sidemenu.jsp" />
-
-
 		<!-- Content Area -->
 		<div class="col-md-10 col-sm-11 display-table-cell" id="content-area">
-
 			<ol class="breadcrumb">
 				<li><a href="admin-dashboard.jsp"><span
 						class="glyphicon glyphicon-home"> Home</span></a></li>
@@ -35,10 +31,7 @@
 				<li><a><span class="glyphicon glyphicon-education black">
 							Result</span></a></li>
 			</ol>
-
-
 			<!--=============================================Main Containt===============================  -->
-
 			<div class="box box-default with-border">
 				<div style="position: relative;">
 					<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
@@ -51,9 +44,7 @@
 						</button>
 					</h3>
 				</div>
-
 			</div>
-
 			<!--====================================================Table==================================================================  -->
 			<div class="box box-primary with-border" style="margin-top: 10px;">
 				<div class="row with-border" style="overflow: hidden;">
@@ -83,16 +74,14 @@
 											<tr>
 												<td>S.No</td>
 												<td>Name</td>
-												<td>Subject</td>
-												<td class="hidden-xs">Exam Type</td>
-												<td class="hidden-xs">FullMarks</td>
-												<td class="hidden-xs">PassMarks</td>
-												<td class="hidden-xs">Scored</td>
-												<td class="hidden-xs">Attendence</td>
-												<td>Pass/Fail</td>
-
+												<td>Semester</td>
+												<td class="hidden-xs">Batch</td>
+												<td class="hidden-xs">Faculty</td>
+												<td class="hidden-xs">Program</td>
+												<td>Amount</td>
 											</tr>
-										<tbody id="result_data">
+											</thead>
+										<tbody id="account_data">
 										</tbody>
 									</table>
 								</div>
@@ -102,14 +91,8 @@
 					</div>
 				</div>
 			</div>
+				<!--=========================================================================================  -->
 		</div>
-
-
-
-		
-		
-		
-		<!--=========================================================================================  -->
 	</div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -118,13 +101,7 @@
 <script src="../Resources/js/bootstrap.min.js"></script>
 <script src="../Resources/js/default.js"></script>
 <script src="../Resources/plugins/summernote/dist/summernote.min.js"></script>
-
-
-
-
 </body>
 </html>
-
-
 </body>
 </html>
