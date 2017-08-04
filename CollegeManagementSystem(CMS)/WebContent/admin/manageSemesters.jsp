@@ -394,13 +394,20 @@ function load_semester(arr,page, limit){
 	            for (var i = 0; i < json.tableData.length; i++) {
 	            	c += '<tr id=\"row'+json.tableData[i].semester_id+' \">';
 	            	c += '<td><input type=\"checkbox\" class=\"checkthis\" /></td>';
-		            c += '<td>' + json.tableData[i].semester_id + '</td>';
-		            c += '<td>' + json.tableData[i].batch_year + '</td>';
-		            c += '<td>' + json.tableData[i].program_name + '</td>';
+		            c += '<td class="semester_id">' + json.tableData[i].semester_id + '</td>';
+		            c += '<td class="batch_year">' + json.tableData[i].batch_year + '</td>';
+		            c += '<td class="program_name">' + json.tableData[i].program_name + '</td>';
 		            c += '<td class="semester_no">' + json.tableData[i].semester_no + '</td>';
-		            c += '<td>' + json.tableData[i].sem_start_date + '</td>';
-		            c += '<td>' + json.tableData[i].sem_end_date + '</td>';
-		            c += '<td>' + json.tableData[i].status + '</td>';
+		            c += '<td class="sem_start_date">' + json.tableData[i].sem_start_date + '</td>';
+		            c += '<td class="sem_end_date">' + json.tableData[i].sem_end_date + '</td>';
+		        	var status = json.tableData[i].status;
+		        	var semester_status;
+		            if (status === 0) {
+						semester_status="Inactive";
+					}else if(status === 1){
+						semester_status="Active";
+					}
+		            c += '<td class="semester_status">' + semester_status + '</td>';
 		            
 		            c += '<td><button type=\"button\" class=\"btn btn-info pull-right\" data-toggle=\"modal\" data-target=#edit_semester_modal id=\"edit\" onClick=\"load_edit('+json.tableData[i].semester_id+');\">Edit <span class=\"glyphicon glyphicon-pencil\"></span></button></td>';
 		            c += '<td><button type=\"button\" class=\"btn btn-danger pull-right\" data-toggle=\"modal\" data-target=#delete_semester_modal id=\"delete\" onClick=\"load_delete('+json.tableData[i].semester_id+');\">Delete <span class=\"glyphicon glyphicon-trash\"></span></button></td>';
@@ -410,6 +417,7 @@ function load_semester(arr,page, limit){
 	            $('#table-body').html(c); 
 	            var total_pages = json.TotalPage;
 	            pagination_view(data, total_pages, page);
+	            editableInitialize();
 	        }
 	     }
 	}
@@ -529,23 +537,104 @@ function getParameterByName(name, url) {
 // for table
 $(document).ready(function(){
 	$("#mytable").hide();
-	
+		$("#mytable #checkall").click(function () {
+	        if ($("#mytable #checkall").is(':checked')) {
+	            $("#mytable input[type=checkbox]").each(function () {
+	                $(this).prop("checked", true);
+	            });
+
+	        } else {
+	            $("#mytable input[type=checkbox]").each(function () {
+	                $(this).prop("checked", false);
+	            });
+	        }
+	    });
+	    
+	    $("[data-toggle=tooltip]").tooltip();
+});
+function editableInitialize(){
+		
 	// call makeEditable function (target-id, (td)selector-class, number-string-any )
-	makeEditable("table-body", "semester_no", "number");
+	makeEditable("table-body", "semester_no", "number", "text", "");
 	
-	$('#save').click(function() {
-		var semester_no = [];
-		$('.semester_no').each(function() {
-			semester_no.push($(this).text());
+	$('td.semester_no').on('save', function(e, params) {
+	    //alert('Saved value: ' + params.newValue);
+	    var value = params.newValue;
+	    var semester_id = $(this).closest('tr').find('.semester_id').text(); 
+	    //var semester_id = 9;
+	    
+	    $.ajax({
+			url : "../update_semester_no",
+			method : "POST",
+			cache : true,
+
+			data : {
+				semester_id : semester_id,
+				semester_no : value
+			},
+			success : function(data) {
+				$(this).addClass("tdsucess");
+				//$('td.semester_no').delay(1000).fadeOut('slow');
+			},
+			error : function() {
+				$(this).addClass("tderror");
+				//$('td.semester_no').delay(1000).fadeOut('slow');
+			}
 		});
-		alert(semester_no[0]);
 	});
 	
-	function makeEditable(target, selector, fieldType){
+	var semester_status_source  = [{"value":"1","text":"Active"},{"value":"0","text":"Inactive"}];
+	makeEditable("table-body", "semester_status", "number", "select", semester_status_source);
+	
+	$('td.semester_status').on('shown', function(e, editable) {
+		var semester_status = $(this).closest('tr').find('.semester_status').text(); 
+		if (semester_status == "Active"){
+			 editable.input.$input.val(1);
+		}
+		else {
+			 editable.input.$input.val(0);
+		}
+	});
+	
+	$('td.semester_status').on('save', function(e, params) {
+	    //alert('Saved value: ' + params.newValue);
+	    var value = params.newValue;
+	    alert("the val is: "+value)
+	    var semester_id = $(this).closest('tr').find('.semester_id').text(); 
+	    //var semester_id = 9;
+	    
+	    $.ajax({
+			url : "../supdate_semester_no",
+			method : "POST",
+			cache : true,
+
+			data : {
+				semester_id : semester_id,
+				semester_status : value
+			},
+			success : function(data) {
+				$(this).addClass("tdsucess");
+				//$('td.semester_no').delay(1000).fadeOut('slow');
+			},
+			error : function() {
+				$(this).addClass("tderror");
+				//$('td.semester_no').delay(1000).fadeOut('slow');
+			}
+		});
+	});
+}
+	
+	
+	
+	
+	
+	function makeEditable(target, selector, fieldType, type, source){
 		$('#'+target).editable({
 			container : 'body',
 			selector : 'td.'+selector+'',
 			title: selector,
+			type: type,
+			source: source,
 			validate : function(value) {
 				if(fieldType == 'number'){
 						if ($.trim(value) == '') {
@@ -555,6 +644,7 @@ $(document).ready(function(){
 						if (!regex.test(value)) {
 							return 'Numbers only!';
 						}
+						
 					}
 				else if(fieldType=="string") {
 						if ($.trim(value) == '') {
@@ -571,26 +661,10 @@ $(document).ready(function(){
 						}
 				}
 			}
+		
+		
 		});
 	}
-
-	
-	$("#mytable #checkall").click(function () {
-	        if ($("#mytable #checkall").is(':checked')) {
-	            $("#mytable input[type=checkbox]").each(function () {
-	                $(this).prop("checked", true);
-	            });
-
-	        } else {
-	            $("#mytable input[type=checkbox]").each(function () {
-	                $(this).prop("checked", false);
-	            });
-	        }
-	    });
-	    
-	    $("[data-toggle=tooltip]").tooltip();
-	});
-
 
 </script>
 

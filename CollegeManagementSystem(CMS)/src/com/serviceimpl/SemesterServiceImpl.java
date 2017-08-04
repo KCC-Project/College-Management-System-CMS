@@ -29,4 +29,9 @@ public class SemesterServiceImpl implements SemesterServiceInterface {
 	public List<SemesterModel> searchByFields(Object[] obj){
 		return model.searchByFields(obj);
 	}
+
+	@Override
+	public boolean update_semesterNo(int semester_id, int semester_no) {
+		return model.update_semesterNo(semester_id,semester_no);
+	}
 }

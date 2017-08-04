@@ -9,4 +9,5 @@ public interface SemesterModelInterface {
 	public List<SemesterModel> getAllRecord();  // getting all semester records 
 	public SemesterModel loadById(int id);
 	public List<SemesterModel> searchByFields(Object[] obj);
+	public boolean update_semesterNo(int semester_id, int semester_no);
 }

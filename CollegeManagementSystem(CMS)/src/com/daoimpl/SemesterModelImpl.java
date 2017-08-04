@@ -243,4 +243,34 @@ public class SemesterModelImpl implements SemesterModelInterface {
 		
 		return semester;
 	}
+
+	@Override
+	public boolean update_semesterNo(int semester_id, int semester_no) {
+		
+		try {
+			
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "update semester set semester_no = ? where semester_id = ?";
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, semester_no);
+			pst.setInt(2, semester_id);
+			pst.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				pst.close();
+				rs.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return false;
+	}
 }
