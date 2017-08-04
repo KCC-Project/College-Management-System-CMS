@@ -70,6 +70,7 @@ public class ajax_account_student extends HttpServlet {
 						map.put("StudentName", studentModel2.getFirstname() + " " + studentModel2.getMiddlename() + " "
 								+ studentModel2.getLastname());
 					}
+					map.put("student_id", studentModel2.getStudentID());
 					tempList.add(map);
 				}
 			}

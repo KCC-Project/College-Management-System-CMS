@@ -85,6 +85,10 @@
 										<tbody id="account_data">
 										</tbody>
 									</table>
+									<div align="center">
+										<button type="button" name="save" id="save"
+											class="btn btn-info">Save</button>
+									</div>
 								</div>
 								<div class="loader" id="loader" hidden style="margin-left: 40%;"></div>
 							</div>
@@ -153,6 +157,39 @@
 				</div>
 			</div>
 			<!--=========================================================================================  -->
+			<div class="modal fade" id="sucessfulDialog" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Sucessfull</h4>
+					</div>
+					<div class="modal-body">
+						<p>Information has sucessfully saved into database.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<div class="modal fade" id="errorDialog" role="dialog">
+			<div class="modal-dialog modal-md">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Error</h4>
+					</div>
+					<div class="modal-body">
+						<p>Error in saving information,Either data was already inserted or some fields empty.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+			<!-- ========================================================================================= -->
 		</div>
 	</div>
 </div>
@@ -171,30 +208,29 @@ $(document).ready(function(){
 	$("#p-faculty-box").change(function(event){ load_program(event, "p-program-box"); });
 	$("#p-program-box").change(function(event){ load_batch_year(event, "batch-box"); });
 	$("#searchbtnClicked").click(function(event){ loadStudent(event,"account_data"); });
+	$("#save").click(function(event){ saveAccount(event); });
 	
 	function loadStudent(e,target) {
-
-	var programId = document.getElementById("p-program-box").value;
-	var batchNo = document.getElementById("batch-box").value;
-	var  semesterNo= document.getElementById("Semester_box").value;
-
-	var url = "../ajax_account_student";
-	var idSend = "programId=" + programId
+		var programId = document.getElementById("p-program-box").value;
+		var batchNo = document.getElementById("batch-box").value;
+		var  semesterNo= document.getElementById("Semester_box").value;
+		var url = "../ajax_account_student";
+		var idSend = "programId=" + programId
 			+ "&batchNo=" + batchNo + "&semesterNo=" + semesterNo;
-	var aj = new XMLHttpRequest();
-	aj.open("POST", url, true);
-	aj
+		var aj = new XMLHttpRequest();
+		aj.open("POST", url, true);
+		aj
 			.setRequestHeader("Content-type",
 					"application/x-www-form-urlencoded");
-	aj.onreadystatechange = function() {
-		if (aj.readyState == 4 && aj.status == 200) {
-			var jSonObject = eval('(' + aj.responseText + ')');
-			$("#tblAccount").show();
-			var content = '';
-			for (var i = 0; i < jSonObject.length; i++) {
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+				var jSonObject = eval('(' + aj.responseText + ')');
+				$("#tblAccount").show();
+				var content = '';
+				for (var i = 0; i < jSonObject.length; i++) {
 				content += '<tr>';
 				content += '<td>' + (i + 1) + '</td>';
-				content += "<td>"+ jSonObject[i].StudentName + "</td>";
+				content += '<td class="student_id" value='+jSonObject[i].student_id+'>'+ jSonObject[i].StudentName + '</td>';
 				content += '<td   data-type="text" class="student_semester" ></td>';
 				content += '<td  data-type="text" " class="student_amount"  ></td>';	
 				makeEditable("account_data","student_amount","Amount","number");
@@ -206,6 +242,46 @@ $(document).ready(function(){
 	}
 	aj.send(idSend);
 }
+	
+	function saveAccount() {
+			var student_id = [];
+			var amount = [];
+		var section_number=[];
+
+			$('.student_id').each(function() {
+				student_id.push($(this).attr('value'));
+			});
+			$('.student_amount').each(function() {
+				amount.push($(this).text());
+			});
+			$('.student_semester').each(function() {
+				section_number.push($(this).text());
+			});
+			
+		console.log(student_id+" "+ amount+" "+section_number);
+		
+			$.ajax({
+				url : "../ajax_save_account",
+				method : "POST",
+				cache : true,
+
+				data : {
+					student_id : student_id,
+					amount : amount,
+					section_number : section_number
+				
+				},
+				success : function(data) {
+					// alert(data);
+					$('#tblAccount tr:not(:first)').remove();
+					$('#sucessfulDialog').modal('show');
+				},
+				error : function() {
+					$('#errorDialog').modal('show');
+				}
+			});
+
+	}
 });
 </script>
 </body>
