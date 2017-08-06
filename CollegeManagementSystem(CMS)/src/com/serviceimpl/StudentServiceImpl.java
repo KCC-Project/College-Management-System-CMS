@@ -42,4 +42,9 @@ public class StudentServiceImpl implements StudentServiceInterface {
 		return model.searchByField(obj);
 	}
 
+	@Override
+	public List<StudentModel> searchForAccount(String name) {
+		return model.searchForAccount(name);
+	}
+
 }

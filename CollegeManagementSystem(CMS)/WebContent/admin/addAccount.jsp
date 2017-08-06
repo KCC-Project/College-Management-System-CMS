@@ -41,11 +41,21 @@
 
 						<a><button type="button" class="btn btn-info pull-right"
 								data-toggle="modal" data-target="#addAccountModal" id="modal-box">Account</button></a>
-						<button type="button" class="btn btn-info" id="model-search"
-							style="float: left; margin-left: -20px;">
-							<span class="glyphicon glyphicon-search" ></span> Filter
-						</button>
 					</h3>
+					<form class="navbar-form" role="search" style="position:absolute;margin-top: -34px;">
+    <div class="input-group add-on">
+    
+    
+     <select class="form-control" id="sel1">
+     <option value="" disabled selected>Search</option>
+      </select>
+    
+    <!--   <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term" style="height: 28px;"> -->
+      <div class="input-group-btn" >
+        <button class="btn btn-default" type="submit"  style="height: 34px;"><i class="glyphicon glyphicon-search"></i></button>
+      </div>
+    </div>
+  </form>
 				</div>
 			</div>
 			<!--====================================================Table==================================================================  -->
@@ -313,6 +323,55 @@ $(document).ready(function(){
 	    theme: "bootstrap",
 	    width: "auto"
 	});
+	$( "#sel1" ).select2({
+	    theme: "bootstrap",
+	    width: "200px",
+	    height: "10px"
+	});
+	$(document).on('keyup', '.select2-search__field', function (e) {
+		var value=$('.select2-search__field').val();
+		//console.log(value);
+		searchEntry(value);	
+	});
+	
+	/* function searchEntry(value) {
+		$.ajax({
+			url :"../ajax_search_student_for_account",
+			method : "POST",
+			cache : true,
+
+			data : {
+				val : value
+			},
+			success : function(data) {
+				alert("value=="+data);
+				//document.getElementById("sel1").innerHTML = data;
+			},
+			error : function() {
+				console.log("Error");
+			}
+		});
+	} */
+	
+	function searchEntry(value) {
+		
+		var url = "../ajax_search_student_for_account";
+		var aj = new XMLHttpRequest();
+		var send="val="+value
+		aj.open("POST", url, true);
+		aj
+				.setRequestHeader("Content-type",
+						"application/x-www-form-urlencoded");
+
+		aj.onreadystatechange = function() {
+			if (aj.readyState == 4 && aj.status == 200) {
+
+				var return_data = aj.responseText;
+				document.getElementById("sel1").innerHTML = return_data;
+			}
+		}
+		aj.send(send);
+	}
 });
 </script>
 </body>

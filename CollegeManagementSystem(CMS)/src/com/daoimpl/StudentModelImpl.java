@@ -342,4 +342,36 @@ public class StudentModelImpl implements StudentModelInterface {
 		return stModel;
 	}
 
+	@Override
+	public List<StudentModel> searchForAccount(String name) {
+		System.out.println("name==="+name);
+		List<StudentModel> stModel = new ArrayList<>();
+		try {
+			conn = DatabaseConnection.connectToDatabase();
+			sql = "SELECT * FROM `student` where CONCAT(student_firstname ,student_lastname) like '"+name+"%'";
+			pst = conn.prepareStatement(sql);
+			rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				StudentModel model = new StudentModel();
+				model.setStudentID(rs.getInt("student_id"));
+				model.setFirstname(rs.getString("student_firstname"));
+				model.setMiddlename(rs.getString("student_middlename"));
+				model.setLastname(rs.getString("student_lastname"));
+				model.setEmail(rs.getString("student_email"));
+				model.setMobileNo(rs.getInt("student_phone"));
+				model.setAddress(rs.getString("student_address"));
+				model.setGender(rs.getString("student_gender"));
+				model.setUsername(rs.getString("student_username"));
+				model.setIdentityCard(rs.getString("student_identitycard"));
+				model.setStatus(rs.getInt("status"));
+				stModel.add(model);
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return stModel;
+	}
+
 }

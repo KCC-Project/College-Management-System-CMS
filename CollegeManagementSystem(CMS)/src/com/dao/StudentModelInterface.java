@@ -11,4 +11,5 @@ public interface StudentModelInterface {
 	int delete(int id);
 	int update(StudentModel stu);
 	List<StudentModel> searchByField(Object[] obj);
+	List<StudentModel> searchForAccount(String name);
 }
