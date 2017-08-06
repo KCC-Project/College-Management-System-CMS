@@ -33,8 +33,21 @@ public class ajax_semester_load extends HttpServlet {
 			throws ServletException, IOException {
 		String program_id = request.getParameter("id");
 		String semester_id = request.getParameter("semester_id");
+		String req_batch_id = request.getParameter("batch_id");
+		String req_semester_no = request.getParameter("semester_no");
+		String req_semester_status = request.getParameter("semester_status");
+		
 		String pageNo = request.getParameter("page");
 		String req_limit = request.getParameter("limit");
+		
+		int batch_id = 0; //default limit
+		if(req_batch_id!=null){ batch_id = Integer.parseInt(req_batch_id); }
+		
+		int dsemester_no = 0; //default limit
+		if(req_semester_no!=null){ dsemester_no = Integer.parseInt(req_semester_no); }
+		
+		int semester_status = 1; //default limit
+		if(req_semester_status!=null){ semester_status = Integer.parseInt(req_semester_status); }
 		
 		int limit = 5; //default limit
 		if(req_limit!=null){ limit = Integer.parseInt(req_limit); }
@@ -53,7 +66,10 @@ public class ajax_semester_load extends HttpServlet {
 			YearServiceInterface year = new YearServiceImpl();
 			
 			Object[] obj = new Object[10];
-			obj[2]=id;
+			obj[1] = dsemester_no;
+			obj[2] = id;
+			obj[3] = batch_id;
+			obj[6] = semester_status;
 			obj[7]=start; //start limit
 			obj[8]=limit; // limit
 		

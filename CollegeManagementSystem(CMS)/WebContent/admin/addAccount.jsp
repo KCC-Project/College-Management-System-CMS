@@ -310,7 +310,8 @@ $(document).ready(function(){
 	}
 	
 	$( "select" ).select2({
-	    theme: "bootstrap"
+	    theme: "bootstrap",
+	    width: "auto"
 	});
 });
 </script>

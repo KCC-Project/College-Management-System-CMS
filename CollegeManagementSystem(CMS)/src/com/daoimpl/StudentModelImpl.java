@@ -254,15 +254,15 @@ public class StudentModelImpl implements StudentModelInterface {
 		            parameters.add(student_id);
 		        }
 				if (student_firstname != null) {
-		            query.append(" AND student_firstname = ?");
+		            query.append(" AND student_firstname LIKE '?%'");
 		            parameters.add(student_firstname);
 		        }
 				if (student_middlename != null) {
-		            query.append(" AND student_middlename = ?");
+		            query.append(" AND student_middlename LIKE '?%'");
 		            parameters.add(student_middlename);
 		        }
 				if (student_lastname != null) {
-		            query.append(" AND student_lastname = ?");
+		            query.append(" AND student_lastname LIKE '?%'");
 		            parameters.add(student_lastname);
 		        }
 				if (student_email != null) {

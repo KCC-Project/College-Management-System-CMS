@@ -50,7 +50,6 @@
 				<!-- Modal content-->
 				<div class="modal-content">
 						<div class="modal-body">
-					    	<div id="faculty">
 					    		<div class="row">
 					    			<div class="col-sm-6">
 									    <label>Faculty: <span class="astriek">*</span></label>
@@ -65,6 +64,38 @@
 										</select>
 									  </div>
 					    		</div>
+					    		<div class="row">
+					    			<div class="col-sm-6">
+									    <label> <span class="astriek">Optional Fields: <i class="fa fa-angle-down" aria-hidden="true"></i></span></label>
+								  	</div>
+								</div>
+					    		<div class="row">
+									<div class="col-sm-4 form-group">
+										<label>Semester no.: <span class="astriek"></span></label>
+										<select required class="form-control" id="p-semester-no" name="semester_no">
+											<option value="" disabled selected>Select Semester</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+										</select>										</div>
+									<div  class="col-sm-4 form-group">
+										<label>Batch: <span class="astriek"></span></label>
+											    <select required class="form-control" name="batch_id" id="p-batch-box">
+													<option value="" disabled selected>Select Batch</option>
+												</select>
+									</div>
+									<div class="form-group col-sm-4">
+									  	<label>Semester Status: </label>
+									  	<div class="form-control">
+									  	<input type="radio" name="s-semester" id="p-inactive" value="0" required>Inactive
+										<input type="radio" name="s-semester" id="p-active" value="1" checked>Active
+										</div>
+									</div>
 					    	</div>
 						</div>
 						<div class="modal-footer">
@@ -87,7 +118,7 @@
 								<br>
 								<div class="table-responsive">
 									<table id="mytable" class="table table-bordered table-condensed table-hover table-striped">
-										<thead>
+										<thead id="table-head">
 											<tr>
 												<th><input type="checkbox" id="checkall" /></th>
 												<th>Semester_id</th>
@@ -230,8 +261,18 @@
 						  </div>
 						  <div class="form-group col-sm-6">
 						    <label>Semester no.: <span class="astriek">*</span></label>
-						    	<input type="number" id="e-sem-no" name="semester_no" required class="form-control" placeholder="Semester number">
-						  </div>
+								<select required class="form-control" id="e-semester-no" name="semester_no">
+									<option value="" disabled selected>Select Semester</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+								</select>						  
+							</div>
 						 </div>
 						 <div class="row">
 						  <div class="form-group col-sm-6">
@@ -297,13 +338,23 @@ $(document).ready(function(){
 	$("#filter-box").click(function(event){ load_faculty(event, "p-faculty-box"); });
 	$("#modal-box").click(function(event){ load_faculty(event, "faculty-box"); });
 	$("#p-faculty-box").change(function(event){ load_program(event, "p-program-box"); });
+	$("#p-program-box").change(function(event){ load_batch_year(event, "p-batch-box"); });
+	
 	$("#faculty-box").change(function(event){ load_program(event, "program-box"); });
 	$("#program-box").change(function(event){ load_batch_year(event, "batch-box"); });
 	$("#e-faculty-box").change(function(event){ load_program(event, "e-program-box"); });
 	$("#e-program-box").change(function(event){ load_batch_year(event, "e-batch-box"); });
+	
 	$("#go").click(function(event){ 
-		var id=document.getElementById("p-program-box").value;
-		var data = "id=" + id ;
+		var id = document.getElementById("p-program-box").value;
+		var batch_id = document.getElementById("p-batch-box").value;
+		var semester_no = document.getElementById("p-semester-no").value;
+		var status_selected = $('input[name=s-semester]:checked').val();
+		var data = "id=" + id;
+		if(batch_id && !isNaN(batch_id)){ data+= "&batch_id=" + batch_id; }
+		if(semester_no && !isNaN(semester_no)){ data+= "&semester_no=" + semester_no; }
+		if(status_selected){ data+= "&semester_status=" + status_selected; }
+		
 		var arr = [data];
 		alert(data);
 		//var limit=document.getElementById("limit-box").value;
@@ -492,7 +543,7 @@ function load_edit(id){
 	            for (var i = 0; i < json.length; i++) {
 	            	load_faculty(event, "e-faculty-box");
 	            	//document.getElementById("e-faculty-box").change();
-	            	load_program(event, "p-program-box");
+	            	load_program(event, "e-program-box");
 	            	document.getElementById("e-program-box").value=json[i].program_id;
 	            	load_batch_year(event, "e-batch-box");
 	            	document.getElementById("e-batch-box").value=json[i].batch_year;
@@ -552,6 +603,7 @@ $(document).ready(function(){
 	    
 	    $("[data-toggle=tooltip]").tooltip();
 });
+
 function editableInitialize(){
 		
 	// call makeEditable function (target-id, (td)selector-class, number-string-any )
