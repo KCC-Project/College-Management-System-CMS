@@ -46,7 +46,7 @@
     <div class="input-group add-on">
     
     
-     <select class="form-control" id="sel1">
+     <select class="form-control" id="sel1" >
      <option value="" disabled selected>Search</option>
       </select>
     
@@ -323,10 +323,12 @@ $(document).ready(function(){
 	    theme: "bootstrap",
 	    width: "auto"
 	});
+
 	$( "#sel1" ).select2({
 	    theme: "bootstrap",
 	    width: "200px",
 	    height: "10px"
+	    //minimumInputLength: 3
 	}).on("change", function(e) {
 
 		 var selected_element = $(e.currentTarget);
@@ -339,7 +341,10 @@ $(document).ready(function(){
 		if (value=='') {
 			console.log("null="+value);
 		}else{
-		searchEntry(value);	
+			if (value.length>2) {
+				console.log("length="+value.length);
+				searchEntry(value);		
+			}
 		}
 		});
 	

@@ -344,11 +344,11 @@ public class StudentModelImpl implements StudentModelInterface {
 
 	@Override
 	public List<StudentModel> searchForAccount(String name) {
-		System.out.println("name==="+name);
+		//System.out.println("name==="+name);
 		List<StudentModel> stModel = new ArrayList<>();
 		try {
 			conn = DatabaseConnection.connectToDatabase();
-			sql = "SELECT * FROM `student` where CONCAT(student_firstname ,student_lastname) like '"+name+"%'";
+			sql = "SELECT * FROM `student` where CONCAT(student_firstname,student_lastname)  like '%"+name+"%'";
 			pst = conn.prepareStatement(sql);
 			rs = pst.executeQuery();
 			
