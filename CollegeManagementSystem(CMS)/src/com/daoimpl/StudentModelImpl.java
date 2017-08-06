@@ -366,6 +366,7 @@ public class StudentModelImpl implements StudentModelInterface {
 				model.setIdentityCard(rs.getString("student_identitycard"));
 				model.setStatus(rs.getInt("status"));
 				stModel.add(model);
+				System.out.println(rs.getString("student_firstname"));
 			}
 
 		} catch (Exception e) {

@@ -28,6 +28,7 @@ public class ajax_search_student_for_account extends HttpServlet {
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		PrintWriter out = response.getWriter();
+		out.write("<option disabled selected>Select Student </option>");
 		for (StudentModel studentModel : model) {
 			boolean isEmpty = false;
 			try {

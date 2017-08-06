@@ -327,12 +327,21 @@ $(document).ready(function(){
 	    theme: "bootstrap",
 	    width: "200px",
 	    height: "10px"
-	});
+	}).on("change", function(e) {
+
+		 var selected_element = $(e.currentTarget);
+		    var select_val = selected_element.val();
+		  alert(select_val);
+		 });
 	$(document).on('keyup', '.select2-search__field', function (e) {
 		var value=$('.select2-search__field').val();
 		//console.log(value);
+		if (value=='') {
+			console.log("null="+value);
+		}else{
 		searchEntry(value);	
-	});
+		}
+		});
 	
 	/* function searchEntry(value) {
 		$.ajax({
@@ -365,13 +374,15 @@ $(document).ready(function(){
 
 		aj.onreadystatechange = function() {
 			if (aj.readyState == 4 && aj.status == 200) {
-
+				
 				var return_data = aj.responseText;
+				console.log(return_data);
 				document.getElementById("sel1").innerHTML = return_data;
 			}
 		}
 		aj.send(send);
 	}
+	
 });
 </script>
 </body>
