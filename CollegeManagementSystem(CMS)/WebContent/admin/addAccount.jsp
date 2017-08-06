@@ -15,7 +15,9 @@
 <link href="../Resources/css/manageExam.css" rel="stylesheet"
 	type="text/css">
 <link href="../Resources/css/bootstrap-editable.css" rel="stylesheet" />
-
+<!-- select2 css -->
+<link href="../Resources/css/select2.min.css" rel="stylesheet" />
+<link href="../Resources/css/select2-bootstrap.min.css" rel="stylesheet" />
 <jsp:include page="admin-header.jsp" />
 
 
@@ -39,9 +41,9 @@
 
 						<a><button type="button" class="btn btn-info pull-right"
 								data-toggle="modal" data-target="#addAccountModal" id="modal-box">Account</button></a>
-						<button type="button" class="btn btn-info"
+						<button type="button" class="btn btn-info" id="model-search"
 							style="float: left; margin-left: -20px;">
-							<span class="glyphicon glyphicon-search"></span> Search
+							<span class="glyphicon glyphicon-search" ></span> Filter
 						</button>
 					</h3>
 				</div>
@@ -86,8 +88,10 @@
 										</tbody>
 									</table>
 									<div align="center">
-										<button type="button" name="save" id="save"
-											class="btn btn-info">Save</button>
+										<button  type="button" name="save" id="save"
+											class="btn btn-info hidden" >Save</button>
+											<button type="button" name="update" id="update"
+											class="btn btn-info hidden" >Update</button>
 									</div>
 								</div>
 								<div class="loader" id="loader" hidden style="margin-left: 40%;"></div>
@@ -201,14 +205,18 @@
 <script src="../Resources/plugins/summernote/dist/summernote.min.js"></script>
 <script src="../Resources/js/re-usable.js"></script>
 <script src="../Resources/js/bootstrap-editable.min.js"></script>
+<script src="../Resources/js/select2.min.js"></script>
 <script>
 $(document).ready(function(){
 	
-	$("#modal-box").click(function(event){ load_faculty(event, "p-faculty-box"); });
+	$("#modal-box").click(function(event){ load_faculty(event, "p-faculty-box"); $("#save").removeClass("hidden");$("#update").addClass("hidden");});
 	$("#p-faculty-box").change(function(event){ load_program(event, "p-program-box"); });
 	$("#p-program-box").change(function(event){ load_batch_year(event, "batch-box"); });
 	$("#searchbtnClicked").click(function(event){ loadStudent(event,"account_data"); });
-	$("#save").click(function(event){ saveAccount(event); });
+	$("#save").click(function(event){ save_update_Account("save"); });
+	$("#searchbtnClicked").click(function(event){ loadStudent(event,"account_data"); });
+	$("#model-search").click(function(event){$("#save").addClass("hidden");$("#update").removeClass("hidden");});
+	$("#update").click(function(event){ save_update_Account("update"); });
 	
 	function loadStudent(e,target) {
 		var programId = document.getElementById("p-program-box").value;
@@ -243,25 +251,41 @@ $(document).ready(function(){
 	aj.send(idSend);
 }
 	
-	function saveAccount() {
+	function save_update_Account(status) {
+		//console.log("Status of saving or updating== "+status);
 			var student_id = [];
 			var amount = [];
-		var section_number=[];
-
+			var section_number=[];
+			var error=0;
+		
 			$('.student_id').each(function() {
 				student_id.push($(this).attr('value'));
 			});
 			$('.student_amount').each(function() {
+				if ($(this).text() <0) {
+					error=1;
+				}else{
 				amount.push($(this).text());
-			});
-			$('.student_semester').each(function() {
-				section_number.push($(this).text());
+				}
 			});
 			
+			$('.student_semester').each(function() {
+				if ($(this).text() >=9 ||$(this).text() <=0) {
+					error=1
+				}else{
+					section_number.push($(this).text());
+				}
+			});
 		console.log(student_id+" "+ amount+" "+section_number);
-		
+		var urls;
+		if (status=="save") {
+			urls="../ajax_save_account";
+		}else if(status=="update"){
+			urls="../ajax_update_account";
+		}
+		if(error===0){
 			$.ajax({
-				url : "../ajax_save_account",
+				url :urls,
 				method : "POST",
 				cache : true,
 
@@ -272,7 +296,7 @@ $(document).ready(function(){
 				
 				},
 				success : function(data) {
-					// alert(data);
+					alert(data);
 					$('#tblAccount tr:not(:first)').remove();
 					$('#sucessfulDialog').modal('show');
 				},
@@ -280,8 +304,14 @@ $(document).ready(function(){
 					$('#errorDialog').modal('show');
 				}
 			});
-
+		}else{
+			$('#errorDialog').modal('show');
+		}
 	}
+	
+	$( "select" ).select2({
+	    theme: "bootstrap"
+	});
 });
 </script>
 </body>

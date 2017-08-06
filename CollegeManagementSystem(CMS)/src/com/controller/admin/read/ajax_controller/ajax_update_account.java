@@ -10,14 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.model.FeeModel;
+import com.model.FeeUpdateModel;
 import com.serviceimpl.FeeModelServiceImpl;
 
-@WebServlet("/ajax_save_account")
-public class ajax_save_account extends HttpServlet {
+@WebServlet("/ajax_update_account")
+public class ajax_update_account extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		String[] studentId = request.getParameterValues("student_id[]");
 		String[] amount = request.getParameterValues("amount[]");
@@ -26,6 +27,7 @@ public class ajax_save_account extends HttpServlet {
 		boolean isSucess = false;
 		for (int i = 0; i < studentId.length; i++) {
 			FeeModel model= new FeeModel();
+			FeeUpdateModel update=new FeeUpdateModel();
 			model.setStudent_id(Integer.parseInt(studentId[i]));
 			model.setDue_amount(Integer.parseInt(amount[i]));
 			model.setSemester_no(Integer.parseInt(semester_number[i]));
@@ -36,5 +38,7 @@ public class ajax_save_account extends HttpServlet {
 		}else{
 			out.println("not sucessful");
 		}
+	
 	}
+
 }
