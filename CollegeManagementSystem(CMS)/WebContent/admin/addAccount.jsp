@@ -37,25 +37,23 @@
 			<!--=============================================Main Containt===============================  -->
 			<div class="box box-default with-border">
 				<div>
-					<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
+					<div style="margin: 0px; padding-left: 20px; height: 35px;">
 
 						<a><button type="button" class="btn btn-info pull-right"
 								data-toggle="modal" data-target="#addAccountModal"
 								id="modal-box">Account</button></a>
-						
-							<div class="input-group add-on">
-								<select class="form-control" id="sel1">
-									<option value="" disabled selected>Search</option>
-								</select>
-								<div class="input-group-btn" >
-									<button class="btn btn-default" type="submit"
-										style="height: 34px;">
-										<i class="glyphicon glyphicon-search"></i>
-									</button>
+
+						<div class="col-xs-3" style="margin-left: -34px;">
+							<div class="form-group">
+								<div class="input-group">
+									<select class="form-control" id="sel1"></select> <span
+										class="input-group-addon"> <i class="fa fa-search"></i>
+									</span>
 								</div>
 							</div>
-						
-					</h3>
+						</div>
+
+					</div>
 				</div>
 			</div>
 			<!--====================================================Table==================================================================  -->
@@ -382,10 +380,10 @@
 								.select2(
 										{
 											theme : "bootstrap",
-											width : "200px",
+											width : "220px",
 											height : "10px",
 											minimumInputLength : 3,
-											placeholder : "Search for a repository",
+											placeholder : "Search for a student",
 											ajax : {
 												url : "../ajax_search_student_for_account",
 												dataType : 'json',
@@ -402,7 +400,7 @@
 												},
 												processResults : function(data,
 														params) {
-													console.log("data=" + data);
+													//console.log("data=" + data);
 													params.page = params.page || 1;
 
 													return {
@@ -436,27 +434,6 @@
 
 						function formatRepoSelection(repo) {
 							return repo.name || repo.text;
-						}
-
-						function searchEntry(value) {
-
-							var url = "../ajax_search_student_for_account";
-							var aj = new XMLHttpRequest();
-							var send = "val=" + value
-							aj.open("POST", url, true);
-							aj.setRequestHeader("Content-type",
-									"application/x-www-form-urlencoded");
-
-							aj.onreadystatechange = function() {
-								if (aj.readyState == 4 && aj.status == 200) {
-									//var jSonObject = eval('(' + aj.responseText + ')');
-									var return_data = aj.responseText;
-									//alert(return_data);
-									console.log(return_data);
-									document.getElementById("sel1").innerHTML = return_data;
-								}
-							}
-							aj.send(send);
 						}
 
 					});
