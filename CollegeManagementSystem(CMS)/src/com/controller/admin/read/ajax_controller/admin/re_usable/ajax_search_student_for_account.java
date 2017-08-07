@@ -1,4 +1,4 @@
-package com.controller.admin.read.ajax_controller;
+package com.controller.admin.read.ajax_controller.admin.re_usable;
 
 import java.io.IOException;
 import java.io.PrintWriter;
