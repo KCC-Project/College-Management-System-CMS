@@ -42,7 +42,7 @@
 						<a><button type="button" class="btn btn-info pull-right"
 								data-toggle="modal" data-target="#addAccountModal"
 								id="modal-box">Account</button></a>
-						<div>
+						
 							<div class="input-group add-on">
 								<select class="form-control" id="sel1">
 									<option value="" disabled selected>Search</option>
@@ -54,7 +54,7 @@
 									</button>
 								</div>
 							</div>
-						</div>
+						
 					</h3>
 				</div>
 			</div>
