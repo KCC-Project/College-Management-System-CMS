@@ -344,7 +344,7 @@ public class StudentModelImpl implements StudentModelInterface {
 
 	@Override
 	public List<StudentModel> searchForAccount(String name) {
-		//System.out.println("name==="+name);
+		System.out.println("name==="+name);
 		List<StudentModel> stModel = new ArrayList<>();
 		try {
 			conn = DatabaseConnection.connectToDatabase();

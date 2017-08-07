@@ -2,7 +2,10 @@ package com.controller.admin.read.ajax_controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +17,7 @@ import com.dao.StudentModelInterface;
 import com.model.StudentModel;
 import com.service.StudentServiceInterface;
 import com.serviceimpl.StudentServiceImpl;
+import com.util.JsonUtil;
 
 @WebServlet("/ajax_search_student_for_account")
 public class ajax_search_student_for_account extends HttpServlet {
@@ -28,7 +32,7 @@ public class ajax_search_student_for_account extends HttpServlet {
 		response.setContentType("text/xml");
 		response.setHeader("Cache-Control", "no-cache");
 		PrintWriter out = response.getWriter();
-		out.write("<option disabled selected>Select Student </option>");
+		List list= new ArrayList();
 		for (StudentModel studentModel : model) {
 			boolean isEmpty = false;
 			try {
@@ -37,13 +41,25 @@ public class ajax_search_student_for_account extends HttpServlet {
 				isEmpty=true;
 			}
 			if (isEmpty==true) {
-				out.write("<option value=" + studentModel.getStudentID() + ">" + studentModel.getFirstname() +" "+studentModel.getLastname()+ "</option>");
+				Map<String, Object> map= new HashMap<String,Object>();
+				map.put("name", studentModel.getFirstname()+ " "+studentModel.getLastname());
+				map.put("id",studentModel.getStudentID());
+				list.add(map);
+				System.out.println(studentModel.getFirstname());
+				//out.write("<option value=" + studentModel.getStudentID() + ">" + studentModel.getFirstname() +" "+studentModel.getLastname()+ "</option>");
 			}else {
-				out.write("<option value=" + studentModel.getStudentID() + ">" + studentModel.getFirstname() + " "+studentModel.getMiddlename()+" "+studentModel.getLastname()+"</option>");
+				Map<String, Object> map= new HashMap<String,Object>();
+				map.put("name", studentModel.getFirstname()+ " "+studentModel.getMiddlename()+" "+studentModel.getLastname());
+				map.put("id",studentModel.getStudentID());
+				list.add(map);
+				//out.write("<option value=" + studentModel.getStudentID() + ">" + studentModel.getFirstname() + " "+studentModel.getMiddlename()+" "+studentModel.getLastname()+"</option>");
 			}
 			
 		//System.out.println("qqq======="+studentModel.getFirstname());
 		}
+		String result=JsonUtil.convertJavaToJson(list);
+		System.out.println("resukt="+result);
+		response.getWriter().write(result);
 		out.flush();
 	}
 

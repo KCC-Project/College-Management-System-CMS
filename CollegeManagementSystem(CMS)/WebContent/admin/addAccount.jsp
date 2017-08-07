@@ -40,22 +40,27 @@
 					<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
 
 						<a><button type="button" class="btn btn-info pull-right"
-								data-toggle="modal" data-target="#addAccountModal" id="modal-box">Account</button></a>
+								data-toggle="modal" data-target="#addAccountModal"
+								id="modal-box">Account</button></a>
 					</h3>
-					<form class="navbar-form" role="search" style="position:absolute;margin-top: -34px;">
-    <div class="input-group add-on">
-    
-    
-     <select class="form-control" id="sel1" >
-     <option value="" disabled selected>Search</option>
-      </select>
-    
-    <!--   <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term" style="height: 28px;"> -->
-      <div class="input-group-btn" >
-        <button class="btn btn-default" type="submit"  style="height: 34px;"><i class="glyphicon glyphicon-search"></i></button>
-      </div>
-    </div>
-  </form>
+					<form class="navbar-form" role="search"
+						style="position: absolute; margin-top: -34px;">
+						<div class="input-group add-on">
+
+
+							<select class="form-control" id="sel1">
+								<option value="" disabled selected>Search</option>
+							</select>
+
+							<!--   <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term" style="height: 28px;"> -->
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="submit"
+									style="height: 34px;">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 			<!--====================================================Table==================================================================  -->
@@ -98,10 +103,10 @@
 										</tbody>
 									</table>
 									<div align="center">
-										<button  type="button" name="save" id="save"
-											class="btn btn-info hidden" >Save</button>
-											<button type="button" name="update" id="update"
-											class="btn btn-info hidden" >Update</button>
+										<button type="button" name="save" id="save"
+											class="btn btn-info hidden">Save</button>
+										<button type="button" name="update" id="update"
+											class="btn btn-info hidden">Update</button>
 									</div>
 								</div>
 								<div class="loader" id="loader" hidden style="margin-left: 40%;"></div>
@@ -163,7 +168,7 @@
 								<button type="button" class="btn btn-default"
 									data-dismiss="modal">Close</button>
 								<button type="submit" class="btn btn-success"
-									id="searchbtnClicked"  data-dismiss="modal">Search</button>
+									id="searchbtnClicked" data-dismiss="modal">Search</button>
 							</div>
 						</div>
 					</div>
@@ -172,37 +177,40 @@
 			</div>
 			<!--=========================================================================================  -->
 			<div class="modal fade" id="sucessfulDialog" role="dialog">
-			<div class="modal-dialog modal-md">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Sucessfull</h4>
-					</div>
-					<div class="modal-body">
-						<p>Information has sucessfully saved into database.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	<div class="modal fade" id="errorDialog" role="dialog">
-			<div class="modal-dialog modal-md">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Error</h4>
-					</div>
-					<div class="modal-body">
-						<p>Error in saving information,Either data was already inserted or some fields empty.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Sucessfull</h4>
+						</div>
+						<div class="modal-body">
+							<p>Information has sucessfully saved into database.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			<div class="modal fade" id="errorDialog" role="dialog">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Error</h4>
+						</div>
+						<div class="modal-body">
+							<p>Error in saving information,Either data was already
+								inserted or some fields empty.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- ========================================================================================= -->
 		</div>
 	</div>
@@ -217,178 +225,245 @@
 <script src="../Resources/js/bootstrap-editable.min.js"></script>
 <script src="../Resources/js/select2.min.js"></script>
 <script>
-$(document).ready(function(){
-	
-	$("#modal-box").click(function(event){ load_faculty(event, "p-faculty-box"); $("#save").removeClass("hidden");$("#update").addClass("hidden");});
-	$("#p-faculty-box").change(function(event){ load_program(event, "p-program-box"); });
-	$("#p-program-box").change(function(event){ load_batch_year(event, "batch-box"); });
-	$("#searchbtnClicked").click(function(event){ loadStudent(event,"account_data"); });
-	$("#save").click(function(event){ save_update_Account("save"); });
-	$("#searchbtnClicked").click(function(event){ loadStudent(event,"account_data"); });
-	$("#model-search").click(function(event){$("#save").addClass("hidden");$("#update").removeClass("hidden");});
-	$("#update").click(function(event){ save_update_Account("update"); });
-	
-	function loadStudent(e,target) {
-		var programId = document.getElementById("p-program-box").value;
-		var batchNo = document.getElementById("batch-box").value;
-		var  semesterNo= document.getElementById("Semester_box").value;
-		var url = "../ajax_account_student";
-		var idSend = "programId=" + programId
-			+ "&batchNo=" + batchNo + "&semesterNo=" + semesterNo;
-		var aj = new XMLHttpRequest();
-		aj.open("POST", url, true);
-		aj
-			.setRequestHeader("Content-type",
-					"application/x-www-form-urlencoded");
-		aj.onreadystatechange = function() {
-			if (aj.readyState == 4 && aj.status == 200) {
-				var jSonObject = eval('(' + aj.responseText + ')');
-				$("#tblAccount").show();
-				var content = '';
-				for (var i = 0; i < jSonObject.length; i++) {
-				content += '<tr>';
-				content += '<td>' + (i + 1) + '</td>';
-				content += '<td class="student_id" value='+jSonObject[i].student_id+'>'+ jSonObject[i].StudentName + '</td>';
-				content += '<td   data-type="text" class="student_semester" ></td>';
-				content += '<td  data-type="text" " class="student_amount"  ></td>';	
-				makeEditable("account_data","student_amount","Amount","number");
-				makeEditable("account_data","student_semester","Semester","number");
-				content += '<tr>';
-			}
-			$('#'+ target).html(content);
-		}
-	}
-	aj.send(idSend);
-}
-	
-	function save_update_Account(status) {
-		//console.log("Status of saving or updating== "+status);
-			var student_id = [];
-			var amount = [];
-			var section_number=[];
-			var error=0;
-		
-			$('.student_id').each(function() {
-				student_id.push($(this).attr('value'));
-			});
-			$('.student_amount').each(function() {
-				if ($(this).text() <0) {
-					error=1;
-				}else{
-				amount.push($(this).text());
-				}
-			});
-			
-			$('.student_semester').each(function() {
-				if ($(this).text() >=9 ||$(this).text() <=0) {
-					error=1
-				}else{
-					section_number.push($(this).text());
-				}
-			});
-		console.log(student_id+" "+ amount+" "+section_number);
-		var urls;
-		if (status=="save") {
-			urls="../ajax_save_account";
-		}else if(status=="update"){
-			urls="../ajax_update_account";
-		}
-		if(error===0){
-			$.ajax({
-				url :urls,
-				method : "POST",
-				cache : true,
+	$(document)
+			.ready(
+					function() {
 
-				data : {
-					student_id : student_id,
-					amount : amount,
-					section_number : section_number
-				
-				},
-				success : function(data) {
-					alert(data);
-					$('#tblAccount tr:not(:first)').remove();
-					$('#sucessfulDialog').modal('show');
-				},
-				error : function() {
-					$('#errorDialog').modal('show');
-				}
-			});
-		}else{
-			$('#errorDialog').modal('show');
-		}
-	}
-	
-	$( "select" ).select2({
-	    theme: "bootstrap",
-	    width: "auto"
-	});
+						$("#modal-box").click(function(event) {
+							load_faculty(event, "p-faculty-box");
+							$("#save").removeClass("hidden");
+							$("#update").addClass("hidden");
+						});
+						$("#p-faculty-box").change(function(event) {
+							load_program(event, "p-program-box");
+						});
+						$("#p-program-box").change(function(event) {
+							load_batch_year(event, "batch-box");
+						});
+						$("#searchbtnClicked").click(function(event) {
+							loadStudent(event, "account_data");
+						});
+						$("#save").click(function(event) {
+							save_update_Account("save");
+						});
+						$("#searchbtnClicked").click(function(event) {
+							loadStudent(event, "account_data");
+						});
+						$("#model-search").click(function(event) {
+							$("#save").addClass("hidden");
+							$("#update").removeClass("hidden");
+						});
+						$("#update").click(function(event) {
+							save_update_Account("update");
+						});
 
-	$( "#sel1" ).select2({
-	    theme: "bootstrap",
-	    width: "200px",
-	    height: "10px"
-	    //minimumInputLength: 3
-	}).on("change", function(e) {
+						function loadStudent(e, target) {
+							var programId = document
+									.getElementById("p-program-box").value;
+							var batchNo = document.getElementById("batch-box").value;
+							var semesterNo = document
+									.getElementById("Semester_box").value;
+							var url = "../ajax_account_student";
+							var idSend = "programId=" + programId + "&batchNo="
+									+ batchNo + "&semesterNo=" + semesterNo;
+							var aj = new XMLHttpRequest();
+							aj.open("POST", url, true);
+							aj.setRequestHeader("Content-type",
+									"application/x-www-form-urlencoded");
+							aj.onreadystatechange = function() {
+								if (aj.readyState == 4 && aj.status == 200) {
+									var jSonObject = eval('(' + aj.responseText
+											+ ')');
+									$("#tblAccount").show();
+									var content = '';
+									for (var i = 0; i < jSonObject.length; i++) {
+										content += '<tr>';
+										content += '<td>' + (i + 1) + '</td>';
+										content += '<td class="student_id" value='+jSonObject[i].student_id+'>'
+												+ jSonObject[i].StudentName
+												+ '</td>';
+										content += '<td   data-type="text" class="student_semester" ></td>';
+										content += '<td  data-type="text" " class="student_amount"  ></td>';
+										makeEditable("account_data",
+												"student_amount", "Amount",
+												"number");
+										makeEditable("account_data",
+												"student_semester", "Semester",
+												"number");
+										content += '<tr>';
+									}
+									$('#' + target).html(content);
+								}
+							}
+							aj.send(idSend);
+						}
 
-		 var selected_element = $(e.currentTarget);
-		    var select_val = selected_element.val();
-		  alert(select_val);
-		 });
-	$(document).on('keyup', '.select2-search__field', function (e) {
-		var value=$('.select2-search__field').val();
-		//console.log(value);
-		if (value=='') {
-			console.log("null="+value);
-		}else{
-			if (value.length>2) {
-				console.log("length="+value.length);
-				searchEntry(value);		
-			}
-		}
-		});
-	
-	/* function searchEntry(value) {
-		$.ajax({
-			url :"../ajax_search_student_for_account",
-			method : "POST",
-			cache : true,
+						function save_update_Account(status) {
+							//console.log("Status of saving or updating== "+status);
+							var student_id = [];
+							var amount = [];
+							var section_number = [];
+							var error = 0;
 
-			data : {
-				val : value
-			},
-			success : function(data) {
-				alert("value=="+data);
-				//document.getElementById("sel1").innerHTML = data;
-			},
-			error : function() {
-				console.log("Error");
-			}
-		});
-	} */
-	
-	function searchEntry(value) {
-		
-		var url = "../ajax_search_student_for_account";
-		var aj = new XMLHttpRequest();
-		var send="val="+value
-		aj.open("POST", url, true);
-		aj
-				.setRequestHeader("Content-type",
-						"application/x-www-form-urlencoded");
+							$('.student_id').each(function() {
+								student_id.push($(this).attr('value'));
+							});
+							$('.student_amount').each(function() {
+								if ($(this).text() < 0) {
+									error = 1;
+								} else {
+									amount.push($(this).text());
+								}
+							});
 
-		aj.onreadystatechange = function() {
-			if (aj.readyState == 4 && aj.status == 200) {
-				
-				var return_data = aj.responseText;
-				console.log(return_data);
-				document.getElementById("sel1").innerHTML = return_data;
-			}
-		}
-		aj.send(send);
-	}
-	
-});
+							$('.student_semester')
+									.each(
+											function() {
+												if ($(this).text() >= 9
+														|| $(this).text() <= 0) {
+													error = 1
+												} else {
+													section_number.push($(this)
+															.text());
+												}
+											});
+							console.log(student_id + " " + amount + " "
+									+ section_number);
+							var urls;
+							if (status == "save") {
+								urls = "../ajax_save_account";
+							} else if (status == "update") {
+								urls = "../ajax_update_account";
+							}
+							if (error === 0) {
+								$.ajax({
+									url : urls,
+									method : "POST",
+									cache : true,
+
+									data : {
+										student_id : student_id,
+										amount : amount,
+										section_number : section_number
+
+									},
+									success : function(data) {
+										alert(data);
+										$('#tblAccount tr:not(:first)')
+												.remove();
+										$('#sucessfulDialog').modal('show');
+									},
+									error : function() {
+										$('#errorDialog').modal('show');
+									}
+								});
+							} else {
+								$('#errorDialog').modal('show');
+							}
+						}
+
+						$("select").select2({
+							theme : "bootstrap",
+							width : "auto"
+						});
+						var data = [ {
+							id : 0,
+							text : 'enhancement'
+						}, {
+							id : 1,
+							text : 'bug'
+						}, {
+							id : 2,
+							text : 'duplicate'
+						}, {
+							id : 3,
+							text : 'invalid'
+						}, {
+							id : 4,
+							text : 'wontfix'
+						} ];
+
+						$("#sel1")
+								.select2(
+										{
+											theme : "bootstrap",
+											width : "200px",
+											height : "10px",
+											minimumInputLength: 3,
+											placeholder : "Search for a repository",
+											ajax : {
+												url : "../ajax_search_student_for_account",
+												dataType : 'json',
+												type : "POST",
+												delay : 250,
+												data : function(params) {
+													console.log("params="
+															+ params.term);
+													//console.log("params="+params.page);
+													return {
+														val : params.term, // search term
+														page : params.page
+													};
+												},
+												processResults : function(data,
+														params) {
+													console.log("data=" + data);
+													params.page = params.page || 1;
+
+													return {
+														results : data,
+														pagination : {
+															more : (params.page * 30) < data.total_count
+														}
+													};
+												},
+												cache : true
+											},
+											escapeMarkup : function(markup) {
+												return markup;
+											},
+											templateResult : formatRepo, 
+											templateSelection : formatRepoSelection
+										}).on("change", function(e) {
+
+											 var selected_element = $(e.currentTarget);
+											    var select_val = selected_element.val();
+											  alert(select_val);
+											 });
+						function formatRepo(repo) {
+							if (repo.loading)
+								return repo.text;
+							var markup = '<option value='+repo.id+'>' + repo.name + '</option>';
+							console.log("repo.text=" + repo.text);
+							return markup;
+						}
+
+						function formatRepoSelection(repo) {
+							return repo.name || repo.text;
+						}
+
+						function searchEntry(value) {
+
+							var url = "../ajax_search_student_for_account";
+							var aj = new XMLHttpRequest();
+							var send = "val=" + value
+							aj.open("POST", url, true);
+							aj.setRequestHeader("Content-type",
+									"application/x-www-form-urlencoded");
+
+							aj.onreadystatechange = function() {
+								if (aj.readyState == 4 && aj.status == 200) {
+									//var jSonObject = eval('(' + aj.responseText + ')');
+									var return_data = aj.responseText;
+									//alert(return_data);
+									console.log(return_data);
+									document.getElementById("sel1").innerHTML = return_data;
+								}
+							}
+							aj.send(send);
+						}
+
+					});
 </script>
 </body>
 </html>
