@@ -205,6 +205,29 @@
 				</div>
 			</div>
 			<!-- ========================================================================================= -->
+			<div class="modal fade" id="loadingSemesterModal" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Select Semester</h4>
+						</div>
+						<div class="modal-body" id="put_semester_box">
+						
+						
+						
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- ========================================================================================= -->
 		</div>
 	</div>
 </div>
@@ -421,7 +444,9 @@
 
 									var selected_element = $(e.currentTarget);
 									var select_val = selected_element.val();
-									alert(select_val);
+									//alert(select_val);
+									console.log("Student Id=" + select_val);
+									gettingPreviousAccount(select_val);
 								});
 						function formatRepo(repo) {
 							if (repo.loading)
@@ -434,6 +459,27 @@
 
 						function formatRepoSelection(repo) {
 							return repo.name || repo.text;
+						}
+
+						//Function for getting all previous semester account and selecting desired account
+						function gettingPreviousAccount(val) {
+							$.ajax({
+								url : "../ajax_get_all_semester_account",
+								method : "POST",
+								cache : true,
+								data : {
+									student_id : val
+								},
+								success : function(data) {
+
+									console.log("semester number=" + data);
+									$('#loadingSemesterModal').modal('show');
+									//$('#put_semester_box').
+								},
+								error : function() {
+									alert("Error...!!!");
+								}
+							});
 						}
 
 					});

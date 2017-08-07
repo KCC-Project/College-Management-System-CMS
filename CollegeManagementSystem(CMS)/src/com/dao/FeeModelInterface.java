@@ -15,4 +15,5 @@ public interface FeeModelInterface {
 	int delete(int id);
 
 	List<FeeModel> getAllRecord();
+	List<FeeModel> getAllRecord(int id);
 }

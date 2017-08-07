@@ -34,8 +34,12 @@ public class FeeModelServiceImpl implements FeeModelServiceInterface {
 
 	@Override
 	public List<FeeModel> getAllRecord() {
-		// TODO Auto-generated method stub
-		return null;
+		return inter.getAllRecord();
+	}
+
+	@Override
+	public List<FeeModel> getAllRecord(int id) {
+		return inter.getAllRecord(id);
 	}
 
 }
