@@ -36,31 +36,26 @@
 			</ol>
 			<!--=============================================Main Containt===============================  -->
 			<div class="box box-default with-border">
-				<div style="position: relative;">
+				<div>
 					<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
 
 						<a><button type="button" class="btn btn-info pull-right"
 								data-toggle="modal" data-target="#addAccountModal"
 								id="modal-box">Account</button></a>
-					</h3>
-					<form class="navbar-form" role="search"
-						style="position: absolute; margin-top: -34px;">
-						<div class="input-group add-on">
-
-
-							<select class="form-control" id="sel1">
-								<option value="" disabled selected>Search</option>
-							</select>
-
-							<!--   <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term" style="height: 28px;"> -->
-							<div class="input-group-btn">
-								<button class="btn btn-default" type="submit"
-									style="height: 34px;">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
+						<div>
+							<div class="input-group add-on">
+								<select class="form-control" id="sel1">
+									<option value="" disabled selected>Search</option>
+								</select>
+								<div class="input-group-btn" >
+									<button class="btn btn-default" type="submit"
+										style="height: 34px;">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
 							</div>
 						</div>
-					</form>
+					</h3>
 				</div>
 			</div>
 			<!--====================================================Table==================================================================  -->
@@ -389,7 +384,7 @@
 											theme : "bootstrap",
 											width : "200px",
 											height : "10px",
-											minimumInputLength: 3,
+											minimumInputLength : 3,
 											placeholder : "Search for a repository",
 											ajax : {
 												url : "../ajax_search_student_for_account",
@@ -401,7 +396,7 @@
 															+ params.term);
 													//console.log("params="+params.page);
 													return {
-														val : params.term, // search term
+														val : params.term,
 														page : params.page
 													};
 												},
@@ -422,18 +417,19 @@
 											escapeMarkup : function(markup) {
 												return markup;
 											},
-											templateResult : formatRepo, 
+											templateResult : formatRepo,
 											templateSelection : formatRepoSelection
 										}).on("change", function(e) {
 
-											 var selected_element = $(e.currentTarget);
-											    var select_val = selected_element.val();
-											  alert(select_val);
-											 });
+									var selected_element = $(e.currentTarget);
+									var select_val = selected_element.val();
+									alert(select_val);
+								});
 						function formatRepo(repo) {
 							if (repo.loading)
 								return repo.text;
-							var markup = '<option value='+repo.id+'>' + repo.name + '</option>';
+							var markup = '<option value='+repo.id+'>'
+									+ repo.name + '</option>';
 							console.log("repo.text=" + repo.text);
 							return markup;
 						}
