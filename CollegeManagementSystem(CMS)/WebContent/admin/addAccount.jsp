@@ -455,14 +455,15 @@
 												var content = '';
 												for (var i = 0; i < obj.length; i++) {
 
-													content += '<input type="button" id="btnSelected" onclick="mausam()" class="btn btn-default btnSelected" values='
+													content += '<input type="button" id="btnSelected" class="btn btn-default btnSelected" values='
 															+ obj[i].fee_id
 															+ ' value='
 															+ obj[i].Semester_no
 															+ '>';
 												}
-
+												
 												$("#sembtn").append(content);
+												$("#btnSelected").click(function(event){ mausam(); });
 											} else {
 												$("#sembtn").empty();
 												alert("Enter some data fist and come later....!!");
@@ -477,8 +478,7 @@
 							alert("a");
 						}
 					});
+
 </script>
-</body>
-</html>
 </body>
 </html>
