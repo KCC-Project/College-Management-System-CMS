@@ -23,15 +23,15 @@ public class ajax_update_account extends HttpServlet {
 		String[] studentId = request.getParameterValues("student_id[]");
 		String[] amount = request.getParameterValues("amount[]");
 		String[] semester_number = request.getParameterValues("section_number[]");
-	
+	System.out.println("11111111111111111111111111111111111111");
 		boolean isSucess = false;
 		for (int i = 0; i < studentId.length; i++) {
 			FeeModel model= new FeeModel();
 			FeeUpdateModel update=new FeeUpdateModel();
-			model.setStudent_id(Integer.parseInt(studentId[i]));
+			model.setStudent_fee_amount_id(Integer.parseInt(studentId[i]));
 			model.setDue_amount(Integer.parseInt(amount[i]));
 			model.setSemester_no(Integer.parseInt(semester_number[i]));
-			isSucess=new FeeModelServiceImpl().save(model);
+			//isSucess=new FeeModelServiceImpl().update(feeModel, model));
 		}
 		if (isSucess == true) {
 			out.println("Successfull");

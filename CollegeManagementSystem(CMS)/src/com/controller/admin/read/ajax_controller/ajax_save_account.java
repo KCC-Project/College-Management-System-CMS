@@ -26,7 +26,7 @@ public class ajax_save_account extends HttpServlet {
 		boolean isSucess = false;
 		for (int i = 0; i < studentId.length; i++) {
 			FeeModel model= new FeeModel();
-			model.setStudent_id(Integer.parseInt(studentId[i]));
+			model.setStudent_fee_amount_id(Integer.parseInt(studentId[i]));
 			model.setDue_amount(Integer.parseInt(amount[i]));
 			model.setSemester_no(Integer.parseInt(semester_number[i]));
 			isSucess=new FeeModelServiceImpl().save(model);

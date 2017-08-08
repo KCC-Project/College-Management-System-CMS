@@ -82,7 +82,7 @@
 												<!-- <td class="hidden-xs">Batch</td>
 												<td class="hidden-xs">Faculty</td>
 												<td class="hidden-xs">Program</td> -->
-												<td>Amount</td>
+												<td>Due Amount</td>
 											</tr>
 										</thead>
 										<tbody id="account_data">
@@ -283,7 +283,7 @@
 												+ jSonObject[i].StudentName
 												+ '</td>';
 										content += '<td   data-type="text" class="student_semester" ></td>';
-										content += '<td  data-type="text" " class="student_amount"  ></td>';
+										content += '<td  data-type="text" " class="student_amount" value="'+jSonObject[i].studentFeeAmountId+'" >'+jSonObject[i].amount+'</td>';
 										makeEditable("account_data",
 												"student_amount", "Amount",
 												"number");
@@ -299,12 +299,12 @@
 						}
 						function save_update_Account(status) {
 							//console.log("Status of saving or updating== "+status);
-							var student_id = [];
+							var student_fee_amount_id = [];
 							var amount = [];
 							var section_number = [];
 							var error = 0;
-							$('.student_id').each(function() {
-								student_id.push($(this).attr('value'));
+							$('.student_amount').each(function() {
+								student_fee_amount_id.push($(this).attr('value'));
 							});
 							$('.student_amount').each(function() {
 								if ($(this).text() < 0) {
@@ -324,7 +324,7 @@
 															.text());
 												}
 											});
-							console.log(student_id + " " + amount + " "
+							console.log(student_fee_amount_id + " " + amount + " "
 									+ section_number);
 							var urls;
 							if (status == "save") {
@@ -338,7 +338,7 @@
 									method : "POST",
 									cache : true,
 									data : {
-										student_id : student_id,
+										student_id : student_fee_amount_id,
 										amount : amount,
 										section_number : section_number
 									},
@@ -419,7 +419,7 @@
 										}).on("change", function(e) {
 									var selected_element = $(e.currentTarget);
 									var select_val = selected_element.val();
-									//alert(select_val);
+									//alert("name="+ selectedValues[select_val]);
 									console.log("Student Id=" + select_val);
 									gettingPreviousAccount(select_val);
 								});
@@ -436,6 +436,7 @@
 						}
 						//Function for getting all previous semester account and selecting desired account
 						function gettingPreviousAccount(val) {
+							
 							$
 									.ajax({
 										url : "../ajax_get_all_semester_account",
@@ -455,7 +456,7 @@
 												var content = '';
 												for (var i = 0; i < obj.length; i++) {
 
-													content += '<input type="button" id="btnSelected" class="btn btn-default btnSelected" values='
+													content += '<input type="button" id="'+obj[i].fee_id+'" class="btn btn-default btnSelected" values='
 															+ obj[i].fee_id
 															+ ' value='
 															+ obj[i].Semester_no
@@ -463,7 +464,10 @@
 												}
 												
 												$("#sembtn").append(content);
-												$("#btnSelected").click(function(event){ mausam(); });
+												$("input").click(function(event){var idClicked = event.target.id; getInfo(idClicked,val);
+												$("#save").addClass("hidden");
+												$("#update").removeClass("hidden"); 
+												});
 											} else {
 												$("#sembtn").empty();
 												alert("Enter some data fist and come later....!!");
@@ -474,8 +478,50 @@
 										}
 									});
 						}
-						function mausam() {
-							alert("a");
+						function getInfo(fee_id,student_id) {
+							//alert("fee_id="+fee_id+"  student_id="+student_id);
+							$
+							.ajax({
+								url : "../ajax_get_dataOf_semester_account",
+								method : "POST",
+								cache : true,
+								data : {
+									fee_id : fee_id,
+									student_id:student_id
+								},
+								success : function(data) {
+									var jSonObject = JSON.parse(data);
+									console.log("json size mmm="+ jSonObject.length);
+									console.log("sem no="+ data.Semester_no);
+									if (jSonObject.length > 0) {
+										
+										$("#tblAccount").show();
+										var content = '';
+										for (var i = 0; i < jSonObject.length; i++) {
+											content += '<tr>';
+											content += '<td>' + (i + 1) + '</td>';
+											content += '<td class="student_id" value='+student_id+'>'
+													+ jSonObject[i].StudentName
+													+ '</td>';
+											content += '<td   data-type="text" class="student_semester" >'+jSonObject[i].semester_no+'</td>';
+											content += '<td  data-type="text" " class="student_amount" value="'+jSonObject[i].studentFeeAmountId+'" >'+jSonObject[i].amount+'</td>';
+											
+											makeEditable("account_data","student_amount", "Amount","number");
+											//makeEditable("account_data","student_semester", "Semester","number");
+											content += '<tr>';
+										}
+										$('#account_data').html(content);
+										
+										//$("input").click(function(event){var idClicked = event.target.id; getInfo(idClicked,val); });
+									} else {
+										
+										alert("Enter some data fist and come later....!!");
+									}
+								},
+								error : function() {
+									alert("Error...!!!");
+								}
+							});
 						}
 					});
 

@@ -12,14 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.valves.StuckThreadDetectionValve;
+
 import com.dao.StudentModelInterface;
 import com.daoimpl.StudentModelImpl;
 import com.model.SemesterModel;
 import com.model.StudentModel;
 import com.model.StudentSemesterModel;
+import com.model.Student_Fee_AmountModel;
 import com.service.SemesterServiceInterface;
+import com.service.StudentFeeAmountModelService;
 import com.service.StudentSemesterModelServiceInterface;
 import com.serviceimpl.SemesterServiceImpl;
+import com.serviceimpl.StudentFeeAmountModelServiceImpl;
 import com.serviceimpl.StudentSemesterModelServiceImpl;
 import com.util.JsonUtil;
 
@@ -56,22 +61,29 @@ public class ajax_account_student extends HttpServlet {
 				List<StudentModel> studentModel=stModel.searchByField(obj2);
 				System.out.println("studentModel size=="+studentModel.size());
 				for (StudentModel studentModel2 : studentModel) {
-					Map<String, Object> map = new HashMap<String, Object>();
-					boolean isEmpty = false;
-					try {
-						isEmpty = studentModel2.getMiddlename().isEmpty();
-					} catch (Exception e) {
-						isEmpty=true;
+					StudentFeeAmountModelService modelService= new StudentFeeAmountModelServiceImpl();
+					List<Student_Fee_AmountModel> mod=modelService.getAllRecord(studentModel2.getStudentID());
+					for (Student_Fee_AmountModel student_Fee_AmountModel : mod) {
+						Map<String, Object> map = new HashMap<String, Object>();
+						boolean isEmpty = false;
+						try {
+							isEmpty = studentModel2.getMiddlename().isEmpty();
+						} catch (Exception e) {
+							isEmpty=true;
+						}
+						if (isEmpty==true) {
+							map.put("StudentName", studentModel2.getFirstname()  + " "
+									+ studentModel2.getLastname());
+						}else {
+							map.put("StudentName", studentModel2.getFirstname() + " " + studentModel2.getMiddlename() + " "
+									+ studentModel2.getLastname());
+						}
+						map.put("student_id", studentModel2.getStudentID());
+						map.put("amount", student_Fee_AmountModel.getFee_amount());
+						map.put("studentFeeAmountId", student_Fee_AmountModel.getStudent_Fee_Amount_id());
+						tempList.add(map);
 					}
-					if (isEmpty==true) {
-						map.put("StudentName", studentModel2.getFirstname()  + " "
-								+ studentModel2.getLastname());
-					}else {
-						map.put("StudentName", studentModel2.getFirstname() + " " + studentModel2.getMiddlename() + " "
-								+ studentModel2.getLastname());
-					}
-					map.put("student_id", studentModel2.getStudentID());
-					tempList.add(map);
+					
 				}
 			}
 			

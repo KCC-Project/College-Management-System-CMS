@@ -22,8 +22,7 @@ public class FeeModelServiceImpl implements FeeModelServiceInterface {
 
 	@Override
 	public List<FeeModel> searchByField(Object[] obj) {
-		// TODO Auto-generated method stub
-		return null;
+		return inter.searchByField(obj);
 	}
 
 	@Override
