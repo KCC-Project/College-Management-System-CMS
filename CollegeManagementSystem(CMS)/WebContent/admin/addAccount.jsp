@@ -2,7 +2,7 @@
 <%@page import="com.serviceimpl.ExamInfoModelServiceImpl"%>
 <%@page import="com.service.ExamInfoModelServiceInterface"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.model.ExamModel"%>
 <%@page import="java.util.List"%>
@@ -10,70 +10,62 @@
 <%@page import="com.service.ExamModelServiceInterface"%>
 <link href="../Resources/css/w3school.css" rel="stylesheet"
 	type="text/css">
-<link rel="stylesheet"
-	href="../Resources/font-awesome/css/font-awesome.min.css">
-<link href="../Resources/css/manageExam.css" rel="stylesheet"
-	type="text/css">
-<link href="../Resources/css/bootstrap-editable.css" rel="stylesheet" />
-<!-- select2 css -->
-<link href="../Resources/css/select2.min.css" rel="stylesheet" />
-<link href="../Resources/css/select2-bootstrap.min.css" rel="stylesheet" />
-<jsp:include page="admin-header.jsp" />
-
-
-<div class="container-fluid display-table">
-	<div class="row display-table-row">
-		<jsp:include page="admin-sidemenu.jsp" />
-		<!-- Content Area -->
-		<div class="col-md-10 col-sm-11 display-table-cell" id="content-area">
-			<ol class="breadcrumb">
-				<li><a href="admin-dashboard.jsp"><span
-						class="glyphicon glyphicon-home"> Home</span></a></li>
-				<li><a><span class="glyphicon glyphicon-education black">
+	<link rel="stylesheet"
+		href="../Resources/font-awesome/css/font-awesome.min.css">
+		<link href="../Resources/css/manageExam.css" rel="stylesheet"
+			type="text/css">
+			<link href="../Resources/css/bootstrap-editable.css" rel="stylesheet" />
+			<!-- select2 css -->
+			<link href="../Resources/css/select2.min.css" rel="stylesheet" />
+			<link href="../Resources/css/select2-bootstrap.min.css" rel="stylesheet" />
+			<jsp:include page="admin-header.jsp" />
+			<div class="container-fluid display-table">
+				<div class="row display-table-row">
+					<jsp:include page="admin-sidemenu.jsp" />
+					<!-- Content Area -->
+					<div class="col-md-10 col-sm-11 display-table-cell" id="content-area">
+						<ol class="breadcrumb">
+							<li><a href="admin-dashboard.jsp"><span
+							class="glyphicon glyphicon-home"> Home</span></a></li>
+							<li><a><span class="glyphicon glyphicon-education black">
 							Account</span></a></li>
-				<li><a><span class="glyphicon glyphicon-education black">
+							<li><a><span class="glyphicon glyphicon-education black">
 							Add Account</span></a></li>
-			</ol>
-			<!--=============================================Main Containt===============================  -->
-			<div class="box box-default with-border">
-				<div>
-					<div style="margin: 0px; padding-left: 20px; height: 35px;">
-
-						<a><button type="button" class="btn btn-info pull-right"
-								data-toggle="modal" data-target="#addAccountModal"
-								id="modal-box">Account</button></a>
-
-						<div class="col-xs-3" style="margin-left: -34px;">
-							<div class="form-group">
-								<div class="input-group">
-									<select class="form-control" id="sel1"></select> <span
-										class="input-group-addon"> <i class="fa fa-search"></i>
-									</span>
+						</ol>
+						<!--=============================================Main Containt===============================  -->
+						<div class="box box-default with-border">
+							<div>
+								<div style="margin: 0px; padding-left: 20px; height: 35px;">
+									<a><button type="button" class="btn btn-info pull-right"
+										data-toggle="modal" data-target="#addAccountModal"
+									id="modal-box">Account</button></a>
+									<div class="col-xs-3" style="margin-left: -34px;">
+										<div class="form-group">
+											<div class="input-group">
+											<select class="form-control" id="sel1"></select> <span
+											class="input-group-addon"> <i class="fa fa-search"></i>
+										</span>
+									</div>
 								</div>
 							</div>
+							<div class="col-xs-6" id="sembtn"></div>
 						</div>
-
-						<div class="col-xs-6" id="sembtn"></div>
 					</div>
 				</div>
-			</div>
-			<!--====================================================Table==================================================================  -->
-			<div class="box box-primary with-border" style="margin-top: 10px;">
-				<div class="row with-border" style="overflow: hidden;">
-					<div class="col-lg-12 ">
-						<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
+				<!--====================================================Table==================================================================  -->
+				<div class="box box-primary with-border" style="margin-top: 10px;">
+					<div class="row with-border" style="overflow: hidden;">
+						<div class="col-lg-12 ">
+							<h3 style="margin: 0px; padding-left: 20px; height: 35px;">
 							<span class="hidden-xs"
 								style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
-								class="fa fa-graduation-cap"></i> Manage Account</span> <span
-								class="visible-xs"
-								style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
-								class="fa fa-graduation-cap"></i> Exam result</span>
+							class="fa fa-graduation-cap"></i> Manage Account</span> <span
+							class="visible-xs"
+							style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
+						class="fa fa-graduation-cap"></i> Exam result</span>
 						</h3>
-
 					</div>
 				</div>
-
-
 				<!-- Regular exam -->
 				<div class="box-body " style="margin-bottom: 4px;">
 					<div id="accordion" class="box-group">
@@ -98,9 +90,9 @@
 									</table>
 									<div align="center">
 										<button type="button" name="save" id="save"
-											class="btn btn-info hidden">Save</button>
+										class="btn btn-info hidden">Save</button>
 										<button type="button" name="update" id="update"
-											class="btn btn-info hidden">Update</button>
+										class="btn btn-info hidden">Update</button>
 									</div>
 								</div>
 								<div class="loader" id="loader" hidden style="margin-left: 40%;"></div>
@@ -160,13 +152,12 @@
 							<br>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
+								data-dismiss="modal">Close</button>
 								<button type="submit" class="btn btn-success"
-									id="searchbtnClicked" data-dismiss="modal">Search</button>
+								id="searchbtnClicked" data-dismiss="modal">Search</button>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 			<!--=========================================================================================  -->
@@ -182,7 +173,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
+							data-dismiss="modal">Close</button>
 						</div>
 					</div>
 				</div>
@@ -196,34 +187,32 @@
 						</div>
 						<div class="modal-body">
 							<p>Error in saving information,Either data was already
-								inserted or some fields empty.</p>
+							inserted or some fields empty.</p>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
+							data-dismiss="modal">Close</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- ========================================================================================= -->
-			<div class="modal fade" id="loadingSemesterModal" role="dialog">
-				<div class="modal-dialog">
-
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Select Semester</h4>
-						</div>
-						<div class="modal-body" id="put_semester_box"></div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-						</div>
+			<!-- 	<div class="modal fade" id="loadingSemesterModal" role="dialog">
+					<div class="modal-dialog">
+							Modal content
+							<div class="modal-content">
+									<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Select Semester</h4>
+									</div>
+									<div class="modal-body" id="put_semester_box"></div>
+									<div class="modal-footer">
+											<button type="button" class="btn btn-default"
+												data-dismiss="modal">Close</button>
+									</div>
+							</div>
 					</div>
-
-				</div>
-			</div>
+			</div> -->
 			<!-- ========================================================================================= -->
 		</div>
 	</div>
@@ -241,7 +230,6 @@
 	$(document)
 			.ready(
 					function() {
-
 						$("#modal-box").click(function(event) {
 							load_faculty(event, "p-faculty-box");
 							$("#save").removeClass("hidden");
@@ -269,7 +257,6 @@
 						$("#update").click(function(event) {
 							save_update_Account("update");
 						});
-
 						function loadStudent(e, target) {
 							var programId = document
 									.getElementById("p-program-box").value;
@@ -291,217 +278,205 @@
 									var content = '';
 									for (var i = 0; i < jSonObject.length; i++) {
 										content += '<tr>';
-										content += '<td>' + (i + 1) + '</td>';
-										content += '<td class="student_id" value='+jSonObject[i].student_id+'>'
-												+ jSonObject[i].StudentName
-												+ '</td>';
-										content += '<td   data-type="text" class="student_semester" ></td>';
-										content += '<td  data-type="text" " class="student_amount"  ></td>';
-										makeEditable("account_data",
-												"student_amount", "Amount",
-												"number");
-										makeEditable("account_data",
-												"student_semester", "Semester",
-												"number");
-										content += '<tr>';
-									}
-									$('#' + target).html(content);
-								}
-							}
-							aj.send(idSend);
-						}
-
-						function save_update_Account(status) {
-							//console.log("Status of saving or updating== "+status);
-							var student_id = [];
-							var amount = [];
-							var section_number = [];
-							var error = 0;
-
-							$('.student_id').each(function() {
-								student_id.push($(this).attr('value'));
-							});
-							$('.student_amount').each(function() {
-								if ($(this).text() < 0) {
-									error = 1;
-								} else {
-									amount.push($(this).text());
-								}
-							});
-
-							$('.student_semester')
-									.each(
-											function() {
-												if ($(this).text() >= 9
-														|| $(this).text() <= 0) {
-													error = 1
-												} else {
-													section_number.push($(this)
-															.text());
-												}
-											});
-							console.log(student_id + " " + amount + " "
-									+ section_number);
-							var urls;
-							if (status == "save") {
-								urls = "../ajax_save_account";
-							} else if (status == "update") {
-								urls = "../ajax_update_account";
-							}
-							if (error === 0) {
-								$.ajax({
-									url : urls,
-									method : "POST",
-									cache : true,
-
-									data : {
-										student_id : student_id,
-										amount : amount,
-										section_number : section_number
-
-									},
-									success : function(data) {
-										alert(data);
-										$('#tblAccount tr:not(:first)')
-												.remove();
-										$('#sucessfulDialog').modal('show');
-									},
-									error : function() {
-										$('#errorDialog').modal('show');
-									}
-								});
-							} else {
-								$('#errorDialog').modal('show');
-							}
-						}
-
-						$("select").select2({
-							theme : "bootstrap",
-							width : "auto"
-						});
-						var data = [ {
-							id : 0,
-							text : 'enhancement'
-						}, {
-							id : 1,
-							text : 'bug'
-						}, {
-							id : 2,
-							text : 'duplicate'
-						}, {
-							id : 3,
-							text : 'invalid'
-						}, {
-							id : 4,
-							text : 'wontfix'
-						} ];
-
-						$("#sel1")
-								.select2(
-										{
-											theme : "bootstrap",
-											width : "220px",
-											height : "10px",
-											minimumInputLength : 3,
-											placeholder : "Search for a student",
-											ajax : {
-												url : "../ajax_search_student_for_account",
-												dataType : 'json',
-												type : "POST",
-												delay : 250,
-												data : function(params) {
-													console.log("params="
-															+ params.term);
-													//console.log("params="+params.page);
-													return {
-														val : params.term,
-														page : params.page
-													};
-												},
-												processResults : function(data,
-														params) {
-													//console.log("data=" + data);
-													params.page = params.page || 1;
-
-													return {
-														results : data,
-														pagination : {
-															more : (params.page * 30) < data.total_count
-														}
-													};
-												},
-												cache : true
-											},
-											escapeMarkup : function(markup) {
-												return markup;
-											},
-											templateResult : formatRepo,
-											templateSelection : formatRepoSelection
-										}).on("change", function(e) {
-
-									var selected_element = $(e.currentTarget);
-									var select_val = selected_element.val();
-									//alert(select_val);
-									console.log("Student Id=" + select_val);
-									gettingPreviousAccount(select_val);
-								});
-						function formatRepo(repo) {
-							if (repo.loading)
-								return repo.text;
-							var markup = '<option value='+repo.id+'>'
-									+ repo.name + '</option>';
-							console.log("repo.text=" + repo.text);
-							return markup;
-						}
-
-						function formatRepoSelection(repo) {
-							return repo.name || repo.text;
-						}
-
-						//Function for getting all previous semester account and selecting desired account
-						function gettingPreviousAccount(val) {
-							$
-									.ajax({
-										url : "../ajax_get_all_semester_account",
-										method : "POST",
-										cache : true,
-										data : {
-											student_id : val
-										},
-										success : function(data) {
-											var obj = JSON.parse(data);
-											console.log("json size="
-													+ obj.length);
-											console.log("sem no="
-													+ data.Semester_no);
-											if (obj.length > 0) {
-												var content = '';
-												for (var i = 0; i < obj.length; i++) {
-													
-											content+='<input type="button" id="btnSelected" onclick="myFunction()" class="btn btn-default btnSelected" values='+obj[i].fee_id+' value='+obj[i].Semester_no+'>';
-												}
-												$("#sembtn").append(content);
-												//$("#loadingSemesterModal").append(content);
-												//$('#loadingSemesterModal').modal('show');
-												//alert(content);
-											} else {
-												alert("Enter some data fist and come later....!!");
+											content += '<td>' + (i + 1) + '</td>';
+											content += '<td class="student_id" value='+jSonObject[i].student_id+'>'
+														+ jSonObject[i].StudentName
+													+ '</td>';
+											content += '<td   data-type="text" class="student_semester" ></td>';
+											content += '<td  data-type="text" " class="student_amount"  ></td>';
+											makeEditable("account_data",
+													"student_amount", "Amount",
+													"number");
+											makeEditable("account_data",
+													"student_semester", "Semester",
+													"number");
+											content += '<tr>';
 											}
-										},
-										error : function() {
-											alert("Error...!!!");
+											$('#' + target).html(content);
+										}
+									}
+									aj.send(idSend);
+								}
+								function save_update_Account(status) {
+									//console.log("Status of saving or updating== "+status);
+									var student_id = [];
+									var amount = [];
+									var section_number = [];
+									var error = 0;
+									$('.student_id').each(function() {
+										student_id.push($(this).attr('value'));
+									});
+									$('.student_amount').each(function() {
+										if ($(this).text() < 0) {
+											error = 1;
+										} else {
+											amount.push($(this).text());
 										}
 									});
-						}
-						$(".btnSelected").click(function() {
-						    alert(this.id);
-						});
-						document.getElementById ("btnSelected").addEventListener ("click",function(){
-							alert("mm");
-						});
-					});
-</script>
-</body>
+									$('.student_semester')
+											.each(
+													function() {
+														if ($(this).text() >= 9
+																|| $(this).text() <= 0) {
+															error = 1
+														} else {
+															section_number.push($(this)
+																	.text());
+														}
+													});
+									console.log(student_id + " " + amount + " "
+											+ section_number);
+									var urls;
+									if (status == "save") {
+										urls = "../ajax_save_account";
+									} else if (status == "update") {
+										urls = "../ajax_update_account";
+									}
+									if (error === 0) {
+										$.ajax({
+											url : urls,
+											method : "POST",
+											cache : true,
+											data : {
+												student_id : student_id,
+												amount : amount,
+												section_number : section_number
+											},
+											success : function(data) {
+												alert(data);
+												$('#tblAccount tr:not(:first)')
+														.remove();
+												$('#sucessfulDialog').modal('show');
+											},
+											error : function() {
+												$('#errorDialog').modal('show');
+											}
+										});
+									} else {
+										$('#errorDialog').modal('show');
+									}
+								}
+								$("select").select2({
+									theme : "bootstrap",
+									width : "auto"
+								});
+								var data = [ {
+									id : 0,
+									text : 'enhancement'
+								}, {
+									id : 1,
+									text : 'bug'
+								}, {
+									id : 2,
+									text : 'duplicate'
+								}, {
+									id : 3,
+									text : 'invalid'
+								}, {
+									id : 4,
+									text : 'wontfix'
+								} ];
+								$("#sel1")
+										.select2(
+												{
+													theme : "bootstrap",
+													width : "220px",
+													height : "10px",
+													minimumInputLength : 3,
+													placeholder : "Search for a student",
+													ajax : {
+														url : "../ajax_search_student_for_account",
+														dataType : 'json',
+														type : "POST",
+														delay : 250,
+														data : function(params) {
+															console.log("params="
+																	+ params.term);
+															//console.log("params="+params.page);
+															return {
+																val : params.term,
+																page : params.page
+															};
+														},
+														processResults : function(data,
+																params) {
+															//console.log("data=" + data);
+															params.page = params.page || 1;
+															return {
+																results : data,
+																pagination : {
+																	more : (params.page * 30) < data.total_count
+																}
+															};
+														},
+														cache : true
+													},
+													escapeMarkup : function(markup) {
+														return markup;
+													},
+													templateResult : formatRepo,
+													templateSelection : formatRepoSelection
+												}).on("change", function(e) {
+											var selected_element = $(e.currentTarget);
+											var select_val = selected_element.val();
+											//alert(select_val);
+											console.log("Student Id=" + select_val);
+											gettingPreviousAccount(select_val);
+										});
+								function formatRepo(repo) {
+									if (repo.loading)
+										return repo.text;
+									var markup = '<option value='+repo.id+'>'
+											+ repo.name + '</option>';
+									console.log("repo.text=" + repo.text);
+									return markup;
+								}
+								function formatRepoSelection(repo) {
+									return repo.name || repo.text;
+								}
+								//Function for getting all previous semester account and selecting desired account
+								function gettingPreviousAccount(val) {
+									$
+											.ajax({
+												url : "../ajax_get_all_semester_account",
+												method : "POST",
+												cache : true,
+												data : {
+													student_id : val
+												},
+												success : function(data) {
+													var obj = JSON.parse(data);
+													console.log("json size="
+															+ obj.length);
+													console.log("sem no="
+															+ data.Semester_no);
+													if (obj.length > 0) {
+														var content = '';
+														for (var i = 0; i < obj.length; i++) {
+															
+													content+='<input type="button" id="btnSelected" class="btn btn-default btnSelected" values='+obj[i].fee_id+' value='+obj[i].Semester_no+'>';
+														}
+														$("#sembtn").append(content);
+													} else {
+														alert("Enter some data fist and come later....!!");
+													}
+												},
+												error : function() {
+													alert("Error...!!!");
+												}
+											});
+								}
+								$("#btnSelected").click(function(e){
+								var idClicked = e.target.id;
+								alert(idClicked);
+								});
+							});
+			var l=document.getElementById("btnSelected");
+			l.on("click",function(){
+				alert("c");
+			});
+		</script>
+	</body>
 </html>
 </body>
 </html>
