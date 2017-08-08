@@ -53,6 +53,7 @@
 							</div>
 						</div>
 
+						<div class="col-xs-6" id="sembtn"></div>
 					</div>
 				</div>
 			</div>
@@ -214,11 +215,7 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">Select Semester</h4>
 						</div>
-						<div class="modal-body" id="put_semester_box">
-						
-						
-						
-						</div>
+						<div class="modal-body" id="put_semester_box"></div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Close</button>
@@ -463,25 +460,45 @@
 
 						//Function for getting all previous semester account and selecting desired account
 						function gettingPreviousAccount(val) {
-							$.ajax({
-								url : "../ajax_get_all_semester_account",
-								method : "POST",
-								cache : true,
-								data : {
-									student_id : val
-								},
-								success : function(data) {
-
-									console.log("semester number=" + data);
-									$('#loadingSemesterModal').modal('show');
-									//$('#put_semester_box').
-								},
-								error : function() {
-									alert("Error...!!!");
-								}
-							});
+							$
+									.ajax({
+										url : "../ajax_get_all_semester_account",
+										method : "POST",
+										cache : true,
+										data : {
+											student_id : val
+										},
+										success : function(data) {
+											var obj = JSON.parse(data);
+											console.log("json size="
+													+ obj.length);
+											console.log("sem no="
+													+ data.Semester_no);
+											if (obj.length > 0) {
+												var content = '';
+												for (var i = 0; i < obj.length; i++) {
+													
+											content+='<input type="button" id="btnSelected" onclick="myFunction()" class="btn btn-default btnSelected" values='+obj[i].fee_id+' value='+obj[i].Semester_no+'>';
+												}
+												$("#sembtn").append(content);
+												//$("#loadingSemesterModal").append(content);
+												//$('#loadingSemesterModal').modal('show');
+												//alert(content);
+											} else {
+												alert("Enter some data fist and come later....!!");
+											}
+										},
+										error : function() {
+											alert("Error...!!!");
+										}
+									});
 						}
-
+						$(".btnSelected").click(function() {
+						    alert(this.id);
+						});
+						document.getElementById ("btnSelected").addEventListener ("click",function(){
+							alert("mm");
+						});
 					});
 </script>
 </body>
