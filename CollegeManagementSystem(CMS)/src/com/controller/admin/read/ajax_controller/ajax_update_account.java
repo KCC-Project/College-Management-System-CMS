@@ -2,6 +2,7 @@ package com.controller.admin.read.ajax_controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -49,8 +50,8 @@ public class ajax_update_account extends HttpServlet {
 			updateModel.setFee_id(fee_id);
 			updateModel.setAmount_paid(Integer.parseInt(paid_amount[i]));
 			updateModel.setBill_no("100NF");
-			String d="2017-08-15";
-			updateModel.setPaid_date(DateUtil.convertToDate(d));
+			String strDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+			updateModel.setPaid_date(DateUtil.convertToDate(strDate));
 			isSucess=new FeeModelServiceImpl().update(model, updateModel);
 		}
 		if (isSucess == 1) {
