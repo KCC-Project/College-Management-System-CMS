@@ -55,6 +55,8 @@ public class FeeModelIntImpl implements FeeModelInterface {
 			sql = "update fee set due_amount=? where fee_id=?";
 			pst = conn.prepareStatement(sql);
 			int col = 1;
+			System.out.println("feeModel.getDue_amount=="+feeModel.getDue_amount());
+			System.out.println("feeModel.iddd=="+feeModel.getFee_id());
 			pst.setInt(col++, feeModel.getDue_amount());
 			pst.setInt(col++, feeModel.getFee_id());
 			int count = pst.executeUpdate();
@@ -72,7 +74,6 @@ public class FeeModelIntImpl implements FeeModelInterface {
 
 	@Override
 	public List<FeeModel> searchByField(Object[] obj) {
-		System.out.println("here");
 		List<Object> parameters = new ArrayList<Object>();
 		List<FeeModel> feeModel = new ArrayList<>();
 		int fee_id = 0;

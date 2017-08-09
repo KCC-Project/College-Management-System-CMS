@@ -39,7 +39,8 @@
 						<a><button type="button" class="btn btn-info pull-right"
 								data-toggle="modal" data-target="#addAccountModal"
 								id="modal-box">Account</button></a>
-						<div class="col-xs-3" style="margin-left: -34px;">
+						<div class="col-xs-3"
+							style="margin-left: -34px; /* border: 2px solid black; */ height: 37px;">
 							<div class="form-group">
 								<div class="input-group">
 									<select class="form-control" id="sel1"></select> <span
@@ -48,7 +49,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-6" id="sembtn"></div>
+						<div class="col-xs-7 " id="sembtn"></div>
 					</div>
 				</div>
 			</div>
@@ -62,7 +63,14 @@
 								class="fa fa-graduation-cap"></i> Manage Account</span> <span
 								class="visible-xs"
 								style="position: absolute; margin-top: 5px; color: #3c8dbc"><i
-								class="fa fa-graduation-cap"></i> Exam result</span>
+								class="fa fa-graduation-cap"></i> Exam Account</span> 
+								
+								<button
+								 class="btn-sm btn btn-default pull-right"
+								style="margin-top: 5px; margin-right: 10px;"
+								title="View Account Details" data-toggle="modal"
+								data-target="#viewAccountDetail" id="#viewAccountDetail"><i
+								class="fa fa-eye"></i></button>
 						</h3>
 					</div>
 				</div>
@@ -197,23 +205,80 @@
 				</div>
 			</div>
 			<!-- ========================================================================================= -->
-			<!-- 	<div class="modal fade" id="loadingSemesterModal" role="dialog">
-					<div class="modal-dialog">
-							Modal content
-							<div class="modal-content">
-									<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Select Semester</h4>
-									</div>
-									<div class="modal-body" id="put_semester_box"></div>
-									<div class="modal-footer">
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">Close</button>
-									</div>
+			<div class="modal fade" id="viewAccountDetail" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Account Summary</h4>
+						</div>
+						<div class="modal-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Name</th>
+											<th>Total Amount</th>
+											<th>Bill No</th>
+											<th>Paid Date</th>
+											<th>Paid Amount</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Anna</td>
+											<td>Pitt</td>
+											<td>35</td>
+											<td>New York</td>
+											<td>USA</td>
+										</tr>
+									</tbody>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>Anna</td>
+											<td>Pitt</td>
+											<td>35</td>
+											<td>New York</td>
+											<td>USA</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-default pull-left" id="stname">Mausam Rayamajhi</button>
+						<button type="button" class="btn btn-default pull-left" id="stSem">7</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
 					</div>
-			</div> -->
+				</div>
+			</div>
 			<!-- ========================================================================================= -->
+			<div class="modal fade" id="conformationModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Conformation</h4>
+        </div>
+        <div class="modal-body">
+        <h4>Do you really wanna update...?</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           <button type="button" id="conformation" class="btn btn-success" data-dismiss="modal">Update</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+			<!--=========================================================================================  -->
 		</div>
 	</div>
 </div>
@@ -245,7 +310,7 @@
 							loadStudent(event, "account_data");
 						});
 						$("#save").click(function(event) {
-							save_update_Account("save");
+							save_Account("save");
 						});
 						$("#searchbtnClicked").click(function(event) {
 							loadStudent(event, "account_data");
@@ -255,8 +320,13 @@
 							$("#update").removeClass("hidden");
 						});
 						$("#update").click(function(event) {
-							save_update_Account("update");
+							$('#conformationModal').modal('show');
+							
 						});
+						$("#conformation").click(function(event) {
+							update_Account();
+						});
+						
 						function loadStudent(e, target) {
 							var programId = document
 									.getElementById("p-program-box").value;
@@ -283,7 +353,10 @@
 												+ jSonObject[i].StudentName
 												+ '</td>';
 										content += '<td   data-type="text" class="student_semester" ></td>';
-										content += '<td  data-type="text" " class="student_amount" value="'+jSonObject[i].studentFeeAmountId+'" >'+jSonObject[i].amount+'</td>';
+										content += '<td  data-type="text" " class="student_amount" value="'+jSonObject[i].studentFeeAmountId+'" >'
+												+ jSonObject[i].amount
+												+ '</td>';
+
 										makeEditable("account_data",
 												"student_amount", "Amount",
 												"number");
@@ -297,15 +370,17 @@
 							}
 							aj.send(idSend);
 						}
-						function save_update_Account(status) {
+						function save_Account(status) {
 							//console.log("Status of saving or updating== "+status);
 							var student_fee_amount_id = [];
 							var amount = [];
 							var section_number = [];
 							var error = 0;
-							$('.student_amount').each(function() {
-								student_fee_amount_id.push($(this).attr('value'));
-							});
+							$('.student_amount').each(
+									function() {
+										student_fee_amount_id.push($(this)
+												.attr('value'));
+									});
 							$('.student_amount').each(function() {
 								if ($(this).text() < 0) {
 									error = 1;
@@ -324,8 +399,8 @@
 															.text());
 												}
 											});
-							console.log(student_fee_amount_id + " " + amount + " "
-									+ section_number);
+							console.log(student_fee_amount_id + " " + amount
+									+ " " + section_number);
 							var urls;
 							if (status == "save") {
 								urls = "../ajax_save_account";
@@ -356,6 +431,75 @@
 								$('#errorDialog').modal('show');
 							}
 						}
+						
+						function update_Account() {
+							
+							var student_fee_amount_id = [];
+							var amount = [];//due amount
+							var section_number = [];
+							var amount_paid=[];
+							//var bill_no=[];
+							
+							var error_update = 0;
+							$('.student_amount').each(
+									function() {
+										student_fee_amount_id.push($(this)
+												.attr('value'));
+									});
+							$('.remaining_amount').each(function() {
+								if ($(this).text() < 0) {
+									error_update = 1;
+								} else {
+									amount.push($(this).text());
+								}
+							});
+							$('.pay_amount').each(function() {
+								if ($(this).text() < 0) {
+									error_update = 1;
+								} else {
+									amount_paid.push($(this).text());
+								}
+							});
+							
+							$('.student_semester')
+									.each(
+											function() {
+												if ($(this).text() >= 9
+														|| $(this).text() <= 0) {
+													error = 1
+												} else {
+													section_number.push($(this)
+															.text());
+												}
+											});
+							
+							if (error_update === 0) {
+								//salert("masuamn");
+								$.ajax({
+									url : "../ajax_update_account",
+									method : "POST",
+									cache : true,
+									data : {
+										student_id : student_fee_amount_id,
+										amount : amount,
+										section_number : section_number,
+										amount_paid:amount_paid
+									},
+									success : function(data) {
+										alert(data);
+										//$('#tblAccount tr:not(:first)').remove();
+										//$('#sucessfulDialog').modal('show');
+									},
+									error : function() {
+										$('#errorDialog').modal('show');
+									}
+								});
+							} else {
+								$('#errorDialog').modal('show');
+							}
+						}
+						
+						
 						$("select").select2({
 							theme : "bootstrap",
 							width : "auto"
@@ -380,7 +524,8 @@
 								.select2(
 										{
 											theme : "bootstrap",
-											width : "220px",
+											width : "210px",
+											//width:auto,
 											height : "10px",
 											minimumInputLength : 3,
 											placeholder : "Search for a student",
@@ -436,7 +581,7 @@
 						}
 						//Function for getting all previous semester account and selecting desired account
 						function gettingPreviousAccount(val) {
-							
+
 							$
 									.ajax({
 										url : "../ajax_get_all_semester_account",
@@ -462,12 +607,23 @@
 															+ obj[i].Semester_no
 															+ '>';
 												}
-												
+
 												$("#sembtn").append(content);
-												$("input").click(function(event){var idClicked = event.target.id; getInfo(idClicked,val);
-												$("#save").addClass("hidden");
-												$("#update").removeClass("hidden"); 
-												});
+												$("input")
+														.click(
+																function(event) {
+																	var idClicked = event.target.id;
+																	getInfo(
+																			idClicked,
+																			val);
+																	$("#save")
+																			.addClass(
+																					"hidden");
+																	$("#update")
+																			.removeClass(
+																					"hidden");
+																	//$("#viewAccountDetail").value=idClicked;
+																});
 											} else {
 												$("#sembtn").empty();
 												alert("Enter some data fist and come later....!!");
@@ -478,53 +634,85 @@
 										}
 									});
 						}
-						function getInfo(fee_id,student_id) {
+						function getInfo(fee_id, student_id) {
 							//alert("fee_id="+fee_id+"  student_id="+student_id);
 							$
-							.ajax({
-								url : "../ajax_get_dataOf_semester_account",
-								method : "POST",
-								cache : true,
-								data : {
-									fee_id : fee_id,
-									student_id:student_id
-								},
-								success : function(data) {
-									var jSonObject = JSON.parse(data);
-									console.log("json size mmm="+ jSonObject.length);
-									console.log("sem no="+ data.Semester_no);
-									if (jSonObject.length > 0) {
-										
-										$("#tblAccount").show();
-										var content = '';
-										for (var i = 0; i < jSonObject.length; i++) {
-											content += '<tr>';
-											content += '<td>' + (i + 1) + '</td>';
-											content += '<td class="student_id" value='+student_id+'>'
-													+ jSonObject[i].StudentName
-													+ '</td>';
-											content += '<td   data-type="text" class="student_semester" >'+jSonObject[i].semester_no+'</td>';
-											content += '<td  data-type="text" " class="student_amount" value="'+jSonObject[i].studentFeeAmountId+'" >'+jSonObject[i].amount+'</td>';
-											
-											makeEditable("account_data","student_amount", "Amount","number");
-											//makeEditable("account_data","student_semester", "Semester","number");
-											content += '<tr>';
-										}
-										$('#account_data').html(content);
-										
-										//$("input").click(function(event){var idClicked = event.target.id; getInfo(idClicked,val); });
-									} else {
-										
-										alert("Enter some data fist and come later....!!");
-									}
-								},
-								error : function() {
-									alert("Error...!!!");
-								}
-							});
-						}
-					});
+									.ajax({
+										url : "../ajax_get_dataOf_semester_account",
+										method : "POST",
+										cache : true,
+										data : {
+											fee_id : fee_id,
+											student_id : student_id
+										},
+										success : function(data) {
+											var jSonObject = JSON.parse(data);
+											console.log("json size mmm="
+													+ jSonObject.length);
+											console.log("sem no="
+													+ data.Semester_no);
+											if (jSonObject.length > 0) {
 
+												$("#tblAccount").show();
+												var content = '';
+												for (var i = 0; i < jSonObject.length; i++) {
+													content += '<tr>';
+													content += '<td>' + (i + 1)
+															+ '</td>';
+													content += '<td class="student_id" value='+student_id+'>'
+															+ jSonObject[i].StudentName
+															+ '</td>';
+													content += '<td   data-type="text" class="student_semester" >'
+															+ jSonObject[i].semester_no
+															+ '</td>';
+													content += '<td  data-type="text" " class="student_amount" value="'+jSonObject[i].studentFeeAmountId+'" >'
+															+ jSonObject[i].amount
+															+ '</td>';
+													content += '</tr>';
+													content += '<tr>';
+													content += '<th colspan="3" style="text-align: right;" >Pay Amount :</th>';
+													content += '<td class="pay_amount" data-type="text">0</td>';
+													content += '</tr>';
+													content += '<tr>';
+													content += '<th colspan="3" style="text-align: right;">Remaining Amount :</th>';
+													content += '<td class="remaining_amount">'
+															+ jSonObject[i].amount
+															+ '</td>';
+													makeEditable(
+															"account_data",
+															"pay_amount",
+															"Amount", "number");
+
+													
+													//makeEditable("account_data","student_semester", "Semester","number");
+													content += '</tr>';
+												}
+												$('#account_data')
+														.html(content);
+												$(".pay_amount").on("keyup",
+														function(event) {
+															alert("mausam");
+														});
+												$('td.pay_amount').on('save', function(e, params) {
+												    var value = params.newValue;
+												  var previousAmount=$('.student_amount').text();
+												  var newDueAmount=previousAmount-value;
+												  $('.remaining_amount').text(newDueAmount);
+												
+												});
+												//$(".pay_amount").blur(function(event){alert("mausam");});
+											} else {
+
+												alert("Enter some data fist and come later....!!");
+											}
+										},
+										error : function() {
+											alert("Error...!!!");
+										}
+									});
+						}
+						
+					});
 </script>
 </body>
 </html>
