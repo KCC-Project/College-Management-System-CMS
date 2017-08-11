@@ -16,8 +16,7 @@ public class StudentFeeAmountModelServiceImpl implements StudentFeeAmountModelSe
 
 	@Override
 	public int update(Student_Fee_AmountModel feeModel) {
-		// TODO Auto-generated method stub
-		return 0;
+		return model.update(feeModel);
 	}
 
 	@Override

@@ -112,14 +112,15 @@ public class ajax_diplayStudent_forNewResult extends HttpServlet {
 			map.put("PassMarks", examInfoModel2.getPassmarks());
 			map.put("ExamId", examInfoModel2.getExamId());
 			map.put("SubjectName", examInfoModel2.getSubjectName());
+			
 			ExamInfoDetail.add(map);
 		}
 		finalDataJson.put("StudentInfo", studentName);
 		finalDataJson.put("ExamInfo", ExamInfoDetail);
 		
 		String jsonSearch = JsonUtil.convertJavaToJson(finalDataJson);
-		response.setContentType("text/xml");
-		response.setHeader("Cache-Control", "no-cache");
+		/*response.setContentType("text/xml");
+		response.setHeader("Cache-Control", "no-cache");*/
 		System.out.println(jsonSearch);
 		response.getWriter().write(jsonSearch);
 	}

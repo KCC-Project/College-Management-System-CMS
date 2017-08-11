@@ -65,7 +65,9 @@
             <span class="caret pull-right"></span>
           </a>
           <ul class="collapse collapseable" id="collapse-account">
+          <li><a href="addFeeAmount.jsp" id="add-staff">Student Fee</a></li>
             <li><a href="addAccount.jsp" id="add-staff">Student Account</a></li>
+             
           </ul>
         </li>
         <!--====================================================================================  -->

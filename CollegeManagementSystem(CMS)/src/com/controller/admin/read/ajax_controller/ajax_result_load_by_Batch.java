@@ -49,6 +49,8 @@ import javafx.collections.transformation.SortedList;
 public class ajax_result_load_by_Batch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	///this servlert is used by two jsp file fee and result
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int programId = Integer.parseInt(request.getParameter("programId"));

@@ -47,8 +47,32 @@ public class StudentFeeAmountModelIntImpl implements StudentFeeAmountModelInterf
 
 	@Override
 	public int update(Student_Fee_AmountModel feeModel) {
-		// TODO Auto-generated method stub
-		return 0;
+	int status=0;
+	try {
+		conn = DatabaseConnection.connectToDatabase();
+		sql = "update  student_fee_amount set fee_amount=? where student_id=?";
+		pst = conn.prepareStatement(sql);
+		int col = 1;
+		
+		
+		pst.setInt(col++, feeModel.getFee_amount());
+		pst.setInt(col++, feeModel.getStudent_id());
+		int count = pst.executeUpdate();
+		if (count > 0) {
+			status = 1;
+		}
+	} catch (Exception e) {
+		System.out.println("Error from updating fee amount=" + e);
+	} finally {
+		try {
+			pst.close();
+			rs.close();
+			conn.close();
+		} catch (Exception e2) {
+			// TODO: handle exception
+		}
+	}
+	return status;
 	}
 
 	@Override
