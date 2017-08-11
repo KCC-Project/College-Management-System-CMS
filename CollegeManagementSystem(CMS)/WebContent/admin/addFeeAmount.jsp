@@ -423,7 +423,7 @@
 				
 					if (data==1) {
 					    $('.option').addClass('hidden');
-						$('#tblAccount tr:not(:first)').remove();
+						//$('#tblAccount tr:not(:first)').remove();
 						$('#sucessfulDialog').modal('show');
 						
 					}else{
