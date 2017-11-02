@@ -13,27 +13,29 @@ import javax.servlet.http.HttpServletResponse;
 import com.model.YearModel;
 import com.service.YearServiceInterface;
 import com.serviceimpl.YearServiceImpl;
+import com.util.JsonUtil;
 
-@WebServlet("/ajax_year_load")
-public class ajax_year_load extends HttpServlet {
+
+@WebServlet("/year_load")
+public class year_load extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//int program_id = Integer.parseInt(request.getParameter("id"));
+			System.out.println("this is working");
 		
-		YearServiceInterface service = new YearServiceImpl();
-		List<YearModel> year = service.getAllRecord();
-		response.setContentType("text/xml");
-		response.setHeader("Cache-Control", "no-cache");
-		
-		PrintWriter out = response.getWriter();
-		out.write("<option disabled selected>Select Batch Year </option>");
-		
-		for (YearModel model : year) {		
-			out.write("<option value="+model.getYear_id()+">" + model.getYear() + "</option>");
-		}
-		out.flush();
-	}
+			//int program_id = Integer.parseInt(request.getParameter("id"));
+			
+			YearServiceInterface service = new YearServiceImpl();
+			List<YearModel> year = service.getAllRecord();
+			response.setContentType("text/xml");
+			response.setHeader("Cache-Control", "no-cache");
+			
+			PrintWriter out = response.getWriter();
+			response.getWriter().write(JsonUtil.convertJavaToJson(year));
+			System.out.println("json="+JsonUtil.convertJavaToJson(year));
+			out.flush();
+	}	
+
 }

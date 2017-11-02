@@ -226,7 +226,7 @@
 	<!-- Semester Modal ends here -->
 	
 	
-	<!-- Semester Modal starts here -->
+	<!-- Semester edit Modal starts here -->
 		<div class="modal fade" id="edit_semester_modal" role="dialog">
 			<div class="modal-dialog">
 
@@ -240,23 +240,18 @@
       <div class="modal-body">
         				<div class="row">
 						  <div class="form-group col-sm-6">
-						    <label>Faculty: <span class="astriek">*</span></label>
-						    <select required class="form-control" id="e-faculty-box" name="faculty_id">
-								
-							</select>
+						    <label>Semester Id: <span class="astriek">*</span></label>
+						    <input class="form-control" type="text" id="semester_id" disabled>
 						  </div>
 						  <div class="form-group col-sm-6">
-						    <label>Programme: <span class="astriek">*</span></label>
-						    <select required class="form-control" id="e-program-box" name="program_id">
-								<option value="" disabled >Select Programme</option>
-							</select>
+						    <label>Program: <span class="astriek">*</span></label>
+						    <input class="form-control" type="text" id="program_name" disabled>
 						  </div>
 						 </div>
 						 <div class="row">
 						  <div class="form-group col-sm-6">
 						    <label>Batch: <span class="astriek">*</span></label>
 						    <select required class="form-control" name="batch_id" id="e-batch-box">
-								<option value="" disabled>Select Batch</option>
 							</select>
 						  </div>
 						  <div class="form-group col-sm-6">
@@ -541,23 +536,46 @@ function load_edit(id){
 	        }else {
 	        	alert(aj.responseText);
 	            for (var i = 0; i < json.length; i++) {
-	            	load_faculty(event, "e-faculty-box");
+	            	
 	            	//document.getElementById("e-faculty-box").change();
-	            	load_program(event, "e-program-box");
-	            	document.getElementById("e-program-box").value=json[i].program_id;
-	            	load_batch_year(event, "e-batch-box");
+	            	
+	            	document.getElementById("semester_id").placeholder=json[i].semester_id;
+	            	document.getElementById("program_name").placeholder=json[i].program_id;
+	            	var jsony = year_load();
+	            	alert(jsony);
+	            	
+	            	var option_results = "";
+	            	for (var i=0; i<year_json.length; i++){
+		            	//option_results+= '<option value='+json[i][0]+'>'+json[i][1]+'>';
+	            	}
+	            	//$('#e-batch-box').append(option_results);
 	            	document.getElementById("e-batch-box").value=json[i].batch_year;
 	            	document.getElementById("e-sem-no").value=json[i].semester_no;
 	            	document.getElementById("e-start_date").value=json[i].start_date;
 	            	document.getElementById("e-end_date").value=json[i].end_date;
 	            	//document.getElementById("e-status").value=json[i].status;
-		            
 	            }
 	        }
 	     }
 	}
 	aj.send(idSend);
 	
+}
+
+function year_load() {
+	var idSend=1;
+	var url="../year_load";
+	var aj=new XMLHttpRequest();
+	aj.open("POST", url, true);
+	aj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	aj.onreadystatechange=function(){
+		if (aj.readyState==4&&aj.status==200) {
+			var return_data=aj.responseText;
+			alert(return_data);
+			return return_data;
+		}
+	}
+	aj.send(idSend);
 }
 
 function load_delete(id){
